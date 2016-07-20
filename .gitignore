@@ -19,3 +19,5 @@ target
 
 #Mac files
 .DS_Store
+
+chromedriver
