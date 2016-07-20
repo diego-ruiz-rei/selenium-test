@@ -1,0 +1,21 @@
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# IntelliJ project files
+.idea
+*.iml
+
+# Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
+.grunt
+
+# sbteclipse plugin
+target
+
+#Mac files
+.DS_Store
