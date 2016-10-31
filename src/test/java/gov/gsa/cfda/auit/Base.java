@@ -27,6 +27,11 @@ public class Base{
             DesiredCapabilities caps = new DesiredCapabilities();
             caps.setJavascriptEnabled(true);
             caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, phantomjsbin);
+            caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, new String[] {
+                    "--web-security=false",
+                    "--ssl-protocol=any",
+                    "--ignore-ssl-errors=true"
+            });
             driver = new PhantomJSDriver(caps);
         } else {
             System.setProperty("webdriver.chrome.driver", "chromedriver");
