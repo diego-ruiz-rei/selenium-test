@@ -1,5 +1,6 @@
 package gov.gsa.cfda.auit;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.*;
@@ -8,20 +9,9 @@ import java.util.concurrent.TimeUnit;
 import static junit.framework.Assert.assertEquals;
 
 public class SelTest extends Base {
-
     @Test
     public void simpleTest() throws Exception{
-        //load homepage and run tasks
-        String url = base_url+":"+port;
-        driver.get(url);
-        waitForJSandJQueryToLoad();
-
-        FluentWait wait = new FluentWait(driver)
-                .withTimeout(30, TimeUnit.SECONDS)
-                .pollingEvery(200, TimeUnit.MILLISECONDS)
-                .ignoring(NoSuchElementException.class);
-
-        //simple search test
+        //simple search fal number check test
         wait.until(angularHasFinishedProcessing());
         driver.findElement(By.cssSelector(".search-inputbar")).sendKeys("11.111");
         driver.findElement(By.cssSelector(".search-btn")).click();
@@ -32,5 +22,20 @@ public class SelTest extends Base {
         System.out.println(specificEl.getText());
         assertEquals("11.111",specificEl.getText());
     }
-
+    @Test
+    public void simpleFALTest(){
+        //simple fal title check test
+        wait.until(angularHasFinishedProcessing());
+        driver.findElement(By.cssSelector(".search-inputbar")).sendKeys("11.111");
+        driver.findElement(By.cssSelector(".search-btn")).click();
+        wait.until(angularHasFinishedProcessing());
+        WebElement element = (WebElement) wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".search-result-list-item")));
+        WebElement specificEl = element.findElement(By.tagName("a"));
+        specificEl.click();
+        wait.until(angularHasFinishedProcessing());
+        WebElement title = driver.findElement(By.tagName("h1"));
+        System.out.println(title.getText());
+        assertEquals("Foreign-Trade Zones in the United States",title.getText());
+    }
 }

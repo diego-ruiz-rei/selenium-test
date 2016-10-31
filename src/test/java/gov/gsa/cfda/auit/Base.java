@@ -18,6 +18,7 @@ public class Base{
     protected String phantomjsbin = "/usr/bin/phantomjs";
     protected String base_url = System.getProperty("siteTarget");
     protected String port = "3000";
+    protected FluentWait wait;
 
     @Before
     public void setUp() {
@@ -32,6 +33,15 @@ public class Base{
             driver = new ChromeDriver();
         }
         driver.manage().timeouts().setScriptTimeout(5, TimeUnit.SECONDS);
+        //load homepage and run tasks
+        String url = base_url+":"+port;
+        driver.get(url);
+        waitForJSandJQueryToLoad();
+
+        wait = new FluentWait(driver)
+                .withTimeout(30, TimeUnit.SECONDS)
+                .pollingEvery(200, TimeUnit.MILLISECONDS)
+                .ignoring(NoSuchElementException.class);
     }
 
     protected boolean waitForJSandJQueryToLoad() {
@@ -66,7 +76,6 @@ public class Base{
     }
 
     protected static ExpectedCondition angularHasFinishedProcessing() {
-        System.out.println("errr");
         return new ExpectedCondition<Boolean>() {
             public Boolean apply(WebDriver driver) {
                 String hasAngularFinishedScript = "var callback = arguments[arguments.length - 1];\n" +
@@ -88,7 +97,7 @@ public class Base{
 
                 JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
                 String isProcessingFinished = javascriptExecutor.executeAsyncScript(hasAngularFinishedScript).toString();
-                System.out.println("test--"+isProcessingFinished);
+                //System.out.println("test--"+isProcessingFinished);
                 return Boolean.valueOf(isProcessingFinished);
             }
         };
