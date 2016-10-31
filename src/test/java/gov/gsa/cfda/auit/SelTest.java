@@ -17,7 +17,7 @@ public class SelTest extends Base {
         driver.findElement(By.cssSelector(".search-btn")).click();
         wait.until(angularHasFinishedProcessing());
         WebElement element = (WebElement) wait.until(
-                ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".search-result-list-item")));
+                ExpectedConditions.visibilityOfElementLocated(By.tagName("assistance-listing-result")));
         WebElement specificEl = element.findElement(By.cssSelector(".fal-program-number"));
         System.out.println(specificEl.getText());
         assertEquals("11.111",specificEl.getText());
@@ -30,7 +30,7 @@ public class SelTest extends Base {
         driver.findElement(By.cssSelector(".search-btn")).click();
         wait.until(angularHasFinishedProcessing());
         WebElement element = (WebElement) wait.until(
-                ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".search-result-list-item")));
+                ExpectedConditions.visibilityOfElementLocated(By.tagName("assistance-listing-result")));
         WebElement specificEl = element.findElement(By.tagName("a"));
         specificEl.click();
         wait.until(angularHasFinishedProcessing());

@@ -17,7 +17,7 @@ public class Base{
     protected WebDriver driver;
     protected String phantomjsbin = "/usr/bin/phantomjs";
     protected String base_url = System.getProperty("siteTarget");
-    protected String port = "3000";
+    protected String port = "80";
     protected FluentWait wait;
 
     @Before
@@ -31,6 +31,9 @@ public class Base{
         } else {
             System.setProperty("webdriver.chrome.driver", "chromedriver");
             driver = new ChromeDriver();
+        }
+        if(!System.getProperty("port","").equals("")) {
+            port = System.getProperty("port");
         }
         driver.manage().timeouts().setScriptTimeout(5, TimeUnit.SECONDS);
         //load homepage and run tasks
