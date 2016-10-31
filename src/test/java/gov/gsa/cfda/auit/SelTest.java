@@ -21,47 +21,16 @@ public class SelTest extends Base {
                 .pollingEvery(200, TimeUnit.MILLISECONDS)
                 .ignoring(NoSuchElementException.class);
 
+        //simple search test
         wait.until(angularHasFinishedProcessing());
-
-        //switch to super user
-        driver.findElement(By.linkText("Sign In As")).click();
-        WebElement modal = driver.findElement(By.id("ngdialog1"));
-        Select userSelect = new Select (modal.findElement(By.tagName("select")));
-        userSelect.selectByVisibleText("Super User");
-        modal.findElement(By.tagName("button")).click();
+        driver.findElement(By.cssSelector(".search-inputbar")).sendKeys("11.111");
+        driver.findElement(By.cssSelector(".search-btn")).click();
         wait.until(angularHasFinishedProcessing());
-        System.out.println(driver.getTitle());
-        assertEquals("Home - CFDA: Home",driver.getTitle());
-
-        //go to programs page
-        driver.get(url+"/programs");
-        waitForJSandJQueryToLoad();
-        wait.until(angularHasFinishedProcessing());
-        System.out.println(driver.getTitle());
-        assertEquals("My Listings - CFDA: My Listings",driver.getTitle());
-
-        //go to search
-        driver.get(url+"/search?keyword=10.055");
-        waitForJSandJQueryToLoad();
-        wait.until(angularHasFinishedProcessing());
-
-        String loading_xpath = "//div[contains(@class,'loadingModal')]";
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(loading_xpath)));
-
-        System.out.println(driver.getTitle());
-        assertEquals("Search Programs - CFDA: Search Programs",driver.getTitle());
-
-        WebElement tableClass = driver.findElement(By.cssSelector(".dataTable"));
-        String divId = tableClass.getAttribute("id");
-        System.out.println(divId);
-        WebElement table = driver.findElement(By.id(divId));
-
-
-        String link_xpath = "//table[@id='"+divId+"']/tbody/tr/td[2]/a";
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(link_xpath)));
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(link_xpath)));
-        driver.findElement(By.xpath(link_xpath)).click();
-        wait.until(angularHasFinishedProcessing());
+        WebElement element = (WebElement) wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".search-result-list-item")));
+        WebElement specificEl = element.findElement(By.cssSelector(".fal-program-number"));
+        System.out.println(specificEl.getText());
+        assertEquals("11.111",specificEl.getText());
     }
 
 }

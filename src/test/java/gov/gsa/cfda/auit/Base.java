@@ -17,7 +17,7 @@ public class Base{
     protected WebDriver driver;
     protected String phantomjsbin = "/usr/bin/phantomjs";
     protected String base_url = System.getProperty("siteTarget");
-    protected String port = "80";
+    protected String port = "3000";
 
     @Before
     public void setUp() {
@@ -39,7 +39,7 @@ public class Base{
         WebDriverWait wait = new WebDriverWait(driver, 30);
 
         // wait for jQuery to load
-        ExpectedCondition<Boolean> jQueryLoad = new ExpectedCondition<Boolean>() {
+        /*ExpectedCondition<Boolean> jQueryLoad = new ExpectedCondition<Boolean>() {
             public Boolean apply(WebDriver driver) {
                 try {
                     System.out.println("jquery found + loaded");
@@ -51,7 +51,7 @@ public class Base{
                     return true;
                 }
             }
-        };
+        };*/
 
         // wait for Javascript to load
         ExpectedCondition<Boolean> jsLoad = new ExpectedCondition<Boolean>() {
@@ -62,30 +62,33 @@ public class Base{
             }
         };
 
-        return wait.until(jQueryLoad) && wait.until(jsLoad);
+        return wait.until(jsLoad);
     }
 
     protected static ExpectedCondition angularHasFinishedProcessing() {
+        System.out.println("errr");
         return new ExpectedCondition<Boolean>() {
             public Boolean apply(WebDriver driver) {
                 String hasAngularFinishedScript = "var callback = arguments[arguments.length - 1];\n" +
-                        "var el = document.querySelector('html');\n" +
-                        "if (!window.angular) {\n" +
-                        "    callback('false')\n" +
-                        "}\n" +
-                        "if (angular.getTestability) {\n" +
-                        "    angular.getTestability(el).whenStable(function(){callback('true')});\n" +
-                        "} else {\n" +
-                        "    if (!angular.element(el).injector()) {\n" +
-                        "        callback('false')\n" +
-                        "    }\n" +
-                        "    var browser = angular.element(el).injector().get('$browser');\n" +
-                        "    browser.notifyWhenNoOutstandingRequests(function(){callback('true')});\n" +
-                        "}";
+                        "try {\n" +
+                        "    var testabilities = window.getAllAngularTestabilities();\n" +
+                        "    var count = testabilities.length;\n" +
+                        "    var decrement = function() {\n" +
+                        "      count--;\n" +
+                        "      if (count === 0) {\n" +
+                        "        callback('true');\n" +
+                        "      }\n" +
+                        "    };\n" +
+                        "    testabilities.forEach(function(testability) {\n" +
+                        "      testability.whenStable(decrement);\n" +
+                        "    });\n" +
+                        "  } catch (err) {\n" +
+                        "    callback('false');\n" +
+                        "  }";
 
                 JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
                 String isProcessingFinished = javascriptExecutor.executeAsyncScript(hasAngularFinishedScript).toString();
-                //System.out.println(isProcessingFinished);
+                System.out.println("test--"+isProcessingFinished);
                 return Boolean.valueOf(isProcessingFinished);
             }
         };
