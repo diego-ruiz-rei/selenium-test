@@ -1,10 +1,10 @@
-# REISystems-GSA-CFDA-Selenium
+# REISystems-GSA-SGA-Selenium
 CFDA modernization UI Selenium E2E Tests
 
 ## Prerequisites:
-- Java SDK 1.7
+- Java SDK 1.8
 - Maven
-- driver for phantomJS or chrome
+- driver for [phantomJS](http://phantomjs.org/download.html) or [chrome](https://sites.google.com/a/chromium.org/chromedriver/)
 
 ## Running Tests
 Currently supported with Chrome and phantomJS. Will add more browser support soon
@@ -13,11 +13,11 @@ Currently supported with Chrome and phantomJS. Will add more browser support soo
 1. Add 'chromedriver' to this project
 2. Run the following command:
 ```
-mvn package -DsiteTarget="TARGETSITE_URL"
+mvn test -DsiteTarget="TARGETSITE_URL"
 ```
 
 #### Run headless with phantomJS
 Run the following command:
 ```
-mvn package -Dphantomjsbin="PHANTOMJS_BINARY_LOCATION" -DsiteTarget="TARGETSITE_URL"
+mvn test -Dphantomjsbin="PHANTOMJS_BINARY_LOCATION" -DsiteTarget="TARGETSITE_URL"
 ```
