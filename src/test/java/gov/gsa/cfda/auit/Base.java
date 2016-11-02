@@ -15,6 +15,7 @@ import static junit.framework.Assert.assertEquals;
 
 public class Base{
     protected WebDriver driver;
+    protected String chromedriverbin = "";
     protected String phantomjsbin = "/usr/bin/phantomjs";
     protected String base_url = System.getProperty("siteTarget");
     protected String port = "80";
@@ -23,7 +24,7 @@ public class Base{
     @Before
     public void setUp() {
         if(!System.getProperty("phantomjsbin","").equals("")){
-            phantomjsbin = System.getProperty("phantomjsbin");
+            phantomjsbin = System.getProperty("phantomjsbin","bin/phantomjs");//linux only
             DesiredCapabilities caps = new DesiredCapabilities();
             caps.setJavascriptEnabled(true);
             caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, phantomjsbin);
@@ -34,7 +35,8 @@ public class Base{
             });
             driver = new PhantomJSDriver(caps);
         } else {
-            System.setProperty("webdriver.chrome.driver", "chromedriver");
+            chromedriverbin = System.getProperty("chromedriverbin","bin/chromedriver.exe");//windows
+            System.setProperty("webdriver.chrome.driver", chromedriverbin);
             driver = new ChromeDriver();
         }
         if(!System.getProperty("port","").equals("")) {
