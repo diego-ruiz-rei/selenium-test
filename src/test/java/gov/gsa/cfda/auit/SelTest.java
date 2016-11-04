@@ -1,5 +1,6 @@
 package gov.gsa.cfda.auit;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,21 +9,115 @@ import org.openqa.selenium.support.ui.*;
 import java.util.concurrent.TimeUnit;
 import static junit.framework.Assert.assertEquals;
 
+
 public class SelTest extends Base {
+
     @Test
-    public void simpleTest() throws Exception{
-        //simple search fal number check test
+    public void homePageElements() throws Exception{
+        //Home Page test
         wait.until(angularHasFinishedProcessing());
-        driver.findElement(By.cssSelector(".search-inputbar")).sendKeys("11.111");
+        assertEquals("SAM Client Starter", driver.getTitle());
+        System.out.println("--Home Page Elements--");
+        System.out.println("Page Title : "+driver.getTitle());
+
+        //Search By Index Dropdown test
+        Assert.assertTrue((isElementPresent(By.id("filter"))));
+        assertEquals("All", driver.findElement(By.cssSelector("option")).getText());
+        assertEquals("Opportunities", driver.findElement(By.cssSelector("option[value=\"fbo\"]")).getText());
+        assertEquals("Assistance Listings", driver.findElement(By.cssSelector("option[value=\"cfda\"]")).getText());
+        System.out.println("Index Dropdown Present : "+driver.findElement(By.id("filter")).getText());
+
+        //Search Box Present
+        Assert.assertTrue(isElementPresent(By.cssSelector(".search-inputbar")));
+        System.out.println("Search Bar present");
+
+        //Search Button Present
+        Assert.assertTrue(isElementPresent(By.cssSelector(".usa-search-submit-text")));
+        System.out.println("Search Button present");
+    }
+
+    @Test
+    public void searchAll() throws Exception{
+
+        wait.until(angularHasFinishedProcessing());
+        Assert.assertTrue(isElementPresent(By.cssSelector(".usa-search-submit-text")));
         driver.findElement(By.cssSelector(".search-btn")).click();
         wait.until(angularHasFinishedProcessing());
-        WebElement element = (WebElement) wait.until(
-                //ExpectedConditions.visibilityOfElementLocated(By.tagName("assistance-listing-result")));
-                ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".fal-program-number")));
-        //WebElement specificEl = element.findElement(By.cssSelector(".fal-program-number"));
-        System.out.println(element.getText());
-        assertEquals("11.111",element.getText());
+
+        //Check 10 records are present in Search results page
+        Assert.assertTrue(isElementPresent(By.cssSelector(".m_T-5x")));
+        System.out.println("--Search Results Page - Search All--");
+        System.out.println("Number of result Found in Search Page : "+driver.findElements(By.cssSelector(".m_T-5x")).size());
+        assertEquals(10,driver.findElements(By.cssSelector(".m_T-5x")).size());
+
+        //Check Pagination
+        Assert.assertTrue(isElementPresent(By.cssSelector(".usa-button-outline")));
+        assertEquals(5,driver.findElements(By.cssSelector(".usa-button-outline")).size());
+        System.out.println("Pagination Size found : "+driver.findElements(By.cssSelector(".usa-button-outline")).size());
     }
+
+
+    @Test
+    public void searchAssistance() throws Exception {
+
+        keywordSearch("All",AllKeywords);
+        keywordSearch("Opportunities",OpportunitiesKeywords);
+        keywordSearch("Assistance Listings",AssistanceKeywords);
+
+    }
+
+    private void keywordSearch(String index,String[] keywords) {
+        wait.until(angularHasFinishedProcessing());
+        driver.findElement(By.cssSelector("img.marginCenter")).click();
+        System.out.println("--Search Results Page - Search with Parameters--");
+        new Select(driver.findElement(By.id("filter"))).selectByVisibleText(index);
+        for (int i = 0; i < keywords.length; i++) {
+            driver.findElement(By.cssSelector(".search-inputbar")).sendKeys(keywords[i]);
+            driver.findElement(By.cssSelector(".search-btn")).click();
+
+            //trim quotes for exact match keywords
+            keywords[i] = keywords[i].replace("\"","");
+
+            wait.until(angularHasFinishedProcessing());
+
+            if (index=="Opportunities"){
+                WebElement element = (WebElement) wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/app/main/search/div/div[2]/div[1]/opportunities-result/div[2]/ul/li[1]/ul/li")));
+                System.out.println("Search Index : "+index);
+                System.out.println("Search Parameter : "+element.getText());
+                assertEquals(keywords[i], element.getText());
+            }
+            else if (index=="Assistance Listings")
+            {
+                WebElement element = (WebElement) wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".fal-program-number")));
+                System.out.println("Search Index : "+index);
+                System.out.println("Search Parameter : "+element.getText());
+                assertEquals(keywords[i], element.getText());
+            }
+            else
+            {
+                WebElement element = (WebElement) wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".assistance-listing-title")));
+                System.out.println("Search Index : "+index);
+                System.out.println("Search Parameter : "+element.getText());
+                assertEquals(keywords[i], element.getText());
+            }
+            driver.findElement(By.cssSelector(".search-inputbar")).clear();
+
+        }
+    }
+
+    private boolean isElementPresent(By by) {
+        try {
+            driver.findElement(by);
+            return true;
+        } catch (NoSuchElementException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    /*
     @Test
     public void simpleFALTest(){
         //simple fal title check test
@@ -40,4 +135,5 @@ public class SelTest extends Base {
         System.out.println(title.getText());
         assertEquals("Foreign-Trade Zones in the United States",title.getText());
     }
+    */
 }
