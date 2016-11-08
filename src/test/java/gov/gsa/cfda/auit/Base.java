@@ -52,7 +52,12 @@ public class Base{
         }
         driver.manage().timeouts().setScriptTimeout(5, TimeUnit.SECONDS);
         //load homepage and run tasks
-        String url = base_url+":"+port;
+        String url = "";
+        if(port.equals("80")){
+            url = base_url;
+        } else {
+            url = base_url + ":" + port;
+        }
         driver.get(url);
         waitForJSandJQueryToLoad();
 
