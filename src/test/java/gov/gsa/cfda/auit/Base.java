@@ -36,11 +36,22 @@ public class Base{
             DesiredCapabilities caps = new DesiredCapabilities();
             caps.setJavascriptEnabled(true);
             caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, phantomjsbin);
-            caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, new String[] {
-                    "--web-security=false",
-                    "--ssl-protocol=any",
-                    "--ignore-ssl-errors=true"
-            });
+            if(!System.getProperty("cicd","").equals("")) {
+                //--display :99
+                caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, new String[]{
+                        "--web-security=false",
+                        "--ssl-protocol=any",
+                        "--ignore-ssl-errors=true",
+                        "--display :0"
+                });
+            } else {
+                caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, new String[]{
+                        "--web-security=false",
+                        "--ssl-protocol=any",
+                        "--ignore-ssl-errors=true"
+                });
+            }
+
             driver = new PhantomJSDriver(caps);
         } else {
             chromedriverbin = System.getProperty("chromedriverbin","bin/chromedriver.exe");//windows
