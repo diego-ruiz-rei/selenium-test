@@ -42,7 +42,7 @@ public class Base{
                         "--web-security=false",
                         "--ssl-protocol=any",
                         "--ignore-ssl-errors=true",
-                        "--display :0"
+                        "--display :1.5"
                 });
             } else {
                 caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, new String[]{
