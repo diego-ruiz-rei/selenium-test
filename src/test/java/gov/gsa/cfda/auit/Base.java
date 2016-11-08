@@ -21,10 +21,13 @@ public class Base{
     protected String port = "80";
     protected FluentWait wait;
 
-    protected String[] AssistanceKeywords = {"11.111","10.001"};
+    protected String[] AssistanceKeywords = {"11.111","10.001","11.420","11.111"};
     protected String[] OpportunitiesKeywords = {"DTFANM-08-R-00058","DON-SNOTE-080306-004"};
-    protected String[] AllKeywords = {"Foreign-Trade Zones in the United States","\"Yakima River Basin Water Enhancement (YRBWE)\""};
+    protected String[] AllKeywords = {"Foreign-Trade Zones in the United States","8(g) State Coastal Zone","\"Yakima River Basin Water Enhancement (YRBWE)\""};
+  //  "\"Y--Design and Construction of new Army Reserve Center (ARC) at Marine Corps Air<br>Station (MCAS); Miramar, San Diego, CA\""
     protected String[] index = {"All","Opportunities","Assistance Listings"};
+    protected String[] NoKeywords = {"12.12312","12321.123"};
+    protected String[] wildcard = {"transitional *","?--Transitional Housing"};
 
     @Before
     public void setUp() {

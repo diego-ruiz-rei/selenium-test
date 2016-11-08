@@ -8,8 +8,12 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.*;
 import java.util.concurrent.TimeUnit;
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
+import org.junit.runners.MethodSorters;
+import org.junit.FixMethodOrder;
 
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SelTest extends Base {
 
     @Test
@@ -63,10 +67,43 @@ public class SelTest extends Base {
         keywordSearch("All",AllKeywords);
         keywordSearch("Opportunities",OpportunitiesKeywords);
         keywordSearch("Assistance Listings",AssistanceKeywords);
+        searchNoResult(NoKeywords);
+        searchWildcard(wildcard);
 
     }
 
-    private void keywordSearch(String index,String[] keywords) {
+    public void searchWildcard(String[] keywords) {
+        wait.until(angularHasFinishedProcessing());
+        driver.findElement(By.cssSelector("img.marginCenter")).click();
+        System.out.println("--Search Results Page - Search with Parameters--");
+        //new Select(driver.findElement(By.id("filter"))).selectByVisibleText(index);
+        for (int i = 0; i < keywords.length; i++) {
+            driver.findElement(By.cssSelector(".search-inputbar")).sendKeys(keywords[i]);
+            driver.findElement(By.cssSelector(".search-btn")).click();
+
+            //trim quotes for exact match keywords
+            keywords[i] = keywords[i].replace("\"","");
+
+            wait.until(angularHasFinishedProcessing());
+            //Check 10 records are present in Search results page
+            Assert.assertTrue(isElementPresent(By.cssSelector(".m_T-5x")));
+            System.out.println("--Search Results Page - Search All--");
+            System.out.println("Number of result Found in Search Page : "+driver.findElements(By.cssSelector(".m_T-5x")).size());
+            assertTrue(driver.findElements(By.cssSelector(".m_T-5x")).size()>1);
+            System.out.println("**Search result found in Search Page ");
+
+            //Check Pagination
+            Assert.assertTrue(isElementPresent(By.cssSelector(".usa-button-outline")));
+            assertEquals(5,driver.findElements(By.cssSelector(".usa-button-outline")).size());
+            System.out.println("Pagination Size found : "+driver.findElements(By.cssSelector(".usa-button-outline")).size());
+            driver.findElement(By.cssSelector(".search-inputbar")).clear();
+
+        }
+    }
+
+
+
+    public void keywordSearch(String index,String[] keywords) {
         wait.until(angularHasFinishedProcessing());
         driver.findElement(By.cssSelector("img.marginCenter")).click();
         System.out.println("--Search Results Page - Search with Parameters--");
@@ -79,30 +116,24 @@ public class SelTest extends Base {
             keywords[i] = keywords[i].replace("\"","");
 
             wait.until(angularHasFinishedProcessing());
+            WebElement element;
 
-            if (index=="Opportunities"){
-                WebElement element = (WebElement) wait.until(
+            if (index=="Opportunities") {
+                element = (WebElement) wait.until(
                         ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/app/main/search/div/div[2]/div[1]/opportunities-result/div[2]/ul/li[1]/ul/li")));
-                System.out.println("Search Index : "+index);
-                System.out.println("Search Parameter : "+element.getText());
-                assertEquals(keywords[i], element.getText());
             }
-            else if (index=="Assistance Listings")
-            {
-                WebElement element = (WebElement) wait.until(
+            else if (index=="Assistance Listings") {
+                element = (WebElement) wait.until(
                         ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".fal-program-number")));
-                System.out.println("Search Index : "+index);
-                System.out.println("Search Parameter : "+element.getText());
-                assertEquals(keywords[i], element.getText());
             }
-            else
-            {
-                WebElement element = (WebElement) wait.until(
+            else  {
+                element = (WebElement) wait.until(
                         ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".assistance-listing-title")));
-                System.out.println("Search Index : "+index);
-                System.out.println("Search Parameter : "+element.getText());
-                assertEquals(keywords[i], element.getText());
             }
+
+            System.out.println("Search Index : "+index);
+            System.out.println("Search Parameter : "+element.getText());
+            assertEquals(keywords[i], element.getText());
             driver.findElement(By.cssSelector(".search-inputbar")).clear();
 
         }
@@ -117,6 +148,34 @@ public class SelTest extends Base {
             return false;
         }
     }
+
+
+    public void searchNoResult(String[] keywords) throws Exception{
+
+        wait.until(angularHasFinishedProcessing());
+        driver.findElement(By.cssSelector("img.marginCenter")).click();
+        System.out.println("--Search Results Page - No Results found--");
+        //new Select(driver.findElement(By.id("filter"))).selectByVisibleText(index);
+        for (int i = 0; i < keywords.length; i++) {
+            driver.findElement(By.cssSelector(".search-inputbar")).sendKeys(keywords[i]);
+            driver.findElement(By.cssSelector(".search-btn")).click();
+
+            //trim quotes for exact match keywords
+            keywords[i] = keywords[i].replace("\"","");
+
+            wait.until(angularHasFinishedProcessing());
+            WebElement element;
+            element = (WebElement) wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/app/main/search/div/div[2]/div/p")));
+            System.out.println("Search Parameter : "+keywords[i]);
+            assertEquals("No results found for '"+keywords[i]+"'", element.getText());
+
+            driver.findElement(By.cssSelector(".search-inputbar")).clear();
+
+        }
+    }
+
+
     /*
     @Test
     public void simpleFALTest(){
