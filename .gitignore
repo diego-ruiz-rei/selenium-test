@@ -20,5 +20,5 @@ target
 #Mac files
 .DS_Store
 
-chromedriver
-phantomjs
+/chromedriver
+/phantomjs
