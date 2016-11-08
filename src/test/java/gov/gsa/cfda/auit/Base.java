@@ -5,6 +5,8 @@ import org.junit.Test;
 import org.junit.Ignore;
 import org.junit.Before;
 import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriverService;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.*;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
@@ -56,7 +58,16 @@ public class Base{
         } else {
             chromedriverbin = System.getProperty("chromedriverbin","bin/chromedriver.exe");//windows
             System.setProperty("webdriver.chrome.driver", chromedriverbin);
-            driver = new ChromeDriver();
+            ChromeOptions opts = new ChromeOptions();
+            if(!System.getProperty("cicd","").equals("")) {
+                opts.addArguments(new String[]{
+                        "--display :1.5"
+                });
+                //DesiredCapabilities caps = new DesiredCapabilities();
+                //caps.setCapability(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY);
+            }
+            driver = new ChromeDriver(opts);
+
         }
         if(!System.getProperty("port","").equals("")) {
             port = System.getProperty("port");
