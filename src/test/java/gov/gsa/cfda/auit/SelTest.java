@@ -58,9 +58,9 @@ public class SelTest extends Base {
         assertEquals(10,driver.findElements(By.cssSelector(".m_T-5x")).size());
 
         //Check Pagination
-        Assert.assertTrue(isElementPresent(By.cssSelector(".usa-button-outline")));
-        assertEquals(5,driver.findElements(By.cssSelector(".usa-button-outline")).size());
-        //System.out.println("Pagination Size found : "+driver.findElements(By.cssSelector(".usa-button-outline")).size());
+        Assert.assertTrue(isElementPresent(By.cssSelector(".page-button")));
+        Assert.assertTrue(driver.findElements(By.cssSelector(".page-button")).size()>1);
+        System.out.println("Pagination Size found : "+driver.findElements(By.cssSelector(".page-button")).size());
         System.out.println("Search Results Found for Empty Search !");
     }
 
@@ -117,8 +117,9 @@ public class SelTest extends Base {
                             ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".assistance-listing-title")));
                     //check number of search result is greater than 1 and Pagination exists
                     assertTrue(driver.findElements(By.cssSelector(".m_T-5x")).size() > 1);
-                    Assert.assertTrue(isElementPresent(By.cssSelector(".usa-button-outline")));
-                    assertEquals(5, driver.findElements(By.cssSelector(".usa-button-outline")).size());
+                    Assert.assertTrue(isElementPresent(By.cssSelector(".page-button")));
+                    assertTrue(driver.findElements(By.cssSelector(".page-button")).size()>1);
+
                 }
 
                 System.out.println("\nSearch Index : " + keywords[i][0]);
