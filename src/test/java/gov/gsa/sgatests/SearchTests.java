@@ -1,5 +1,6 @@
-package gov.gsa.cfda.auit;
+package gov.gsa.sgatests;
 
+import gov.gsa.sga.Base;
 import org.apache.bcel.generic.SWITCH;
 import org.apache.xpath.operations.Or;
 import org.junit.Assert;
@@ -17,7 +18,7 @@ import java.lang.String;
 
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class SelTest extends Base {
+public class SearchTests extends Base {
 
     @Test
     public void homePageElements() throws Exception{
@@ -97,7 +98,7 @@ public class SelTest extends Base {
                     if (driver.findElement(By.cssSelector(".m_B-0")).getText().contains("Solicitation Number")) {
                         element = (WebElement) wait.until(
                                 ExpectedConditions.visibilityOfElementLocated(By.xpath("html/body/app/main/search/div/div[2]/div[2]/opportunities-result/div[2]/ul/li[1]/ul/li")));
-                    //    ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/app/main/search/div/div[2]/div[1]/opportunities-result/div[2]/ul/li[1]/ul/li")));
+                        //    ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/app/main/search/div/div[2]/div[1]/opportunities-result/div[2]/ul/li[1]/ul/li")));
                     }
                     //check for FAL Number
                     else {
@@ -142,34 +143,4 @@ public class SelTest extends Base {
         }
 
     }
-
-    private boolean isElementPresent(By by) {
-        try {
-            driver.findElement(by);
-            return true;
-        } catch (NoSuchElementException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    /*
-    @Test
-    public void simpleFALTest(){
-        //simple fal title check test
-        wait.until(angularHasFinishedProcessing());
-        driver.findElement(By.cssSelector(".search-inputbar")).sendKeys("11.111");
-        driver.findElement(By.cssSelector(".search-btn")).click();
-        wait.until(angularHasFinishedProcessing());
-        WebElement element = (WebElement) wait.until(
-                //ExpectedConditions.visibilityOfElementLocated(By.tagName("assistance-listing-result")));
-                ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".assistance-listing-title")));
-        WebElement specificEl = element.findElement(By.tagName("a"));
-        specificEl.click();
-        wait.until(angularHasFinishedProcessing());
-        WebElement title = driver.findElement(By.tagName("h1"));
-        System.out.println(title.getText());
-        assertEquals("Foreign-Trade Zones in the United States",title.getText());
-    }
-    */
 }

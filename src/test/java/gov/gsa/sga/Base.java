@@ -1,4 +1,4 @@
-package gov.gsa.cfda.auit;
+package gov.gsa.sga;
 
 import org.junit.After;
 import org.junit.Test;
@@ -36,7 +36,7 @@ public class Base{
             {"All","transitional *","wildcard"},
             {"Assistance Listings","97.*","wildcard"},
             {"Opportunities","12.12312","title"},
-            };
+    };
 
     @Before
     public void setUp() {
@@ -70,8 +70,6 @@ public class Base{
                 opts.addArguments(new String[]{
                         "--display :1.5"
                 });
-                //DesiredCapabilities caps = new DesiredCapabilities();
-                //caps.setCapability(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY);
             }
             driver = new ChromeDriver(opts);
 
@@ -97,23 +95,7 @@ public class Base{
     }
 
     protected boolean waitForJSandJQueryToLoad() {
-
         WebDriverWait wait = new WebDriverWait(driver, 30);
-
-        // wait for jQuery to load
-        /*ExpectedCondition<Boolean> jQueryLoad = new ExpectedCondition<Boolean>() {
-            public Boolean apply(WebDriver driver) {
-                try {
-                    System.out.println("jquery found + loaded");
-                    return ((Long)((JavascriptExecutor)driver).executeScript("return jQuery.active") == 0);
-                }
-                catch (Exception e) {
-                    System.out.println("jquery not found");
-                    // no jQuery present
-                    return true;
-                }
-            }
-        };*/
 
         // wait for Javascript to load
         ExpectedCondition<Boolean> jsLoad = new ExpectedCondition<Boolean>() {
@@ -153,6 +135,16 @@ public class Base{
                 return Boolean.valueOf(isProcessingFinished);
             }
         };
+    }
+
+    protected boolean isElementPresent(By by) {
+        try {
+            driver.findElement(by);
+            return true;
+        } catch (NoSuchElementException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @After
