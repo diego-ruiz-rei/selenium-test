@@ -55,7 +55,7 @@ public class SelTest extends Base {
         Assert.assertTrue(isElementPresent(By.cssSelector(".m_T-5x")));
         System.out.println("\n--Search Results Page - Search All--");
         //System.out.println("Number of result Found in Search Page : "+driver.findElements(By.cssSelector(".m_T-5x")).size());
-        assertEquals(10,driver.findElements(By.cssSelector(".m_T-5x")).size());
+        assertTrue(driver.findElements(By.cssSelector(".m_T-5x")).size()>1);
 
         //Check Pagination
         Assert.assertTrue(isElementPresent(By.cssSelector(".page-button")));
@@ -96,7 +96,8 @@ public class SelTest extends Base {
                     //check for Solicitation Number
                     if (driver.findElement(By.cssSelector(".m_B-0")).getText().contains("Solicitation Number")) {
                         element = (WebElement) wait.until(
-                                ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/app/main/search/div/div[2]/div[1]/opportunities-result/div[2]/ul/li[1]/ul/li")));
+                                ExpectedConditions.visibilityOfElementLocated(By.xpath("html/body/app/main/search/div/div[2]/div[2]/opportunities-result/div[2]/ul/li[1]/ul/li")));
+                    //    ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/app/main/search/div/div[2]/div[1]/opportunities-result/div[2]/ul/li[1]/ul/li")));
                     }
                     //check for FAL Number
                     else {
