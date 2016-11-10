@@ -19,6 +19,19 @@ import java.lang.String;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SearchTests extends Base {
+    //Test Data specific to Search - Format {index,keyword,type}
+    protected String[][] searchParameters = {{"All","","all"},
+            {"All","Foreign-Trade Zones in the United States","title"},
+            {"Assistance Listings","11.111","number"},
+            {"Opportunities","DTFANM-08-R-00058","number"},
+            {"All","10.001","number"},
+            {"All","8(g) State Coastal Zone","title"},
+            {"All","\"Yakima River Basin Water Enhancement (YRBWE)\"","title"},
+            {"Assistance Listings","11.420","number"},
+            {"All","transitional *","wildcard"},
+            {"Assistance Listings","97.*","wildcard"},
+            {"Opportunities","12.12312","title"},
+    };
 
     @Test
     public void homePageElements() throws Exception{

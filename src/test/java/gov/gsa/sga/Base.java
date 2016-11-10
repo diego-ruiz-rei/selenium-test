@@ -23,21 +23,6 @@ public class Base{
     protected String port = "80";
     protected FluentWait wait;
 
-
-    //Test Data - Format {index,keyword,type}
-    protected String[][] searchParameters = {{"All","","all"},
-            {"All","Foreign-Trade Zones in the United States","title"},
-            {"Assistance Listings","11.111","number"},
-            {"Opportunities","DTFANM-08-R-00058","number"},
-            {"All","10.001","number"},
-            {"All","8(g) State Coastal Zone","title"},
-            {"All","\"Yakima River Basin Water Enhancement (YRBWE)\"","title"},
-            {"Assistance Listings","11.420","number"},
-            {"All","transitional *","wildcard"},
-            {"Assistance Listings","97.*","wildcard"},
-            {"Opportunities","12.12312","title"},
-    };
-
     @Before
     public void setUp() {
         if(!System.getProperty("phantomjsbin","").equals("")){
@@ -45,21 +30,11 @@ public class Base{
             DesiredCapabilities caps = new DesiredCapabilities();
             caps.setJavascriptEnabled(true);
             caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, phantomjsbin);
-            if(!System.getProperty("cicd","").equals("")) {
-                //--display :99
-                caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, new String[]{
-                        "--web-security=false",
-                        "--ssl-protocol=any",
-                        "--ignore-ssl-errors=true",
-                        "--display :1.5"
-                });
-            } else {
-                caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, new String[]{
-                        "--web-security=false",
-                        "--ssl-protocol=any",
-                        "--ignore-ssl-errors=true"
-                });
-            }
+            caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, new String[]{
+                "--web-security=false",
+                "--ssl-protocol=any",
+                "--ignore-ssl-errors=true"
+            });
 
             driver = new PhantomJSDriver(caps);
         } else {
@@ -112,27 +87,27 @@ public class Base{
     protected static ExpectedCondition angularHasFinishedProcessing() {
         return new ExpectedCondition<Boolean>() {
             public Boolean apply(WebDriver driver) {
-                String hasAngularFinishedScript = "var callback = arguments[arguments.length - 1];\n" +
-                        "try {\n" +
-                        "    var testabilities = window.getAllAngularTestabilities();\n" +
-                        "    var count = testabilities.length;\n" +
-                        "    var decrement = function() {\n" +
-                        "      count--;\n" +
-                        "      if (count === 0) {\n" +
-                        "        callback('true');\n" +
-                        "      }\n" +
-                        "    };\n" +
-                        "    testabilities.forEach(function(testability) {\n" +
-                        "      testability.whenStable(decrement);\n" +
-                        "    });\n" +
-                        "  } catch (err) {\n" +
-                        "    callback('false');\n" +
-                        "  }";
+            String hasAngularFinishedScript = "var callback = arguments[arguments.length - 1];\n" +
+                "try {\n" +
+                "    var testabilities = window.getAllAngularTestabilities();\n" +
+                "    var count = testabilities.length;\n" +
+                "    var decrement = function() {\n" +
+                "      count--;\n" +
+                "      if (count === 0) {\n" +
+                "        callback('true');\n" +
+                "      }\n" +
+                "    };\n" +
+                "    testabilities.forEach(function(testability) {\n" +
+                "      testability.whenStable(decrement);\n" +
+                "    });\n" +
+                "  } catch (err) {\n" +
+                "    callback('false');\n" +
+                "  }";
 
-                JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
-                String isProcessingFinished = javascriptExecutor.executeAsyncScript(hasAngularFinishedScript).toString();
-                //System.out.println("test--"+isProcessingFinished);
-                return Boolean.valueOf(isProcessingFinished);
+            JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
+            String isProcessingFinished = javascriptExecutor.executeAsyncScript(hasAngularFinishedScript).toString();
+            //System.out.println("test--"+isProcessingFinished);
+            return Boolean.valueOf(isProcessingFinished);
             }
         };
     }
