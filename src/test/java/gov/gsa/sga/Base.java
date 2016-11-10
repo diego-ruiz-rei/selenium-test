@@ -23,7 +23,10 @@ public class Base{
     protected String port = "80";
     protected FluentWait wait;
 
-    @Before
+    public Base(){
+        setUp();
+    }
+
     public void setUp() {
         if(!System.getProperty("phantomjsbin","").equals("")){
             phantomjsbin = System.getProperty("phantomjsbin","bin/phantomjs");//linux only
@@ -84,7 +87,7 @@ public class Base{
         return wait.until(jsLoad);
     }
 
-    protected static ExpectedCondition angularHasFinishedProcessing() {
+    public static ExpectedCondition angularHasFinishedProcessing() {
         return new ExpectedCondition<Boolean>() {
             public Boolean apply(WebDriver driver) {
             String hasAngularFinishedScript = "var callback = arguments[arguments.length - 1];\n" +
@@ -111,8 +114,12 @@ public class Base{
             }
         };
     }
+    
+    public void appWait(){
+        wait.until(this.angularHasFinishedProcessing());
+    }
 
-    protected boolean isElementPresent(By by) {
+    public boolean isElementPresent(By by) {
         try {
             driver.findElement(by);
             return true;
@@ -122,7 +129,14 @@ public class Base{
         }
     }
 
-    @After
+    public String getPageTitle(){
+        return driver.getTitle();
+    }
+
+    public WebDriver getDriver(){
+       return driver;
+    }
+
     public void closeOut(){
         driver.quit();
     }
