@@ -28,7 +28,7 @@ public class FACObjectView extends ObjectView{
         //this.getDriver().findElement(By.name("search")).clear();
         this.getDriver().findElement(By.name("search")).sendKeys(FACSearchTerm);
         this.getDriver().findElement(By.cssSelector(".search-btn")).click();
-        Thread.sleep(1000);
+        Thread.sleep(2000);
 
         System.out.println(driver.findElement(By.cssSelector(".assistance-listing-title")).getText());
         driver.findElement(By.cssSelector(".assistance-listing-title")).click();
