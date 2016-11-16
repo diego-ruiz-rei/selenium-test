@@ -11,7 +11,7 @@ import static junit.framework.Assert.assertEquals;
 public class HomepageTest {
     Base home = new Base();
 
-    @Test
+   @Test
     public void homePageElements() throws Exception{
         //Home Page test
         home.appWait();

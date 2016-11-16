@@ -1,6 +1,7 @@
 package gov.gsa.sgatests;
 
 import gov.gsa.sga.Base;
+import gov.gsa.sga.FACObjectView;
 import gov.gsa.sga.Search;
 import org.apache.bcel.generic.SWITCH;
 import org.apache.xpath.operations.Or;
@@ -47,11 +48,9 @@ public class SearchTest {
         search.keywordSearch();
     }
 
-    @After
+   @After
     public void end(){
         search.closeOut();
     }
-
-
 
 }

@@ -14,7 +14,7 @@ public class Search extends Base {
     protected String[][] searchParameters = {{"All","","all"},
             {"All","Foreign-Trade Zones in the United States","title"},
             {"Assistance Listings","11.111","number"},
-            {"Opportunities","DTFANM-08-R-00058","number"},
+            //{"Opportunities","DTFANM-08-R-00058","number"},
             {"All","10.001","number"},
             {"All","8(g) State Coastal Zone","title"},
             {"All","\"Yakima River Basin Water Enhancement (YRBWE)\"","title"},
@@ -60,9 +60,9 @@ public class Search extends Base {
                     //check for Solicitation Number
                     if (driver.findElement(By.cssSelector(".m_B-0")).getText().contains("Solicitation Number")) {
                         //TODO: add a class, xpath too unreliable (ie. when agency filter is/isn't present)
-                        /*element = (WebElement) wait.until(
-                                ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/app/main/search/div/div[2]/div[3]/opportunities-result/div[2]/ul/li[1]/ul/li")));*/
-                        //    ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/app/main/search/div/div[2]/div[1]/opportunities-result/div[2]/ul/li[1]/ul/li")));
+                        element = (WebElement) wait.until(
+                                ExpectedConditions.visibilityOfElementLocated(By.id("solicitation-number")));
+
                     }
                     //check for FAL Number
                     else {
@@ -99,14 +99,18 @@ public class Search extends Base {
                 //Todo add a css selector, xpath too unreliable
                 //Check No results found message
                 element = (WebElement) wait.until(
-                        ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/app/main/search/div/div[2]/div/p")));
+                        ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".no-results-found")));
                 System.out.println("\nSearch Parameter : "+keywords[i][1]);
                 //assertEquals("No results found for '"+keywords[i][1]+"'", element.getText());
+                assertTrue(("No results found for '"+keywords[i][1]+"'").contains(element.getText()));
                 System.out.println("No results Found for Search term");
 
                 driver.findElement(By.cssSelector(".search-inputbar")).clear();
             }
+
         }
+
+
 
     }
 }
