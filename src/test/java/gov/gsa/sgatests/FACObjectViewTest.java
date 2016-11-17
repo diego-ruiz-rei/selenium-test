@@ -11,8 +11,9 @@ import static junit.framework.Assert.assertTrue;
 
 public class FACObjectViewTest {
 
+
+
     FACObjectView facobject = new FACObjectView();
-    //ObjectView object = new ObjectView();
 
     @Test
     public void FACObjectView() throws Exception{
@@ -21,7 +22,9 @@ public class FACObjectViewTest {
         facobject.logo();
         facobject.FACSideMenu();
         facobject.FACHeader();
-        //facobject.getFACObjectPage();
+        facobject.FACObjectViewSections();
+        facobject.obligationsGraph();
+        //facobject.obligationsTabularView();
     }
 
     @After

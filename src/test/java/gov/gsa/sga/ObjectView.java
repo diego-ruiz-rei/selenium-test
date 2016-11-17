@@ -17,19 +17,19 @@ public class ObjectView extends Base{
 
     public void logo(){
         assertTrue(isElementPresent(By.cssSelector(".logo")));
-        System.out.println("Logo is Present in the Object View page");
+        System.out.println("\n--Logo is Present in the Object View page--");
     }
 
     public void FACSideMenu(){
-        System.out.println("Inside Object View..");
+        //System.out.println("Inside Object View..");
         assertTrue(isElementPresent(By.cssSelector(".usa-width-three-fourths")));
         //System.out.println("Object View title---"+driver.findElement(By.cssSelector(".usa-width-three-fourths")).getText());
 
         //Check Side Menu
-        System.out.println(driver.findElements(By.cssSelector(".usa-sidenav-list")).size());
-        System.out.println(driver.findElement(By.cssSelector(".usa-sidenav-list")).getText());
+        //System.out.println(driver.findElements(By.cssSelector(".usa-sidenav-list")).size());
+        //System.out.println(driver.findElement(By.cssSelector(".usa-sidenav-list")).getText());
         assertTrue(isElementPresent(By.cssSelector(".usa-sidenav-list")));
-        assertEquals("Overview", driver.findElement(By.linkText("Overview")).getText());
+        assertEquals("Overview is not found in Side menu","Overview", driver.findElement(By.linkText("Overview")).getText());
         assertEquals("Authorizations", driver.findElement(By.linkText("Authorizations")).getText());
         assertEquals("Financial Information", driver.findElement(By.linkText("Financial Information")).getText());
         assertEquals("Criteria for Applying", driver.findElement(By.linkText("Criteria for Applying")).getText());
@@ -37,6 +37,7 @@ public class ObjectView extends Base{
         assertEquals("Compliance Requirements", driver.findElement(By.linkText("Compliance Requirements")).getText());
         assertEquals("Contact Information", driver.findElement(By.linkText("Contact Information")).getText());
         assertEquals("History", driver.findElement(By.linkText("History")).getText());
+        System.out.println("\n--Side Menu is present in the Object View page--");
 
     }
 }

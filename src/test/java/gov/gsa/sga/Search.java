@@ -43,7 +43,7 @@ public class Search extends Base {
             this.appWait();
 
             //select index , enter search term and click on search button
-            driver.findElement(By.cssSelector("img.marginCenter")).click();
+            //driver.findElement(By.cssSelector("img.marginCenter")).click();
             new Select(driver.findElement(By.id("filter"))).selectByVisibleText(keywords[i][0]);
             driver.findElement(By.cssSelector(".search-inputbar")).sendKeys(keywords[i][1]);
             driver.findElement(By.cssSelector(".search-btn")).click();
