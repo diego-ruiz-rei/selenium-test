@@ -1,38 +1,53 @@
 package gov.gsa.sgatests;
 
 import gov.gsa.sga.Base;
+import gov.gsa.sga.HomePage;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
+import static junit.framework.Assert.assertTrue;
 import static junit.framework.Assert.assertEquals;
 
 public class HomepageTest {
-    Base home = new Base();
+    HomePage home = new HomePage();
 
-   @Test
-    public void homePageElements() throws Exception{
-        //Home Page test
-        home.appWait();
-        assertEquals("SAM Client Starter", home.getPageTitle());
-        System.out.println("\n--Home Page Elements--");
-        System.out.println("Page Title : "+home.getPageTitle());
+    @Test
+    public void homePageElements() throws Exception {
+       //Home Page test
+       home.appWait();
+       assertEquals("SAM Client Starter", home.getPageTitle());
+       System.out.println("\nHome Page is Present and Title matches");
+    }
 
+    @Test
+    public void homeDropdown() throws Exception {
         //Search By Index Dropdown test
-        Assert.assertTrue((home.isElementPresent(By.id("filter"))));
-        assertEquals("All", home.getDriver().findElement(By.cssSelector("option")).getText());
-        assertEquals("Opportunities", home.getDriver().findElement(By.cssSelector("option[value=\"fbo\"]")).getText());
-        assertEquals("Assistance Listings", home.getDriver().findElement(By.cssSelector("option[value=\"cfda\"]")).getText());
-        System.out.println("Index Dropdown Present : "+home.getDriver().findElement(By.id("filter")).getText());
+        home.appWait();
+        //assertTrue((home.isElementPresent(By.id("filter"))));
+        assertTrue(home.filterDropdown());
+        assertEquals("All", home.defaultOption("option"));
+        assertEquals("Opportunities", home.specificOption("fbo"));
+        assertEquals("Assistance Listings", home.specificOption("cfda"));
+        assertEquals("Federal Hierarchy", home.specificOption("fh"));
+        assertEquals("Entities", home.specificOption("ent"));
 
+        System.out.println("\nIndex Dropdown Present and Values Match");
+    }
+
+    @Test
+    public void searchBar() throws Exception {
         //Search Box Present
-        Assert.assertTrue(home.isElementPresent(By.cssSelector(".search-inputbar")));
-        System.out.println("Search Bar present");
+        assertTrue(home.searchInputBar());
+        System.out.println("\nSearch Bar present");
+    }
 
+    @Test
+    public void searchButton() throws Exception {
         //Search Button Present
-        Assert.assertTrue(home.isElementPresent(By.cssSelector(".usa-search-submit-text")));
-        System.out.println("Search Button present");
+        assertTrue(home.searchButton());
+        System.out.println("\nSearch Button present");
     }
 
     @After

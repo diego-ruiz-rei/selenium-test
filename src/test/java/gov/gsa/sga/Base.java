@@ -129,9 +129,7 @@ public class Base{
         }
     }
 
-    public String getPageTitle(){
-        return driver.getTitle();
-    }
+
 
     public WebDriver getDriver(){
        return driver;
