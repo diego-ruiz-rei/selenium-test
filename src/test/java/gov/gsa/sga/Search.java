@@ -43,7 +43,6 @@ public class Search extends Base {
             this.appWait();
 
             //select index , enter search term and click on search button
-            //driver.findElement(By.cssSelector("img.marginCenter")).click();
             new Select(driver.findElement(By.id("filter"))).selectByVisibleText(keywords[i][0]);
             driver.findElement(By.cssSelector(".search-inputbar")).sendKeys(keywords[i][1]);
             driver.findElement(By.cssSelector(".search-btn")).click();
@@ -96,12 +95,10 @@ public class Search extends Base {
 
                 driver.findElement(By.cssSelector(".search-inputbar")).clear();
             } else {
-                //Todo add a css selector, xpath too unreliable
                 //Check No results found message
                 element = (WebElement) wait.until(
                         ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".no-results-found")));
                 System.out.println("\nSearch Parameter : "+keywords[i][1]);
-                //assertEquals("No results found for '"+keywords[i][1]+"'", element.getText());
                 assertTrue(("No results found for '"+keywords[i][1]+"'").contains(element.getText()));
                 System.out.println("No results Found for Search term");
 

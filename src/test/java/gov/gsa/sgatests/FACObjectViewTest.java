@@ -54,9 +54,13 @@ public class FACObjectViewTest {
     @Test
     public void popularNameTest(){
         ArrayList<String> popular = facobject.popularname();
-        assertTrue("Popular Name is empty", popular.get(0).contains("Popular Name:"));
-        assertTrue("Popular Name Data is empty", popular.get(1).length() > 1);
-        System.out.println("Popular Name Label and Data exists");
+        if (popular.get(0) == "Popular Name not available")
+            System.out.println("FAL does not have Popular Name field");
+        else {
+            assertTrue("Popular Name is empty", popular.get(0).contains("Popular Name:"));
+            assertTrue("Popular Name Data is empty", popular.get(1).length() > 1);
+            System.out.println("Popular Name Label and Data exists");
+        }
     }
 
     @Test
@@ -73,6 +77,12 @@ public class FACObjectViewTest {
         assertTrue("FAL Number is empty", falnum.get(0).contains("FAL Number:"));
         assertTrue("FAL Number is empty", falnum.get(1).length() > 1);
         System.out.println("FAL Number Label and Data exists");
+    }
+
+    @Test
+    public void relatedAssistance() {
+        assertTrue(facobject.relatedAssistance().length() > 1);
+        System.out.println("Related Assistance Content is present");
     }
 
     @Test
@@ -194,7 +204,7 @@ public class FACObjectViewTest {
 
     @Test
     public void preapplicationCoordination() {
-        assertTrue("Preapplication Coordination Content is not present", facobject.preapplication().length() > 10);
+        assertTrue("Preapplication Coordination Content is not present", facobject.preapplication().length() > 1);
         System.out.println("Preapplication Coordination Content is Present");
     }
 
@@ -228,7 +238,7 @@ public class FACObjectViewTest {
         System.out.println("Renewals Content is Present");
     }
 
-    //@Test
+    @Test
     public void appealsTest() {
         assertTrue("Appeals Content is not present", facobject.appeals().length() > 1);
         System.out.println("Appeals Content is Present");
@@ -282,7 +292,7 @@ public class FACObjectViewTest {
         System.out.println("Regional or Local Office Content is Present");
     }
 
-   // @Test
+   @Test
     public void headquartersOfficeTest() {
         assertTrue("Headquarters Office Content is not present", facobject.headquarters().length() > 1);
         System.out.println("Headquarters Office Content is Present");
@@ -325,6 +335,14 @@ public class FACObjectViewTest {
         assertTrue(graphObject.getGraphsize() == 3);
         System.out.println("Obligations Graph is present and 3 bars are present");
 
+    }
+
+    @Test
+    public void falObligationsTabular() throws Exception {
+        List<WebElement> tabular = facobject.obligationsTabularView();
+
+        assertTrue(tabular.get(0).getText().contains("Totals"));
+        System.out.println("Obligations Tabular View is present ");
     }
 
     @AfterClass

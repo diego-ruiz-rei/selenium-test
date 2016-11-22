@@ -2,16 +2,23 @@ package gov.gsa.sgatests;
 
 import gov.gsa.sga.Base;
 import gov.gsa.sga.HomePage;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.*;
 import org.openqa.selenium.By;
 
 import static junit.framework.Assert.assertTrue;
 import static junit.framework.Assert.assertEquals;
 
 public class HomepageTest {
-    HomePage home = new HomePage();
+    static HomePage home = new HomePage();
+
+    @BeforeClass
+    public static void start() throws InterruptedException {
+        try {
+            home.gotoHomePage();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Test
     public void homePageElements() throws Exception {
@@ -50,8 +57,8 @@ public class HomepageTest {
         System.out.println("\nSearch Button present");
     }
 
-    @After
-    public void end(){
+    @AfterClass
+    public static void end(){
         home.closeOut();
     }
 }

@@ -11,6 +11,10 @@ public class HomePage extends Base {
         return driver.getTitle();
     }
 
+    public void gotoHomePage() throws InterruptedException {
+        driver.get(base_url);
+    }
+
     public String defaultOption(String optionVar) {
         return this.getDriver().findElement(By.cssSelector(optionVar)).getText();
     }

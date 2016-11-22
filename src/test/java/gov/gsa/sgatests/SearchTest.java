@@ -22,6 +22,7 @@ public class SearchTest {
 
     Search search = new Search();
 
+
     @Test
     public void searchAll() throws Exception{
 

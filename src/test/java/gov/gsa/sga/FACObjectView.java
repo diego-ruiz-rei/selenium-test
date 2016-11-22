@@ -2,7 +2,6 @@ package gov.gsa.sga;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
 import java.util.*;
 
 import static junit.framework.Assert.assertEquals;
@@ -12,17 +11,17 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class FACObjectView extends ObjectView{
     //Test Data
-    //FAL Number - 20.218
-    protected String FACSearchTerm = "14.248";
+    //FAL Number - 20.218, 14.248
+    protected String FACSearchTerm = "93.155";
 
     public FACObjectView(){
         super();
     }
 
     public void gotoFACObjectView() throws InterruptedException {
-
         //driver.get(base_url + "programs/610e64ea171eeff29c952688eaf3c7e4/view");
         System.out.println("Search results page");
+        Thread.sleep(1000);
         this.getDriver().findElement(By.name("search")).sendKeys(FACSearchTerm);
         this.getDriver().findElement(By.cssSelector(".search-btn")).click();
         Thread.sleep(1000);
@@ -36,12 +35,19 @@ public class FACObjectView extends ObjectView{
     }
 
     public ArrayList<String> popularname(){
-        String popularname = this.getDriver().findElement(By.id("program-alternative-names")).getText();
-        String popularnamedata = popularname.substring(popularname.lastIndexOf(':')+1).trim();
         ArrayList<String> ar = new ArrayList<String>();
-        ar.add(popularname);
-        ar.add(popularnamedata);
-        return ar;
+        if (this.getDriver().findElements(By.id("program-alternative-names")).size() > 0 ){
+            String popularname = this.getDriver().findElement(By.id("program-alternative-names")).getText();
+            String popularnamedata = popularname.substring(popularname.lastIndexOf(':') + 1).trim();
+            ar.add(popularname);
+            ar.add(popularnamedata);
+            return ar;
+        }
+        else{
+            ar.add("Popular Name not available");
+            return ar;
+        }
+
     }
 
     public ArrayList<String> agencyname(){
@@ -62,13 +68,13 @@ public class FACObjectView extends ObjectView{
         return ar;
     }
 
-    //TODO : Need to cover Scenarios for Related Assistance
-    public void relatedAssistance(){
-        String relatedassistance = this.getDriver().findElement(By.id("")).getText();
-        assertTrue(relatedassistance.contains("Related Federal Assistance:"));
-        assertTrue(isElementPresent(By.id("program-related-na")));
-        System.out.println(relatedassistance+"\nRelated Assistance Title and Data exists!!");
-
+    //TODO : Need to add id for Related Assistance   - Not applicable
+    public String relatedAssistance(){
+        if(this.getDriver().findElements(By.id("program-related-0")).size() > 0){
+            return this.getDriver().findElement(By.id("program-related-0")).getText();
+        }
+        else
+            return "Not Applicable";
     }
 
     //Overview Section
@@ -81,7 +87,7 @@ public class FACObjectView extends ObjectView{
     }
 
     public String examplesOfFunded() {
-        if (this.isElementPresent(By.id("program-project-example-na")))
+        if (this.getDriver().findElements(By.id("program-project-example-na")).size()>0)
             return this.getDriver().findElement(By.id("program-project-example-na")).getText();
         else
             return this.getDriver().findElement(By.id("program-project-example-0")).getText();
@@ -105,12 +111,12 @@ public class FACObjectView extends ObjectView{
     }
 
     public String accomplishments() {
-        if(isElementPresent(By.cssSelector(".content-block > p")))
+        if(this.getDriver().findElements(By.cssSelector(".content-block > p")).size() > 0)
             return this.getDriver().findElement(By.cssSelector(".content-block > p")).getText();
         else
             return this.getDriver().findElement(By.id("program-accomplishments-actual-0")).getText();
-          /*  TODO : getdata for 2015, 2016 and 2017 if exists
-          assertThat(true,
+            /*TODO : getdata for 2015, 2016 and 2017 if exists
+            assertThat(true,
                     either(driver.findElement(By.id("program-accomplishments-actual-0")).getText().length()>10 ||
                     driver.findElement(By.id("program-accomplighments-projected-1")).getText().length()>10) ||
                     driver.findElement(By.id("program-accomplighments-projected-2")).getText().length()>10))
@@ -178,14 +184,20 @@ public class FACObjectView extends ObjectView{
     }
 
     public String deadlines() {
-        if (this.isElementPresent(By.id("program-deadline-dates-0")))
+        if (this.getDriver().findElements(By.id("program-deadline-dates-0")).size() > 0)
             return this.getDriver().findElement(By.id("program-deadline-dates-0")).getText();
-        else
+        else if (this.getDriver().findElements(By.id("program-deadline-na")).size() > 0)
             return this.getDriver().findElement(By.id("program-deadline-na")).getText();
+        else
+            return this.getDriver().findElement(By.id("program-deadline-contact")).getText();
     }
 
     public String preapplication() {
-        return this.getDriver().findElement(By.id("program-preapplication-coordination")).getText();
+        if (this.getDriver().findElements(By.id("program-preapplication-coordination-executive-order")).size()>0)
+             return this.getDriver().findElement(By.id("program-preapplication-coordination-executive-order")).getText();
+        else
+            return this.getDriver().findElement(By.id("program-preapplication-coordination")).getText();
+
     }
 
     public String applicationProcedures() {
@@ -209,7 +221,7 @@ public class FACObjectView extends ObjectView{
     }
 
     public String appeals() {
-        return this.getDriver().findElement(By.id("program-application-appeal")).getText();
+        return this.getDriver().findElement(By.xpath("//*[@id=\"program-application-appeal-interval\"]/em")).getText();
     }
 
 
@@ -248,7 +260,8 @@ public class FACObjectView extends ObjectView{
     }
 
     public String headquarters() {
-        return this.getDriver().findElement(By.id(".sam-address")).getText();
+
+        return this.getDriver().findElement(By.cssSelector(".sam-address")).getText();
     }
 
     //History Section
@@ -293,17 +306,10 @@ public class FACObjectView extends ObjectView{
 
     }
 
-/*
-    public void obligationsTabularView() throws InterruptedException {
+
+    public List<WebElement> obligationsTabularView() throws InterruptedException {
         Thread.sleep(2000);
-        System.out.println("--Obligations Tabular View--");
-        if (obligation_type[1]== "Salary") {
-            System.out.println("****"+driver.findElement(By.id("chart-table")).getText() );
-            assertTrue(driver.findElement(By.id("chart-table")).getText().contains("Salary or Expense"));
-            //System.out.println(driver.findElements(By.cssSelector(".axis--x .tick")).size());
-            //assertTrue(driver.findElements(By.cssSelector(".axis--x .tick")).size() == 3);
-        }
-
-    }*/
-
+        List<WebElement> obligationTotal = this.getDriver().findElements(By.cssSelector(".totals"));
+        return obligationTotal;
+    }
 }
