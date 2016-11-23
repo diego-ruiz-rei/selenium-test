@@ -12,7 +12,7 @@ public class HomePage extends Base {
     }
 
     public void gotoHomePage() throws InterruptedException {
-        driver.get(base_url);
+        driver.get(full_url);
     }
 
     public String defaultOption(String optionVar) {

@@ -21,6 +21,7 @@ public class Base{
     protected String phantomjsbin = "/usr/bin/phantomjs";
     protected String base_url = System.getProperty("siteTarget");
     protected String port = "80";
+    protected String full_url = "";
     protected FluentWait wait;
 
     public Base(){
@@ -63,6 +64,7 @@ public class Base{
         } else {
             url = base_url + ":" + port;
         }
+        this.full_url = url;
         driver.get(url);
         waitForJSandJQueryToLoad();
 
