@@ -15,6 +15,7 @@ public class ObjectView extends Base{
         return this.isElementPresent(By.cssSelector(".logo"));
     }
 
+    //FAL Side Menu
     public Boolean falSideMenuPresent() {
         return this.isElementPresent(By.cssSelector(".usa-width-three-fourths"));
     }
@@ -49,6 +50,27 @@ public class ObjectView extends Base{
 
     public String history(){
         return this.driver.findElement(By.linkText("History")).getText();
+    }
+
+    //Opportunities Side Menu
+    public Boolean oppSideMenuPresent() {
+        return this.isElementPresent(By.cssSelector(".usa-width-one-fourth"));
+    }
+
+    public String generalInformation(){
+        return this.driver.findElement(By.linkText("General Information")).getText();
+    }
+
+    public String classification(){
+        return this.driver.findElement(By.linkText("Classification")).getText();
+    }
+
+    public String synopsis(){
+        return this.driver.findElement(By.linkText("Synopsis/Description")).getText();
+    }
+
+    public String packages(){
+        return this.driver.findElement(By.linkText("Packages")).getText();
     }
 
 }

@@ -23,7 +23,7 @@ public class HomepageTest {
     @Test
     public void homePageElements() throws Exception {
        //Home Page test
-       home.appWait();
+       //home.appWait();
        assertEquals("SAM Client Starter", home.getPageTitle());
        System.out.println("\nHome Page is Present and Title matches");
     }
@@ -31,7 +31,7 @@ public class HomepageTest {
     @Test
     public void homeDropdown() throws Exception {
         //Search By Index Dropdown test
-        home.appWait();
+        //home.appWait();
         //assertTrue((home.isElementPresent(By.id("filter"))));
         assertTrue(home.filterDropdown());
         assertEquals("All", home.defaultOption("option"));

@@ -6,8 +6,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
+import static java.lang.Thread.*;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
+import java.util.*;
 
 public class Search extends Base {
     //Test Data specific to Search - Format {index,keyword,type}
@@ -31,22 +33,25 @@ public class Search extends Base {
     public String[][] getSearchParameters(){
         return searchParameters;
     }
-    public void goToSearch(){
+    public void goToSearch() throws InterruptedException{
         this.getDriver().findElement(By.cssSelector(".search-btn")).click();
-        this.appWait();
+        Thread.sleep(1000);
+        //this.appWait();
     }
     public void keywordSearch() throws InterruptedException {
         String[][] keywords = searchParameters;
-        this.appWait();
+        //this.appWait();
+        Thread.sleep(1000);
         System.out.println("--Search Results Page - Search with Parameters--");
         for(int i=0;i<keywords.length;i++) {
-            this.appWait();
-
+            //this.appWait();
+            Thread.sleep(1000);
             //select index , enter search term and click on search button
             new Select(driver.findElement(By.id("filter"))).selectByVisibleText(keywords[i][0]);
             driver.findElement(By.cssSelector(".search-inputbar")).sendKeys(keywords[i][1]);
             driver.findElement(By.cssSelector(".search-btn")).click();
-            this.appWait();
+            //this.appWait();
+            Thread.sleep(1000);
 
             //trim quotes for exact match keywords
             keywords[i][1] = keywords[i][1].replace("\"", "");

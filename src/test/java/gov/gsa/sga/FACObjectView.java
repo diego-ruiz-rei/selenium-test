@@ -27,7 +27,7 @@ public class FACObjectView extends ObjectView{
         Thread.sleep(1000);
         this.getDriver().findElement(By.cssSelector(".assistance-listing-title > a")).click();
         Thread.sleep(1000);
-        this.appWait();
+        //this.appWait();
     }
 
     public Boolean falTitle() {
@@ -59,7 +59,7 @@ public class FACObjectView extends ObjectView{
         return ar;
     }
 
-    public ArrayList<String> falNumber(){
+    public ArrayList<String> cfdaNumber(){
         String fal = this.getDriver().findElement(By.id("program-number")).getText();
         String faldata = fal.substring(fal.lastIndexOf(':')+1).trim();
         ArrayList<String> ar = new ArrayList<String>();

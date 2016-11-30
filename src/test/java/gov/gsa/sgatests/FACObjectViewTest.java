@@ -72,11 +72,11 @@ public class FACObjectViewTest {
     }
 
     @Test
-    public void falNumberTest() {
-        ArrayList<String> falnum = facobject.falNumber();
-        assertTrue("FAL Number is empty", falnum.get(0).contains("FAL Number:"));
-        assertTrue("FAL Number is empty", falnum.get(1).length() > 1);
-        System.out.println("FAL Number Label and Data exists");
+    public void cfdaNumberTest() {
+        ArrayList<String> falnum = facobject.cfdaNumber();
+        assertTrue("CFDA Number is empty", falnum.get(0).contains("CFDA Number:"));
+        assertTrue("CFDA Number is empty", falnum.get(1).length() > 1);
+        System.out.println("CFDA Number Label and Data exists");
     }
 
     @Test

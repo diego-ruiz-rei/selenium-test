@@ -26,7 +26,8 @@ public class SearchTest {
     @Test
     public void searchAll() throws Exception{
 
-        search.appWait();
+        //search.appWait();
+        Thread.sleep(1000);
         Assert.assertTrue(search.isElementPresent(By.cssSelector(".usa-search-submit-text")));
 
         search.goToSearch();
