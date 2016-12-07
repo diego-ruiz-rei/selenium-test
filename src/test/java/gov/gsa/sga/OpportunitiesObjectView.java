@@ -14,6 +14,7 @@ public class OpportunitiesObjectView extends ObjectView{
 
     protected String opp_SearchTerm = "F4FRQT3091A007";
 
+
     public OpportunitiesObjectView(){
         super();
     }
@@ -71,16 +72,18 @@ public class OpportunitiesObjectView extends ObjectView{
         return splitLabelAndData(posted);
     }
 
+    //TODO : Not all notices have this date. It is Conditional, need to modify script
     public ArrayList<String> originalPosted(){
         String ori_posted = this.getDriver().findElement(By.id("opportunity-general-original-posted-date")).getText();
         return splitLabelAndData(ori_posted);
     }
 
-    public ArrayList<String> resposnseDate(){
+    public ArrayList<String> responseDate(){
         String response = this.getDriver().findElement(By.id("opportunity-general-response-date")).getText();
         return splitLabelAndData(response);
     }
 
+    //TODO : Not all notices have this date. It is Conditional, need to modify script
     public ArrayList<String> originalResponse(){
         String ori_response = this.getDriver().findElement(By.id("opportunity-general-original-response-date")).getText();
         return splitLabelAndData(ori_response);
@@ -92,6 +95,7 @@ public class OpportunitiesObjectView extends ObjectView{
     }
 
     //Classification Section
+    //TODO : Not all notices have this date. It is Conditional, need to modify script
     public ArrayList<String> originalSetAside(){
         String ori_set = this.getDriver().findElement(By.id("opportunity-classification-original-set-aside")).getText();
         return splitLabelAndData(ori_set);
@@ -115,6 +119,24 @@ public class OpportunitiesObjectView extends ObjectView{
         ArrayList<String> ar = new ArrayList<String>();
         ar.add(poplabel);
         ar.add(pop);
+        return ar;
+
+    }
+
+    //Contracting Office
+    public ArrayList<String> contractingOffice(){
+        ArrayList<String> ar = new ArrayList<String>();
+        if (this.getDriver().findElements(By.id("opportunity-contact-contracting-office-street")).size() > 0 )
+            ar.add(this.getDriver().findElement(By.id("opportunity-contact-contracting-office-street")).getText());
+        else if (this.getDriver().findElements(By.id("opportunity-contact-contracting-office-city")).size() > 0)
+            ar.add(this.getDriver().findElement(By.id("opportunity-contact-contracting-office-city")).getText());
+        else if (this.getDriver().findElements(By.id("opportunity-contact-contracting-office-state")).size() > 0)
+            ar.add(this.getDriver().findElement(By.id("opportunity-contact-contracting-office-state")).getText());
+        else if (this.getDriver().findElements(By.id("opportunity-contact-contracting-office-country")).size() > 0)
+            ar.add(this.getDriver().findElement(By.id("opportunity-contact-contracting-office-country")).getText());
+        else if (this.getDriver().findElements(By.id("opportunity-contact-contracting-office-zip")).size() > 0)
+            ar.add(this.getDriver().findElement(By.id("opportunity-contact-contracting-office-zip")).getText());
+
         return ar;
 
     }
