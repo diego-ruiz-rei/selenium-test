@@ -79,7 +79,7 @@ public class OpportunitiesObjectViewTest extends Base{
         System.out.println("Posted Date Label and Data exists");
     }
 
-    @Test
+    //@Test
     public void originialPostedDateTest() {
         ArrayList<String> originalposted = OpportunitiesObjectViewPage.originalPosted();
         assertTrue("Original Posted Date Label is empty", originalposted.get(0).contains("Original Posted Date:"));
@@ -95,7 +95,7 @@ public class OpportunitiesObjectViewTest extends Base{
         System.out.println("Response Date Label and Data exists");
     }
 
-    @Test
+    //@Test
     public void originalResponseDateTest() {
         ArrayList<String> originalresponse = OpportunitiesObjectViewPage.originalResponse();
         assertTrue("Original Response Date Label is empty", originalresponse.get(0).contains("Original Response Date:"));
@@ -111,7 +111,7 @@ public class OpportunitiesObjectViewTest extends Base{
         System.out.println("Archiving Policy Label and Data exists");
     }
 
-    @Test
+    // @Test
     public void originalSetAsideTest() {
         ArrayList<String> ori_setaside = OpportunitiesObjectViewPage.originalSetAside();
         assertTrue("Original Set Aside is empty", ori_setaside.get(0).contains("Original Set Aside:"));
@@ -139,6 +139,17 @@ public class OpportunitiesObjectViewTest extends Base{
         assertTrue("Place of Performance is empty", place.get(0).contains("Place of Performance:"));
         assertTrue("Place of Performance Data is empty", place.get(1).length() > 1);
         System.out.println("Place of Performance Label and Data exists");
+    }
+
+    @Test
+    public void contractingOfficeTest() {
+        ArrayList<String> contracting = oppobject.contractingOffice();
+        for (String temp : contracting)
+        {
+            assertTrue(temp.length() >1);
+        }
+
+        System.out.println("Contracting Office Data exists");
     }
 
     @Test
