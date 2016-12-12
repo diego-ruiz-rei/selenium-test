@@ -1,34 +1,31 @@
-package gov.gsa.sga;
+package gov.gsa.Utilities;
 
-import org.junit.After;
-import org.junit.Test;
-import org.junit.Ignore;
-import org.junit.Before;
-import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriverService;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.*;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.util.concurrent.TimeUnit;
-import static junit.framework.Assert.assertEquals;
+
 
 public class Base{
-    protected WebDriver driver;
-    protected String chromedriverbin = "";
-    protected String phantomjsbin = "/usr/bin/phantomjs";
-    protected String base_url = System.getProperty("siteTarget");
-    protected String port = "80";
-    protected String full_url = "";
-    protected FluentWait wait;
+    public static WebDriver driver;
+    private static String chromedriverbin = "";
+    private static String phantomjsbin = "/usr/bin/phantomjs";
+    private static String base_url = System.getProperty("siteTarget");
+    private static String port = "80";
+    public static String full_url = "";
+    public static FluentWait wait;
 
-    public Base(){
-        setUp();
-    }
-
-    public void setUp() {
+    public static void setUp() {
         if(!System.getProperty("phantomjsbin","").equals("")){
             phantomjsbin = System.getProperty("phantomjsbin","bin/phantomjs");//linux only
             DesiredCapabilities caps = new DesiredCapabilities();
@@ -64,7 +61,7 @@ public class Base{
         } else {
             url = base_url + ":" + port;
         }
-        this.full_url = url;
+        full_url = url;
         driver.get(url);
         waitForJSandJQueryToLoad();
 
@@ -74,7 +71,7 @@ public class Base{
                 .ignoring(NoSuchElementException.class);
     }
 
-    protected boolean waitForJSandJQueryToLoad() {
+    private static boolean waitForJSandJQueryToLoad() {
         WebDriverWait wait = new WebDriverWait(driver, 30);
 
         // wait for Javascript to load
@@ -121,23 +118,24 @@ public class Base{
         wait.until(this.angularHasFinishedProcessing());
     }
 
-    public boolean isElementPresent(By by) {
-        try {
-            driver.findElement(by);
-            return true;
-        } catch (NoSuchElementException e) {
-            e.printStackTrace();
-            return false;
-        }
+    // REPLACE THIS STATEMENT WITH DRIVER.FINDELEMENTSBYID
+//    public boolean isElementPresent(By by) {
+//        try {
+//            driver.findElement(by);
+//            return true;
+//        } catch (NoSuchElementException e) {
+//            e.printStackTrace();
+//            return false;
+//        }
+//    }
+
+
+
+    public static WebDriver getDriver(){
+        return driver;
     }
 
-
-
-    public WebDriver getDriver(){
-       return driver;
-    }
-
-    public void closeOut(){
+    public static void closeOut(){
         driver.quit();
     }
 }

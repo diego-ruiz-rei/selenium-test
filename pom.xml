@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>gov.gsa.sgatests</groupId>
+    <groupId>gov.gsa.oldTestCode.sga.sgatests</groupId>
     <artifactId>iae-e2e-test</artifactId>
     <version>0.1.0</version>
 
