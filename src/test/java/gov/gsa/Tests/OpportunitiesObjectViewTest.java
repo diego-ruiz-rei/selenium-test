@@ -143,7 +143,7 @@ public class OpportunitiesObjectViewTest extends Base{
 
     @Test
     public void contractingOfficeTest() {
-        ArrayList<String> contracting = oppobject.contractingOffice();
+        ArrayList<String> contracting = OpportunitiesObjectViewPage.contractingOffice();
         for (String temp : contracting)
         {
             assertTrue(temp.length() >1);

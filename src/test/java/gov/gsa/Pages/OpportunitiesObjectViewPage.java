@@ -20,8 +20,8 @@ public class OpportunitiesObjectViewPage extends ObjectView {
     }
 
     //Function to split Data and Label
-    public static ArrayList<String> splitLabelAndData(String element){
-        String soldata = element.substring(element.lastIndexOf(':')+1).trim();
+    public static ArrayList<String> splitLabelAndData(String element) {
+        String soldata = element.substring(element.lastIndexOf(':') + 1).trim();
         ArrayList<String> ar = new ArrayList<String>();
         ar.add(element);
         ar.add(soldata);
@@ -29,72 +29,72 @@ public class OpportunitiesObjectViewPage extends ObjectView {
     }
 
     //Opportunity Header
-    public static ArrayList<String> solicitation(){
+    public static ArrayList<String> solicitation() {
         String solname = Base.driver.findElement(By.id("opportunity-header-solicitation-number")).getText();
         return splitLabelAndData(solname);
     }
 
-    public static ArrayList<String> office(){
+    public static ArrayList<String> office() {
         String officename = Base.driver.findElement(By.id("opportunity-header-hierarchy-level")).getText();
         return splitLabelAndData(officename);
     }
 
-    public static ArrayList<String> location(){
+    public static ArrayList<String> location() {
         String locationname = Base.driver.findElement(By.id("opportunity-header-location")).getText();
         return splitLabelAndData(locationname);
     }
 
     //General Information
-    public static ArrayList<String> oppType(){
+    public static ArrayList<String> oppType() {
         String opportunitytype = Base.driver.findElement(By.id("opportunity-general-type")).getText();
         return splitLabelAndData(opportunitytype);
     }
 
-    public static ArrayList<String> postedDate(){
+    public static ArrayList<String> postedDate() {
         String posted = Base.driver.findElement(By.id("opportunity-general-posted-date")).getText();
         return splitLabelAndData(posted);
     }
 
-    public static ArrayList<String> originalPosted(){
+    public static ArrayList<String> originalPosted() {
         String ori_posted = Base.driver.findElement(By.id("opportunity-general-original-posted-date")).getText();
         return splitLabelAndData(ori_posted);
     }
 
-    public static ArrayList<String> resposnseDate(){
+    public static ArrayList<String> resposnseDate() {
         String response = Base.driver.findElement(By.id("opportunity-general-response-date")).getText();
         return splitLabelAndData(response);
     }
 
-    public static ArrayList<String> originalResponse(){
+    public static ArrayList<String> originalResponse() {
         String ori_response = Base.driver.findElement(By.id("opportunity-general-original-response-date")).getText();
         return splitLabelAndData(ori_response);
     }
 
-    public static ArrayList<String> archivingPolicy(){
+    public static ArrayList<String> archivingPolicy() {
         String arch_policy = Base.driver.findElement(By.id("opportunity-general-archiving-policy")).getText();
         return splitLabelAndData(arch_policy);
     }
 
     //Classification Section
-    public static ArrayList<String> originalSetAside(){
+    public static ArrayList<String> originalSetAside() {
         String ori_set = Base.driver.findElement(By.id("opportunity-classification-original-set-aside")).getText();
         return splitLabelAndData(ori_set);
     }
 
-    public static ArrayList<String> classificationCode(){
+    public static ArrayList<String> classificationCode() {
         String classi_code = Base.driver.findElement(By.id("opportunity-classification-classification-code")).getText();
         return splitLabelAndData(classi_code);
     }
 
-    public static String naicscode(){
+    public static String naicscode() {
         WebElement naics = Base.driver.findElement(By.xpath("//*[@id=\"opportunity-classification-naics-code\"]/ul/li"));
         return naics.getText();
 
     }
 
     //TODO : Add for Address, city and state
-    public static ArrayList<String> placeOfPerformance(){
-        String pop= Base.driver.findElement(By.id("opportunity-classification-pop-location")).getText();
+    public static ArrayList<String> placeOfPerformance() {
+        String pop = Base.driver.findElement(By.id("opportunity-classification-pop-location")).getText();
         String poplabel = Base.driver.findElement(By.id("opportunity-classification-pop")).getText();
         ArrayList<String> ar = new ArrayList<String>();
         ar.add(poplabel);
@@ -104,8 +104,8 @@ public class OpportunitiesObjectViewPage extends ObjectView {
     }
 
     //Contact Information
-    public static ArrayList<String> primaryPointOfContact(){
-        String pocfullname= Base.driver.findElement(By.id("opportunity-contact-primary-poc-full-name")).getText();
+    public static ArrayList<String> primaryPointOfContact() {
+        String pocfullname = Base.driver.findElement(By.id("opportunity-contact-primary-poc-full-name")).getText();
         String popemail = Base.driver.findElement(By.xpath("//*[@id=\"opportunity-contact-primary-poc-email\"]/a")).getText();
         String popphone = Base.driver.findElement(By.id("opportunity-contact-primary-poc-phone")).getText();
         ArrayList<String> ar = new ArrayList<String>();
@@ -116,5 +116,25 @@ public class OpportunitiesObjectViewPage extends ObjectView {
 
     }
 
-
+    //Contracting Office
+    public static ArrayList<String> contractingOffice() {
+        ArrayList<String> ar = new ArrayList<String>();
+        if(Base.driver.findElements(By.id("opportunity-contact-contracting-office-street")).size() > 0){
+            ar.add(Base.getDriver().findElement(By.id("opportunity-contact-contracting-office-street")).getText());
+        }
+        else if (Base.getDriver().findElements(By.id("opportunity-contact-contracting-office-city")).size() > 0){
+            ar.add(Base.getDriver().findElement(By.id("opportunity-contact-contracting-office-city")).getText());
+        }
+        else if (Base.getDriver().findElements(By.id("opportunity-contact-contracting-office-state")).size() > 0){
+            ar.add(Base.getDriver().findElement(By.id("opportunity-contact-contracting-office-state")).getText());
+        }
+        else if (Base.getDriver().findElements(By.id("opportunity-contact-contracting-office-country")).size() > 0){
+            ar.add(Base.getDriver().findElement(By.id("opportunity-contact-contracting-office-country")).getText());
+        }
+        else if (Base.getDriver().findElements(By.id("opportunity-contact-contracting-office-zip")).size() > 0){
+            ar.add(Base.getDriver().findElement(By.id("opportunity-contact-contracting-office-zip")).getText());
+        }
+        return ar;
+    }
 }
+
