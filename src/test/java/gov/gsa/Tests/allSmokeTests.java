@@ -20,7 +20,5 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({HomepageTest.class, FACObjectViewTest.class, OpportunitiesObjectViewTest.class, SearchTest.class})
 public class allSmokeTests extends Base{
-//    @BeforeClass public static void onlyOnce(){
-//        setUp();
-//    }
+
 }

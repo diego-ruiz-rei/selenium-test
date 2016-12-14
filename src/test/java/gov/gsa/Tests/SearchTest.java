@@ -19,7 +19,7 @@ public class SearchTest extends Base{
         setUp();
     }
 
-    @Test
+    //@Test
     public void searchAll() throws Exception{
 
         //SearchNavigation.appWait();

@@ -161,7 +161,6 @@ public class OpportunitiesObjectViewTest extends Base{
         System.out.println("Primary Point of Contact Data exists");
     }
 
-
     @AfterClass
     public static void end(){
         closeOut();
