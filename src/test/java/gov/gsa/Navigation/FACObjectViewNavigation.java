@@ -17,7 +17,7 @@ public class FACObjectViewNavigation extends ObjectView{
         //driver.get(base_url + "programs/610e64ea171eeff29c952688eaf3c7e4/view");
         System.out.println("Search results page");
         Thread.sleep(1000);
-        Base.driver.findElement(By.name("search")).sendKeys(FACSearchTerm);
+        Base.driver.findElement(By.cssSelector(".search-inputbar")).sendKeys(FACSearchTerm);
         Base.driver.findElement(By.cssSelector(".search-btn")).click();
         Thread.sleep(1000);
         Base.driver.findElement(By.cssSelector(".assistance-listing-title > a")).click();

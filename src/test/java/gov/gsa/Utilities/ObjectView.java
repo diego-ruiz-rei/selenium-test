@@ -3,10 +3,10 @@ package gov.gsa.Utilities;
 import org.openqa.selenium.By;
 
 
-public class ObjectView {
+public class ObjectView extends Base{
 
     public static Boolean logo() {
-        return Base.driver.findElements(By.cssSelector(".logo")).size() > 0;
+        return Base.driver.findElements(By.cssSelector(".sidenav-logo")).size() > 0;
     }
 
     //FAL Side Menu

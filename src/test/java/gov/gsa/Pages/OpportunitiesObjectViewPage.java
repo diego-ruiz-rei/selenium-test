@@ -4,8 +4,10 @@ import gov.gsa.Utilities.Base;
 import gov.gsa.Utilities.ObjectView;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class OpportunitiesObjectViewPage extends ObjectView {
 
@@ -119,22 +121,134 @@ public class OpportunitiesObjectViewPage extends ObjectView {
     //Contracting Office
     public static ArrayList<String> contractingOffice() {
         ArrayList<String> ar = new ArrayList<String>();
-        if(Base.driver.findElements(By.id("opportunity-contact-contracting-office-street")).size() > 0){
+        if (Base.driver.findElements(By.id("opportunity-contact-contracting-office-street")).size() > 0) {
             ar.add(Base.getDriver().findElement(By.id("opportunity-contact-contracting-office-street")).getText());
-        }
-        else if (Base.getDriver().findElements(By.id("opportunity-contact-contracting-office-city")).size() > 0){
+        } else if (Base.getDriver().findElements(By.id("opportunity-contact-contracting-office-city")).size() > 0) {
             ar.add(Base.getDriver().findElement(By.id("opportunity-contact-contracting-office-city")).getText());
-        }
-        else if (Base.getDriver().findElements(By.id("opportunity-contact-contracting-office-state")).size() > 0){
+        } else if (Base.getDriver().findElements(By.id("opportunity-contact-contracting-office-state")).size() > 0) {
             ar.add(Base.getDriver().findElement(By.id("opportunity-contact-contracting-office-state")).getText());
-        }
-        else if (Base.getDriver().findElements(By.id("opportunity-contact-contracting-office-country")).size() > 0){
+        } else if (Base.getDriver().findElements(By.id("opportunity-contact-contracting-office-country")).size() > 0) {
             ar.add(Base.getDriver().findElement(By.id("opportunity-contact-contracting-office-country")).getText());
-        }
-        else if (Base.getDriver().findElements(By.id("opportunity-contact-contracting-office-zip")).size() > 0){
+        } else if (Base.getDriver().findElements(By.id("opportunity-contact-contracting-office-zip")).size() > 0) {
             ar.add(Base.getDriver().findElement(By.id("opportunity-contact-contracting-office-zip")).getText());
         }
         return ar;
     }
+
+    //OPPORTUNITY PACKAGES
+    //Packages - Expand Link
+    public static void packagesExpand() {
+        WebElement element = (WebElement) Base.wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".card-header")));
+        element.click();
+    }
+
+    //Packages - External Link Check
+    public static String externalLink() throws InterruptedException {
+        packagesExpand();
+        Thread.sleep(1000);
+        String external = Base.driver.findElement(By.cssSelector(".download-info-link > a")).getText();
+        return external;
+
+    }
+
+    //Packages - PDF Document
+    public static ArrayList<String> pdfDocument() throws InterruptedException {
+        packagesExpand();
+        Thread.sleep(1000);
+        String pdf = Base.driver.findElement(By.cssSelector(".download-info-link > a")).getText();
+        String pdftype = Base.driver.findElement(By.cssSelector(".download-info-type")).getText();
+        ArrayList<String> ar = new ArrayList<String>();
+        ar.add(pdf);
+        ar.add(pdftype);
+        return ar;
+    }
+
+    //Packages - Word Document
+    //1954a3b14efff49e70c9ccf239e7e951
+    public static ArrayList<String> wordDocument() throws InterruptedException {
+        packagesExpand();
+        Thread.sleep(1000);
+        String word = Base.driver.findElement(By.cssSelector(".download-info-link > a")).getText();
+        String wordtype = Base.driver.findElement(By.cssSelector(".download-info-type")).getText();
+        
+        ArrayList<String> ar = new ArrayList<String>();
+        ar.add(word);
+        ar.add(wordtype);
+        return ar;
+    }
+
+    //Package - Document Icons
+    public static String documentIcon() throws InterruptedException {
+        packagesExpand();
+        Thread.sleep(1000);
+        String icon = Base.driver.findElement(By.cssSelector(".download-info-icon > i")).getAttribute("class");
+        System.out.println("***"+icon);
+
+        return icon;
+    }
+
+    //Package - No Package Message
+    public static String noPackage() throws InterruptedException {
+        //packagesExpand();
+        Thread.sleep(2000);
+        String msg = Base.driver.findElement(By.cssSelector(".card-secure-content.usa-text-center > strong")).getText();
+        System.out.println("***"+msg);
+
+        return msg;
+    }
+
+    //Packages - Zip Archive
+    public static ArrayList<String> zipArchive() throws InterruptedException {
+        packagesExpand();
+        Thread.sleep(1000);
+        String zip = Base.driver.findElement(By.cssSelector(".download-info-link > a")).getText();
+        String ziptype = Base.driver.findElement(By.cssSelector(".download-info-type")).getText();
+        ArrayList<String> ar = new ArrayList<String>();
+        ar.add(zip);
+        ar.add(ziptype);
+        return ar;
+    }
+
+    //Packages - multiple packages Count
+    public static int multiplePackagesCount() throws InterruptedException {
+        packagesExpand();
+        Thread.sleep(1000);
+        int numberofpackages = Base.driver.findElements(By.className("download-container")).size();
+        return numberofpackages;
+    }
+
+    //Packages - Secure packages Count
+    public static ArrayList<Integer> secureNotSecurePackagesCount() throws InterruptedException {
+        packagesExpand();
+        Thread.sleep(1000);
+        int secureCount = Base.driver.findElements(By.cssSelector(".card-extra-content .fa.fa-lock")).size();
+        int notSecuredCount = Base.driver.findElements(By.cssSelector("i.fa.fa-unlock")).size();
+        ArrayList<Integer> ar = new ArrayList<Integer>();
+        ar.add(secureCount);
+        ar.add(notSecuredCount);
+        return ar;
+    }
+
+    //Packages - Secure packages Content
+    public static ArrayList<String> secureContent() throws InterruptedException {
+        packagesExpand();
+        Thread.sleep(1000);
+        String secured = Base.driver.findElement(By.xpath("//*[@class=\"card-extra-content\"]/div[2]/strong")).getText();
+        String securedMessage = Base.driver.findElement(By.cssSelector(".card-secure-content >p > em")).getText();
+        //System.out.println("secured ** " + secured);
+        //System.out.println("content ** " + securedMessage);
+
+        ArrayList<String> ar = new ArrayList<String>();
+        ar.add(secured);
+        ar.add(securedMessage);
+        return ar;
+    }
+
+    //Packages - Document Type Icon
+
 }
+
+
+
 
