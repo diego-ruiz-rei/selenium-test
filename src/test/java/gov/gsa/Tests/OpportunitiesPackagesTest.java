@@ -22,7 +22,6 @@ import static junit.framework.Assert.assertTrue;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class OpportunitiesPackagesTest extends Base{
 
-    //TODO : Test Data should be set up here instead of having it within each tests
     //Test Data - Notice Ids
     public String external_Link_package = "33274e2fa53eb34a24c4da02b0edfb26";//Test for external link
     public String single_package = "1954a3b14efff49e70c9ccf239e7e951";
