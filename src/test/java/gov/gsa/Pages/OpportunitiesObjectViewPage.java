@@ -143,38 +143,44 @@ public class OpportunitiesObjectViewPage extends ObjectView {
         element.click();
     }
 
+    //Packages - Section Title
+    public static String packagesTitle() throws InterruptedException {
+        packagesExpand();
+        Thread.sleep(1000);
+        return Base.driver.findElement(By.cssSelector(".download-container-header > h2")).getText();
+    }
+
+    //Packages - Download All Button
+    public static String downloadAllButton() throws InterruptedException {
+        packagesExpand();
+        Thread.sleep(1000);
+        return Base.driver.findElement(By.cssSelector(".download-container-header .download-button .usa-button-small.usa-button-gray>span")).getText();
+    }
+
+    //Packages - Download  Button
+    public static String downloadButton() throws InterruptedException {
+        packagesExpand();
+        Thread.sleep(1000);
+        return Base.driver.findElement(By.cssSelector(".download-container .download-button .usa-button-small.usa-button-gray>span")).getText();
+    }
+
+
     //Packages - External Link Check
     public static String externalLink() throws InterruptedException {
         packagesExpand();
         Thread.sleep(1000);
-        String external = Base.driver.findElement(By.cssSelector(".download-info-link > a")).getText();
-        return external;
-
+        return Base.driver.findElement(By.cssSelector(".download-info-link > a")).getText();
     }
 
-    //Packages - PDF Document
-    public static ArrayList<String> pdfDocument() throws InterruptedException {
+    //Packages - Document Check
+    public static ArrayList<String> document() throws InterruptedException {
         packagesExpand();
         Thread.sleep(1000);
-        String pdf = Base.driver.findElement(By.cssSelector(".download-info-link > a")).getText();
-        String pdftype = Base.driver.findElement(By.cssSelector(".download-info-type")).getText();
+        String doc = Base.driver.findElement(By.cssSelector(".download-info-link > a")).getText();
+        String doctype = Base.driver.findElement(By.cssSelector(".download-info-type")).getText();
         ArrayList<String> ar = new ArrayList<String>();
-        ar.add(pdf);
-        ar.add(pdftype);
-        return ar;
-    }
-
-    //Packages - Word Document
-    //1954a3b14efff49e70c9ccf239e7e951
-    public static ArrayList<String> wordDocument() throws InterruptedException {
-        packagesExpand();
-        Thread.sleep(1000);
-        String word = Base.driver.findElement(By.cssSelector(".download-info-link > a")).getText();
-        String wordtype = Base.driver.findElement(By.cssSelector(".download-info-type")).getText();
-        
-        ArrayList<String> ar = new ArrayList<String>();
-        ar.add(word);
-        ar.add(wordtype);
+        ar.add(doc);
+        ar.add(doctype);
         return ar;
     }
 
@@ -182,40 +188,26 @@ public class OpportunitiesObjectViewPage extends ObjectView {
     public static String documentIcon() throws InterruptedException {
         packagesExpand();
         Thread.sleep(1000);
-        String icon = Base.driver.findElement(By.cssSelector(".download-info-icon > i")).getAttribute("class");
-        System.out.println("***"+icon);
-
-        return icon;
+        return Base.driver.findElement(By.cssSelector(".download-info-icon > i")).getAttribute("class");
     }
 
     //Package - No Package Message
     public static String noPackage() throws InterruptedException {
         //packagesExpand();
-        Thread.sleep(2000);
-        String msg = Base.driver.findElement(By.cssSelector(".card-secure-content.usa-text-center > strong")).getText();
-        System.out.println("***"+msg);
+        Thread.sleep(3000);
+        //WebElement element = (WebElement) Base.wait.until(
+        //        ExpectedConditions.textToBePresentInElementValue(By.cssSelector(".card-secure-content.usa-text-center > strong"),"No packages uploaded."));
+        System.out.println("*** " + Base.driver.findElement(By.cssSelector(".card-secure-content.usa-text-center > strong")).getText());
+        return Base.driver.findElement(By.cssSelector(".card-secure-content.usa-text-center > strong")).getText();
 
-        return msg;
     }
 
-    //Packages - Zip Archive
-    public static ArrayList<String> zipArchive() throws InterruptedException {
-        packagesExpand();
-        Thread.sleep(1000);
-        String zip = Base.driver.findElement(By.cssSelector(".download-info-link > a")).getText();
-        String ziptype = Base.driver.findElement(By.cssSelector(".download-info-type")).getText();
-        ArrayList<String> ar = new ArrayList<String>();
-        ar.add(zip);
-        ar.add(ziptype);
-        return ar;
-    }
 
     //Packages - multiple packages Count
     public static int multiplePackagesCount() throws InterruptedException {
         packagesExpand();
         Thread.sleep(1000);
-        int numberofpackages = Base.driver.findElements(By.className("download-container")).size();
-        return numberofpackages;
+        return Base.driver.findElements(By.className("download-container")).size();
     }
 
     //Packages - Secure packages Count
@@ -236,17 +228,18 @@ public class OpportunitiesObjectViewPage extends ObjectView {
         Thread.sleep(1000);
         String secured = Base.driver.findElement(By.xpath("//*[@class=\"card-extra-content\"]/div[2]/strong")).getText();
         String securedMessage = Base.driver.findElement(By.cssSelector(".card-secure-content >p > em")).getText();
-        //System.out.println("secured ** " + secured);
-        //System.out.println("content ** " + securedMessage);
-
         ArrayList<String> ar = new ArrayList<String>();
         ar.add(secured);
         ar.add(securedMessage);
         return ar;
     }
 
-    //Packages - Document Type Icon
-
+    //Packages - Not Secured
+    public static String notSecurePackage() throws InterruptedException {
+        packagesExpand();
+        Thread.sleep(1000);
+        return Base.driver.findElement(By.xpath("//*[@class=\"card-extra-content\"]/div[2]/strong")).getText();
+    }
 }
 
 
