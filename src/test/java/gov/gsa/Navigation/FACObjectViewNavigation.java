@@ -2,7 +2,6 @@ package gov.gsa.Navigation;
 
 import gov.gsa.Utilities.Base;
 import gov.gsa.Utilities.ObjectView;
-import org.junit.BeforeClass;
 import org.openqa.selenium.By;
 
 /**

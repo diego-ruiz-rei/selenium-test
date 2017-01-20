@@ -1,7 +1,6 @@
 package gov.gsa.Navigation;
 
 import gov.gsa.Utilities.Base;
-import org.openqa.selenium.By;
 /**
  * Created by michael.kellogg on 12/6/16.
  */

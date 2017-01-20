@@ -6,7 +6,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import gov.gsa.Utilities.Base;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
