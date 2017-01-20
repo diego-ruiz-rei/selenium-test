@@ -22,4 +22,4 @@ target
 
 /chromedriver
 /phantomjs
-/chromedriverformac
+/bin/chromedriverformac
