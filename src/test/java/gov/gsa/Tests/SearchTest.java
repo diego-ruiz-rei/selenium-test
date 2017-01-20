@@ -8,8 +8,7 @@ import org.junit.*;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 
-import static junit.framework.Assert.assertTrue;
-
+import static org.junit.Assert.*;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SearchTest extends Base{

@@ -12,8 +12,8 @@ import org.junit.runners.MethodSorters;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 
 /**
  * Created by RKumar on 1/13/2017.
