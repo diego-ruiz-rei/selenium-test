@@ -12,13 +12,13 @@ import org.junit.runners.MethodSorters;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.function.Consumer;
 
+import static gov.gsa.Utilities.CommonUtils.testFieldAndDataExists;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class OpportunitiesObjectViewTest extends Base{
+public class OpportunitiesObjectViewTest extends Base {
 
     @BeforeClass
     public static void start() throws InterruptedException {
@@ -33,29 +33,15 @@ public class OpportunitiesObjectViewTest extends Base{
         }
     }
 
-    public static void processField(ArrayList<String> fieldParse,Consumer<String> labelConsumer, Consumer<String> dataConsumer) {
-        labelConsumer.accept(fieldParse.get(0));
-        dataConsumer.accept(fieldParse.get(1));
-    }
-
-    public static void testFieldExists(String fieldLabel, ArrayList<String> fieldParse) {
-        processField(
-                fieldParse,
-                label -> assertTrue(fieldLabel + " label does not exist", label.contains(fieldLabel + ":")),
-                data -> assertTrue(fieldLabel + " data is empty", !data.isEmpty())
-        );
-        System.out.println(fieldLabel + " Label and Data exists");
-    }
-
     @Test
-    public void oppTitleTest(){
+    public void oppTitleTest() {
         assertTrue(OpportunitiesObjectViewPage.oppTitle());
         System.out.println("Title is Present in the Object View page");
     }
 
     @Test
     public void oppSideMenuItemsTest() {
-        assertEquals("Overview is not found in Side menu","General Information", OpportunitiesObjectViewPage.generalInformation());
+        assertEquals("Overview is not found in Side menu", "General Information", OpportunitiesObjectViewPage.generalInformation());
         assertEquals("Classification", OpportunitiesObjectViewPage.classification());
         assertEquals("Synopsis/Description", OpportunitiesObjectViewPage.synopsis());
         assertEquals("Packages", OpportunitiesObjectViewPage.packages());
@@ -66,52 +52,52 @@ public class OpportunitiesObjectViewTest extends Base{
 
     @Test
     public void solicitationNumberTest() {
-        testFieldExists("Solicitation Number", OpportunitiesObjectViewPage.solicitation());
+        testFieldAndDataExists("Solicitation Number", OpportunitiesObjectViewPage.solicitation());
     }
 
     @Test
     public void officeTest() {
-        testFieldExists("Office", OpportunitiesObjectViewPage.office());
+        testFieldAndDataExists("Office", OpportunitiesObjectViewPage.office());
     }
 
     @Test
     public void opportunityTypeTest() {
-        testFieldExists("Opportunity Type", OpportunitiesObjectViewPage.oppType());
+        testFieldAndDataExists("Opportunity Type", OpportunitiesObjectViewPage.oppType());
     }
 
     @Test
     public void postedDateTest() {
-        testFieldExists("Posted Date", OpportunitiesObjectViewPage.postedDate());
+        testFieldAndDataExists("Posted Date", OpportunitiesObjectViewPage.postedDate());
     }
 
     //@Test
     public void originialPostedDateTest() {
-        testFieldExists("Original Posted Date", OpportunitiesObjectViewPage.originalPosted());
+        testFieldAndDataExists("Original Posted Date", OpportunitiesObjectViewPage.originalPosted());
     }
 
     @Test
     public void ResponseDateTest() {
-        testFieldExists("Response Date", OpportunitiesObjectViewPage.responseDate());
+        testFieldAndDataExists("Response Date", OpportunitiesObjectViewPage.responseDate());
     }
 
     //@Test
     public void originalResponseDateTest() {
-        testFieldExists("Original Response Date", OpportunitiesObjectViewPage.originalResponse());
+        testFieldAndDataExists("Original Response Date", OpportunitiesObjectViewPage.originalResponse());
     }
 
     @Test
     public void archivingPolicyTest() {
-        testFieldExists("Archiving Policy", OpportunitiesObjectViewPage.archivingPolicy());
+        testFieldAndDataExists("Archiving Policy", OpportunitiesObjectViewPage.archivingPolicy());
     }
 
     // @Test
     public void originalSetAsideTest() {
-        testFieldExists("Original Set Aside", OpportunitiesObjectViewPage.originalSetAside());
+        testFieldAndDataExists("Original Set Aside", OpportunitiesObjectViewPage.originalSetAside());
     }
 
     @Test
     public void classificationCodeTest() {
-        testFieldExists("Classification Code", OpportunitiesObjectViewPage.classificationCode());
+        testFieldAndDataExists("Classification Code", OpportunitiesObjectViewPage.classificationCode());
     }
 
     @Test
@@ -122,15 +108,14 @@ public class OpportunitiesObjectViewTest extends Base{
 
     @Test
     public void placeOfPerformanceTest() {
-        testFieldExists("Place of Performance", OpportunitiesObjectViewPage.placeOfPerformance());
+        testFieldAndDataExists("Place of Performance", OpportunitiesObjectViewPage.placeOfPerformance());
     }
 
     @Test
     public void contractingOfficeTest() {
         ArrayList<String> contracting = OpportunitiesObjectViewPage.contractingOffice();
-        for (String temp : contracting)
-        {
-            assertTrue(temp.length() >1);
+        for (String temp : contracting) {
+            assertTrue(temp.length() > 1);
         }
 
         System.out.println("Contracting Office Data exists");
@@ -147,7 +132,7 @@ public class OpportunitiesObjectViewTest extends Base{
 
 
     @AfterClass
-    public static void end(){
+    public static void end() {
         closeOut();
     }
 }
