@@ -38,12 +38,20 @@ public class OpportunitiesObjectViewTest extends Base{
     }
 
     public static void testFieldExists(String fieldLabel, ArrayList<String> fieldParse) {
+        testFieldExists(fieldLabel, fieldParse, true);
+    }
+
+    public static void testFieldExists(String fieldLabel, ArrayList<String> fieldParse, boolean shouldExist) {
+        String labelErrorMessage = fieldLabel + (shouldExist ? " label does not exist" : " label exists");
+        String dataErrorMessage = fieldLabel + (shouldExist ? " data is empty" : " data is not empty");
+
         processField(
-                fieldParse,
-                label -> assertTrue(fieldLabel + " label does not exist", label.contains(fieldLabel + ":")),
-                data -> assertTrue(fieldLabel + " data is empty", !data.isEmpty())
+            fieldParse,
+            label -> assertEquals(labelErrorMessage, label.contains(fieldLabel + ":"), shouldExist),
+            data -> assertEquals(dataErrorMessage, !data.isEmpty(), shouldExist)
         );
-        System.out.println(fieldLabel + " Label and Data exists");
+
+        System.out.println(fieldLabel + (shouldExist ? " Label and Data exist" : " Label and Data do not exist"));
     }
 
     @Test
