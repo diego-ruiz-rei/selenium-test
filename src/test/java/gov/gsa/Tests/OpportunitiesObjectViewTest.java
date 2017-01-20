@@ -13,8 +13,7 @@ import org.junit.runners.MethodSorters;
 import java.util.ArrayList;
 
 import static gov.gsa.Utilities.CommonUtils.testFieldAndDataExists;
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class OpportunitiesObjectViewTest extends Base {
@@ -114,7 +113,7 @@ public class OpportunitiesObjectViewTest extends Base {
     public void contractingOfficeTest() {
         ArrayList<String> contracting = OpportunitiesObjectViewPage.contractingOffice();
         for (String temp : contracting) {
-            assertTrue(temp.length() > 1);
+            assertFalse(temp.isEmpty());
         }
 
         System.out.println("Contracting Office Data exists");
