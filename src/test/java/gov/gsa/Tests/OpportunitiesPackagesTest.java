@@ -9,6 +9,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static junit.framework.Assert.assertEquals;
@@ -27,6 +28,7 @@ public class OpportunitiesPackagesTest extends Base{
     public String no_package = "165b3db50efea022a78c95872079cfd0";
     public String multiple_packages = "10460d4fd45a82cc5d85f0b7693138a0";
     public String secure_package = "5ffe4f3cb5e95af9071dc91d826ab0aa";
+    public String download_package = "eeedbf4cb4a9b39c91e69fa589821ab3";
 
 
     @BeforeClass
@@ -119,6 +121,20 @@ public class OpportunitiesPackagesTest extends Base{
         OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(single_package);
         assertTrue("Secured Type does not exists", OpportunitiesObjectViewPage.notSecurePackage().equals("Not Secure"));
         System.out.println("Not Secured Content exists");
+    }
+
+    @Test
+    public void donwloadAllPackagesTest() {
+        try {
+            OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(download_package);
+            int code = OpportunitiesObjectViewPage.downloadAllPackages();
+            assertTrue("Error code returned", code == 200);
+            System.out.println("HTTP code 202 returned");
+        } catch (InterruptedException e) {
+            System.out.println("InterruptedException");
+        } catch (IOException e) {
+            System.out.println("InterruptedException");
+        }
     }
 
     @AfterClass

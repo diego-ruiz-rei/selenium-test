@@ -27,8 +27,7 @@ public class OpportunitiesObjectViewTest extends Base{
 
         //TODO : need to pass search parameter
         try {
-            OpportunitiesObjectViewNavigation.gotoOppObjectView("FA8240-13-R-7218");
-            //OpportunitiesObjectViewNavigation.gotoOppObjectViewByID("10460d4fd45a82cc5d85f0b7693138a0");
+            OpportunitiesObjectViewNavigation.gotoOppObjectView("F4FRQT3091A007");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -146,18 +145,6 @@ public class OpportunitiesObjectViewTest extends Base{
         System.out.println("Primary Point of Contact Data exists");
     }
 
-    @Test
-    public void donwloadAllPackagesTest() {
-        try {
-            int code = OpportunitiesObjectViewPage.downloadAllPackages();
-            assertTrue("Error code returned", code == 200);
-            System.out.println("HTTP code 202 returned");
-        } catch (InterruptedException e) {
-            System.out.println("InterruptedException");
-        } catch (IOException e) {
-            System.out.println("InterruptedException");
-        }
-    }
 
     @AfterClass
     public static void end(){

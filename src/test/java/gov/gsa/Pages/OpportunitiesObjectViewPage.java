@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -250,12 +251,14 @@ public class OpportunitiesObjectViewPage extends ObjectView {
     public static int downloadAllPackages() throws InterruptedException, MalformedURLException,IOException {
         int code = 0;
         try {
+            packagesExpand();
             downloadButtonIsLoaded();
             Thread.sleep(1000);
             String link = Base.driver.findElement(By.className("download-button")).findElement(By.tagName("a")).getAttribute("href");
             System.out.println("Link: " + link);
             URL url = new URL(link);
-            HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+            HttpsURLConnection connection = (HttpsURLConnection)url.openConnection();
+            //connection.setDefaultHostnameVerifier ((hostname, session) -> true);
             connection.setRequestMethod("GET");
             connection.setReadTimeout(10000);
             connection.connect();
@@ -273,33 +276,33 @@ public class OpportunitiesObjectViewPage extends ObjectView {
         }
         return code;
     }
-    //Packages - Download All Packages
-    public static int downloadSinglePackage() throws InterruptedException, MalformedURLException,IOException {
-        int code = 0;
-        try {
-            packagesExpand();
-            Thread.sleep(1000);
-            String link = Base.driver.findElement(By.className("download-button")).findElement(By.tagName("a")).getAttribute("href");
-            System.out.println("Link: " + link);
-            URL url = new URL(link);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-            connection.setReadTimeout(10000);
-            connection.connect();
-
-            code = connection.getResponseCode();
-        } catch (InterruptedException e) {
-            System.out.println("InterruptedException");
-            e.printStackTrace();
-        } catch (MalformedURLException e) {
-            System.out.println("MalformedURLException");
-            e.printStackTrace();
-        } catch (IOException e) {
-            System.out.println("IOException");
-            e.printStackTrace();
-        }
-        return code;
-    }
+//    //Packages - Download All Packages
+//    public static int downloadSinglePackage() throws InterruptedException, MalformedURLException,IOException {
+//        int code = 0;
+//        try {
+//            packagesExpand();
+//            Thread.sleep(1000);
+//            String link = Base.driver.findElement(By.className("download-button")).findElement(By.tagName("a")).getAttribute("href");
+//            System.out.println("Link: " + link);
+//            URL url = new URL(link);
+//            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//            connection.setRequestMethod("GET");
+//            connection.setReadTimeout(10000);
+//            connection.connect();
+//
+//            code = connection.getResponseCode();
+//        } catch (InterruptedException e) {
+//            System.out.println("InterruptedException");
+//            e.printStackTrace();
+//        } catch (MalformedURLException e) {
+//            System.out.println("MalformedURLException");
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            System.out.println("IOException");
+//            e.printStackTrace();
+//        }
+//        return code;
+//    }
     //Packages - Not Secured
     public static String notSecurePackage() throws InterruptedException {
         packagesExpand();
