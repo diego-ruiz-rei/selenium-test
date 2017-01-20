@@ -7,7 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class OpportunitiesObjectViewPage extends ObjectView {
 
@@ -62,7 +61,7 @@ public class OpportunitiesObjectViewPage extends ObjectView {
         return splitLabelAndData(ori_posted);
     }
 
-    public static ArrayList<String> resposnseDate() {
+    public static ArrayList<String> responseDate() {
         String response = Base.driver.findElement(By.id("opportunity-general-response-date")).getText();
         return splitLabelAndData(response);
     }

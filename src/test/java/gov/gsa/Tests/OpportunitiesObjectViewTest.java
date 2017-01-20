@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import java.util.ArrayList;
+import java.util.function.Consumer;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
@@ -29,6 +30,20 @@ public class OpportunitiesObjectViewTest extends Base{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void processField(ArrayList<String> fieldParse,Consumer<String> labelConsumer, Consumer<String> dataConsumer) {
+        labelConsumer.accept(fieldParse.get(0));
+        dataConsumer.accept(fieldParse.get(1));
+    }
+
+    public static void testFieldExists(String fieldLabel, ArrayList<String> fieldParse) {
+        processField(
+                fieldParse,
+                label -> assertTrue(fieldLabel + " label does not exist", label.contains(fieldLabel + ":")),
+                data -> assertTrue(fieldLabel + " data is empty", !data.isEmpty())
+        );
+        System.out.println(fieldLabel + " Label and Data exists");
     }
 
     @Test
@@ -50,82 +65,52 @@ public class OpportunitiesObjectViewTest extends Base{
 
     @Test
     public void solicitationNumberTest() {
-        ArrayList<String> sol = OpportunitiesObjectViewPage.solicitation();
-        assertTrue("Solicitation Number is empty", sol.get(0).contains("Solicitation Number:"));
-        assertTrue("Solicitation Number Data is empty", sol.get(1).length() > 1);
-        System.out.println("Solicitation Number Label and Data exists");
+        testFieldExists("Solicitation Number", OpportunitiesObjectViewPage.solicitation());
     }
 
     @Test
     public void officeTest() {
-        ArrayList<String> office = OpportunitiesObjectViewPage.office();
-        assertTrue("Office Name is empty", office.get(0).contains("Office:"));
-        assertTrue("Office Data is empty", office.get(1).length() > 1);
-        System.out.println("Office Name Label and Data exists");
+        testFieldExists("Office", OpportunitiesObjectViewPage.office());
     }
 
     @Test
     public void opportunityTypeTest() {
-        ArrayList<String> opp_type = OpportunitiesObjectViewPage.oppType();
-        assertTrue("Opportunity Type Name is empty", opp_type.get(0).contains("Opportunity Type:"));
-        assertTrue("Opportunity Type Data is empty", opp_type.get(1).length() > 1);
-        System.out.println("Opportunity Type Label and Data exists");
+        testFieldExists("Opportunity Type", OpportunitiesObjectViewPage.oppType());
     }
 
     @Test
     public void postedDateTest() {
-        ArrayList<String> posted = OpportunitiesObjectViewPage.postedDate();
-        assertTrue("Posted Date Name is empty", posted.get(0).contains("Posted Date:"));
-        assertTrue("Posted Date Data is empty", posted.get(1).length() > 1);
-        System.out.println("Posted Date Label and Data exists");
+        testFieldExists("Posted Date", OpportunitiesObjectViewPage.postedDate());
     }
 
     //@Test
     public void originialPostedDateTest() {
-        ArrayList<String> originalposted = OpportunitiesObjectViewPage.originalPosted();
-        assertTrue("Original Posted Date Label is empty", originalposted.get(0).contains("Original Posted Date:"));
-        assertTrue("Original Posted Date Data is empty", originalposted.get(1).length() > 1);
-        System.out.println("Original Posted Date Label and Data exists");
+        testFieldExists("Original Posted Date", OpportunitiesObjectViewPage.originalPosted());
     }
 
     @Test
     public void ResponseDateTest() {
-        ArrayList<String> response = OpportunitiesObjectViewPage.resposnseDate();
-        assertTrue("Response Date Label is empty", response.get(0).contains("Response Date:"));
-        assertTrue("Response Date Data is empty", response.get(1).length() > 1);
-        System.out.println("Response Date Label and Data exists");
+        testFieldExists("Response Date", OpportunitiesObjectViewPage.responseDate());
     }
 
     //@Test
     public void originalResponseDateTest() {
-        ArrayList<String> originalresponse = OpportunitiesObjectViewPage.originalResponse();
-        assertTrue("Original Response Date Label is empty", originalresponse.get(0).contains("Original Response Date:"));
-        assertTrue("Original Response Date Data is empty", originalresponse.get(1).length() > 1);
-        System.out.println("Original Response Date Label and Data exists");
+        testFieldExists("Original Response Date", OpportunitiesObjectViewPage.originalResponse());
     }
 
     @Test
     public void archivingPolicyTest() {
-        ArrayList<String> archiving = OpportunitiesObjectViewPage.archivingPolicy();
-        assertTrue("Archiving Policy is empty", archiving.get(0).contains("Archiving Policy:"));
-        assertTrue("Archiving Policy Data is empty", archiving.get(1).length() > 1);
-        System.out.println("Archiving Policy Label and Data exists");
+        testFieldExists("Archiving Policy", OpportunitiesObjectViewPage.archivingPolicy());
     }
 
     // @Test
     public void originalSetAsideTest() {
-        ArrayList<String> ori_setaside = OpportunitiesObjectViewPage.originalSetAside();
-        assertTrue("Original Set Aside is empty", ori_setaside.get(0).contains("Original Set Aside:"));
-        assertTrue("Original Set Aside Data is empty", ori_setaside.get(1).length() > 1);
-        System.out.println("Original Set Aside Label and Data exists");
+        testFieldExists("Original Set Aside", OpportunitiesObjectViewPage.originalSetAside());
     }
 
     @Test
     public void classificationCodeTest() {
-        ArrayList<String> classification = OpportunitiesObjectViewPage.classificationCode();
-        assertTrue("Classification Code is empty", classification.get(0).contains("Classification Code:"));
-        assertTrue("Classification Code Data is empty", classification.get(1).length() > 1);
-        System.out.println("Classification Code Label and Data exists");
+        testFieldExists("Classification Code", OpportunitiesObjectViewPage.classificationCode());
     }
 
     @Test
@@ -136,10 +121,7 @@ public class OpportunitiesObjectViewTest extends Base{
 
     @Test
     public void placeOfPerformanceTest() {
-        ArrayList<String> place = OpportunitiesObjectViewPage.placeOfPerformance();
-        assertTrue("Place of Performance is empty", place.get(0).contains("Place of Performance:"));
-        assertTrue("Place of Performance Data is empty", place.get(1).length() > 1);
-        System.out.println("Place of Performance Label and Data exists");
+        testFieldExists("Place of Performance", OpportunitiesObjectViewPage.placeOfPerformance());
     }
 
     @Test
