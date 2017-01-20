@@ -6,7 +6,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import gov.gsa.Utilities.Base;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
@@ -16,14 +15,14 @@ public class SearchPage{
     private static String[][] searchParameters = {{"All","","all"},
             {"All","Foreign-Trade Zones in the United States","title"},
             {"Assistance Listings","11.111","number"},
-            //{"Opportunities","DTFANM-08-R-00058","number"},
+            {"Opportunities","DTFANM-08-R-00058","number"},
             {"All","10.001","number"},
             {"All","8(g) State Coastal Zone","title"},
             {"All","\"Yakima River Basin Water Enhancement (YRBWE)\"","title"},
             {"Assistance Listings","11.420","number"},
             {"All","transitional *","wildcard"},
             {"Assistance Listings","97.*","wildcard"},
-            {"Opportunities","12.12312","title"},
+            {"Assistance Listings","N0017415SN0027","title"},
     };
 
 //    // I don't know if this is required, may be removed
@@ -62,7 +61,7 @@ public class SearchPage{
                     if (Base.driver.findElement(By.cssSelector(".m_B-0")).getText().contains("Solicitation Number")) {
                         //TODO: add a class, xpath too unreliable (ie. when agency filter is/isn't present)
                         element = (WebElement) Base.wait.until(
-                                ExpectedConditions.visibilityOfElementLocated(By.id("solicitation-number")));
+                                ExpectedConditions.visibilityOfElementLocated(By.className("solicitation-number")));
 
                     }
                     //check for FAL Number
