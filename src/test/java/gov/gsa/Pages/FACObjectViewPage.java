@@ -114,8 +114,6 @@ public class FACObjectViewPage extends ObjectView {
     }
 
     public static String accomplishments() {
-        System.out.println("*************************************** made it into the accomplishments block");
-
         if(Base.driver.findElements(By.cssSelector(".content-block > p")).size() > 0){
             System.out.println(Base.driver.findElement(By.cssSelector(".content-block > p")).getText());
             return Base.driver.findElement(By.cssSelector(".content-block > p")).getText();

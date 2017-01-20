@@ -39,10 +39,12 @@ public class HomepageTest extends Base{
         //assertTrue((HomePage.isElementPresent(By.id("filter"))));
         assertTrue(HomePage.filterDropdownExists());
         assertEquals("All", HomePage.defaultOption("option"));
-        assertEquals("Opportunities", HomePage.specificOption("fbo"));
+        assertEquals("Opportunities", HomePage.specificOption("opp"));
         assertEquals("Assistance Listings", HomePage.specificOption("cfda"));
         assertEquals("Federal Hierarchy", HomePage.specificOption("fh"));
         assertEquals("Entities", HomePage.specificOption("ent"));
+        assertEquals("Exclusions", HomePage.specificOption("ex"));
+        assertEquals("Wage Determinations", HomePage.specificOption("wd"));
 
         System.out.println("\nIndex Dropdown Present and Values Match");
     }

@@ -196,7 +196,7 @@ public class OpportunitiesObjectViewPage extends ObjectView {
         Thread.sleep(3000);
         //WebElement element = (WebElement) Base.wait.until(
         //        ExpectedConditions.textToBePresentInElementValue(By.cssSelector(".card-secure-content.usa-text-center > strong"),"No packages uploaded."));
-        System.out.println("*** " + Base.driver.findElement(By.cssSelector(".card-secure-content.usa-text-center > strong")).getText());
+        //System.out.println("*** " + Base.driver.findElement(By.cssSelector(".card-secure-content.usa-text-center > strong")).getText());
         return Base.driver.findElement(By.cssSelector(".card-secure-content.usa-text-center > strong")).getText();
 
     }
