@@ -24,9 +24,9 @@ public class CommonUtils {
 
     /**
      * Convenience method to test that a field exists; see overloaded method for details
-     **/
-    public static void testFieldExists(String fieldLabel, ArrayList<String> fieldParse) {
-        testFieldExists(fieldLabel, fieldParse, true);
+     */
+    public static void testFieldAndDataExists(String fieldLabel, ArrayList<String> fieldParse) {
+        testFieldAndDataExists(fieldLabel, fieldParse, true);
     }
 
     /**
@@ -39,7 +39,7 @@ public class CommonUtils {
      * @param fieldParse  {@code List} containing information about a field
      * @param shouldExist {@code true} if the field is expected to exist, else {@code false}
      */
-    public static void testFieldExists(String fieldLabel, List<String> fieldParse, boolean shouldExist) {
+    public static void testFieldAndDataExists(String fieldLabel, List<String> fieldParse, boolean shouldExist) {
         String labelErrorMessage = fieldLabel + (shouldExist ? " label does not exist" : " label exists");
         String dataErrorMessage = fieldLabel + (shouldExist ? " data is empty" : " data is not empty");
 

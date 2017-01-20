@@ -12,7 +12,7 @@ import org.junit.runners.MethodSorters;
 
 import java.util.ArrayList;
 
-import static gov.gsa.Utilities.CommonUtils.testFieldExists;
+import static gov.gsa.Utilities.CommonUtils.testFieldAndDataExists;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 
@@ -51,52 +51,52 @@ public class OpportunitiesObjectViewTest extends Base {
 
     @Test
     public void solicitationNumberTest() {
-        testFieldExists("Solicitation Number", OpportunitiesObjectViewPage.solicitation());
+        testFieldAndDataExists("Solicitation Number", OpportunitiesObjectViewPage.solicitation());
     }
 
     @Test
     public void officeTest() {
-        testFieldExists("Office", OpportunitiesObjectViewPage.office());
+        testFieldAndDataExists("Office", OpportunitiesObjectViewPage.office());
     }
 
     @Test
     public void opportunityTypeTest() {
-        testFieldExists("Opportunity Type", OpportunitiesObjectViewPage.oppType());
+        testFieldAndDataExists("Opportunity Type", OpportunitiesObjectViewPage.oppType());
     }
 
     @Test
     public void postedDateTest() {
-        testFieldExists("Posted Date", OpportunitiesObjectViewPage.postedDate());
+        testFieldAndDataExists("Posted Date", OpportunitiesObjectViewPage.postedDate());
     }
 
     //@Test
     public void originialPostedDateTest() {
-        testFieldExists("Original Posted Date", OpportunitiesObjectViewPage.originalPosted());
+        testFieldAndDataExists("Original Posted Date", OpportunitiesObjectViewPage.originalPosted());
     }
 
     @Test
     public void ResponseDateTest() {
-        testFieldExists("Response Date", OpportunitiesObjectViewPage.responseDate());
+        testFieldAndDataExists("Response Date", OpportunitiesObjectViewPage.responseDate());
     }
 
     //@Test
     public void originalResponseDateTest() {
-        testFieldExists("Original Response Date", OpportunitiesObjectViewPage.originalResponse());
+        testFieldAndDataExists("Original Response Date", OpportunitiesObjectViewPage.originalResponse());
     }
 
     @Test
     public void archivingPolicyTest() {
-        testFieldExists("Archiving Policy", OpportunitiesObjectViewPage.archivingPolicy());
+        testFieldAndDataExists("Archiving Policy", OpportunitiesObjectViewPage.archivingPolicy());
     }
 
     // @Test
     public void originalSetAsideTest() {
-        testFieldExists("Original Set Aside", OpportunitiesObjectViewPage.originalSetAside());
+        testFieldAndDataExists("Original Set Aside", OpportunitiesObjectViewPage.originalSetAside());
     }
 
     @Test
     public void classificationCodeTest() {
-        testFieldExists("Classification Code", OpportunitiesObjectViewPage.classificationCode());
+        testFieldAndDataExists("Classification Code", OpportunitiesObjectViewPage.classificationCode());
     }
 
     @Test
@@ -107,7 +107,7 @@ public class OpportunitiesObjectViewTest extends Base {
 
     @Test
     public void placeOfPerformanceTest() {
-        testFieldExists("Place of Performance", OpportunitiesObjectViewPage.placeOfPerformance());
+        testFieldAndDataExists("Place of Performance", OpportunitiesObjectViewPage.placeOfPerformance());
     }
 
     @Test
