@@ -193,10 +193,10 @@ public class OpportunitiesObjectViewPage extends ObjectView {
     //Package - No Package Message
     public static String noPackage() throws InterruptedException {
         //packagesExpand();
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         //WebElement element = (WebElement) Base.wait.until(
         //        ExpectedConditions.textToBePresentInElementValue(By.cssSelector(".card-secure-content.usa-text-center > strong"),"No packages uploaded."));
-        //System.out.println("*** " + Base.driver.findElement(By.cssSelector(".card-secure-content.usa-text-center > strong")).getText());
+        //System.out.println("No Package Message : " + Base.driver.findElement(By.cssSelector(".card-secure-content.usa-text-center > strong")).getText());
         return Base.driver.findElement(By.cssSelector(".card-secure-content.usa-text-center > strong")).getText();
 
     }
