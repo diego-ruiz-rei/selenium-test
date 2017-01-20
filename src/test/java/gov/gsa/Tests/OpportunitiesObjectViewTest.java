@@ -10,6 +10,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static junit.framework.Assert.assertEquals;
@@ -25,7 +26,8 @@ public class OpportunitiesObjectViewTest extends Base{
 
         //TODO : need to pass search parameter
         try {
-            OpportunitiesObjectViewNavigation.gotoOppObjectView("F4FRQT3091A007");
+            OpportunitiesObjectViewNavigation.gotoOppObjectView("FA8240-13-R-7218");
+            //OpportunitiesObjectViewNavigation.gotoOppObjectViewByID("10460d4fd45a82cc5d85f0b7693138a0");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -160,6 +162,19 @@ public class OpportunitiesObjectViewTest extends Base{
         assertTrue("Primary POC Email is empty", primarypoc.get(1).length() > 1);
         assertTrue("Primary POC Phone Number is empty", primarypoc.get(2).length() > 1);
         System.out.println("Primary Point of Contact Data exists");
+    }
+
+    @Test
+    public void donwloadAllPackagesTest() {
+        try {
+            int code = OpportunitiesObjectViewPage.downloadAllPackages();
+            assertTrue("Error code returned", code == 200);
+            System.out.println("HTTP code 202 returned");
+        } catch (InterruptedException e) {
+            System.out.println("InterruptedException");
+        } catch (IOException e) {
+            System.out.println("InterruptedException");
+        }
     }
 
     @AfterClass

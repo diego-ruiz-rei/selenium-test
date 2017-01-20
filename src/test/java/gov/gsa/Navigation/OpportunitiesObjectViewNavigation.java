@@ -28,7 +28,7 @@ public class OpportunitiesObjectViewNavigation extends ObjectView {
     }
 
     public static void gotoOppObjectViewByID(String opp_noticeId) throws InterruptedException {
-        Base.driver.get(full_url + "opportunities/" + opp_noticeId);
+        Base.driver.get(full_url + "/opportunities/" + opp_noticeId);
         Thread.sleep(2000);
 
     }

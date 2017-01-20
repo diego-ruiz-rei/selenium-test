@@ -6,6 +6,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -143,6 +147,11 @@ public class OpportunitiesObjectViewPage extends ObjectView {
         element.click();
     }
 
+    public static void downloadButtonIsLoaded(){
+        WebElement element = (WebElement) Base.wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".card-header")));
+    }
+
     //Packages - External Link Check
     public static String externalLink() throws InterruptedException {
         packagesExpand();
@@ -247,6 +256,60 @@ public class OpportunitiesObjectViewPage extends ObjectView {
 
     //Packages - Document Type Icon
 
+    //Packages - Download All Packages
+    public static int downloadAllPackages() throws InterruptedException, MalformedURLException,IOException {
+        int code = 0;
+        try {
+            downloadButtonIsLoaded();
+            Thread.sleep(1000);
+            String link = Base.driver.findElement(By.className("download-button")).findElement(By.tagName("a")).getAttribute("href");
+            System.out.println("Link: " + link);
+            URL url = new URL(link);
+            HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setReadTimeout(10000);
+            connection.connect();
+            Thread.sleep(5000);
+            code = connection.getResponseCode();
+        } catch(InterruptedException e){
+            System.out.println("InterruptedException");
+            e.printStackTrace();
+        } catch(MalformedURLException e){
+            System.out.println("MalformedURLException");
+            e.printStackTrace();
+        } catch(IOException e){
+            System.out.println("IOException");
+            e.printStackTrace();
+        }
+        return code;
+    }
+    //Packages - Download All Packages
+    public static int downloadSinglePackage() throws InterruptedException, MalformedURLException,IOException {
+        int code = 0;
+        try {
+            packagesExpand();
+            Thread.sleep(1000);
+            String link = Base.driver.findElement(By.className("download-button")).findElement(By.tagName("a")).getAttribute("href");
+            System.out.println("Link: " + link);
+            URL url = new URL(link);
+            HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setReadTimeout(10000);
+            connection.connect();
+
+            code = connection.getResponseCode();
+        } catch(InterruptedException e){
+            System.out.println("InterruptedException");
+            e.printStackTrace();
+        } catch(MalformedURLException e){
+            System.out.println("MalformedURLException");
+            e.printStackTrace();
+        } catch(IOException e){
+            System.out.println("IOException");
+            e.printStackTrace();
+        }
+        return code;
+    }
 }
 
 
