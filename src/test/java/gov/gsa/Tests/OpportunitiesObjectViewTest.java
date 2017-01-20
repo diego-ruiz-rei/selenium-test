@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import java.util.ArrayList;
+import java.util.function.Consumer;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
@@ -29,6 +30,20 @@ public class OpportunitiesObjectViewTest extends Base{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void processField(ArrayList<String> fieldParse,Consumer<String> labelConsumer, Consumer<String> dataConsumer) {
+        labelConsumer.accept(fieldParse.get(0));
+        dataConsumer.accept(fieldParse.get(1));
+    }
+
+    public static void testFieldExists(String fieldLabel, ArrayList<String> fieldParse) {
+        processField(
+                fieldParse,
+                label -> assertTrue(fieldLabel + " label does not exist", label.contains(fieldLabel + ":")),
+                data -> assertTrue(fieldLabel + " data is empty", !data.isEmpty())
+        );
+        System.out.println(fieldLabel + " Label and Data exists");
     }
 
     @Test
