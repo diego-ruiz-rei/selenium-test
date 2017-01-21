@@ -129,11 +129,11 @@ public class OpportunitiesPackagesTest extends Base{
             OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(download_package);
             int code = OpportunitiesObjectViewPage.downloadAllPackages();
             assertTrue("Error code returned", code == 200);
-            System.out.println("HTTP code 202 returned");
+            System.out.println("HTTP code 200 returned");
         } catch (InterruptedException e) {
-            System.out.println("InterruptedException");
+            System.out.println("InterruptedException " + e);
         } catch (IOException e) {
-            System.out.println("InterruptedException");
+            System.out.println("IOException " + e);
         }
     }
 
