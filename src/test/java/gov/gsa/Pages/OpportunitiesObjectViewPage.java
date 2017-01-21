@@ -8,7 +8,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -258,7 +257,7 @@ public class OpportunitiesObjectViewPage extends ObjectView {
             System.out.println("Link: " + link);
             URL url = new URL(link);
             HttpsURLConnection connection = (HttpsURLConnection)url.openConnection();
-            //connection.setDefaultHostnameVerifier ((hostname, session) -> true);
+            connection.setHostnameVerifier ((hostname, session) -> true);
             connection.setRequestMethod("GET");
             connection.setReadTimeout(10000);
             connection.connect();

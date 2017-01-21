@@ -12,6 +12,12 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+import java.security.SecureRandom;
+import java.security.cert.X509Certificate;
 import java.util.concurrent.TimeUnit;
 
 
@@ -53,6 +59,26 @@ public class Base{
             port = System.getProperty("port");
         }
         driver.manage().timeouts().setScriptTimeout(5, TimeUnit.SECONDS);
+
+        /**
+         * We need to avoid checking SSL cert trust chains because REI dev server does not have valid certificate
+         * Skip SSL validation code thanks to Chris Salij: http://stackoverflow.com/a/6055903
+         */
+        // Create a trust manager that does not validate certificate chains
+        TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager(){
+            public X509Certificate[] getAcceptedIssuers(){return null;}
+            public void checkClientTrusted(X509Certificate[] certs, String authType){}
+            public void checkServerTrusted(X509Certificate[] certs, String authType){}
+        }};
+
+        // Install the all-trusting trust manager
+        try {
+            SSLContext sc = SSLContext.getInstance("TLS");
+            sc.init(null, trustAllCerts, new SecureRandom());
+            HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+        } catch (Exception e) {
+        }
+
         //load homepage and run tasks
         String url = "";
         if(port.equals("80")){
