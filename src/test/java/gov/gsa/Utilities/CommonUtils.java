@@ -17,7 +17,7 @@ public class CommonUtils {
      * Precondition: {@code List} contains field's label in first element and field's data in second element
      * Postcondition: {@code labelConsumer} is passed field's label and {@code dataConsumer} is passed field's data
      */
-    public static void processField(List<String> fieldParse, Consumer<String> labelConsumer, Consumer<String> dataConsumer) {
+    public static void processFieldAndData(List<String> fieldParse, Consumer<String> labelConsumer, Consumer<String> dataConsumer) {
         labelConsumer.accept(fieldParse.get(0));
         dataConsumer.accept(fieldParse.get(1));
     }
@@ -37,13 +37,13 @@ public class CommonUtils {
      *
      * @param fieldLabel  The label that the field is expected to have (this should also be the field's name)
      * @param fieldParse  {@code List} containing information about a field
-     * @param shouldExist {@code true} if the field is expected to exist, else {@code false}
+     * @param shouldExist {@code true} to test that the field exists, else {@code false}
      */
     public static void testFieldAndDataExists(String fieldLabel, List<String> fieldParse, boolean shouldExist) {
         String labelErrorMessage = fieldLabel + (shouldExist ? " label does not exist" : " label exists");
         String dataErrorMessage = fieldLabel + (shouldExist ? " data is empty" : " data is not empty");
 
-        processField(
+        processFieldAndData(
             fieldParse,
             label -> assertEquals(labelErrorMessage, label.contains(fieldLabel), shouldExist), // check label
             data -> assertEquals(dataErrorMessage, !data.isEmpty(), shouldExist) // check data
