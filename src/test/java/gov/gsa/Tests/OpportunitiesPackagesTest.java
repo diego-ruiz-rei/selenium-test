@@ -137,6 +137,20 @@ public class OpportunitiesPackagesTest extends Base{
         }
     }
 
+    @Test
+    public void donwloadSinglePackageTest() {
+        try {
+            OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(download_package);
+            int code = OpportunitiesObjectViewPage.downloadSinglePackage();
+            assertTrue("Error code returned", code == 200);
+            System.out.println("HTTP code 200 returned");
+        } catch (InterruptedException e) {
+            System.out.println("InterruptedException " + e);
+        } catch (IOException e) {
+            System.out.println("IOException " + e);
+        }
+    }
+
     @AfterClass
     public static void end(){
         closeOut();
