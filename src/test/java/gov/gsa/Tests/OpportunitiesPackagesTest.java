@@ -124,7 +124,7 @@ public class OpportunitiesPackagesTest extends Base{
     }
 
     @Test
-    public void donwloadAllPackagesTest() {
+    public void downloadAllPackagesTest() {
         try {
             OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(download_package);
             int code = OpportunitiesObjectViewPage.downloadAllPackages();
@@ -138,7 +138,7 @@ public class OpportunitiesPackagesTest extends Base{
     }
 
     @Test
-    public void donwloadSinglePackageTest() {
+    public void downloadSinglePackageTest() {
         try {
             OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(download_package);
             int code = OpportunitiesObjectViewPage.downloadSinglePackage();
