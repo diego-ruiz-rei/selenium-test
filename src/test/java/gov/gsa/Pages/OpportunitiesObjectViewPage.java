@@ -1,6 +1,7 @@
 package gov.gsa.Pages;
 
 import gov.gsa.Utilities.Base;
+import gov.gsa.Utilities.CommonUtils.DataField;
 import gov.gsa.Utilities.ObjectView;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -24,88 +25,83 @@ public class OpportunitiesObjectViewPage extends ObjectView {
         return Base.driver.findElements(By.tagName("h1")).size() > 0;
     }
 
-    //Function to split Data and Label
-    public static ArrayList<String> splitLabelAndData(String element) {
-        String soldata = element.substring(element.lastIndexOf(':') + 1).trim();
-        ArrayList<String> ar = new ArrayList<String>();
-        ar.add(element);
-        ar.add(soldata);
-        return ar;
+    private static DataField splitLabelAndData(String element) {
+        String fieldLabel = element.substring(0, element.indexOf(':')).trim(); // get all up to but not including colon
+        String fieldData = element.substring(element.indexOf(':') + 1).trim(); // get all after and not including colon
+
+        return new DataField(null, fieldLabel, fieldData);
     }
 
     //Opportunity Header
-    public static ArrayList<String> solicitation() {
+    public static DataField solicitation() {
         String solname = Base.driver.findElement(By.id("opportunity-header-solicitation-number")).getText();
-        return splitLabelAndData(solname);
+        return splitLabelAndData(solname).setName("Solicitation Number");
     }
 
-    public static ArrayList<String> office() {
-        String officename = Base.driver.findElement(By.id("opportunity-header-hierarchy-level")).getText();
-        return splitLabelAndData(officename);
+    public static DataField office() {
+        String office = Base.driver.findElement(By.id("opportunity-header-hierarchy-level")).getText();
+        return splitLabelAndData(office).setName("Office");
     }
 
-    public static ArrayList<String> location() {
-        String locationname = Base.driver.findElement(By.id("opportunity-header-location")).getText();
-        return splitLabelAndData(locationname);
+    public static DataField location() {
+        String location = Base.driver.findElement(By.id("opportunity-header-location")).getText();
+        return splitLabelAndData(location).setName("Location");
     }
 
     //General Information
-    public static ArrayList<String> oppType() {
-        String opportunitytype = Base.driver.findElement(By.id("opportunity-general-type")).getText();
-        return splitLabelAndData(opportunitytype);
+    public static DataField oppType() {
+        String opportunityType = Base.driver.findElement(By.id("opportunity-general-type")).getText();
+        return splitLabelAndData(opportunityType).setName("Opportunity Type");
     }
 
-    public static ArrayList<String> postedDate() {
-        String posted = Base.driver.findElement(By.id("opportunity-general-posted-date")).getText();
-        return splitLabelAndData(posted);
+    public static DataField postedDate() {
+        String postedDate = Base.driver.findElement(By.id("opportunity-general-posted-date")).getText();
+        return splitLabelAndData(postedDate).setName("Posted Date");
     }
 
-    public static ArrayList<String> originalPosted() {
-        String ori_posted = Base.driver.findElement(By.id("opportunity-general-original-posted-date")).getText();
-        return splitLabelAndData(ori_posted);
+    public static DataField originalPosted() {
+        String originalPosted = Base.driver.findElement(By.id("opportunity-general-original-posted-date")).getText();
+        return splitLabelAndData(originalPosted).setName("Original Posted Date");
     }
 
-    public static ArrayList<String> responseDate() {
-        String response = Base.driver.findElement(By.id("opportunity-general-response-date")).getText();
-        return splitLabelAndData(response);
+    public static DataField responseDate() {
+        String responseDate = Base.driver.findElement(By.id("opportunity-general-response-date")).getText();
+        return splitLabelAndData(responseDate).setName("Response Date");
     }
 
-    public static ArrayList<String> originalResponse() {
-        String ori_response = Base.driver.findElement(By.id("opportunity-general-original-response-date")).getText();
-        return splitLabelAndData(ori_response);
+    public static DataField originalResponse() {
+        String originalResponse = Base.driver.findElement(By.id("opportunity-general-original-response-date")).getText();
+        return splitLabelAndData(originalResponse).setName("Original Response Date");
     }
 
-    public static ArrayList<String> archivingPolicy() {
-        String arch_policy = Base.driver.findElement(By.id("opportunity-general-archiving-policy")).getText();
-        return splitLabelAndData(arch_policy);
+    public static DataField archivingPolicy() {
+        String archivingPolicy = Base.driver.findElement(By.id("opportunity-general-archiving-policy")).getText();
+        return splitLabelAndData(archivingPolicy).setName("Archiving Policy");
     }
 
     //Classification Section
-    public static ArrayList<String> originalSetAside() {
-        String ori_set = Base.driver.findElement(By.id("opportunity-classification-original-set-aside")).getText();
-        return splitLabelAndData(ori_set);
+    public static DataField originalSetAside() {
+        String originalSetAside = Base.driver.findElement(By.id("opportunity-classification-original-set-aside")).getText();
+        return splitLabelAndData(originalSetAside).setName("Original Set Aside");
     }
 
-    public static ArrayList<String> classificationCode() {
-        String classi_code = Base.driver.findElement(By.id("opportunity-classification-classification-code")).getText();
-        return splitLabelAndData(classi_code);
+    public static DataField classificationCode() {
+        String classificationCode = Base.driver.findElement(By.id("opportunity-classification-classification-code")).getText();
+        return splitLabelAndData(classificationCode).setName("Classification Code");
     }
 
-    public static String naicscode() {
-        WebElement naics = Base.driver.findElement(By.xpath("//*[@id=\"opportunity-classification-naics-code\"]/ul/li"));
-        return naics.getText();
+    // todo change to DataField
+    public static String naicsCode() {
+        WebElement naicsCode = Base.driver.findElement(By.xpath("//*[@id=\"opportunity-classification-naics-code\"]/ul/li"));
+        return naicsCode.getText();
 
     }
 
     //TODO : Add for Address, city and state
-    public static ArrayList<String> placeOfPerformance() {
+    public static DataField placeOfPerformance() {
         String pop = Base.driver.findElement(By.id("opportunity-classification-pop-location")).getText();
         String poplabel = Base.driver.findElement(By.id("opportunity-classification-pop")).getText();
-        ArrayList<String> ar = new ArrayList<String>();
-        ar.add(poplabel);
-        ar.add(pop);
-        return ar;
-
+        return new DataField("Place of Performance", poplabel, pop);
     }
 
     //Contact Information
