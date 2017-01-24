@@ -1,9 +1,8 @@
 package gov.gsa.Utilities;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Consumer;
+import java.util.function.Predicate;
 
+import static jdk.nashorn.internal.objects.NativeRegExp.test;
 import static org.junit.Assert.*;
 
 /**
@@ -11,44 +10,83 @@ import static org.junit.Assert.*;
  */
 public class CommonUtils {
     /**
-     * Process a {@code List} containing information about a field.
-     * The field's label and data are split up and processing delegates to the appropriate {@code Consumer}.
-     * <p>
-     * Precondition: {@code List} contains field's label in first element and field's data in second element
-     * Postcondition: {@code labelConsumer} is passed field's label and {@code dataConsumer} is passed field's data
+     * Model a simple field that consists of just a label and data, and has a name
      */
-    public static void processFieldAndData(List<String> fieldParse, Consumer<String> labelConsumer, Consumer<String> dataConsumer) {
-        labelConsumer.accept(fieldParse.get(0));
-        dataConsumer.accept(fieldParse.get(1));
+    public static class DataField {
+        public String name;
+        public String label;
+        public String data;
+
+        public DataField(String name, String label, String data) {
+            this.name = name;
+            this.label = label;
+            this.data = data;
+        }
+
+        public DataField setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public DataField setLabel(String label) {
+            this.label = label;
+            return this;
+        }
+
+        public DataField setData(String data) {
+            this.data = data;
+            return this;
+        }
     }
 
     /**
-     * Convenience method to test that a field exists; see overloaded method for details
+     * Convenience methods to test that parts of a field exists; see overloaded methods for details
      */
-    public static void testFieldAndDataExists(String fieldLabel, ArrayList<String> fieldParse) {
-        testFieldAndDataExists(fieldLabel, fieldParse, true);
-    }
+    public static void testLabelAndDataExists(DataField field) { testLabelAndDataExists(field, true); }
+    public static void testLabelExists(DataField field) { testLabelExists(field, true); }
+    public static void testDataExists(DataField field) { testDataExists(field, true); }
 
     /**
      * Verifies either that a field that should exist does and has some data,
      * or that a field that shouldn't exist does not and has no data, based on the value of {@code shouldExist} param
      * <p>
-     * Precondition: {@code List} contains field's label in first element and field's data in second element
+     * Precondition: {@code field} and its elements are not {@code null}
      *
-     * @param fieldLabel  The label that the field is expected to have (this should also be the field's name)
-     * @param fieldParse  {@code List} containing information about a field
-     * @param shouldExist {@code true} to test that the field exists, else {@code false}
+     * @param field A {@code Field} object that has been populated with information on the field
+     * @param shouldExist {@code true} to check that the field exists, else {@code false}
      */
-    public static void testFieldAndDataExists(String fieldLabel, List<String> fieldParse, boolean shouldExist) {
-        String labelErrorMessage = fieldLabel + (shouldExist ? " label does not exist" : " label exists");
-        String dataErrorMessage = fieldLabel + (shouldExist ? " data is empty" : " data is not empty");
+    public static void testLabelAndDataExists(DataField field, boolean shouldExist) {
+        assertLabelExists(field, shouldExist);
+        assertDataExists(field, shouldExist);
 
-        processFieldAndData(
-            fieldParse,
-            label -> assertEquals(labelErrorMessage, label.contains(fieldLabel), shouldExist), // check label
-            data -> assertEquals(dataErrorMessage, !data.isEmpty(), shouldExist) // check data
-        );
+        System.out.println(field.name + (shouldExist ? " label and data exists" : " label and data does not exist"));
+    }
 
-        System.out.println(fieldLabel + (shouldExist ? " Label and Data exist" : " Label and Data do not exist"));
+    public static void testLabelExists(DataField field, boolean shouldExist) {
+        assertLabelExists(field, shouldExist);
+        System.out.println(field.name + (shouldExist ? " label exists" : " label does not exist"));
+    }
+
+    public static void testDataExists(DataField field, boolean shouldExist) {
+        assertDataExists(field, shouldExist);
+        System.out.println(field.name + (shouldExist ? " data exists" : " data does not exist"));
+    }
+
+    private static void assertLabelExists(DataField field, boolean shouldExist) {
+        String labelErrorMessage = field.name + (shouldExist ? " label does not exist" : " label exists");
+        assertTrue(labelErrorMessage, field.label.isEmpty() != shouldExist);
+    }
+
+    private static void assertDataExists(DataField field, boolean shouldExist) {
+        String dataErrorMessage = field.name + (shouldExist ? " data is empty" : " data is not empty");
+        assertTrue(dataErrorMessage, field.data.isEmpty() != shouldExist);
+    }
+
+    public static void testLabelContains(DataField field, String expectedLabel) {
+        assertTrue(field.name + " does not have expected label", field.label.contains(expectedLabel));
+    }
+
+    public static void testDataContains(DataField field, String expectedData) {
+        assertTrue(field.name + " does not have expected data", field.data.contains(expectedData));
     }
 }

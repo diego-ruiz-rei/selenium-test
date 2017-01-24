@@ -4,6 +4,7 @@ package gov.gsa.Tests;
 import gov.gsa.Navigation.OpportunitiesObjectViewNavigation;
 import gov.gsa.Pages.OpportunitiesObjectViewPage;
 import gov.gsa.Utilities.Base;
+import gov.gsa.Utilities.CommonUtils.DataField;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -12,7 +13,8 @@ import org.junit.runners.MethodSorters;
 
 import java.util.ArrayList;
 
-import static gov.gsa.Utilities.CommonUtils.testFieldAndDataExists;
+import static gov.gsa.Utilities.CommonUtils.testLabelAndDataExists;
+import static gov.gsa.Utilities.CommonUtils.testLabelContains;
 import static org.junit.Assert.*;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -50,63 +52,85 @@ public class OpportunitiesObjectViewTest extends Base {
 
     @Test
     public void solicitationNumberTest() {
-        testFieldAndDataExists("Solicitation Number", OpportunitiesObjectViewPage.solicitation());
+        DataField solicitation = OpportunitiesObjectViewPage.solicitation();
+        testLabelAndDataExists(solicitation);
+        testLabelContains(solicitation, "Solicitation Number");
     }
 
     @Test
     public void officeTest() {
-        testFieldAndDataExists("Office", OpportunitiesObjectViewPage.office());
+        DataField office = OpportunitiesObjectViewPage.office();
+        testLabelAndDataExists(office);
+        testLabelContains(office, "Office");
     }
 
     @Test
     public void opportunityTypeTest() {
-        testFieldAndDataExists("Opportunity Type", OpportunitiesObjectViewPage.oppType());
+        DataField opportunityType = OpportunitiesObjectViewPage.oppType();
+        testLabelAndDataExists(opportunityType);
+        testLabelContains(opportunityType, "Opportunity Type");
     }
 
     @Test
     public void postedDateTest() {
-        testFieldAndDataExists("Posted Date", OpportunitiesObjectViewPage.postedDate());
+        DataField postedDate = OpportunitiesObjectViewPage.postedDate();
+        testLabelAndDataExists(postedDate);
+        testLabelContains(postedDate, "Posted Date");
     }
 
     //@Test
     public void originialPostedDateTest() {
-        testFieldAndDataExists("Original Posted Date", OpportunitiesObjectViewPage.originalPosted());
+        DataField originalPostedDate = OpportunitiesObjectViewPage.originalPosted();
+        testLabelAndDataExists(originalPostedDate);
+        testLabelContains(originalPostedDate, "Original Posted Date");
     }
 
     @Test
     public void ResponseDateTest() {
-        testFieldAndDataExists("Response Date", OpportunitiesObjectViewPage.responseDate());
+        DataField responseDate = OpportunitiesObjectViewPage.responseDate();
+        testLabelAndDataExists(responseDate);
+        testLabelContains(responseDate, "Response Date");
     }
 
     //@Test
     public void originalResponseDateTest() {
-        testFieldAndDataExists("Original Response Date", OpportunitiesObjectViewPage.originalResponse());
+        DataField originalResponseDate = OpportunitiesObjectViewPage.originalResponse();
+        testLabelAndDataExists(originalResponseDate);
+        testLabelContains(originalResponseDate, "Original Response Date");
     }
 
     @Test
     public void archivingPolicyTest() {
-        testFieldAndDataExists("Archiving Policy", OpportunitiesObjectViewPage.archivingPolicy());
+        DataField archivePolicy = OpportunitiesObjectViewPage.archivingPolicy();
+        testLabelAndDataExists(archivePolicy);
+        testLabelContains(archivePolicy, "Archiving Policy");
     }
 
     // @Test
     public void originalSetAsideTest() {
-        testFieldAndDataExists("Original Set Aside", OpportunitiesObjectViewPage.originalSetAside());
+        DataField originalSetAside = OpportunitiesObjectViewPage.originalSetAside();
+        testLabelAndDataExists(originalSetAside);
+        testLabelContains(originalSetAside, "Original Set Aside");
     }
 
     @Test
     public void classificationCodeTest() {
-        testFieldAndDataExists("Classification Code", OpportunitiesObjectViewPage.classificationCode());
+        DataField classificationCode = OpportunitiesObjectViewPage.classificationCode();
+        testLabelAndDataExists(classificationCode);
+        testLabelContains(classificationCode, "Classification Code");
     }
 
     @Test
     public void naicsCodeTest() {
-        assertTrue("NAICS Code(s) Data is empty", OpportunitiesObjectViewPage.naicscode().length() > 1);
+        assertTrue("NAICS Code(s) Data is empty", !OpportunitiesObjectViewPage.naicsCode().isEmpty());
         System.out.println("NAICS Code(s)Data exists");
     }
 
     @Test
     public void placeOfPerformanceTest() {
-        testFieldAndDataExists("Place of Performance", OpportunitiesObjectViewPage.placeOfPerformance());
+        DataField pop = OpportunitiesObjectViewPage.placeOfPerformance();
+        testLabelAndDataExists(pop);
+        testLabelContains(pop, "Place of Performance");
     }
 
     @Test
