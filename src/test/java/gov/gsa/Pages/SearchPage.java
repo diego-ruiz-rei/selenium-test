@@ -12,7 +12,8 @@ import static junit.framework.Assert.assertTrue;
 
 public class SearchPage{
     //Test Data specific to Search - Format {index,keyword,type}
-    private static String[][] searchParameters = {{"All","","all"},
+    private static String[][] searchParameters = {
+            {"All","","all"},
             {"All","Foreign-Trade Zones in the United States","title"},
             {"Assistance Listings","11.111","number"},
             {"Opportunities","DTFANM-08-R-00058","number"},
@@ -81,7 +82,7 @@ public class SearchPage{
                 } else if ((keywords[i][2] == "wildcard") || (keywords[i][2] == "all")) {
 
                     element = (WebElement) Base.wait.until(
-                            ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".assistance-listing-title")));
+                            ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".usa-label")));
                     //check number of search result is greater than 1 and Pagination exists
                     assertTrue(Base.driver.findElements(By.cssSelector(".m_T-5x")).size() > 1);
                     Assert.assertTrue(Base.driver.findElements(By.cssSelector(".page-button")).size() > 0);
