@@ -87,7 +87,7 @@ public class OpportunitiesObjectViewTest extends Base {
     }
 
     @Test
-    public void ResponseDateTest() {
+    public void responseDateTest() {
         DataField responseDate = OpportunitiesObjectViewPage.responseDate();
         testLabelAndDataExists(responseDate);
         testLabelContains(responseDate, "Response Date");
