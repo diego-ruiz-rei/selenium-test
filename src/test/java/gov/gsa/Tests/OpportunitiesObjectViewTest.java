@@ -9,25 +9,62 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
+import org.junit.runners.Parameterized;
+
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 
 import static gov.gsa.Utilities.CommonUtils.testLabelAndDataExists;
 import static gov.gsa.Utilities.CommonUtils.testLabelContains;
 import static org.junit.Assert.*;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@RunWith(value = Parameterized.class)
 public class OpportunitiesObjectViewTest extends Base {
 
-    @BeforeClass
-    public static void start() throws InterruptedException {
+//    public class IdAndType{
+//         String id;
+//         String type;
+//
+//        public IdAndType(String id, String type){
+//            this.id = id;
+//            this.type = type;
+//            System.out.println("Constructor ID: " + this.id + " Type: " + this.type);
+//        }
+//    }
+
+    @Parameterized.Parameter
+    public String[] idAndType;
+
+    //Single parameter, use Object[]
+    @Parameterized.Parameters(name = "{index}: opportunityId - {0}")
+    public static Collection <Object[]> data() {
+        return  Arrays.asList(new Object[][]{
+                {new String[]{"F4FRQT3091A007","k"}},
+                {new String[]{"VA24816Q0997","k"}},
+                {new String[]{"N00253-16-T-0385","a"}}
+//                {"F4FRQT3091A007","k"},
+//                {"VA24816Q0997","k"},
+//                {"N00253-16-T-0385","a"}
+//                new IdAndType("F4FRQT3091A007","k"),
+//                new IdAndType("VA24816Q0997","k"),
+//                new IdAndType("N00253-16-T-0385","a")
+        });
+    }
+
+    @Test
+    public void aaastart() throws InterruptedException {
 
         setUp();
 
         //TODO : need to pass search parameter
         try {
-            OpportunitiesObjectViewNavigation.gotoOppObjectView("F4FRQT3091A007");
+            System.out.println("Opportunity ID: " + idAndType[0]);
+            OpportunitiesObjectViewNavigation.gotoOppObjectView(idAndType[0]);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -35,8 +72,14 @@ public class OpportunitiesObjectViewTest extends Base {
 
     @Test
     public void oppTitleTest() {
-        assertTrue(OpportunitiesObjectViewPage.oppTitle());
-        System.out.println("Title is Present in the Object View page");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("oppTitleTest Results: " + OpportunitiesObjectViewPage.oppTitle());
+            assertTrue(OpportunitiesObjectViewPage.oppTitle());
+            System.out.println("Title is Present in the Object View page");
     }
 
     @Test
@@ -150,6 +193,36 @@ public class OpportunitiesObjectViewTest extends Base {
         assertTrue("Primary POC Email is empty", primarypoc.get(1).length() > 1);
         assertTrue("Primary POC Phone Number is empty", primarypoc.get(2).length() > 1);
         System.out.println("Primary Point of Contact Data exists");
+    }
+
+    @Test
+    public void contractAwardDollarAmountTest(){
+        System.out.println("Type: " + idAndType[1]);
+        if (idAndType[1].equals("a")) {
+            DataField contractAwardDollarAmount = OpportunitiesObjectViewPage.contractAwardDollarAmount();
+            testLabelAndDataExists(contractAwardDollarAmount);
+            testLabelContains(contractAwardDollarAmount, "Contract Award Dollar Amount");
+        }
+        else {
+            System.out.println("Irrelevant Type");
+        }
+    }
+    @Test
+    public void contractAwardDate(){
+        System.out.println("Type: " + idAndType[1]);
+        if (idAndType[1].equals("a") || idAndType[1].equals("j") || idAndType[1].equals("l")) {
+            DataField contractAwardDate = OpportunitiesObjectViewPage.contractAwardDollarAmount();
+            testLabelAndDataExists(contractAwardDate);
+            testLabelContains(contractAwardDate, "Contract Award Dollar Amount");
+        }
+        else {
+            System.out.println("Irrelevant Type");
+        }
+    }
+
+    @Test
+    public void zzzcloseOutTest(){
+        closeOut();
     }
 
 

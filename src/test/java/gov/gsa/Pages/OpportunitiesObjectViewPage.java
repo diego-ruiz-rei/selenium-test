@@ -305,6 +305,21 @@ int code = 0;
         Thread.sleep(1000);
         return Base.driver.findElement(By.xpath("//*[@class=\"card-extra-content\"]/div[2]/strong")).getText();
     }
+
+    public static DataField contractAwardDollarAmount() {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        String contractAwardDollarAmount = Base.driver.findElement(By.id("opportunity-award-amount")).getText();
+        return splitLabelAndData(contractAwardDollarAmount).setName("Contract Award Dollar Amount");
+    }
+
+    public static DataField contractAwardDate() {
+        String contractAwardDate = Base.driver.findElement(By.id("opportunity-award-date")).getText();
+        return splitLabelAndData(contractAwardDate).setName("Contract Award Date");
+    }
 }
 
 
