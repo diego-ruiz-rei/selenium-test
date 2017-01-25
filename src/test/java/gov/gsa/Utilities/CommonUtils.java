@@ -62,11 +62,27 @@ public class CommonUtils {
         System.out.println(field.name + (shouldExist ? " label and data exists" : " label and data does not exist"));
     }
 
+    /**
+     * Verifies either that a field's label exists or does not exist, based on the value of {@code shouldExist} param
+     * <p>
+     * Precondition: {@code field.label} is not {@code null}
+     *
+     * @param field A {@code Field} object that has been populated with information on the field
+     * @param shouldExist {@code true} to check that the label exists, else {@code false}
+     */
     public static void testLabelExists(DataField field, boolean shouldExist) {
         assertLabelExists(field, shouldExist);
         System.out.println(field.name + (shouldExist ? " label exists" : " label does not exist"));
     }
 
+    /**
+     * Verifies either that a field's data exists or does not exist, based on the value of {@code shouldExist} param
+     * <p>
+     * Precondition: {@code field.data} is not {@code null}
+     *
+     * @param field A {@code Field} object that has been populated with information on the field
+     * @param shouldExist {@code true} to check that the data exists, else {@code false}
+     */
     public static void testDataExists(DataField field, boolean shouldExist) {
         assertDataExists(field, shouldExist);
         System.out.println(field.name + (shouldExist ? " data exists" : " data does not exist"));
