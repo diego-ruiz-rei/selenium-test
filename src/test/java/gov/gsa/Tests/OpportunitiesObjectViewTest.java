@@ -26,16 +26,6 @@ import static org.junit.Assert.*;
 @RunWith(value = Parameterized.class)
 public class OpportunitiesObjectViewTest extends Base {
 
-//    public class IdAndType{
-//         String id;
-//         String type;
-//
-//        public IdAndType(String id, String type){
-//            this.id = id;
-//            this.type = type;
-//            System.out.println("Constructor ID: " + this.id + " Type: " + this.type);
-//        }
-//    }
 
     @Parameterized.Parameter
     public String[] idAndType;
@@ -47,12 +37,6 @@ public class OpportunitiesObjectViewTest extends Base {
                 {new String[]{"F4FRQT3091A007","k"}},
                 {new String[]{"VA24816Q0997","k"}},
                 {new String[]{"N00253-16-T-0385","a"}}
-//                {"F4FRQT3091A007","k"},
-//                {"VA24816Q0997","k"},
-//                {"N00253-16-T-0385","a"}
-//                new IdAndType("F4FRQT3091A007","k"),
-//                new IdAndType("VA24816Q0997","k"),
-//                new IdAndType("N00253-16-T-0385","a")
         });
     }
 
@@ -122,7 +106,7 @@ public class OpportunitiesObjectViewTest extends Base {
     }
 
     //@Test
-    public void originialPostedDateTest() {
+    public void originalPostedDateTest() {
         DataField originalPostedDate = OpportunitiesObjectViewPage.originalPosted();
         testLabelAndDataExists(originalPostedDate);
         testLabelContains(originalPostedDate, "Original Posted Date");
@@ -130,9 +114,14 @@ public class OpportunitiesObjectViewTest extends Base {
 
     @Test
     public void responseDateTest() {
-        DataField responseDate = OpportunitiesObjectViewPage.responseDate();
-        testLabelAndDataExists(responseDate);
-        testLabelContains(responseDate, "Response Date");
+        if (!idAndType[1].equals("a")) {
+            DataField responseDate = OpportunitiesObjectViewPage.responseDate();
+            testLabelAndDataExists(responseDate);
+            testLabelContains(responseDate, "Response Date");
+        }
+        else {
+            System.out.println("Irrelevant Type");
+        }
     }
 
     //@Test
@@ -158,22 +147,37 @@ public class OpportunitiesObjectViewTest extends Base {
 
     @Test
     public void classificationCodeTest() {
-        DataField classificationCode = OpportunitiesObjectViewPage.classificationCode();
-        testLabelAndDataExists(classificationCode);
-        testLabelContains(classificationCode, "Classification Code");
+        if (!idAndType[1].equals("a")) {
+            DataField classificationCode = OpportunitiesObjectViewPage.classificationCode();
+            testLabelAndDataExists(classificationCode);
+            testLabelContains(classificationCode, "Classification Code");
+        }
+        else {
+            System.out.println("Irrelevant Type");
+        }
     }
 
     @Test
     public void naicsCodeTest() {
-        assertTrue("NAICS Code(s) Data is empty", !OpportunitiesObjectViewPage.naicsCode().isEmpty());
-        System.out.println("NAICS Code(s)Data exists");
+        if (!idAndType[1].equals("a")) {
+            assertTrue("NAICS Code(s) Data is empty", !OpportunitiesObjectViewPage.naicsCode().isEmpty());
+            System.out.println("NAICS Code(s)Data exists");
+            }
+        else {
+            System.out.println("Irrelevant Type");
+        }
     }
 
     @Test
     public void placeOfPerformanceTest() {
-        DataField pop = OpportunitiesObjectViewPage.placeOfPerformance();
-        testLabelAndDataExists(pop);
-        testLabelContains(pop, "Place of Performance");
+        if (!idAndType[1].equals("a")) {
+            DataField pop = OpportunitiesObjectViewPage.placeOfPerformance();
+            testLabelAndDataExists(pop);
+            testLabelContains(pop, "Place of Performance");
+        }
+        else {
+            System.out.println("Irrelevant Type");
+        }
     }
 
     @Test
@@ -188,16 +192,21 @@ public class OpportunitiesObjectViewTest extends Base {
 
     @Test
     public void primaryPointOfContactTest() {
+        if (!idAndType[1].equals("a")) {
         ArrayList<String> primarypoc = OpportunitiesObjectViewPage.primaryPointOfContact();
         assertTrue("Primary POC Name is empty", primarypoc.get(0).length() > 1);
         assertTrue("Primary POC Email is empty", primarypoc.get(1).length() > 1);
         assertTrue("Primary POC Phone Number is empty", primarypoc.get(2).length() > 1);
         System.out.println("Primary Point of Contact Data exists");
+        }
+        else {
+            System.out.println("Irrelevant Type");
+        }
     }
+
 
     @Test
     public void contractAwardDollarAmountTest(){
-        System.out.println("Type: " + idAndType[1]);
         if (idAndType[1].equals("a")) {
             DataField contractAwardDollarAmount = OpportunitiesObjectViewPage.contractAwardDollarAmount();
             testLabelAndDataExists(contractAwardDollarAmount);
@@ -208,12 +217,117 @@ public class OpportunitiesObjectViewTest extends Base {
         }
     }
     @Test
-    public void contractAwardDate(){
-        System.out.println("Type: " + idAndType[1]);
+    public void contractAwardDateTest(){
         if (idAndType[1].equals("a") || idAndType[1].equals("j") || idAndType[1].equals("l")) {
-            DataField contractAwardDate = OpportunitiesObjectViewPage.contractAwardDollarAmount();
+            DataField contractAwardDate = OpportunitiesObjectViewPage.contractAwardDate();
             testLabelAndDataExists(contractAwardDate);
             testLabelContains(contractAwardDate, "Contract Award Dollar Amount");
+        }
+        else {
+            System.out.println("Irrelevant Type");
+        }
+    }
+    @Test
+    public void contractAwardNumberTest(){
+        if (idAndType[1].equals("a") || idAndType[1].equals("j") || idAndType[1].equals("l") || idAndType[1].equals("i")) {
+            DataField contractAwardNumber = OpportunitiesObjectViewPage.contractAwardNumber();
+            testLabelAndDataExists(contractAwardNumber);
+            testLabelContains(contractAwardNumber, "Contract Award Number");
+        }
+        else {
+            System.out.println("Irrelevant Type");
+        }
+    }
+    @Test
+    public void contractLineItemNumberTest(){
+        if (idAndType[1].equals("a")) {
+            DataField contractLineItemNumber = OpportunitiesObjectViewPage.contractLineItemNumber();
+            testLabelAndDataExists(contractLineItemNumber);
+            testLabelContains(contractLineItemNumber, "Contract Line Item Number");
+        }
+        else {
+            System.out.println("Irrelevant Type");
+        }
+    }
+
+    @Test
+    public void contractorAwardedNameTest(){
+        if (idAndType[1].equals("a")) {
+            DataField contractorAwardedName = OpportunitiesObjectViewPage.contractorAwardedName();
+            testLabelAndDataExists(contractorAwardedName);
+            testLabelContains(contractorAwardedName, "Contractor Awarded Name");
+        }
+        else {
+            System.out.println("Irrelevant Type");
+        }
+    }
+
+    @Test
+    public void contractorAwardedDUNSTest(){
+        if (idAndType[1].equals("a")) {
+            DataField contractorAwardedDUNS = OpportunitiesObjectViewPage.contractorAwardedDUNS();
+            testLabelAndDataExists(contractorAwardedDUNS);
+            testLabelContains(contractorAwardedDUNS, "Contractor Awarded DUNS");
+        }
+        else {
+            System.out.println("Irrelevant Type");
+        }
+    }
+
+    @Test
+    public void contractorAwardedAddressTest(){
+        if (idAndType[1].equals("a")) {
+            DataField contractorAwardedAddress = OpportunitiesObjectViewPage.contractorAwardedAddress();
+            testLabelAndDataExists(contractorAwardedAddress);
+            testLabelContains(contractorAwardedAddress, "Contractor Awarded Address");
+        }
+        else {
+            System.out.println("Irrelevant Type");
+        }
+    }
+
+    @Test
+    public void statutoryAuthorityTest(){
+        if (idAndType[1].equals("j")) {
+            DataField statutoryAuthority = OpportunitiesObjectViewPage.statutoryAuthority();
+            testLabelAndDataExists(statutoryAuthority);
+            testLabelContains(statutoryAuthority, "J&A Statutory Authority");
+        }
+        else {
+            System.out.println("Irrelevant Type");
+        }
+    }
+
+    @Test
+    public void justificationAuthorityTest(){
+        if (idAndType[1].equals("l")) {
+            DataField justificationAuthority = OpportunitiesObjectViewPage.justificationAuthority();
+            testLabelAndDataExists(justificationAuthority);
+            testLabelContains(justificationAuthority, "Fair Opportunity / Limited Sources Justification Authority");
+        }
+        else {
+            System.out.println("Irrelevant Type");
+        }
+    }
+
+    @Test
+    public void orderNumberTest(){
+        if (idAndType[1].equals("i") || idAndType[1].equals("l")) {
+            DataField orderNumber = OpportunitiesObjectViewPage.orderNumber();
+            testLabelAndDataExists(orderNumber);
+            testLabelContains(orderNumber, "Fair Opportunity / Limited Sources Justification Authority");
+        }
+        else {
+            System.out.println("Irrelevant Type");
+        }
+    }
+
+    @Test
+    public void specialLegislationTest(){
+        if (idAndType[1].equals("p") || idAndType[1].equals("k") || idAndType[1].equals("r") || idAndType[1].equals("j") || idAndType[1].equals("a") || idAndType[1].equals("f") || idAndType[1].equals("s")) {
+            DataField specialLegislation = OpportunitiesObjectViewPage.specialLegislation();
+            testLabelAndDataExists(specialLegislation);
+            testLabelContains(specialLegislation, "Special Legislation");
         }
         else {
             System.out.println("Irrelevant Type");

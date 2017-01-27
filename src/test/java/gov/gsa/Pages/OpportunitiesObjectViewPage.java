@@ -307,18 +307,72 @@ int code = 0;
     }
 
     public static DataField contractAwardDollarAmount() {
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        WebElement element = (WebElement) Base.wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.id("opportunity-award")));
         String contractAwardDollarAmount = Base.driver.findElement(By.id("opportunity-award-amount")).getText();
         return splitLabelAndData(contractAwardDollarAmount).setName("Contract Award Dollar Amount");
     }
 
     public static DataField contractAwardDate() {
+        WebElement element = (WebElement) Base.wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.id("opportunity-award")));
         String contractAwardDate = Base.driver.findElement(By.id("opportunity-award-date")).getText();
         return splitLabelAndData(contractAwardDate).setName("Contract Award Date");
+    }
+
+    public static DataField contractAwardNumber() {
+        WebElement element = (WebElement) Base.wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.id("opportunity-award")));
+        String contractAwardNumber = Base.driver.findElement(By.id("opportunity-award-number")).getText();
+        return splitLabelAndData(contractAwardNumber).setName("Contract Award Number");
+    }
+
+    public static DataField contractLineItemNumber() {
+        WebElement element = (WebElement) Base.wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.id("opportunity-award")));
+        String contractLineItemNumber = Base.driver.findElement(By.id("opportunity-award-line-item-number")).getText();
+        return splitLabelAndData(contractLineItemNumber).setName("Contract Line Item Number");
+    }
+
+    public static DataField contractorAwardedName() {
+        WebElement element = (WebElement) Base.wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.id("opportunity-award")));
+        String contractorAwardedName = Base.driver.findElement(By.id("opportunity-awarded-name")).getText();
+        return splitLabelAndData(contractorAwardedName).setName("Contractor Awarded Name");
+    }
+
+    public static DataField contractorAwardedDUNS() {
+        WebElement element = (WebElement) Base.wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.id("opportunity-award")));
+        String contractorAwardedDUNS = Base.driver.findElement(By.id("opportunity-awarded-duns")).getText();
+        return splitLabelAndData(contractorAwardedDUNS).setName("Contractor Awarded DUNS");
+    }
+
+    public static DataField contractorAwardedAddress() {
+        WebElement element = (WebElement) Base.wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.id("opportunity-award")));
+        String contractorAwardedAddress = Base.driver.findElement(By.id("opportunity-awarded-address")).getText();
+        return splitLabelAndData(contractorAwardedAddress).setName("Contractor Awarded Address");
+    }
+
+    public static DataField statutoryAuthority() {
+        String statutoryAuthority = Base.driver.findElement(By.id("statutory-authority")).getText();
+        return splitLabelAndData(statutoryAuthority).setName("J&A Statutory Authority");
+    }
+
+    public static DataField justificationAuthority() {
+        String justificationAuthority = Base.driver.findElement(By.id("justification-authority")).getText();
+        return splitLabelAndData(justificationAuthority).setName("Fair Opportunity / Limited Sources Justification Authority");
+    }
+
+    public static DataField orderNumber() {
+        String orderNumber = Base.driver.findElement(By.id("order-number")).getText();
+        return splitLabelAndData(orderNumber).setName("Task/Delivery Order Number");
+    }
+
+    public static DataField specialLegislation() {
+        String specialLegislation = Base.driver.findElement(By.id("special-legislation")).getText();
+        return splitLabelAndData(specialLegislation).setName("Special Legislation");
     }
 }
 
