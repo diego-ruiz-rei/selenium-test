@@ -119,7 +119,7 @@ public class OpportunitiesPackagesTest extends Base{
     @Test
     public void notSecuredTest() throws InterruptedException {
         OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(single_package);
-        assertTrue("Secured Type does not exists", OpportunitiesObjectViewPage.notSecurePackage().equals("Not Secure"));
+        assertTrue("Pagination greater than 1", OpportunitiesObjectViewPage.notSecurePackage().equals("Not Secure"));
         System.out.println("Not Secured Content exists");
     }
 
