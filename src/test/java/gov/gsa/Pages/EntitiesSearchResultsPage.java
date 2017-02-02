@@ -90,6 +90,7 @@ public class EntitiesSearchResultsPage extends Base{
 
     //Pagination count
     public static Integer resultsPageCount(){
+        System.out.println("Results page count : "+ Base.driver.findElements(By.cssSelector(".page-button")).size());
         return Base.driver.findElements(By.cssSelector(".page-button")).size();
     }
 

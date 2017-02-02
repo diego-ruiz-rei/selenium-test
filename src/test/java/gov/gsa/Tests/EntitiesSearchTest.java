@@ -37,7 +37,7 @@ public class EntitiesSearchTest extends Base{
     @Test
     public void entitiesTagTest() throws InterruptedException {
         SearchNavigation.gotoSearchResultsPage(index,"");
-        assertEquals(EntitiesSearchResultsPage.entitiesTag(),"ENTITY");
+        assertEquals("Entities Tag does not Exist",EntitiesSearchResultsPage.entitiesTag(),"ENTITY");
         System.out.println("Entities Tag is Present");
     }
 
@@ -45,7 +45,7 @@ public class EntitiesSearchTest extends Base{
     @Test
     public void entitiesInactiveTagTest() throws InterruptedException {
         SearchNavigation.gotoSearchResultsPage(index,inactive_searchTerm);
-        assertEquals(EntitiesSearchResultsPage.entitiesInactiveTag(),"INACTIVE");
+        assertEquals("Entities Inactive Tag does not Exist",EntitiesSearchResultsPage.entitiesInactiveTag(),"INACTIVE");
         System.out.println("Entities Inactive Tag is Present");
     }
 
@@ -119,8 +119,8 @@ public class EntitiesSearchTest extends Base{
         exact_searchTerm = exact_searchTerm.replace("\"","");
         System.out.println("Input Search Term : "+ exact_searchTerm);
         SearchNavigation.gotoSearchResultsPage(index,exact_searchTerm);
-        assertEquals(EntitiesSearchResultsPage.entitiesTitle(), exact_searchTerm);
-        System.out.println("Exact match found");
+        assertEquals("Entities Exact match NOT found on Title",EntitiesSearchResultsPage.entitiesTitle(), exact_searchTerm);
+        System.out.println("Entities Exact match found on Title");
     }
 
     // DUNS exact Match test
@@ -129,8 +129,8 @@ public class EntitiesSearchTest extends Base{
         duns_searchTerm = duns_searchTerm.replace("\"","");
         System.out.println("Input DUNS Search Term : "+ duns_searchTerm);
         SearchNavigation.gotoSearchResultsPage(index,duns_searchTerm);
-        assertEquals(EntitiesSearchResultsPage.dunsExactMatch(), duns_searchTerm);
-        System.out.println("Search by DUNS renders results");
+        assertEquals("Entities Exact match NOT found on DUNS Number",EntitiesSearchResultsPage.dunsExactMatch(), duns_searchTerm);
+        System.out.println("Entities Exact match found on DUNS Number");
     }
 
 
