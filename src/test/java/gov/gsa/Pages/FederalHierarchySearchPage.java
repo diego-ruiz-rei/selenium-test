@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 /**
  * Created by michael.kellogg on 1/30/17.
  */
-public class FederalHierarchyObjectViewPage extends ObjectView {
+public class FederalHierarchySearchPage extends ObjectView {
 
     // finds the federal hierarchy tag above result items
     public static String fhTag(){

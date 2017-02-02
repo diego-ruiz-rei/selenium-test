@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
 
-public class FederalHierarchyObjectViewNavigation extends ObjectView {
+public class FederalHierarchySearchNavigation extends ObjectView {
 
     public static void gotoFhObjectView(String fh_SearchTerm) throws InterruptedException {
         //System.out.println("Search results page");
