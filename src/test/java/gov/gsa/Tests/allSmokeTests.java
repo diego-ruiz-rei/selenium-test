@@ -14,7 +14,7 @@ import org.junit.runners.Suite;
 //
 @RunWith(Suite.class)
 @Suite.SuiteClasses({HomepageTest.class, FACObjectViewTest.class, OpportunitiesObjectViewTest.class, SearchTest.class,
-OpportunitiesPackagesTest.class, FederalHierarchyObjectViewTest.class})
+OpportunitiesPackagesTest.class, FederalHierarchyObjectViewTest.class, EntitiesSearchTest.class})
 //@Suite.SuiteClasses({HomepageTest.class, FederalHierarchyObjectViewTest.class})
 public class allSmokeTests extends Base{
 }
