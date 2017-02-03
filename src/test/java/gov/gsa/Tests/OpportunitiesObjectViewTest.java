@@ -34,9 +34,19 @@ public class OpportunitiesObjectViewTest extends Base {
     @Parameterized.Parameters(name = "{index}: opportunityId - {0}")
     public static Collection <Object[]> data() {
         return  Arrays.asList(new Object[][]{
-                {new String[]{"F4FRQT3091A007","k"}},
-                {new String[]{"VA24816Q0997","k"}},
-                {new String[]{"N00253-16-T-0385","a"}}
+//                {new String[]{"F4FRQT3091A007","k"}},
+//                {new String[]{"VA24816Q0997","k"}},
+//                {new String[]{"N00253-16-T-0385","a"}}
+                {new String[]{"AAA-AAA-11-1111","p"}},
+                {new String[]{"AAA-AAA-11-1112","k"}},
+                {new String[]{"AAA-AAA-11-1113","f"}},
+                {new String[]{"AAA-AAA-11-1114","g"}},
+                {new String[]{"AAA-AAA-11-1115","r"}},
+                {new String[]{"AAA-AAA-11-1116","i"}},
+                {new String[]{"AAA-AAA-11-1117","j"}},
+                {new String[]{"AAA-AAA-11-1118","a"}},
+                {new String[]{"AAA-AAA-11-1119","l"}},
+                {new String[]{"AAA-AAA-11-1120","s"}},
         });
     }
 

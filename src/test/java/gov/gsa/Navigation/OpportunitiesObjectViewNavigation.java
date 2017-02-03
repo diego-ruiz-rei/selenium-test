@@ -21,7 +21,7 @@ public class OpportunitiesObjectViewNavigation extends ObjectView {
         Base.driver.findElement(By.cssSelector(".search-inputbar")).sendKeys(opp_SearchTerm);
         new Select(Base.driver.findElement(By.id("filter"))).selectByVisibleText("Opportunities");
         Base.driver.findElement(By.cssSelector(".search-btn")).click();
-        Thread.sleep(2000);
+        Thread.sleep(3000);
         Base.driver.findElement(By.cssSelector(".opportunity-title > a")).click();
         Thread.sleep(2000);
         // this.appWait();
