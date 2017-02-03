@@ -36,7 +36,7 @@ public class FederalHierarchySearchTest extends Base {
     // empty search checks for more than 1 page
     @Test
     public void emptySearchTestPagination() throws InterruptedException {
-        //FederalHierarchySearchNavigation.gotoFhObjectView("");
+        FederalHierarchySearchNavigation.gotoFhObjectView("");
         System.out.println(FederalHierarchySearchPage.fhResultPageCount());
         assertTrue("fh results are greater than one page", FederalHierarchySearchPage.fhResultPageCount() > 1);
         System.out.println("fh results are greater than 1 page");
