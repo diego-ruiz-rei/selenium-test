@@ -102,6 +102,10 @@ public class CommonUtils {
         assertTrue(field.name + " does not have expected label", field.label.contains(expectedLabel));
     }
 
+    public static void testContainsLabel(DataField field, String expectedLabel) {
+        assertTrue(field.name + " does not have expected label", expectedLabel.contains(field.label));
+    }
+
     public static void testDataContains(DataField field, String expectedData) {
         assertTrue(field.name + " does not have expected data", field.data.contains(expectedData));
     }

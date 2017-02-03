@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
+import static gov.gsa.Utilities.CommonUtils.testContainsLabel;
 import static gov.gsa.Utilities.CommonUtils.testLabelAndDataExists;
 import static gov.gsa.Utilities.CommonUtils.testLabelContains;
 import static org.junit.Assert.*;
@@ -98,7 +99,7 @@ public class OpportunitiesObjectViewTest extends Base {
     public void officeTest() {
         DataField office = OpportunitiesObjectViewPage.office();
         testLabelAndDataExists(office);
-        testLabelContains(office, "Office");
+        testContainsLabel(office, "Office Agency");
     }
 
     @Test
