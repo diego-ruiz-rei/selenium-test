@@ -356,22 +356,22 @@ int code = 0;
     }
 
     public static DataField statutoryAuthority() {
-        String statutoryAuthority = Base.driver.findElement(By.id("statutory-authority")).getText();
+        String statutoryAuthority = Base.driver.findElement(By.id("opportunity-general-statutory-authority")).getText();
         return splitLabelAndData(statutoryAuthority).setName("J&A Statutory Authority");
     }
 
     public static DataField justificationAuthority() {
-        String justificationAuthority = Base.driver.findElement(By.id("justification-authority")).getText();
+        String justificationAuthority = Base.driver.findElement(By.id("opportunity-general-justification-authority")).getText();
         return splitLabelAndData(justificationAuthority).setName("Fair Opportunity / Limited Sources Justification Authority");
     }
 
     public static DataField orderNumber() {
-        String orderNumber = Base.driver.findElement(By.id("order-number")).getText();
+        String orderNumber = Base.driver.findElement(By.id("opportunity-order-number")).getText();
         return splitLabelAndData(orderNumber).setName("Task/Delivery Order Number");
     }
 
     public static DataField specialLegislation() {
-        String specialLegislation = Base.driver.findElement(By.id("special-legislation")).getText();
+        String specialLegislation = Base.driver.findElement(By.id("opportunity-general-special-legislation")).getText();
         return splitLabelAndData(specialLegislation).setName("Special Legislation");
     }
 }

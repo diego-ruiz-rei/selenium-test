@@ -231,7 +231,7 @@ public class OpportunitiesObjectViewTest extends Base {
         if (idAndType[1].equals("a") || idAndType[1].equals("j") || idAndType[1].equals("l")) {
             DataField contractAwardDate = OpportunitiesObjectViewPage.contractAwardDate();
             testLabelAndDataExists(contractAwardDate);
-            testLabelContains(contractAwardDate, "Contract Award Dollar Amount");
+            testLabelContains(contractAwardDate, "Contract Award Date");
         }
         else {
             System.out.println("Irrelevant Type");
@@ -325,7 +325,7 @@ public class OpportunitiesObjectViewTest extends Base {
         if (idAndType[1].equals("i") || idAndType[1].equals("l")) {
             DataField orderNumber = OpportunitiesObjectViewPage.orderNumber();
             testLabelAndDataExists(orderNumber);
-            testLabelContains(orderNumber, "Fair Opportunity / Limited Sources Justification Authority");
+            testLabelContains(orderNumber, "Task/Delivery Order Number");
         }
         else {
             System.out.println("Irrelevant Type");
@@ -334,7 +334,7 @@ public class OpportunitiesObjectViewTest extends Base {
 
     @Test
     public void specialLegislationTest(){
-        if (idAndType[1].equals("p") || idAndType[1].equals("k") || idAndType[1].equals("r") || idAndType[1].equals("j") || idAndType[1].equals("a") || idAndType[1].equals("f") || idAndType[1].equals("s")) {
+        if (idAndType[1].equals("p") || idAndType[1].equals("k") || idAndType[1].equals("r") || idAndType[1].equals("j") || idAndType[1].equals("a") || idAndType[1].equals("l") || idAndType[1].equals("s")) {
             DataField specialLegislation = OpportunitiesObjectViewPage.specialLegislation();
             testLabelAndDataExists(specialLegislation);
             testLabelContains(specialLegislation, "Special Legislation");
