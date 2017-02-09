@@ -13,7 +13,7 @@ public class SearchPage{
     //Test Data specific to Search - Format {index,keyword,type}
     private static String[][] searchParameters = {
             {"All","","all"},
-            {"All","Foreign-Trade Zones in the United States","title"},
+            {"Assistance Listings","Foreign-Trade Zones in the United States","title"},
             {"Assistance Listings","11.111","number"},
             {"Opportunities","DTFANM-08-R-00058","number"},
             {"All","10.001","number"},

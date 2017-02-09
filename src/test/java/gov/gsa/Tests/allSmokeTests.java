@@ -13,7 +13,13 @@ import org.junit.runners.Suite;
 // this class uses annotations to run all the test classes in one location
 //
 @RunWith(Suite.class)
-@Suite.SuiteClasses({HomepageTest.class, FACObjectViewTest.class, OpportunitiesObjectViewTest.class, SearchTest.class,
-OpportunitiesPackagesTest.class, FederalHierarchySearchTest.class, EntitiesSearchTest.class})
+@Suite.SuiteClasses({HomepageTest.class,
+        SearchTest.class,
+        FederalHierarchySearchTest.class,
+        EntitiesSearchTest.class,
+        FACObjectViewTest.class,
+        OpportunitiesObjectViewTest.class,
+        OpportunitiesPackagesTest.class
+        })
 public class allSmokeTests extends Base{
 }
