@@ -41,6 +41,7 @@ public class EntitiesSearchTest extends Base{
         SearchNavigation.gotoSearchResultsPage(index,"");
         assertEquals("Entities Tag does not Exist",EntitiesSearchResultsPage.entitiesTag(),"ENTITY");
         System.out.println("Entities Tag is Present");
+
     }
 
     // Entities Inactive Tag

@@ -1,5 +1,9 @@
 package gov.gsa.Utilities;
 
+import gov.gsa.Navigation.FederalHierarchySearchNavigation;
+import gov.gsa.Navigation.SearchNavigation;
+import gov.gsa.Pages.FederalHierarchySearchPage;
+
 import java.util.function.Predicate;
 
 import static jdk.nashorn.internal.objects.NativeRegExp.test;
@@ -108,5 +112,15 @@ public class CommonUtils {
 
     public static void testDataContains(DataField field, String expectedData) {
         assertTrue(field.name + " does not have expected data", field.data.contains(expectedData));
+        System.out.println("tested if " + field.data + " was the same as " + expectedData);
+    }
+
+    // example of how to implement -> assertTrue(CommonUtils.autoCompleteExists("AR2"));
+    public static boolean autoCompleteExists(String searchText) throws InterruptedException {
+        // takes actions to open auto-complete window
+        FederalHierarchySearchNavigation.gotoAutoComplete(searchText);
+        // this just returns a bool value of if autocomplete window shows up or not
+        return FederalHierarchySearchPage.autocompleteExists();
+
     }
 }
