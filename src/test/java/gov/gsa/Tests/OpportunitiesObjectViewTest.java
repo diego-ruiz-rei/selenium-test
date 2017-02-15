@@ -254,7 +254,7 @@ public class OpportunitiesObjectViewTest extends Base {
     public void naicsCodeTest() {
     	Assume.assumeFalse(ArrayUtils.contains(idAndType[2], "NAICS Code"));
         if (!idAndType[1].equals("a")) {
-            assertTrue("NAICS Code(s) Data is empty", !OpportunitiesObjectViewPage.naicsCode().isEmpty());
+            assertTrue("NAICS Code(s) Data is empty", OpportunitiesObjectViewPage.naicsCode());
             System.out.println("NAICS Code(s)Data exists");
             }
         else {
