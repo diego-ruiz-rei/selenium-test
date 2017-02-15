@@ -202,7 +202,7 @@ public class OpportunitiesObjectViewTest extends Base {
 
     @Test
     public void responseDateTest() {
-    	Assume.assumeFalse(ArrayUtils.contains(idAndType[2], "Response Dater"));
+    	Assume.assumeFalse(ArrayUtils.contains(idAndType[2], "Response Date"));
         if (!idAndType[1].equals("a")) {
             DataField responseDate = OpportunitiesObjectViewPage.responseDate();
             testLabelAndDataExists(responseDate);
