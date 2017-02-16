@@ -5,7 +5,10 @@ import gov.gsa.Navigation.OpportunitiesObjectViewNavigation;
 import gov.gsa.Pages.OpportunitiesObjectViewPage;
 import gov.gsa.Utilities.Base;
 import gov.gsa.Utilities.CommonUtils.DataField;
+
+import org.apache.commons.lang.ArrayUtils;
 import org.junit.AfterClass;
+import org.junit.Assume;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -29,28 +32,87 @@ public class OpportunitiesObjectViewTest extends Base {
 
 
     @Parameterized.Parameter
-    public String[] idAndType;
+    public String[][] idAndType;
 
     //Single parameter, use Object[]
     @Parameterized.Parameters(name = "{index}: opportunityId - {0}")
     public static Collection <Object[]> data() {
+    	if(System.getProperty("siteTarget").contains("reisys.com")){
         return  Arrays.asList(new Object[][]{
-    //            {new String[]{"N0016417RJT22","p"}},
-    //            {new String[]{"F4FRQT3091A007","k"}},
-    //            {new String[]{"VA24816Q0997","k"}},
-    //            {new String[]{"N00253-16-T-0385","a"}},
-                {new String[]{"AAA-AAA-11-1111","p"}},//Presolicitation
-                {new String[]{"AAA-AAA-11-1112","k"}},//Combined Synopsis
-                {new String[]{"AAA-AAA-11-1113","f"}},//Foreign Government Standard
-                {new String[]{"AAA-AAA-11-1114","g"}},//Sale of Surplus
-                {new String[]{"AAA-AAA-11-1115","r"}},//Sources Sought
-                {new String[]{"AAA-AAA-11-1116","i"}},//Intent of Bundle
-                {new String[]{"AAA-AAA-11-1117","j"}},//Justification and Approval
-                {new String[]{"AAA-AAA-11-1118","a"}},//Award
-                {new String[]{"AAA-AAA-11-1119","l"}},//Fair Opportunity
-                {new String[]{"AAA-AAA-11-1120","s"}},//Special Notice
+                //Pass the fields that should not be included in the
+                {new String[][]{{"AAA-AAA-11-1111"},{"p"},
+        			{"Contract Award Dollar Amount","Contract Award Date","Contract Award Number", "Task Order Number", "Contract Line Item Number", 
+                  	"Contractor Awarded Name", "Contractor Awarded DUNS", "Contractor Awarded Address", "J&A Statutory Authority", "Fair Opportunity",
+                  	"Modification Number", "Description of Benefits"}
+                  }},//Presolicitation
+                {new String[][]{{"AAA-AAA-11-1112"},{"k"},
+                	{"Contract Award Dollar Amount","Contract Award Date","Contract Award Number", "Task Order Number", "Contract Line Item Number", 
+                	"Contractor Awarded Name", "Contractor Awarded DUNS", "Contractor Awarded Address", "J&A Statutory Authority", "Fair Opportunity",
+                	"Modification Number", "Description of Benefits"}
+                }},//Combined Synopsis
+                {new String[][]{{"AAA-AAA-11-1113"},{"f"},
+                	{"Special Legislation","Contract Award Dollar Amount","Contract Award Date","Contract Award Number", "Task Order Number", "Contract Line Item Number", 
+                	"Contractor Awarded Name", "Contractor Awarded DUNS", "Contractor Awarded Address", "J&A Statutory Authority", "Fair Opportunity",
+                	"Modification Number", "Description of Benefits"}
+                }},//Foreign Government Standard
+                {new String[][]{{"AAA-AAA-11-1114"},{"g"},
+                	{"Special Legislation","Contract Award Dollar Amount","Contract Award Date","Contract Award Number", "Task Order Number", "Contract Line Item Number", 
+                	"Contractor Awarded Name", "Contractor Awarded DUNS", "Contractor Awarded Address", "J&A Statutory Authority", "Fair Opportunity",
+                	"Modification Number", "Description of Benefits"}
+                }},//Sale of Surplus
+                {new String[][]{{"AAA-AAA-11-1115"},{"r"},
+                	{"Contract Award Dollar Amount","Contract Award Date","Contract Award Number", "Task Order Number", "Contract Line Item Number", 
+                	"Contractor Awarded Name", "Contractor Awarded DUNS", "Contractor Awarded Address", "J&A Statutory Authority", "Fair Opportunity",
+                	"Modification Number", "Description of Benefits"}
+                }},//Sources Sought
+                {new String[][]{{"AAA-AAA-11-1116"},{"i"},
+                	{"Special Legislation","Contract Award Dollar Amount","Contract Award Date", "Contract Line Item Number", 
+                	"Contractor Awarded Name", "Contractor Awarded DUNS", "Contractor Awarded Address", "J&A Statutory Authority", "Fair Opportunity",
+                	"Modification Number"}
+                }},//Intent of Bundle
+                {new String[][]{{"AAA-AAA-11-1117"},{"j"},
+                	{"Contract Award Dollar Amount", "Task Order Number", "Contract Line Item Number", 
+                	"Contractor Awarded Name", "Contractor Awarded DUNS", "Contractor Awarded Address", "Fair Opportunity"}
+                }},//Justification and Approval
+                {new String[][]{{"AAA-AAA-11-1118"},{"a"},
+                	{"Task Order Number", "Response Date", "J&A Statutory Authority", "Fair Opportunity", "Modification Number", 
+                	"Place of Performance","Description of Benefits"}
+                }},//Award
+                {new String[][]{{"AAA-AAA-11-1119"},{"l"},
+                	{"Contract Award Dollar Amount", "Contract Line Item Number", "Contractor Awarded Name", "Contractor Awarded DUNS",
+                	"Contractor Awarded Address", "J&A Statutory Authority", "Description of Benefits"}
+                }},//Fair Opportunity   
+                {new String[][]{{"AAA-AAA-11-1120"},{"s"},
+                	{"Contract Award Dollar Amount","Contract Award Date", "Contract Award Number", "Task Order Number", "Contract Line Item Number", 
+                	"Contractor Awarded Name", "Contractor Awarded DUNS", "Contractor Awarded Address", "J&A Statutory Authority", "Fair Opportunity",
+                	"Modification Number", "Description of Benefits"}
+                }},//Special Notice
 
         });
+    	}
+    	else{
+    		return  Arrays.asList(new Object[][]{   
+	    		{new String[][]{{"N0016417RJT22"},{"p"},
+	    			{"Contract Award Dollar Amount","Contract Award Date","Contract Award Number", "Task Order Number", "Contract Line Item Number", 
+                  	"Contractor Awarded Name", "Contractor Awarded DUNS", "Contractor Awarded Address", "J&A Statutory Authority", "Fair Opportunity",
+                  	"Modification Number", "Description of Benefits"}	
+	    		}},
+	    	    {new String[][]{{"F4FRQT3091A007"},{"k"},
+	    	    	{"Contract Award Dollar Amount","Contract Award Date","Contract Award Number", "Task Order Number", "Contract Line Item Number", 
+                	"Contractor Awarded Name", "Contractor Awarded DUNS", "Contractor Awarded Address", "J&A Statutory Authority", "Fair Opportunity",
+                	"Modification Number", "Description of Benefits"}	
+	    	    }},
+	    	    {new String[][]{{"VA24816Q0997"},{"k"},
+	    	    	{"Contract Award Dollar Amount","Contract Award Date","Contract Award Number", "Task Order Number", "Contract Line Item Number", 
+                	"Contractor Awarded Name", "Contractor Awarded DUNS", "Contractor Awarded Address", "J&A Statutory Authority", "Fair Opportunity",
+                	"Modification Number", "Description of Benefits"}
+	    	    }},
+	    	    {new String[][]{{"N00253-16-T-0385"},{"a"},
+	    	    	{"Task Order Number", "Response Date", "J&A Statutory Authority", "Fair Opportunity", "Modification Number", 
+                	"Place of Performance","Description of Benefits"}
+	    	    }},
+    		});
+    	}
     }
 
     @Test
@@ -60,8 +122,8 @@ public class OpportunitiesObjectViewTest extends Base {
 
         //TODO : need to pass search parameter
         try {
-            System.out.println("Opportunity ID: " + idAndType[0]);
-            OpportunitiesObjectViewNavigation.gotoOppObjectView(idAndType[0]);
+            System.out.println("Opportunity ID: " + idAndType[0][0]);
+            OpportunitiesObjectViewNavigation.gotoOppObjectView(idAndType[0][0]);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -92,6 +154,7 @@ public class OpportunitiesObjectViewTest extends Base {
 
     @Test
     public void solicitationNumberTest() {
+    	Assume.assumeFalse(ArrayUtils.contains(idAndType[2], "Solicitation Number"));
         DataField solicitation = OpportunitiesObjectViewPage.solicitation();
         testLabelAndDataExists(solicitation);
         testLabelContains(solicitation, "Solicitation Number");
@@ -99,6 +162,7 @@ public class OpportunitiesObjectViewTest extends Base {
 
     @Test
     public void officeTest() {
+    	Assume.assumeFalse(ArrayUtils.contains(idAndType[2], "Office"));
         DataField office = OpportunitiesObjectViewPage.office();
         testLabelAndDataExists(office);
         testContainsLabel(office, "Office Agency");
@@ -106,6 +170,7 @@ public class OpportunitiesObjectViewTest extends Base {
 
     @Test
     public void locationTest() {
+    	Assume.assumeFalse(ArrayUtils.contains(idAndType[2], "Location"));
         DataField location = OpportunitiesObjectViewPage.location();
         testLabelAndDataExists(location);
         testContainsLabel(location, "Location");
@@ -113,6 +178,7 @@ public class OpportunitiesObjectViewTest extends Base {
 
     @Test
     public void opportunityTypeTest() {
+    	Assume.assumeFalse(ArrayUtils.contains(idAndType[2], "Opportunity Type"));
         DataField opportunityType = OpportunitiesObjectViewPage.oppType();
         testLabelAndDataExists(opportunityType);
         testLabelContains(opportunityType, "Opportunity Type");
@@ -120,6 +186,7 @@ public class OpportunitiesObjectViewTest extends Base {
 
     @Test
     public void postedDateTest() {
+    	Assume.assumeFalse(ArrayUtils.contains(idAndType[2], "Posted Date"));
         DataField postedDate = OpportunitiesObjectViewPage.postedDate();
         testLabelAndDataExists(postedDate);
         testLabelContains(postedDate, "Posted Date");
@@ -127,6 +194,7 @@ public class OpportunitiesObjectViewTest extends Base {
 
     //@Test
     public void originalPostedDateTest() {
+    	Assume.assumeFalse(ArrayUtils.contains(idAndType[2], "Original Posted Date"));
         DataField originalPostedDate = OpportunitiesObjectViewPage.originalPosted();
         testLabelAndDataExists(originalPostedDate);
         testLabelContains(originalPostedDate, "Original Posted Date");
@@ -134,6 +202,7 @@ public class OpportunitiesObjectViewTest extends Base {
 
     @Test
     public void responseDateTest() {
+    	Assume.assumeFalse(ArrayUtils.contains(idAndType[2], "Response Date"));
         if (!idAndType[1].equals("a")) {
             DataField responseDate = OpportunitiesObjectViewPage.responseDate();
             testLabelAndDataExists(responseDate);
@@ -146,6 +215,7 @@ public class OpportunitiesObjectViewTest extends Base {
 
     //@Test
     public void originalResponseDateTest() {
+    	Assume.assumeFalse(ArrayUtils.contains(idAndType[2], "Original Response Date"));
         DataField originalResponseDate = OpportunitiesObjectViewPage.originalResponse();
         testLabelAndDataExists(originalResponseDate);
         testLabelContains(originalResponseDate, "Original Response Date");
@@ -153,6 +223,7 @@ public class OpportunitiesObjectViewTest extends Base {
 
     @Test
     public void archivingPolicyTest() {
+    	Assume.assumeFalse(ArrayUtils.contains(idAndType[2], "Archiving Policy"));
         DataField archivePolicy = OpportunitiesObjectViewPage.archivingPolicy();
         testLabelAndDataExists(archivePolicy);
         testLabelContains(archivePolicy, "Archiving Policy");
@@ -160,6 +231,7 @@ public class OpportunitiesObjectViewTest extends Base {
 
     //@Test
     public void originalSetAsideTest() {
+    	Assume.assumeFalse(ArrayUtils.contains(idAndType[2], "Original Set Aside"));
         DataField originalSetAside = OpportunitiesObjectViewPage.originalSetAside();
         testLabelAndDataExists(originalSetAside);
         testLabelContains(originalSetAside, "Original Set Aside");
@@ -167,6 +239,7 @@ public class OpportunitiesObjectViewTest extends Base {
 
     @Test
     public void classificationCodeTest() {
+    	Assume.assumeFalse(ArrayUtils.contains(idAndType[2], "Classification Code"));
         if (!idAndType[1].equals("a")) {
             DataField classificationCode = OpportunitiesObjectViewPage.classificationCode();
             testLabelAndDataExists(classificationCode);
@@ -179,8 +252,9 @@ public class OpportunitiesObjectViewTest extends Base {
 
     @Test
     public void naicsCodeTest() {
+    	Assume.assumeFalse(ArrayUtils.contains(idAndType[2], "NAICS Code"));
         if (!idAndType[1].equals("a")) {
-            assertTrue("NAICS Code(s) Data is empty", !OpportunitiesObjectViewPage.naicsCode().isEmpty());
+            assertTrue("NAICS Code(s) Data is empty", OpportunitiesObjectViewPage.naicsCode());
             System.out.println("NAICS Code(s)Data exists");
             }
         else {
@@ -190,6 +264,7 @@ public class OpportunitiesObjectViewTest extends Base {
 
     @Test
     public void placeOfPerformanceTest() {
+    	Assume.assumeFalse(ArrayUtils.contains(idAndType[2], "Place of Performance"));
         if (!idAndType[1].equals("a")) {
             DataField pop = OpportunitiesObjectViewPage.placeOfPerformance();
             testLabelAndDataExists(pop);
@@ -202,6 +277,7 @@ public class OpportunitiesObjectViewTest extends Base {
 
     @Test
     public void contractingOfficeTest() {
+    	Assume.assumeFalse(ArrayUtils.contains(idAndType[2], "Contracting Office"));
         ArrayList<String> contracting = OpportunitiesObjectViewPage.contractingOffice();
         for (String temp : contracting) {
             assertFalse(temp.isEmpty());
@@ -212,6 +288,7 @@ public class OpportunitiesObjectViewTest extends Base {
 
     @Test
     public void primaryPointOfContactTest() {
+    	Assume.assumeFalse(ArrayUtils.contains(idAndType[2], "Point of Contact"));
         if (!idAndType[1].equals("a")) {
         ArrayList<String> primarypoc = OpportunitiesObjectViewPage.primaryPointOfContact();
         assertTrue("Primary POC Name is empty", primarypoc.get(0).length() > 1);
@@ -227,6 +304,7 @@ public class OpportunitiesObjectViewTest extends Base {
 
     @Test
     public void contractAwardDollarAmountTest(){
+    	Assume.assumeFalse(ArrayUtils.contains(idAndType[2], "Contract Award Dollar Amount"));
         if (idAndType[1].equals("a")) {
             DataField contractAwardDollarAmount = OpportunitiesObjectViewPage.contractAwardDollarAmount();
             testLabelAndDataExists(contractAwardDollarAmount);
@@ -238,6 +316,7 @@ public class OpportunitiesObjectViewTest extends Base {
     }
     @Test
     public void contractAwardDateTest(){
+    	Assume.assumeFalse(ArrayUtils.contains(idAndType[2], "Contract Award Date"));
         if (idAndType[1].equals("a") || idAndType[1].equals("j") || idAndType[1].equals("l")) {
             DataField contractAwardDate = OpportunitiesObjectViewPage.contractAwardDate();
             testLabelAndDataExists(contractAwardDate);
@@ -249,6 +328,7 @@ public class OpportunitiesObjectViewTest extends Base {
     }
     @Test
     public void contractAwardNumberTest(){
+    	Assume.assumeFalse(ArrayUtils.contains(idAndType[2], "Contract Award Number"));
         if (idAndType[1].equals("a") || idAndType[1].equals("j") || idAndType[1].equals("l") || idAndType[1].equals("i")) {
             DataField contractAwardNumber = OpportunitiesObjectViewPage.contractAwardNumber();
             testLabelAndDataExists(contractAwardNumber);
@@ -260,6 +340,7 @@ public class OpportunitiesObjectViewTest extends Base {
     }
     @Test
     public void contractLineItemNumberTest(){
+    	Assume.assumeFalse(ArrayUtils.contains(idAndType[2], "Contract Line Item Number"));
         if (idAndType[1].equals("a")) {
             DataField contractLineItemNumber = OpportunitiesObjectViewPage.contractLineItemNumber();
             testLabelAndDataExists(contractLineItemNumber);
@@ -272,6 +353,7 @@ public class OpportunitiesObjectViewTest extends Base {
 
     @Test
     public void contractorAwardedNameTest(){
+    	Assume.assumeFalse(ArrayUtils.contains(idAndType[2], "Contractor Awarded Name"));
         if (idAndType[1].equals("a")) {
             DataField contractorAwardedName = OpportunitiesObjectViewPage.contractorAwardedName();
             testLabelAndDataExists(contractorAwardedName);
@@ -284,6 +366,7 @@ public class OpportunitiesObjectViewTest extends Base {
 
     @Test
     public void contractorAwardedDUNSTest(){
+    	Assume.assumeFalse(ArrayUtils.contains(idAndType[2], "Contractor Awarded DUNS"));
         if (idAndType[1].equals("a")) {
             DataField contractorAwardedDUNS = OpportunitiesObjectViewPage.contractorAwardedDUNS();
             testLabelAndDataExists(contractorAwardedDUNS);
@@ -296,6 +379,7 @@ public class OpportunitiesObjectViewTest extends Base {
 
     @Test
     public void contractorAwardedAddressTest(){
+    	Assume.assumeFalse(ArrayUtils.contains(idAndType[2], "Contractor Awarded Address"));
         if (idAndType[1].equals("a")) {
             DataField contractorAwardedAddress = OpportunitiesObjectViewPage.contractorAwardedAddress();
             testLabelAndDataExists(contractorAwardedAddress);
@@ -308,6 +392,7 @@ public class OpportunitiesObjectViewTest extends Base {
 
     @Test
     public void statutoryAuthorityTest(){
+    	Assume.assumeFalse(ArrayUtils.contains(idAndType[2], "J&A Statutory Authority"));
         if (idAndType[1].equals("j")) {
             DataField statutoryAuthority = OpportunitiesObjectViewPage.statutoryAuthority();
             testLabelAndDataExists(statutoryAuthority);
@@ -320,6 +405,7 @@ public class OpportunitiesObjectViewTest extends Base {
 
     @Test
     public void justificationAuthorityTest(){
+    	Assume.assumeFalse(ArrayUtils.contains(idAndType[2], "Fair Opportunity"));
         if (idAndType[1].equals("l")) {
             DataField justificationAuthority = OpportunitiesObjectViewPage.justificationAuthority();
             testLabelAndDataExists(justificationAuthority);
@@ -332,6 +418,7 @@ public class OpportunitiesObjectViewTest extends Base {
 
     @Test
     public void orderNumberTest(){
+    	Assume.assumeFalse(ArrayUtils.contains(idAndType[2], "Task Order Number"));
         if (idAndType[1].equals("i") || idAndType[1].equals("l")) {
             DataField orderNumber = OpportunitiesObjectViewPage.orderNumber();
             testLabelAndDataExists(orderNumber);
@@ -344,6 +431,7 @@ public class OpportunitiesObjectViewTest extends Base {
 
     @Test
     public void specialLegislationTest(){
+    	Assume.assumeFalse(ArrayUtils.contains(idAndType[2], "Special Legislation"));
         if (idAndType[1].equals("p") || idAndType[1].equals("k") || idAndType[1].equals("r") || idAndType[1].equals("j") || idAndType[1].equals("a") || idAndType[1].equals("l") || idAndType[1].equals("s")) {
             DataField specialLegislation = OpportunitiesObjectViewPage.specialLegislation();
             testLabelAndDataExists(specialLegislation);

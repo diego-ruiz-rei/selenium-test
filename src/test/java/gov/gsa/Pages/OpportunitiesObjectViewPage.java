@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 public class OpportunitiesObjectViewPage extends ObjectView {
 
@@ -91,11 +92,16 @@ public class OpportunitiesObjectViewPage extends ObjectView {
     }
 
     // todo change to DataField
-    public static String naicsCode() {
-        WebElement naicsCode = Base.driver.findElement(By.xpath("//*[@id=\"opportunity-classification-naics-code\"]/ul/li"));
-        return naicsCode.getText();
-
+    public static Boolean naicsCode() {
+        WebElement naicsCodeElement = Base.driver.findElement(By.id("opportunity-classification-naics-code"));
+        List<WebElement> naicsCode = naicsCodeElement.findElements(By.cssSelector("ul > li"));
+        if(naicsCode.size()> 0){
+            return true;
+        }else{
+            return false;
+        }
     }
+
 
     //TODO : Add for Address, city and state
     public static DataField placeOfPerformance() {
