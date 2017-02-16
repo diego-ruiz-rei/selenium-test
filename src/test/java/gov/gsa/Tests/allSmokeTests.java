@@ -14,13 +14,14 @@ import org.junit.runners.Suite;
 //
 @RunWith(Suite.class)
 @Suite.SuiteClasses({HomepageTest.class,
-        //SearchTest.class,
-        //FederalHierarchySearchTest.class,
-        //EntitiesSearchTest.class,
-        //FACObjectViewTest.class,
-        //OpportunitiesObjectViewTest.class,
-        //OpportunitiesPackagesTest.class,
-        WageDeterminationSearchTest.class
+        SearchTest.class,
+        FederalHierarchySearchTest.class,
+        EntitiesSearchTest.class,
+        FACObjectViewTest.class,
+        OpportunitiesObjectViewTest.class,
+        OpportunitiesPackagesTest.class,
+        WageDeterminationSearchTest.class,
+        ExclusionsSearchTest.class
         })
 public class allSmokeTests extends Base{
 }

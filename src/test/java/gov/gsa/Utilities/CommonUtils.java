@@ -3,6 +3,8 @@ package gov.gsa.Utilities;
 import gov.gsa.Navigation.FederalHierarchySearchNavigation;
 import gov.gsa.Navigation.SearchNavigation;
 import gov.gsa.Pages.FederalHierarchySearchPage;
+import gov.gsa.Pages.WageDeterminationSearchPage;
+import org.openqa.selenium.By;
 
 import java.util.function.Predicate;
 
@@ -111,16 +113,33 @@ public class CommonUtils {
     }
 
     public static void testDataContains(DataField field, String expectedData) {
-        assertTrue(field.name + " does not have expected data", field.data.contains(expectedData));
         System.out.println("tested if " + field.data + " was the same as " + expectedData);
+        assertTrue(field.name + " does not have expected data", field.data.contains(expectedData));
     }
 
-    // example of how to implement -> assertTrue(CommonUtils.autoCompleteExists("AR2"));
+    // test autocomplete generic function - checks if first item in autocomplete matches string provided as a parameter
+    // example of how to implement -> assertTrue(CommonUtils.autoCompleteExists("AR20160001"));
     public static boolean autoCompleteExists(String searchText) throws InterruptedException {
         // takes actions to open auto-complete window
         FederalHierarchySearchNavigation.gotoAutoComplete(searchText);
         // this just returns a bool value of if autocomplete window shows up or not
-        return FederalHierarchySearchPage.autocompleteExists();
-
+        return autoCompleteSearchMatch(searchText);
     }
+
+    // test autocomplete helper function
+    public static boolean autoCompleteSearchMatch(String searchText){
+
+        String firstAutoCompleteItem = WageDeterminationSearchPage.autoCompleteFirstItem();
+
+        System.out.println("expected data: " + searchText + " captured data: " + firstAutoCompleteItem);
+
+        if(firstAutoCompleteItem.equals(searchText)){
+            return true;
+        }
+        return false;
+    }
+
+
+
+
 }
