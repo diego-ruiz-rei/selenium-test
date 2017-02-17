@@ -112,9 +112,27 @@ public class OpportunitiesObjectViewPage extends ObjectView {
 
     //Contact Information
     public static ArrayList<String> primaryPointOfContact() {
-        String pocfullname = Base.driver.findElement(By.id("opportunity-contact-primary-poc-full-name")).getText();
-        String popemail = Base.driver.findElement(By.xpath("//*[@id=\"opportunity-contact-primary-poc-email\"]/a")).getText();
-        String popphone = Base.driver.findElement(By.id("opportunity-contact-primary-poc-phone")).getText();
+        String pocfullname = "";
+        String popemail = "";
+        String popphone = "";
+        List <WebElement> pocfullnameConts = Base.driver.findElements(By.id("opportunity-contact-primary-poc-full-name"));
+        if(pocfullnameConts.size() > 0) {
+            for (WebElement pocfullnameCont : pocfullnameConts) {
+                pocfullname = pocfullnameCont.getText();
+            }
+        }
+        List<WebElement> popemailConts= Base.driver.findElements(By.id("opportunity-contact-primary-poc-email"));
+        if(popemailConts.size() > 0) {
+            for (WebElement popemailCont : popemailConts) {
+                popemail = popemailCont.findElement(By.tagName("a")).getText();
+            }
+        }
+        List<WebElement> popphoneConts = Base.driver.findElements(By.id("opportunity-contact-primary-poc-phone"));
+        if(popemailConts.size() > 0) {
+            for (WebElement popphoneCont : popphoneConts) {
+                popphone = popphoneCont.getText();
+            }
+        }
         ArrayList<String> ar = new ArrayList<String>();
         ar.add(pocfullname);
         ar.add(popemail);
