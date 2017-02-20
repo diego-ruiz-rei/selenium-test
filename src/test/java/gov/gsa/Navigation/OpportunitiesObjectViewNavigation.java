@@ -23,7 +23,7 @@ public class OpportunitiesObjectViewNavigation extends ObjectView {
         Base.driver.findElement(By.cssSelector(".search-btn")).click();
         Thread.sleep(3000);
         Base.driver.findElement(By.cssSelector(".opportunity-title > a")).click();
-        Thread.sleep(2000);
+        Thread.sleep(4000);
         // this.appWait();
     }
 

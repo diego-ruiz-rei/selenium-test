@@ -95,26 +95,30 @@ public class OpportunitiesObjectViewTest extends Base {
 	    		{new String[][]{{"N0016417RJT22"},{"p"},
 	    			{"Contract Award Dollar Amount","Contract Award Date","Contract Award Number", "Task Order Number", "Contract Line Item Number", 
                   	"Contractor Awarded Name", "Contractor Awarded DUNS", "Contractor Awarded Address", "J&A Statutory Authority", "Fair Opportunity",
-                  	"Modification Number", "Description of Benefits"}	
+                  	"Modification Number", "Description of Benefits" ,"Original Posted Date" , "Original Response Date" , "Special Legislation" ,
+                    "Original Archive Date" , "Original Set Aside" , "Set Aside" , "Place of Performance" , "Secondary Point of Contact"}
 	    		}},
-	    	    {new String[][]{{"F4FRQT3091A007"},{"k"},
+	    	/*    {new String[][]{{"F4FRQT3091A007"},{"k"},
 	    	    	{"Contract Award Dollar Amount","Contract Award Date","Contract Award Number", "Task Order Number", "Contract Line Item Number", 
                 	"Contractor Awarded Name", "Contractor Awarded DUNS", "Contractor Awarded Address", "J&A Statutory Authority", "Fair Opportunity",
-                	"Modification Number", "Description of Benefits"}	
+                	"Modification Number", "Description of Benefits" , "Archive Date" , "Special Legislation" , "Set Aside" , "Original Set Aside",
+                    "Secondary Point of Contact"}
 	    	    }},
-	    	    {new String[][]{{"VA24816Q0997"},{"k"},
+	    	    {new String[][]{{"W912P6-16-T-0029"},{"f"},
 	    	    	{"Contract Award Dollar Amount","Contract Award Date","Contract Award Number", "Task Order Number", "Contract Line Item Number", 
                 	"Contractor Awarded Name", "Contractor Awarded DUNS", "Contractor Awarded Address", "J&A Statutory Authority", "Fair Opportunity",
-                	"Modification Number", "Description of Benefits"}
+                	"Modification Number", "Description of Benefits" ,"Original Posted Date" , "Original Response Date" , "Original Archive Date",
+                    "Original Set Aside" , "Set Aside" , "Secondary Point of Contact"}
 	    	    }},
 	    	    {new String[][]{{"N00253-16-T-0385"},{"a"},
 	    	    	{"Task Order Number", "Response Date", "J&A Statutory Authority", "Fair Opportunity", "Modification Number", 
                 	"Place of Performance","Description of Benefits"}
-	    	    }},
+	    	    }},*/
     		});
     	}
     }
 
+    //TODO : Add tests for Original Archive Date , Description , Secondary Point of Contact
     @Test
     public void aaastart() throws InterruptedException {
 
