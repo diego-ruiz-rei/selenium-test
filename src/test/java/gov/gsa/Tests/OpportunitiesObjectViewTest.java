@@ -40,11 +40,11 @@ public class OpportunitiesObjectViewTest extends Base {
     	if(System.getProperty("siteTarget").contains("reisys.com")){
         return  Arrays.asList(new Object[][]{
                 //Pass the fields that should not be included in the
-                {new String[][]{{"AAA-AAA-11-1111"},{"p"},
+                /*{new String[][]{{"AAA-AAA-11-1111"},{"p"},
         			{"Contract Award Dollar Amount","Contract Award Date","Contract Award Number", "Task Order Number", "Contract Line Item Number", 
                   	"Contractor Awarded Name", "Contractor Awarded DUNS", "Contractor Awarded Address", "J&A Statutory Authority", "Fair Opportunity",
                   	"Modification Number", "Description of Benefits"}
-                  }},//Presolicitation
+                  }},//Presolicitation*/
                 {new String[][]{{"AAA-AAA-11-1112"},{"k"},
                 	{"Contract Award Dollar Amount","Contract Award Date","Contract Award Number", "Task Order Number", "Contract Line Item Number", 
                 	"Contractor Awarded Name", "Contractor Awarded DUNS", "Contractor Awarded Address", "J&A Statutory Authority", "Fair Opportunity",
