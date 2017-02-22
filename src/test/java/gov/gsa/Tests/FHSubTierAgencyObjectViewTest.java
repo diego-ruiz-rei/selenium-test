@@ -3,11 +3,16 @@ package gov.gsa.Tests;
 import gov.gsa.Navigation.FederalHierarchyObjectViewNavigation;
 import gov.gsa.Pages.FederalHierarchyObjectViewPage;
 import gov.gsa.Utilities.Base;
+import gov.gsa.Utilities.CommonUtils;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+
+import static gov.gsa.Utilities.CommonUtils.testLabelAndDataExists;
+import static gov.gsa.Utilities.CommonUtils.testLabelContains;
+import static org.junit.Assert.assertTrue;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class FHSubTierAgencyObjectViewTest extends FHObjectViewHelper {
@@ -31,6 +36,18 @@ public class FHSubTierAgencyObjectViewTest extends FHObjectViewHelper {
         }
     }
 
+    @Test
+    public void departmentLinkInAgencyObjectViewPageTest() throws InterruptedException{
+        CommonUtils.DataField department = FederalHierarchyObjectViewPage.departmentLinkInAgencyObjectView();
+        testLabelAndDataExists(department);
+        testLabelContains(department, "DEPARTMENT");
+    }
+
+    @Test
+    public void officesSectionTitleTest() throws InterruptedException{
+        assertTrue("Offices Section Title is missing in FH Object View page",FederalHierarchyObjectViewPage.subTierAgencyOrOfficeSection().contains("Offices"));
+        System.out.println("Offices Title is Present ");
+    }
 
     @AfterClass
     public static void end(){
