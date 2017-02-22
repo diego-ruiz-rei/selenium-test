@@ -17,11 +17,13 @@ import org.junit.runners.Suite;
         SearchTest.class,
         FederalHierarchySearchTest.class,
         EntitiesSearchTest.class,
+        ExclusionsSearchTest.class,
+        WageDeterminationSearchTest.class,
         FACObjectViewTest.class,
         OpportunitiesObjectViewTest.class,
         OpportunitiesPackagesTest.class,
-        WageDeterminationSearchTest.class,
-        ExclusionsSearchTest.class
+        FHDepartmentObjectViewTest.class,
+        FHSubTierAgencyObjectViewTest.class
         })
 public class allSmokeTests extends Base{
 }
