@@ -29,63 +29,70 @@ import static org.junit.Assert.*;
 
 
 
-public class FHObjectViewHelper {
+public class FHObjectViewHelper extends Base{
 
+    @Test
     public void fhTitle() throws InterruptedException{
         assertTrue(FederalHierarchyObjectViewPage.fhTitle());
         System.out.println("Title is Present in the FH Object View page");
     }
 
-
+    @Test
     public void fhlogo(){
         assertTrue(FederalHierarchyObjectViewPage.logo());
         System.out.println("Logo is Present in the FH Object View page");
     }
 
-
+    @Test
     public void fpdsOrgId() throws InterruptedException {
         CommonUtils.DataField fpds_org_id = FederalHierarchyObjectViewPage.fpdsOrgID();
         testLabelAndDataExists(fpds_org_id);
         testLabelContains(fpds_org_id, "FPDS Org ID");
     }
 
+    @Test
     public void status() throws InterruptedException {
         CommonUtils.DataField status = FederalHierarchyObjectViewPage.status();
         testLabelContains(status, "Status Active");
     }
 
+    @Test
     public void fhDescription() throws InterruptedException{
         assertTrue("Description is missing in FH Object View page",FederalHierarchyObjectViewPage.description());
         System.out.println("Description is Present in the FH Object View page");
     }
 
-
+    @Test
     public void subTierAgenciesSectionTitle() throws InterruptedException{
         assertTrue("Sub Tier Agencies Section Title is missing in FH Object View page",FederalHierarchyObjectViewPage.subTierAgencyOrOfficeSection().contains("Sub-Tier Agencies"));
         System.out.println("Sub-Tier Agencies Title is Present ");
     }
 
+    @Test
     public void officesSectionTitle() throws InterruptedException{
         assertTrue("Offices Section Title is missing in FH Object View page",FederalHierarchyObjectViewPage.subTierAgencyOrOfficeSection().contains("Offices"));
         System.out.println("Offices Title is Present ");
     }
 
+    @Test
     public void noOfResults() throws InterruptedException{
         assertTrue("Number of results is missing in FH Object View page",FederalHierarchyObjectViewPage.noOfResults().contains("1 - 10"));
         System.out.println("Number of Results are displayed");
     }
 
+    @Test
     public void listOfSubTierAgencies() throws InterruptedException{
         assertTrue("List of Sub Tier Agencies does not exist",FederalHierarchyObjectViewPage.listOfSubTier());
         System.out.println("SubTier Agencies are listed in the FH Object View page");
     }
 
+    @Test
     public void pagination() throws InterruptedException{
         assertTrue("Pagination does not exist",FederalHierarchyObjectViewPage.pagination());
         System.out.println("Pagination is present in the FH Object View page");
     }
 
-
+    @Test
     public void departmentLinkInAgencyObjectViewPage() throws InterruptedException{
         CommonUtils.DataField department = FederalHierarchyObjectViewPage.departmentLinkInAgencyObjectView();
         testLabelAndDataExists(department);

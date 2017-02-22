@@ -31,51 +31,6 @@ public class FHSubTierAgencyObjectViewTest extends FHObjectViewHelper {
         }
     }
 
-    @Test
-    public void fhTitleTest() throws InterruptedException{
-        fhTitle();
-    }
-
-    @Test
-    public void fhlogoTest(){
-        fhlogo();
-    }
-
-    @Test
-    public void fpdsOrgIdTest() throws InterruptedException {
-        fpdsOrgId();
-    }
-
-    @Test
-    public void statusTest() throws InterruptedException {
-        status();
-    }
-
-    @Test
-    public void officesSectionTitleTest() throws InterruptedException{
-        officesSectionTitle();
-    }
-
-    @Test
-    public void noOfOfficesResultsTest() throws InterruptedException{
-        noOfResults();
-    }
-
-    @Test
-    public void listOfSubTierAgenciesTest() throws InterruptedException{
-        listOfSubTierAgencies();
-    }
-
-    @Test
-    public void paginationTest() throws InterruptedException{
-        pagination();
-    }
-
-    @Test
-    public void departmentLinkTest() throws InterruptedException{
-        departmentLinkInAgencyObjectViewPage();
-    }
-
 
     @AfterClass
     public static void end(){

@@ -23,51 +23,7 @@ public class FHDepartmentObjectViewTest extends FHObjectViewHelper {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
 
-    @Test
-    public void fhTitleTest() throws InterruptedException{
-        fhTitle();
-    }
-
-    @Test
-    public void fhlogoTest(){
-        fhlogo();
-    }
-
-    @Test
-    public void fpdsOrgIdTest() throws InterruptedException {
-        fpdsOrgId();
-    }
-
-    @Test
-    public void statusTest() throws InterruptedException {
-        status();
-    }
-
-    @Test
-    public void fhDescriptionTest() throws InterruptedException{
-        fhDescription();
-    }
-
-    @Test
-    public void subTierAgenciesSectionTitleTest() throws InterruptedException{
-        subTierAgenciesSectionTitle();
-    }
-
-    @Test
-    public void noOfSubTierResultsTest() throws InterruptedException{
-        noOfResults();
-    }
-
-    @Test
-    public void listOfSubTierAgenciesTest() throws InterruptedException{
-        listOfSubTierAgencies();
-    }
-
-    @Test
-    public void paginationTest() throws InterruptedException{
-        pagination();
     }
 
     /*@Test
