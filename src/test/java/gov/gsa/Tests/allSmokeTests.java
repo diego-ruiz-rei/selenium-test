@@ -22,6 +22,7 @@ import org.junit.runners.Suite;
         FACObjectViewTest.class,
         OpportunitiesObjectViewTest.class,
         OpportunitiesPackagesTest.class,
+        OpportunitiesModificationCancelTest.class,
         FHDepartmentObjectViewTest.class,
         FHSubTierAgencyObjectViewTest.class
         })

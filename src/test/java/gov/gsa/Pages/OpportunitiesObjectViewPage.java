@@ -29,6 +29,7 @@ public class OpportunitiesObjectViewPage extends ObjectView {
     private static DataField splitLabelAndData(String element) {
         String fieldLabel = element.substring(0, element.indexOf(':')).trim(); // get all up to but not including colon
         String fieldData = element.substring(element.indexOf(':') + 1).trim(); // get all after and not including colon
+       // System.out.println("**Label "+fieldLabel+"**Data "+fieldData);
 
         return new DataField(null, fieldLabel, fieldData);
     }
@@ -157,6 +158,24 @@ public class OpportunitiesObjectViewPage extends ObjectView {
         }
         return ar;
     }
+
+    //Updated/Amendment Opportunity
+    //Check Opportunity Type
+    public static DataField opportunityType() {
+        String oppType = "";
+        List<WebElement> oppTypeElements = Base.driver.findElements(By.id("opportunity-general-type"));
+        if(oppTypeElements.size() > 0) {
+            for (WebElement oppTypeElement : oppTypeElements) {
+                oppType = oppTypeElement.getText();
+            }
+            return splitLabelAndData(oppType).setName("Opportunity Type");
+        }
+        else
+        {
+            return new DataField("Opportunity Type",null,null);
+        }
+    }
+
 
     //OPPORTUNITY PACKAGES
     //Packages - Expand Link
