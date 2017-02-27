@@ -24,9 +24,9 @@ public class EntitiesSearchTest extends Base{
 
     //Test Data
     public String index = "Entities";
-    public String inactive_searchTerm = "ANESHIA Y. SMITH INSTITUTE FOR WOMEN AND GIRLS, INC.";
+    public String inactive_searchTerm = "ANAIAH INSTITUTE FOR RESEARCH MEASUREMENT AND STATISTICAL SOLUTIONS";
     public String active_searchTerm = "SMITH COUNTY EMERGENCY SHELTER FOR WOMEN AND CHILDREN, INC.";
-    public String autocomplete_searchTerm = "res";
+    public String autocomplete_searchTerm = "RESEARCH FOUNDATION, THE";
     public String exact_searchTerm = "\"WATERSWORX, LLC\"";
     public String duns_searchTerm = "\"079756806\"";
 
@@ -47,7 +47,7 @@ public class EntitiesSearchTest extends Base{
     // Entities Inactive Tag
     @Test
     public void entitiesInactiveTagTest() throws InterruptedException {
-        SearchNavigation.gotoSearchResultsPage(index,inactive_searchTerm);
+        SearchNavigation.gotoIsActiveFalseSearch(index,inactive_searchTerm);
         assertEquals("Entities Inactive Tag does not Exist",EntitiesSearchResultsPage.entitiesInactiveTag(),"INACTIVE");
         System.out.println("Entities Inactive Tag is Present");
     }
@@ -102,11 +102,10 @@ public class EntitiesSearchTest extends Base{
 
     // Test Autocomplete
     @Test
-    public void autocompleteTest() throws InterruptedException{
-        SearchNavigation.gotoAutoComplete(index,autocomplete_searchTerm);
-        assertTrue(EntitiesSearchResultsPage.autocompleteExists());
-        System.out.println("AutoComplete present");
+    public void autoCompleteTest() throws InterruptedException {
+        assertTrue(CommonUtils.autoCompleteExists(index,autocomplete_searchTerm));
     }
+
 
     //Pagination test
     @Test

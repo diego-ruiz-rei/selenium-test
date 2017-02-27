@@ -1,12 +1,12 @@
 package gov.gsa.Tests;
 
-import gov.gsa.Navigation.ExclusionsSearchNavigation;
-import gov.gsa.Navigation.WageDeterminationSearchNavigation;
-import gov.gsa.Pages.ExclusionsSearchPage;
+import gov.gsa.Navigation.SearchNavigation;
 import gov.gsa.Pages.ExclusionsSearchPage;
 import gov.gsa.Utilities.Base;
 import gov.gsa.Utilities.CommonUtils;
 import gov.gsa.Utilities.CommonUtils.DataField;
+import static gov.gsa.Utilities.CommonUtils.*;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -26,9 +26,15 @@ import static org.junit.Assert.assertTrue;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ExclusionsSearchTest extends Base {
 
+    //Test Data
+    public String index = "Exclusions";
+    public String active_searchTerm = "BOB METGUD";
+    public String autocomplete_searchTerm = "melissa dawn ferrell";
+    public String exact_searchTerm = "\"CENTURY METALS INC.\"";
+    public String valid_Termination_Date = "\"GIANT LABOR SOLUTIONS LLC\"";
+    public String indefinite_Termination_Date = "\"JANE ANN BAILEY\"";
 
     // Any variables needed here
-
     @BeforeClass
     public static void start() throws InterruptedException {
         setUp();
@@ -37,79 +43,91 @@ public class ExclusionsSearchTest extends Base {
     // empty search - tests wd tag shows up above results and that pagination is greater than 1
     @Test
     public void emptySearchTest() throws InterruptedException {
-        ExclusionsSearchNavigation.gotoObjectView(" ");
+        SearchNavigation.gotoSearchResultsPage(index, " ");
         System.out.println(ExclusionsSearchPage.exTag());
         assertEquals(ExclusionsSearchPage.exTag(), "EXCLUSION");
         System.out.println("Exclusion tag exists");
+    }
 
-        // checking pagination is greater than 0
+
+    // checking pagination is greater than 0
+    @Test
+    public void paginationTest() throws InterruptedException {
+        SearchNavigation.gotoSearchResultsPage(index, " ");
         System.out.println(ExclusionsSearchPage.exResultPageCount());
-        assertTrue("pagination is greater than 1", ExclusionsSearchPage.exResultPageCount() > 1);
-        System.out.println("search results exists");
+        assertTrue("Pagination does not Exist", ExclusionsSearchPage.exResultPageCount() > 1);
+        System.out.println("Search results and Pagination exists");
     }
 
     // keyword search - tests if search string exists in the title
     @Test
     public void keywordSearchTest() throws InterruptedException {
-        ExclusionsSearchNavigation.gotoObjectView("BOB METGUD");
+        SearchNavigation.gotoSearchResultsPage(index,active_searchTerm);
         System.out.println(ExclusionsSearchPage.exTitle());
-        assertEquals(ExclusionsSearchPage.exTitle(), "BOB METGUD");
+        assertEquals(ExclusionsSearchPage.exTitle(), active_searchTerm);
     }
 
     // auto complete - tests if autocomplete exists
     @Test
     public void autoCompleteTest() throws InterruptedException {
-        assertTrue(CommonUtils.autoCompleteExists("melissa dawn ferrell"));
+        assertTrue(CommonUtils.autoCompleteExists(index,autocomplete_searchTerm));
     }
 
     // test common fields exist in search results
     @Test
-    public void searchFieldsExistTest() throws InterruptedException {
-        ExclusionsSearchNavigation.gotoObjectView("CENTURY METALS INC.");
-
-        // gather field data into variables here
+    public void exDunsNumberTest() throws InterruptedException {
+        SearchNavigation.gotoSearchResultsPage(index, exact_searchTerm);
         DataField exDuns = ExclusionsSearchPage.exDuns();
-        DataField exCageCode = ExclusionsSearchPage.exCageCode();
-        DataField exAddress = ExclusionsSearchPage.exAddress();
-        DataField exClassification = ExclusionsSearchPage.exClassification();
-        DataField exActivationDate = ExclusionsSearchPage.exActivationDate();
-        DataField exTerminationDate = ExclusionsSearchPage.exTerminationDate();
-
-        // checking if field label and data exist for the following fields
-        CommonUtils.testLabelAndDataExists(exDuns, true);
-        CommonUtils.testLabelAndDataExists(exCageCode, true);
-        CommonUtils.testLabelAndDataExists(exAddress, true);
-        CommonUtils.testLabelAndDataExists(exClassification, true);
-        CommonUtils.testLabelAndDataExists(exActivationDate, true);
-        CommonUtils.testLabelAndDataExists(exTerminationDate, true);
+        testLabelAndDataExists(exDuns);
+        testLabelContains(exDuns, "DUNS");
     }
 
-    // test DBA common fields text results
+
     @Test
-    public void searchFieldsTextTest() throws InterruptedException {
-        ExclusionsSearchNavigation.gotoObjectView("CENTURY METALS INC.");
-
-        // gather field data into variables here
-        DataField exDuns = ExclusionsSearchPage.exDuns();
+    public void exCageCodeTest() throws InterruptedException {
+        SearchNavigation.gotoSearchResultsPage(index, exact_searchTerm);
         DataField exCageCode = ExclusionsSearchPage.exCageCode();
-        DataField exAddress = ExclusionsSearchPage.exAddress();
-        DataField exClassification = ExclusionsSearchPage.exClassification();
-        DataField exActivationDate = ExclusionsSearchPage.exActivationDate();
-        DataField exTerminationDate = ExclusionsSearchPage.exTerminationDate();
-
-        // checking if field label and data exist for the following fields
-        CommonUtils.testDataContains(exDuns, "070376092");
-        CommonUtils.testDataContains(exCageCode, "6HXG7");
-        CommonUtils.testDataContains(exAddress, "27924 SE 268TH ST, RAVENSDALE, WA 980518814");
-        CommonUtils.testDataContains(exClassification, "Firm");
-        CommonUtils.testDataContains(exActivationDate, "May 21, 2012");
-        CommonUtils.testDataContains(exTerminationDate, "Apr 2, 2022");
+        testLabelAndDataExists(exCageCode);
+        testLabelContains(exCageCode, "CAGE Code");
     }
+
+    @Test
+    public void exAddressTest() throws InterruptedException {
+        SearchNavigation.gotoSearchResultsPage(index, exact_searchTerm);
+        DataField exAddress = ExclusionsSearchPage.exAddress();
+        testLabelAndDataExists(exAddress);
+        testLabelContains(exAddress, "Address");
+    }
+
+    @Test
+    public void exClassificationTest() throws InterruptedException {
+        SearchNavigation.gotoSearchResultsPage(index, exact_searchTerm);
+        DataField exClassification = ExclusionsSearchPage.exClassification();
+        testLabelAndDataExists(exClassification);
+        testLabelContains(exClassification, "Classification");
+    }
+
+    @Test
+    public void exActivationDateTest() throws InterruptedException {
+        SearchNavigation.gotoSearchResultsPage(index, exact_searchTerm);
+        DataField exActivationDate = ExclusionsSearchPage.exActivationDate();
+        testLabelAndDataExists(exActivationDate);
+        testLabelContains(exActivationDate, "Activation Date");
+    }
+
+    @Test
+    public void exTerminationDateTest() throws InterruptedException {
+        SearchNavigation.gotoSearchResultsPage(index, exact_searchTerm);
+        DataField exTerminationDate = ExclusionsSearchPage.exTerminationDate();
+        testLabelAndDataExists(exTerminationDate);
+        testLabelContains(exTerminationDate, "Termination Date");
+    }
+
 
     // test that we are able to parse the termination date displayed
-    @Test
+    //@Test
     public void checkDateFormat() throws InterruptedException {
-        ExclusionsSearchNavigation.gotoObjectView("GIANT LABOR SOLUTIONS LLC");
+        SearchNavigation.gotoSearchResultsPage(index,valid_Termination_Date);
 
         // date format I want to compare against our date
         DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
@@ -121,14 +139,13 @@ public class ExclusionsSearchTest extends Base {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
         assertTrue(date != null);
     }
 
     // test if this record displays indefinite for termination date
     @Test
     public void checkDateIndefinite() throws InterruptedException {
-        ExclusionsSearchNavigation.gotoObjectView("JANE ANN BAILEY");
+        SearchNavigation.gotoSearchResultsPage(index,indefinite_Termination_Date);
         System.out.println(ExclusionsSearchPage.exTerminationDate());
         CommonUtils.testDataContains(ExclusionsSearchPage.exTerminationDate(), "Indefinite");
     }

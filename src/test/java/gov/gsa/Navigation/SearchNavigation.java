@@ -27,4 +27,16 @@ public class SearchNavigation{
         Base.driver.findElement(By.cssSelector(".search-inputbar")).sendKeys(searchTerm);
         Thread.sleep(2000);
     }
+
+    public static void gotoIsActiveFalseSearch(String index,String searchTerm) throws InterruptedException {
+        Base.driver.findElement(By.cssSelector(".search-inputbar")).clear();
+        Thread.sleep(2000);
+        new Select(Base.driver.findElement(By.id("filter"))).selectByVisibleText(index);
+        Base.driver.findElement(By.cssSelector(".search-inputbar")).sendKeys(searchTerm);
+        Thread.sleep(2000);
+        Base.driver.findElement(By.cssSelector(".search-btn")).click();
+        if(Base.driver.findElement(By.id("checkbox-active")).isSelected())
+            Base.driver.findElement(By.id("checkbox-active")).click();
+        Thread.sleep(2000);
+    }
 }

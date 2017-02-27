@@ -3,6 +3,7 @@ package gov.gsa.Utilities;
 import gov.gsa.Navigation.FederalHierarchySearchNavigation;
 import gov.gsa.Navigation.SearchNavigation;
 import gov.gsa.Pages.FederalHierarchySearchPage;
+import gov.gsa.Pages.SearchPage;
 import gov.gsa.Pages.WageDeterminationSearchPage;
 import org.openqa.selenium.By;
 
@@ -119,9 +120,9 @@ public class CommonUtils {
 
     // test autocomplete generic function - checks if first item in autocomplete matches string provided as a parameter
     // example of how to implement -> assertTrue(CommonUtils.autoCompleteExists("AR20160001"));
-    public static boolean autoCompleteExists(String searchText) throws InterruptedException {
+    public static boolean autoCompleteExists(String index,String searchText) throws InterruptedException {
         // takes actions to open auto-complete window
-        FederalHierarchySearchNavigation.gotoAutoComplete(searchText);
+        SearchNavigation.gotoAutoComplete(index,searchText);
         // this just returns a bool value of if autocomplete window shows up or not
         return autoCompleteSearchMatch(searchText);
     }
@@ -129,8 +130,7 @@ public class CommonUtils {
     // test autocomplete helper function
     public static boolean autoCompleteSearchMatch(String searchText){
 
-        String firstAutoCompleteItem = WageDeterminationSearchPage.autoCompleteFirstItem();
-
+        String firstAutoCompleteItem = SearchPage.autoCompleteFirstItem();
         System.out.println("expected data: " + searchText + " captured data: " + firstAutoCompleteItem);
 
         if(firstAutoCompleteItem.equals(searchText)){

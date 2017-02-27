@@ -67,10 +67,7 @@ public class WageDeterminationSearchPage extends ObjectView {
         return new DataField("date field", label, data);
     }
 
-    // grab first item from autocomplete window
-    public static String autoCompleteFirstItem(){
-        return Base.driver.findElement(By.cssSelector("ul.usa-search-autocomplete > li")).getText();
-    }
+
 
 
 
