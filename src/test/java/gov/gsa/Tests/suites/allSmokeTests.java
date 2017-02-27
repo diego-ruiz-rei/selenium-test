@@ -1,9 +1,21 @@
-package gov.gsa.Tests;
+package gov.gsa.Tests.suites;
 
 /**
  * Created by michael.kellogg on 12/6/16.
  */
 
+import gov.gsa.Tests.home.FACObjectViewTest;
+import gov.gsa.Tests.home.HomepageTest;
+import gov.gsa.Tests.home.SearchTest;
+import gov.gsa.Tests.entities.EntitiesSearchTest;
+import gov.gsa.Tests.exclusions.ExclusionsSearchTest;
+import gov.gsa.Tests.federalHierarchy.FHDepartmentObjectViewTest;
+import gov.gsa.Tests.federalHierarchy.FHSubTierAgencyObjectViewTest;
+import gov.gsa.Tests.federalHierarchy.FederalHierarchySearchTest;
+import gov.gsa.Tests.opportunities.OpportunitiesModificationCancelTest;
+import gov.gsa.Tests.opportunities.OpportunitiesObjectViewTest;
+import gov.gsa.Tests.opportunities.OpportunitiesPackagesTest;
+import gov.gsa.Tests.wageDeterminations.WageDeterminationSearchTest;
 import gov.gsa.Utilities.Base;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

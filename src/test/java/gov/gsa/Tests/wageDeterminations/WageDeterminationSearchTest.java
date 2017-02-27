@@ -1,4 +1,4 @@
-package gov.gsa.Tests;
+package gov.gsa.Tests.wageDeterminations;
 
 import gov.gsa.Navigation.WageDeterminationSearchNavigation;
 import gov.gsa.Pages.FederalHierarchySearchPage;

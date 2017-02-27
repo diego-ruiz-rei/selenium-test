@@ -1,4 +1,4 @@
-package gov.gsa.Tests;
+package gov.gsa.Tests.home;
 
 import gov.gsa.Navigation.FACObjectViewNavigation;
 import gov.gsa.Pages.FACObjectViewPage;

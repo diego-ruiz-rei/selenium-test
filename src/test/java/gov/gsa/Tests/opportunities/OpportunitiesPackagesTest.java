@@ -1,4 +1,4 @@
-package gov.gsa.Tests;
+package gov.gsa.Tests.opportunities;
 
 import gov.gsa.Navigation.OpportunitiesObjectViewNavigation;
 import gov.gsa.Pages.OpportunitiesObjectViewPage;

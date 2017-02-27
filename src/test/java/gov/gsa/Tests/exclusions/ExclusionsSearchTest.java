@@ -1,4 +1,4 @@
-package gov.gsa.Tests;
+package gov.gsa.Tests.exclusions;
 
 import gov.gsa.Navigation.ExclusionsSearchNavigation;
 import gov.gsa.Navigation.WageDeterminationSearchNavigation;

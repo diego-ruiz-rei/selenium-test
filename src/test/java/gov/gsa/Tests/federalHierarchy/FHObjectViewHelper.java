@@ -1,4 +1,4 @@
-package gov.gsa.Tests;
+package gov.gsa.Tests.federalHierarchy;
 
 import gov.gsa.Navigation.FederalHierarchyObjectViewNavigation;
 import gov.gsa.Navigation.FederalHierarchySearchNavigation;
