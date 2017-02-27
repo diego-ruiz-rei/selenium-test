@@ -4,7 +4,7 @@ package gov.gsa.Tests.suites;
  * Created by michael.kellogg on 12/6/16.
  */
 
-import gov.gsa.Tests.home.FACObjectViewTest;
+import gov.gsa.Tests.assistanceListings.AssistanceListingObjectViewTest;
 import gov.gsa.Tests.home.HomepageTest;
 import gov.gsa.Tests.home.SearchTest;
 import gov.gsa.Tests.entities.EntitiesSearchTest;
@@ -31,7 +31,7 @@ import org.junit.runners.Suite;
         EntitiesSearchTest.class,
         ExclusionsSearchTest.class,
         WageDeterminationSearchTest.class,
-        FACObjectViewTest.class,
+        AssistanceListingObjectViewTest.class,
         OpportunitiesObjectViewTest.class,
         OpportunitiesPackagesTest.class,
         OpportunitiesModificationCancelTest.class,

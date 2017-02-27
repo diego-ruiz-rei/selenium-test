@@ -1,4 +1,4 @@
-package gov.gsa.Tests.home;
+package gov.gsa.Tests.assistanceListings;
 
 import gov.gsa.Navigation.FACObjectViewNavigation;
 import gov.gsa.Pages.FACObjectViewPage;
@@ -18,7 +18,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class FACObjectViewTest extends Base{
+public class AssistanceListingObjectViewTest extends Base{
 
     @BeforeClass
     public static void start() throws InterruptedException {
