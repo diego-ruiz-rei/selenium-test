@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import javax.net.ssl.HttpsURLConnection;
+import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -66,9 +67,9 @@ public class OpportunitiesObjectViewPage extends ObjectView {
         return splitLabelAndData(originalPosted).setName("Original Posted Date");
     }
 
-    public static DataField responseDate() {
-        String responseDate = Base.driver.findElement(By.id("opportunity-general-response-date")).getText();
-        return splitLabelAndData(responseDate).setName("Response Date");
+    public static DataField updatedPostedDate(){
+        String updatedPostedDate = Base.driver.findElement(By.id("opportunity-general-posted-date")).getText();
+        return splitLabelAndData(updatedPostedDate).setName("Update/Amendment Posted Date");
     }
 
     public static DataField originalResponse() {
@@ -76,15 +77,30 @@ public class OpportunitiesObjectViewPage extends ObjectView {
         return splitLabelAndData(originalResponse).setName("Original Response Date");
     }
 
+    public static DataField updatedResponseDate(){
+        String updatedResponseDate = Base.driver.findElement(By.id("opportunity-general-response-date")).getText();
+        return splitLabelAndData(updatedResponseDate).setName("Update/Amendment Response Date");
+    }
+
     public static DataField archivingPolicy() {
         String archivingPolicy = Base.driver.findElement(By.id("opportunity-general-archiving-policy")).getText();
         return splitLabelAndData(archivingPolicy).setName("Archiving Policy");
+    }
+
+    public static DataField updatedArchiveDate(){
+        String updatedArchiveDate = Base.driver.findElement(By.id("opportunity-general-archive-date")).getText();
+        return splitLabelAndData(updatedArchiveDate).setName("Update/Amendment Archive Date");
     }
 
     //Classification Section
     public static DataField originalSetAside() {
         String originalSetAside = Base.driver.findElement(By.id("opportunity-classification-original-set-aside")).getText();
         return splitLabelAndData(originalSetAside).setName("Original Set Aside");
+    }
+
+    public static DataField updatedSetAside() {
+        String updatedSetAside = Base.driver.findElement(By.id("opportunity-classification-set-aside")).getText();
+        return splitLabelAndData(updatedSetAside).setName("Update/Amendment Set Aside");
     }
 
     public static DataField classificationCode() {

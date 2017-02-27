@@ -75,7 +75,7 @@ public class OpportunitiesObjectViewTest extends Base {
                 	"Contractor Awarded Name", "Contractor Awarded DUNS", "Contractor Awarded Address", "Fair Opportunity"}
                 }},//Justification and Approval
                 {new String[][]{{"AAA-AAA-11-1118"},{"a"},
-                	{"Task Order Number", "Response Date", "J&A Statutory Authority", "Fair Opportunity", "Modification Number", 
+                	{"Task Order Number", "J&A Statutory Authority", "Fair Opportunity", "Modification Number",
                 	"Place of Performance","Description of Benefits"}
                 }},//Award
                 {new String[][]{{"AAA-AAA-11-1119"},{"l"},
@@ -96,12 +96,12 @@ public class OpportunitiesObjectViewTest extends Base {
 	    			{"Contract Award Dollar Amount","Contract Award Date","Contract Award Number", "Task Order Number", "Contract Line Item Number", 
                   	"Contractor Awarded Name", "Contractor Awarded DUNS", "Contractor Awarded Address", "J&A Statutory Authority", "Fair Opportunity",
                   	"Modification Number", "Description of Benefits" ,"Original Posted Date" , "Original Response Date" , "Special Legislation" ,
-                    "Original Archive Date" , "Original Set Aside" , "Set Aside" , "Place of Performance" , "Secondary Point of Contact"}
+                    "Original Archive Date" , "Original Set Aside" , "Place of Performance" , "Secondary Point of Contact"}
 	    		}},
 	    	/*    {new String[][]{{"F4FRQT3091A007"},{"k"},
 	    	    	{"Contract Award Dollar Amount","Contract Award Date","Contract Award Number", "Task Order Number", "Contract Line Item Number", 
                 	"Contractor Awarded Name", "Contractor Awarded DUNS", "Contractor Awarded Address", "J&A Statutory Authority", "Fair Opportunity",
-                	"Modification Number", "Description of Benefits" , "Archive Date" , "Special Legislation" , "Set Aside" , "Original Set Aside",
+                	"Modification Number", "Description of Benefits" , "Special Legislation" , "Set Aside" , "Original Set Aside",
                     "Secondary Point of Contact"}
 	    	    }},
 	    	    {new String[][]{{"W912P6-16-T-0029"},{"f"},
@@ -188,33 +188,12 @@ public class OpportunitiesObjectViewTest extends Base {
         testLabelContains(opportunityType, "Opportunity Type");
     }
 
-    @Test
-    public void postedDateTest() {
-    	Assume.assumeFalse(ArrayUtils.contains(idAndType[2], "Posted Date"));
-        DataField postedDate = OpportunitiesObjectViewPage.postedDate();
-        testLabelAndDataExists(postedDate);
-        testLabelContains(postedDate, "Posted Date");
-    }
-
     //@Test
     public void originalPostedDateTest() {
     	Assume.assumeFalse(ArrayUtils.contains(idAndType[2], "Original Posted Date"));
         DataField originalPostedDate = OpportunitiesObjectViewPage.originalPosted();
         testLabelAndDataExists(originalPostedDate);
         testLabelContains(originalPostedDate, "Original Posted Date");
-    }
-
-    @Test
-    public void responseDateTest() {
-    	Assume.assumeFalse(ArrayUtils.contains(idAndType[2], "Response Date"));
-        if (!idAndType[1].equals("a")) {
-            DataField responseDate = OpportunitiesObjectViewPage.responseDate();
-            testLabelAndDataExists(responseDate);
-            testLabelContains(responseDate, "Response Date");
-        }
-        else {
-            System.out.println("Irrelevant Type");
-        }
     }
 
     //@Test
