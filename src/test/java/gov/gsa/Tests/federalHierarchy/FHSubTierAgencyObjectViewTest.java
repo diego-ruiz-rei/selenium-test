@@ -1,7 +1,8 @@
-package gov.gsa.Tests;
+package gov.gsa.Tests.federalHierarchy;
 
 import gov.gsa.Navigation.FederalHierarchyObjectViewNavigation;
 import gov.gsa.Pages.FederalHierarchyObjectViewPage;
+import gov.gsa.Tests.federalHierarchy.FHObjectViewHelper;
 import gov.gsa.Utilities.Base;
 import gov.gsa.Utilities.CommonUtils;
 import org.junit.AfterClass;

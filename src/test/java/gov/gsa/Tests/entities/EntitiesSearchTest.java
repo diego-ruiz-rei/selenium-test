@@ -1,4 +1,4 @@
-package gov.gsa.Tests;
+package gov.gsa.Tests.entities;
 
 import gov.gsa.Navigation.SearchNavigation;
 import gov.gsa.Pages.EntitiesSearchResultsPage;

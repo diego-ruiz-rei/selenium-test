@@ -1,4 +1,4 @@
-package gov.gsa.Tests;
+package gov.gsa.Tests.exclusions;
 
 import gov.gsa.Navigation.SearchNavigation;
 import gov.gsa.Pages.ExclusionsSearchPage;
