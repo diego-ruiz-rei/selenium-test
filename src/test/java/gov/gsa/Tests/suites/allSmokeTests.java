@@ -15,7 +15,8 @@ import gov.gsa.Tests.federalHierarchy.FederalHierarchySearchTest;
 import gov.gsa.Tests.opportunities.OpportunitiesModificationCancelTest;
 import gov.gsa.Tests.opportunities.OpportunitiesObjectViewTest;
 import gov.gsa.Tests.opportunities.OpportunitiesPackagesTest;
-import gov.gsa.Tests.wageDeterminations.WageDeterminationSearchTest;
+import gov.gsa.Tests.wageDeterminations.WDDBASearchTest;
+import gov.gsa.Tests.wageDeterminations.WDSCASearchTest;
 import gov.gsa.Utilities.Base;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -30,7 +31,8 @@ import org.junit.runners.Suite;
         FederalHierarchySearchTest.class,
         EntitiesSearchTest.class,
         ExclusionsSearchTest.class,
-        WageDeterminationSearchTest.class,
+        WDDBASearchTest.class,
+        WDSCASearchTest.class,
         FACObjectViewTest.class,
         OpportunitiesObjectViewTest.class,
         OpportunitiesPackagesTest.class,

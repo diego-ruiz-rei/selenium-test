@@ -18,6 +18,9 @@ public class SearchNavigation{
         new Select(Base.driver.findElement(By.id("filter"))).selectByVisibleText(index);
         Base.driver.findElement(By.cssSelector(".search-btn")).click();
         Thread.sleep(2000);
+        if(!Base.driver.findElement(By.id("checkbox-active")).isSelected())
+            Base.driver.findElement(By.id("checkbox-active")).click();
+        Thread.sleep(2000);
     }
 
     public static void gotoAutoComplete(String index,String searchTerm) throws InterruptedException {
