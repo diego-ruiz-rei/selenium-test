@@ -1,14 +1,19 @@
 package gov.gsa.Tests.federalHierarchy;
 
 import gov.gsa.Navigation.FederalHierarchySearchNavigation;
+import gov.gsa.Navigation.SearchNavigation;
 import gov.gsa.Pages.FederalHierarchySearchPage;
 import gov.gsa.Utilities.Base;
+import gov.gsa.Utilities.CommonUtils;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import static gov.gsa.Utilities.CommonUtils.testDataExists;
+import static gov.gsa.Utilities.CommonUtils.testLabelAndDataExists;
+import static gov.gsa.Utilities.CommonUtils.testLabelContains;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -16,6 +21,13 @@ import static org.junit.Assert.assertTrue;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class FederalHierarchySearchTest extends Base {
 
+    //Test Data
+    public String index = "Federal Hierarchy";
+    public String inactive_searchTerm = "";
+    public String fh_searchTerm = "agriculture, department of";
+    public String autocomplete_searchTerm = "federal emergency management agency";
+    public String featured_result_searchTerm = "FEDERAL BUREAU OF INVESTIGATION";
+    public String duns_searchTerm = "";
 
     // Any variables needed here
 
@@ -27,7 +39,7 @@ public class FederalHierarchySearchTest extends Base {
     // empty search
     @Test
     public void emptySearchTestTag() throws InterruptedException {
-        FederalHierarchySearchNavigation.gotoFhObjectView("");
+        SearchNavigation.gotoSearchResultsPage(index,"");
         System.out.println(FederalHierarchySearchPage.fhTag());
         assertEquals(FederalHierarchySearchPage.fhTag(), "FEDERAL HIERARCHY");
         System.out.println("Federal Hierarchy tag exists");
@@ -36,7 +48,7 @@ public class FederalHierarchySearchTest extends Base {
     // empty search checks for more than 1 page
     @Test
     public void emptySearchTestPagination() throws InterruptedException {
-        FederalHierarchySearchNavigation.gotoFhObjectView("");
+        SearchNavigation.gotoSearchResultsPage(index,"");
         System.out.println(FederalHierarchySearchPage.fhResultPageCount());
         assertTrue("fh results are greater than one page", FederalHierarchySearchPage.fhResultPageCount() > 1);
         System.out.println("fh results are greater than 1 page");
@@ -45,7 +57,7 @@ public class FederalHierarchySearchTest extends Base {
     // uses search term
     @Test
     public void testSearchTerm() throws InterruptedException {
-        FederalHierarchySearchNavigation.gotoFhObjectView("agriculture, department of");
+        SearchNavigation.gotoSearchResultsPage(index,fh_searchTerm);
         System.out.println(FederalHierarchySearchPage.fhTag());
         assertEquals(FederalHierarchySearchPage.fhTag(), "FEDERAL HIERARCHY");
         System.out.println("Federal Hierarchy tag exists");
@@ -54,45 +66,49 @@ public class FederalHierarchySearchTest extends Base {
     // checks to see if first search item has the search keywords
     @Test
     public void testSearchTermTitle() throws InterruptedException {
-        //FederalHierarchySearchNavigation.gotoFhObjectView("agriculture, department of");
+        SearchNavigation.gotoSearchResultsPage(index,fh_searchTerm);
         System.out.println(FederalHierarchySearchPage.firstResultTitle());
-        assertEquals(FederalHierarchySearchPage.firstResultTitle(), "AGRICULTURE, DEPARTMENT OF");
+        assertTrue(FederalHierarchySearchPage.firstResultTitle().equalsIgnoreCase(fh_searchTerm));
         System.out.println("First Search Item Is Correct");
     }
 
     // checking if autocomplete window exists
     @Test
-    public void testAutocomplete() throws InterruptedException{
-        FederalHierarchySearchNavigation.gotoAutoComplete("dep");
-        assertTrue(FederalHierarchySearchPage.autocompleteExists());
-        System.out.println("AutoComplete present");
+    public void autoCompleteTest() throws InterruptedException {
+        assertTrue(CommonUtils.autoCompleteExists(index,autocomplete_searchTerm));
     }
 
 
     // checks to see if featured search returned title that was searched for
     @Test
     public void testFeaturedResultTitle() throws InterruptedException {
-        FederalHierarchySearchNavigation.gotoFhObjectView("FEDERAL BUREAU OF INVESTIGATION");
+        SearchNavigation.gotoSearchResultsPage(index,featured_result_searchTerm);
         System.out.println(FederalHierarchySearchPage.featuredResultTitle());
-        assertEquals(FederalHierarchySearchPage.featuredResultTitle(), "FEDERAL BUREAU OF INVESTIGATION");
+        assertEquals(FederalHierarchySearchPage.featuredResultTitle(), featured_result_searchTerm);
         System.out.println("Federal Hierarchy tag exists");
     }
 
     // checks if fields present in search result
     @Test
-    public void testFeaturedResultFields() throws InterruptedException {
-        FederalHierarchySearchNavigation.gotoFhObjectView("assistant administrator for enforcement");
-        System.out.println(FederalHierarchySearchPage.resultTitle());
+    public void featuredResultTitleTest() throws InterruptedException {
+        SearchNavigation.gotoSearchResultsPage(index, featured_result_searchTerm);
+        assertTrue(FederalHierarchySearchPage.resultTitle().length() > 0);
+        System.out.println("Result Title Exists");
+    }
+
+    @Test
+    public void featuredResultDescriptionTest() throws InterruptedException {
+        SearchNavigation.gotoSearchResultsPage(index, featured_result_searchTerm);
         System.out.println(FederalHierarchySearchPage.resultDescription());
+        assertTrue(FederalHierarchySearchPage.resultDescription().length() > 0);
+        System.out.println("Result Description Exists");
+    }
+
+/*
         System.out.println(FederalHierarchySearchPage.resultDepartment());
         System.out.println(FederalHierarchySearchPage.resultSubTier());
         System.out.println(FederalHierarchySearchPage.resultAlsoKnownAs());
 
-        assertTrue(FederalHierarchySearchPage.resultTitle().length() > 0);
-        System.out.println("Result Title Exists");
-
-        assertTrue(FederalHierarchySearchPage.resultDescription().length() > 0);
-        System.out.println("Result Description Exists");
 
         assertTrue(FederalHierarchySearchPage.resultDepartment().length() > 0);
         System.out.println("Result Department Exists");
@@ -103,8 +119,8 @@ public class FederalHierarchySearchTest extends Base {
         assertTrue(FederalHierarchySearchPage.resultAlsoKnownAs().length() > 0);
         System.out.println("Result Also Known As Exists");
     }
-
-    @Test
+*/
+    //@Test
     public void testFpdsOrgId() throws InterruptedException {
         FederalHierarchySearchNavigation.gotoFhObjectView("agriculture, department of");
         System.out.println(FederalHierarchySearchPage.organizationTypeCode());
@@ -119,7 +135,7 @@ public class FederalHierarchySearchTest extends Base {
 
     }
 
-    @Test
+    //@Test
     public void testFpdsCode() throws InterruptedException {
         FederalHierarchySearchNavigation.gotoFhObjectView("PENSION BENEFIT GUARANTY CORPORATION");
         System.out.println(FederalHierarchySearchPage.organizationTypeCode());

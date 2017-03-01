@@ -82,11 +82,11 @@ public class EntitiesSearchResultsPage extends Base{
     }
 
 
-    //TODO : Move it to common Search page
+    /*TODO : Move it to common Search page
     //Search AutoComplete
     public static Boolean autocompleteExists(){
         return Base.driver.findElements(By.cssSelector(".usa-search-autocomplete")).size() > 0;
-    }
+    }*/
 
     //Pagination count
     public static Integer resultsPageCount(){

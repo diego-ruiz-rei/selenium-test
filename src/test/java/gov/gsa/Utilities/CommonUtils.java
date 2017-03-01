@@ -133,7 +133,7 @@ public class CommonUtils {
         String firstAutoCompleteItem = SearchPage.autoCompleteFirstItem();
         System.out.println("expected data: " + searchText + " captured data: " + firstAutoCompleteItem);
 
-        if(firstAutoCompleteItem.equals(searchText)){
+        if(firstAutoCompleteItem.equalsIgnoreCase(searchText)){
             return true;
         }
         return false;

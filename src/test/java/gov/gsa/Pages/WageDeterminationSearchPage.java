@@ -10,7 +10,7 @@ import org.openqa.selenium.By;
  */
 public class WageDeterminationSearchPage extends ObjectView {
 
-    // finds the federal hierarchy tag above result items
+    // finds the wd tag above result items
     public static String wdTag() {
         return Base.driver.findElement(By.cssSelector(".search-page .usa-label")).getText();
     }
@@ -41,8 +41,9 @@ public class WageDeterminationSearchPage extends ObjectView {
 
     // grab county field
     public static DataField wdCounty(){
-        String label = Base.driver.findElement(By.cssSelector("div.usa-width-two-thirds > ul.m_T-3x > li:nth-of-type(2) > strong")).getText();
-        String data = Base.driver.findElement(By.cssSelector("div.usa-width-two-thirds > ul.m_T-3x > li:nth-of-type(2) > span")).getText();
+        String label = Base.driver.findElement(By.cssSelector("div.usa-width-two-thirds >  ul > li.break-word > strong")).getText();
+        String data_element = Base.driver.findElement(By.cssSelector("div.usa-width-two-thirds >  ul > li.break-word")).getText();
+        String data = data_element.substring(data_element.indexOf(':')+1).trim();
         return new DataField("county field", label, data);
     }
 
@@ -57,7 +58,14 @@ public class WageDeterminationSearchPage extends ObjectView {
     public static DataField wdConstructionType(){
         String label = Base.driver.findElement(By.cssSelector("div.usa-width-one-third > ul.m_B-0 > li:nth-of-type(2) > strong")).getText();
         String data = Base.driver.findElement(By.cssSelector("div.usa-width-one-third > ul.m_B-0 > li:nth-of-type(2) > ul > span")).getText();
-        return new DataField("construction type field", label, data);
+        return new DataField("Construction Type", label, data);
+    }
+
+    // grab SCA Service field
+    public static DataField wdService(){
+        String label = Base.driver.findElement(By.cssSelector("div.usa-width-one-third > ul.m_B-0 > li:nth-of-type(2) > strong")).getText();
+        String data = Base.driver.findElement(By.cssSelector("div.usa-width-one-third > ul.m_B-0 > li:nth-of-type(2) > ul > span")).getText();
+        return new DataField("Service", label, data);
     }
 
     // grab date field

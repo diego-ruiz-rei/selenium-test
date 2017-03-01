@@ -5,6 +5,7 @@ package gov.gsa.Tests.suites;
  */
 
 import gov.gsa.Tests.assistanceListings.AssistanceListingObjectViewTest;
+import gov.gsa.Tests.assistanceListings.AssistanceListingSearchTest;
 import gov.gsa.Tests.home.HomepageTest;
 import gov.gsa.Tests.home.SearchTest;
 import gov.gsa.Tests.entities.EntitiesSearchTest;
@@ -15,7 +16,8 @@ import gov.gsa.Tests.federalHierarchy.FederalHierarchySearchTest;
 import gov.gsa.Tests.opportunities.OpportunitiesModificationCancelTest;
 import gov.gsa.Tests.opportunities.OpportunitiesObjectViewTest;
 import gov.gsa.Tests.opportunities.OpportunitiesPackagesTest;
-import gov.gsa.Tests.wageDeterminations.WageDeterminationSearchTest;
+import gov.gsa.Tests.wageDeterminations.WDDBASearchTest;
+import gov.gsa.Tests.wageDeterminations.WDSCASearchTest;
 import gov.gsa.Utilities.Base;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -27,10 +29,12 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({HomepageTest.class,
         SearchTest.class,
+        AssistanceListingSearchTest.class,
         FederalHierarchySearchTest.class,
         EntitiesSearchTest.class,
         ExclusionsSearchTest.class,
-        WageDeterminationSearchTest.class,
+        WDDBASearchTest.class,
+        WDSCASearchTest.class,
         AssistanceListingObjectViewTest.class,
         OpportunitiesObjectViewTest.class,
         OpportunitiesPackagesTest.class,
