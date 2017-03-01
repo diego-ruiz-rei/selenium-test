@@ -5,6 +5,7 @@ package gov.gsa.Tests.suites;
  */
 
 import gov.gsa.Tests.assistanceListings.AssistanceListingObjectViewTest;
+import gov.gsa.Tests.assistanceListings.AssistanceListingSearchTest;
 import gov.gsa.Tests.home.HomepageTest;
 import gov.gsa.Tests.home.SearchTest;
 import gov.gsa.Tests.entities.EntitiesSearchTest;
@@ -28,6 +29,7 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({HomepageTest.class,
         SearchTest.class,
+        AssistanceListingSearchTest.class,
         FederalHierarchySearchTest.class,
         EntitiesSearchTest.class,
         ExclusionsSearchTest.class,

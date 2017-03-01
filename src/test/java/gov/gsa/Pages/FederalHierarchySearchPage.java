@@ -1,6 +1,7 @@
 package gov.gsa.Pages;
 
 import gov.gsa.Utilities.Base;
+import gov.gsa.Utilities.CommonUtils.*;
 import gov.gsa.Utilities.ObjectView;
 import org.openqa.selenium.By;
 
@@ -42,6 +43,14 @@ public class FederalHierarchySearchPage extends ObjectView {
     public static String resultTitle(){
         return Base.driver.findElement(By.className("federal-hierarchy-title")).findElement(By.tagName("a")).getText();
     }
+
+    public static DataField title() {
+        String duns = Base.driver.findElement(By.cssSelector(".m_B-2x > li:nth-child(1) > strong")).getText();
+        String dunsdata = Base.driver.findElement(By.cssSelector(".m_B-2x > li:nth-child(1) > span")).getText();
+        System.out.println("Duns Label : "+duns+"\nData : "+dunsdata);
+        return new DataField("DUNS",duns,dunsdata);
+    }
+
 
     // result description
     public static String resultDescription(){
