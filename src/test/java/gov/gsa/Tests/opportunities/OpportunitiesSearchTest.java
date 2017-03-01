@@ -26,6 +26,15 @@ public class OpportunitiesSearchTest extends Base {
     public String archived_searchTerm = "SPE4A516TT128";
     public String active_searchTerm = "SPE4A716R1273";
     public String autocomplete_searchTerm = "16--insulation blanket, cabin, aircraft";
+    public String presolicitation_searchTerm="N6554011T5343";
+    public String combinedsynopsis_searchTerm="SPRTA114Q0054";
+    public String surplussale_searchTerm="W912P-16-T-0056";
+    public String sourcessought_searchTerm="RFIP0700NAS16-0756";
+    public String justifyapprove_searchTerm="W9128F-16-R-0006";
+    public String awardnotice_searchTerm="5GA0066A";
+    public String fairopportunity_searchTerm="W9133L16F2Y04";
+    public String specialnotice_searchTerm="C27JFPMU";
+    public String modifyamendSearchTerm="FM44186201AW01";
 
     @BeforeClass
     public static void start() throws InterruptedException {
@@ -136,63 +145,63 @@ public class OpportunitiesSearchTest extends Base {
     //test for pre-solicitation
     @Test
     public void presolicitationTest() throws InterruptedException {
-        SearchNavigation.gotoSearchResultsPage(index,"N6554011T5343");
+        SearchNavigation.gotoSearchResultsPage(index,presolicitation_searchTerm);
         assertTrue("Pre-solicitation Does not exist", OpportunitiesSearchResultsPage.presolicitation());
     }
 
     //test for combined synopsis
     @Test
     public void combinedSynopsisTest() throws InterruptedException {
-        SearchNavigation.gotoSearchResultsPage(index,"SPRTA114Q0054");
+        SearchNavigation.gotoSearchResultsPage(index,combinedsynopsis_searchTerm);
         assertTrue("Combined Synopsis Does not exist", OpportunitiesSearchResultsPage.combinedSynopsis());
     }
 
     //test for saleOfSurplus
     @Test
     public void saleOfSurplusTest() throws InterruptedException {
-        SearchNavigation.gotoSearchResultsPage(index,"W912P-16-T-0056");
+        SearchNavigation.gotoSearchResultsPage(index,surplussale_searchTerm);
         assertTrue("Sale of Surplus Does not exist", OpportunitiesSearchResultsPage.saleOfSurplus());
     }
 
     //test for sources sought
     @Test
     public void sourcesSoughtTest() throws InterruptedException {
-        SearchNavigation.gotoSearchResultsPage(index,"RFIP0700NAS16-0756");
+        SearchNavigation.gotoSearchResultsPage(index,sourcessought_searchTerm);
         assertTrue("Sources sought Does not exist", OpportunitiesSearchResultsPage.sourcesSought());
     }
 
     //test for justification & approval
     @Test
     public void justifyApproveTest() throws InterruptedException {
-        SearchNavigation.gotoSearchResultsPage(index,"W9128F-16-R-0006");
+        SearchNavigation.gotoSearchResultsPage(index,justifyapprove_searchTerm);
         assertTrue("Justification & Approval Does not exist", OpportunitiesSearchResultsPage.justifyApprove());
     }
 
     //test for award
     @Test
     public void awardTest() throws InterruptedException {
-        SearchNavigation.gotoSearchResultsPage(index,"5GA0066A");
+        SearchNavigation.gotoSearchResultsPage(index,awardnotice_searchTerm);
         assertTrue("Award Notice Does not exist", OpportunitiesSearchResultsPage.awardCheck());
     }
 
     //test for fair opportunity
     @Test
     public void fairOpportunityTest() throws InterruptedException {
-        SearchNavigation.gotoSearchResultsPage(index,"W9133L16F2Y04");
+        SearchNavigation.gotoSearchResultsPage(index,fairopportunity_searchTerm);
         assertTrue("Fair Opportunity Does not exist", OpportunitiesSearchResultsPage.fairOpportunity());
     }
 
     //test for Special Notice
     @Test
     public void specialNoticeTest() throws InterruptedException {
-        SearchNavigation.gotoSearchResultsPage(index,"C27JFPMU");
+        SearchNavigation.gotoSearchResultsPage(index,specialnotice_searchTerm);
         assertTrue("Special Notice Does not exist", OpportunitiesSearchResultsPage.specialNotice());
     }
 
     //test for Modification/Amendment
     @Test
     public void modifyAmendTest() throws InterruptedException {
-        SearchNavigation.gotoSearchResultsPage(index,"FM44186201AW01");
+        SearchNavigation.gotoSearchResultsPage(index,modifyamendSearchTerm);
         assertTrue("Modification/Amendment Does not exist", OpportunitiesSearchResultsPage.modifyAmend());
     }
 
@@ -200,6 +209,7 @@ public class OpportunitiesSearchTest extends Base {
     public static void end(){
         closeOut();
     }
+
 
 
 }
