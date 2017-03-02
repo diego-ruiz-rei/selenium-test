@@ -4,6 +4,9 @@ import gov.gsa.Utilities.Base;
 import gov.gsa.Utilities.CommonUtils.*;
 import gov.gsa.Utilities.ObjectView;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 /**
  * Created by michael.kellogg on 1/30/17.
@@ -13,6 +16,23 @@ public class FederalHierarchySearchPage extends ObjectView {
     // finds the federal hierarchy tag above result items
     public static String fhTag(){
         return Base.driver.findElement(By.cssSelector(".search-page .usa-label")).getText();
+    }
+
+    //Split label and data based on ":"
+    private static DataField splitLabelAndData(String element) {
+        String fieldLabel = element.substring(0, element.indexOf(':')).trim(); // get all up to but not including colon
+        String fieldData = element.substring(element.indexOf(':') + 1).trim(); // get all after and not including colon
+
+        return new DataField(null, fieldLabel, fieldData);
+    }
+
+    //Split label and data based on new line
+    private static DataField splitLabelAndDataNewLine(String element) {
+        String [] labelAndData=element.split("\\r?\\n");
+        String fieldLabel=labelAndData[0].trim();
+        String fieldData=labelAndData[1].trim();
+
+        return new DataField(null, fieldLabel, fieldData);
     }
 
     // finds pagination items on fh page
@@ -82,8 +102,126 @@ public class FederalHierarchySearchPage extends ObjectView {
 //        return Base.driver.findElement(By.cssSelector(".card-secure-content > div > ul.usa-unstyled-list > li:nth-of-type(2)")).getText();
 //    }
 
+// Check fpds org id
+    public static DataField testFpdsOrg() {
+        String fpdsText="";
+        List<WebElement> fpdsTypeElements = Base.driver.findElements(By.cssSelector("federal-hierarchy-result > div.usa-width-one-third > ul > li:nth-child(3)"));
 
+        if(fpdsTypeElements.size() > 0) {
+            for (WebElement oppTypeElement : fpdsTypeElements) {
+                fpdsText = oppTypeElement.getText();
+            }
+            return splitLabelAndData(fpdsText).setName("FPDS Org ID");
+        }
+        else
+        {
+            return new DataField("FPDS Org ID",null,null);
+        }
+    }
 
+    //Check fpds code
+    public static DataField testFpdsCode() {
+        String fpdsCodeText="";
+        List<WebElement> fpdsCodeTypeElements = Base.driver.findElements(By.cssSelector("#search-results > div:nth-child(2) > federal-hierarchy-result > div.usa-width-one-third > ul > li:nth-child(2)"));
+
+        if(fpdsCodeTypeElements.size() > 0) {
+            for (WebElement oppTypeElement : fpdsCodeTypeElements) {
+                fpdsCodeText = oppTypeElement.getText();
+            }
+
+            System.out.println(fpdsCodeText);
+            return splitLabelAndData(fpdsCodeText).setName("FPDS Code");
+        }
+        else
+        {
+            return new DataField("FPDS Code",null,null);
+        }
+    }
+
+    //Check fpds code(old)
+    public static DataField testFpdsCodeOld() {
+        String fpdsCodeOldText="";
+        List<WebElement> fpdsCodeOldTypeElements = Base.driver.findElements(By.cssSelector("#search-results > div:nth-child(1) > federal-hierarchy-result > div.usa-width-one-third > ul > li:nth-child(3)"));
+
+        if(fpdsCodeOldTypeElements.size() > 0) {
+            for (WebElement oppTypeElement : fpdsCodeOldTypeElements) {
+                fpdsCodeOldText = oppTypeElement.getText();
+            }
+
+            System.out.println(fpdsCodeOldText);
+            return splitLabelAndData(fpdsCodeOldText).setName("FPDS Code (Old)");
+        }
+        else
+        {
+            return new DataField("FPDS Code (Old)",null,null);
+        }
+    }
+
+    // grab title
+    public static boolean extractTitle(){
+        String titleText=Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(2) > federal-hierarchy-result > h3.federal-hierarchy-title > a")).getText();
+
+        if(titleText.length()!=0 && titleText!=null){
+            return true;
+        }
+        else
+            return false;
+    }
+
+    // grab description
+    public static boolean extractDescription(){
+        String descriptionText=Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(2) > federal-hierarchy-result > div.usa-width-two-thirds > p > span")).getText();
+
+        if(descriptionText.length()!=0 && descriptionText!=null){
+            return true;
+        }
+        else
+            return false;
+    }
+
+    //check for department
+    public static DataField departmentCheck() {
+        String departmentText="";
+        List<WebElement> departmentTextTypeElements = Base.driver.findElements(By.cssSelector("#search-results > div:nth-child(2) > federal-hierarchy-result > div.usa-width-two-thirds > .m_B-2x > li"));
+
+        if(departmentTextTypeElements.size() > 0) {
+            for (WebElement deptTypeElement : departmentTextTypeElements) {
+                departmentText = deptTypeElement.getText();
+            }
+
+            System.out.println(departmentText);
+            return splitLabelAndData(departmentText).setName("Department");
+        }
+        else
+        {
+            return new DataField("Department",null,null);
+        }
+    }
+
+    //check for sub-tier label
+    public static String subTierCheck(){
+        String subTierText="";
+        List<WebElement> subTierTextTypeElements = Base.driver.findElements(By.cssSelector("#search-results > div:nth-child(2) > federal-hierarchy-result > div.usa-width-one-third > ul > li:nth-child(1)"));
+        if(subTierTextTypeElements.size() > 0) {
+            for (WebElement deptTypeElement : subTierTextTypeElements) {
+                subTierText = deptTypeElement.getText();
+            }
+
+        }
+        return subTierText;
+    }
+
+    //Check for also known as label and data
+    public static String aliasNameCheck() {
+        String aliasNameText="";
+        List<WebElement> aliasNameTextTypeElements = Base.driver.findElements(By.cssSelector("#search-results > div:nth-child(2) > federal-hierarchy-result > div.usa-width-one-third > ul > li:nth-child(2)"));
+
+        if(aliasNameTextTypeElements.size() > 0) {
+            aliasNameText=Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(2) > federal-hierarchy-result > div.usa-width-one-third > ul > li:nth-child(2) > strong")).getText();
+        }
+
+        return aliasNameText;
+    }
 
 
 }

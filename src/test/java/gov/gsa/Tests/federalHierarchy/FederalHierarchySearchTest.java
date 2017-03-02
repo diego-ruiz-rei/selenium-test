@@ -27,6 +27,8 @@ public class FederalHierarchySearchTest extends Base {
     public String fh_searchTerm = "agriculture, department of";
     public String autocomplete_searchTerm = "federal emergency management agency";
     public String featured_result_searchTerm = "FEDERAL BUREAU OF INVESTIGATION";
+    public String fh_searchTermFpdsCode="PENSION BENEFIT GUARANTY CORPORATION";
+    public String fh_searchTermFpdsCodeOld="UNITED STATES INSTITUTE OF PEACE";
     public String duns_searchTerm = "";
 
     // Any variables needed here
@@ -120,22 +122,40 @@ public class FederalHierarchySearchTest extends Base {
         System.out.println("Result Also Known As Exists");
     }
 */
-    //@Test
-    public void testFpdsOrgId() throws InterruptedException {
-        FederalHierarchySearchNavigation.gotoFhObjectView("agriculture, department of");
-        System.out.println(FederalHierarchySearchPage.organizationTypeCode());
 
-        // check that type code exists
-        assertTrue(FederalHierarchySearchPage.organizationTypeCode().length() > 0);
-        System.out.println("fpds org id exists");
-
-        // check that type code equals what we expect it to
-        assertEquals(FederalHierarchySearchPage.organizationTypeCode(),"FPDS Org ID: 1200");
-        System.out.println("fpds org id equals what is expected");
-
+    //check fpds org id label and value
+    @Test
+    public void fpdsOrgIdTest() throws InterruptedException {
+        SearchNavigation.gotoSearchResultsPage(index,fh_searchTerm);
+        CommonUtils.DataField fpdsFieldText = FederalHierarchySearchPage.testFpdsOrg();
+        testLabelAndDataExists(fpdsFieldText);
+        testLabelContains(fpdsFieldText, "FPDS Org ID");
     }
 
-    //@Test
+    //test for fpds code label and value
+    @Test
+    public void fpdsOrgCodeTest() throws InterruptedException {
+        SearchNavigation.gotoSearchResultsPage(index,fh_searchTermFpdsCode);
+        CommonUtils.DataField fpdsCodeFieldText = FederalHierarchySearchPage.testFpdsCode();
+        testLabelAndDataExists(fpdsCodeFieldText);
+        testLabelContains(fpdsCodeFieldText, "FPDS Code");
+    }
+
+    //todo : Find test data
+    //test for fpds code(old) label. Does not check for value
+    @Test
+    public void fpdsOrgCodeOldTest() throws InterruptedException {
+        SearchNavigation.gotoSearchResultsPage(index,fh_searchTermFpdsCodeOld);
+        CommonUtils.DataField fpdsCodeOldFieldText = FederalHierarchySearchPage.testFpdsCodeOld();
+        //testLabelAndDataExists(fpdsCodeOldFieldText);
+        testLabelContains(fpdsCodeOldFieldText, "FPDS Code (Old)");
+    }
+
+
+
+
+
+    /*//@Test
     public void testFpdsCode() throws InterruptedException {
         FederalHierarchySearchNavigation.gotoFhObjectView("PENSION BENEFIT GUARANTY CORPORATION");
         System.out.println(FederalHierarchySearchPage.organizationTypeCode());
@@ -147,7 +167,49 @@ public class FederalHierarchySearchTest extends Base {
         // check that type code equals what we expect it to
         assertEquals(FederalHierarchySearchPage.organizationTypeCode(),"FPDS Org ID: 1665");
         System.out.println("fOrganization Type Code equals what is expected");
+    }*/
+
+    // test for title
+    @Test
+    public void titleTest() throws InterruptedException {
+        SearchNavigation.gotoSearchResultsPage(index,fh_searchTerm);
+        assertTrue("Title Does not exist", FederalHierarchySearchPage.extractTitle());
     }
+
+    //test for description
+    @Test
+    public void descriptionTest() throws InterruptedException {
+        SearchNavigation.gotoSearchResultsPage(index,fh_searchTerm);
+        assertTrue("Description Does not exist", FederalHierarchySearchPage.extractDescription());
+    }
+
+    //Test for Department
+    @Test
+    public void departmentTest() throws InterruptedException {
+        SearchNavigation.gotoSearchResultsPage(index,fh_searchTerm);
+        CommonUtils.DataField deptField = FederalHierarchySearchPage.departmentCheck();
+        testLabelAndDataExists(deptField);
+        testLabelContains(deptField, "Department");
+
+    }
+
+    //Test for sub-tier label
+    @Test
+    public void subTierTest() throws InterruptedException {
+        SearchNavigation.gotoSearchResultsPage(index,fh_searchTerm);
+        assertEquals(FederalHierarchySearchPage.subTierCheck(), "Sub-Tier");
+    }
+
+
+    //Test for "also known as" label and data
+    @Test
+    public void aliasNameTest() throws InterruptedException {
+        SearchNavigation.gotoSearchResultsPage(index,fh_searchTerm);
+        assertEquals("Also Known as Tag does not Exist", FederalHierarchySearchPage.aliasNameCheck(),"Also Known As");
+
+    }
+
+
 
     @AfterClass
     public static void end(){
