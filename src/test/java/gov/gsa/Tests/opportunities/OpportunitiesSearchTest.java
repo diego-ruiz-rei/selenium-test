@@ -77,9 +77,9 @@ public class OpportunitiesSearchTest extends Base {
     @Test
     public void departmentTest() throws InterruptedException {
         SearchNavigation.gotoSearchResultsPage(index,active_searchTerm);
-        DataField dunnumber = OpportunitiesSearchResultsPage.department();
-        testLabelAndDataExists(dunnumber);
-        testLabelContains(dunnumber, "Department/Ind. Agency");
+        DataField dept = OpportunitiesSearchResultsPage.department();
+        testLabelAndDataExists(dept);
+        testLabelContains(dept, "Department");
 
     }
 
