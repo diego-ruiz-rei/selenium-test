@@ -1,6 +1,5 @@
 package gov.gsa.Tests.federalHierarchy;
 
-import gov.gsa.Navigation.FederalHierarchySearchNavigation;
 import gov.gsa.Navigation.SearchNavigation;
 import gov.gsa.Pages.FederalHierarchySearchPage;
 import gov.gsa.Utilities.Base;
