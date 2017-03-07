@@ -105,8 +105,10 @@ public class AssistanceListingSearchPage extends Base{
         if(elements.size() > 0) {
             for (WebElement element : elements) {
                 label = element.findElement(By.tagName("strong")).getText();
-                data = element.findElement(By.cssSelector("ul > li")).getText();
+                data = element.getText();
+                data = data.substring(data.indexOf(':')+1).trim();
             }
+            System.out.println("label "+label+"Data "+data);
             return new DataField("Funded",label,data);
         }
         else
@@ -123,7 +125,7 @@ public class AssistanceListingSearchPage extends Base{
         if(elements.size() > 0) {
             for (WebElement element : elements) {
                 label = element.findElement(By.tagName("strong")).getText();
-                data = element.findElement(By.cssSelector("ul > li")).getText();
+                data = element.getText();
             }
             return new DataField("Last Date Modified",label,data);
         }
@@ -141,8 +143,10 @@ public class AssistanceListingSearchPage extends Base{
         if(elements.size() > 0) {
             for (WebElement element : elements) {
                 label = element.findElement(By.tagName("strong")).getText();
-                data = element.findElement(By.cssSelector("ul > li")).getText();
+                data = element.getText();
+                //data = data.substring(data.indexOf(label.length())+1);
             }
+            System.out.println("label "+label+"Data "+data);
             return new DataField("Type of Assistance",label,data);
         }
         else

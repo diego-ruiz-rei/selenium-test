@@ -50,7 +50,7 @@ public class FederalHierarchyObjectViewPage extends ObjectView{
     }
 
     public static String noOfResults() {
-        System.out.println( Base.driver.findElement(By.cssSelector(".m_T-2x > Strong")).getText());
+        System.out.println(Base.driver.findElement(By.cssSelector(".m_T-2x > Strong")).getText().trim());
         return Base.driver.findElement(By.cssSelector(".m_T-2x > Strong")).getText();
     }
 

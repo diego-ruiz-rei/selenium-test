@@ -28,7 +28,7 @@ public class OpportunitiesSearchResultsPage {
 
     //Pagination count
     public static Integer resultsPageCount() throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(10000);
         System.out.println("Results page count : "+ Base.driver.findElements(By.cssSelector(".page-button")).size());
         return Base.driver.findElements(By.cssSelector(".page-button")).size();
     }

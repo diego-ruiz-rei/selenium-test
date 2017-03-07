@@ -50,28 +50,29 @@ public class WageDeterminationSearchPage extends ObjectView {
     // grab revision number field
     public static DataField wdRevisionNum(){
         String label = Base.driver.findElement(By.cssSelector("div.usa-width-one-third > ul.m_B-0 > li:nth-of-type(1) > strong")).getText();
-        String data = Base.driver.findElement(By.cssSelector("div.usa-width-one-third > ul.m_B-0 > li:nth-of-type(1) > ul > span")).getText();
+        String data = Base.driver.findElement(By.cssSelector("div.usa-width-one-third > ul.m_B-0 > li:nth-of-type(1) ")).getText();
         return new DataField("revision number field", label, data);
     }
 
     // grab construction type field
     public static DataField wdConstructionType(){
-        String label = Base.driver.findElement(By.cssSelector("div.usa-width-one-third > ul.m_B-0 > li:nth-of-type(2) > strong")).getText();
-        String data = Base.driver.findElement(By.cssSelector("div.usa-width-one-third > ul.m_B-0 > li:nth-of-type(2) > ul > span")).getText();
+        String label = Base.driver.findElement(By.cssSelector("div.usa-width-one-third > ul > li:nth-of-type(2) > strong")).getText();
+        String data = Base.driver.findElement(By.xpath("//*[@id=\"search-results\"]/div/wage-determination-result/div[2]/ul/li[2]")).getText();
+        System.out.println("***label "+label+"***data "+data);
         return new DataField("Construction Type", label, data);
     }
 
     // grab SCA Service field
     public static DataField wdService(){
         String label = Base.driver.findElement(By.cssSelector("div.usa-width-one-third > ul.m_B-0 > li:nth-of-type(2) > strong")).getText();
-        String data = Base.driver.findElement(By.cssSelector("div.usa-width-one-third > ul.m_B-0 > li:nth-of-type(2) > ul > span")).getText();
+        String data = Base.driver.findElement(By.cssSelector("div.usa-width-one-third > ul.m_B-0 > li:nth-of-type(2) > span")).getText();
         return new DataField("Service", label, data);
     }
 
     // grab date field
     public static DataField wdDate(){
-        String label = Base.driver.findElement(By.cssSelector("div.usa-width-one-third > ul.m_B-0 > li:nth-of-type(3) > span > strong")).getText();
-        String data = Base.driver.findElement(By.cssSelector("div.usa-width-one-third > ul.m_B-0 > li:nth-of-type(3) > ul > span")).getText();
+        String label = Base.driver.findElement(By.cssSelector("div.usa-width-one-third > ul.m_B-0 > li:nth-of-type(3) > strong")).getText();
+        String data = Base.driver.findElement(By.cssSelector("div.usa-width-one-third > ul.m_B-0 > li:nth-of-type(3)")).getText();
         return new DataField("date field", label, data);
     }
 

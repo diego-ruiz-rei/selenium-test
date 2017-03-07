@@ -15,7 +15,7 @@ public class SearchPage{
             {"All","","all"},
             {"Assistance Listings","Foreign-Trade Zones in the United States","title"},
             {"Assistance Listings","11.111","number"},
-            {"Opportunities","DTFANM-08-R-00058","number"},
+    //        {"Opportunities","DTFANM-08-R-00058","number"},
             {"All","10.001","number"},
             {"All","\"8(g) State Coastal Zone\"","title"},
             {"All","\"Yakima River Basin Water Enhancement (YRBWE)\"","title"},

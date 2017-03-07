@@ -58,7 +58,7 @@ public class FHObjectViewHelper extends Base{
 
     @Test
     public void noOfResultsTest() throws InterruptedException{
-        assertTrue("Number of results is missing in FH Object View page",FederalHierarchyObjectViewPage.noOfResults().contains("1 - 10"));
+        assertTrue("Number of results is missing in FH Object View page",FederalHierarchyObjectViewPage.noOfResults().contains("1"));
         System.out.println("Number of Results are displayed");
     }
 

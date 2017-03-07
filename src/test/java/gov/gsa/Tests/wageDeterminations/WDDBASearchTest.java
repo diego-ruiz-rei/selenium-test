@@ -58,7 +58,7 @@ public class WDDBASearchTest extends WDSearchHelper {
 
 
     // check if inactive tag exists for DBA
-    //@Test
+    @Test
     public void inactiveTagTestDBA() throws InterruptedException {
         SearchNavigation.gotoIsActiveFalseSearch(index,inactive_searchTerm);
         System.out.println(WageDeterminationSearchPage.wdInactiveTag());

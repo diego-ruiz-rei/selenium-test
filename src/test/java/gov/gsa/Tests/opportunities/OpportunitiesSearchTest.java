@@ -24,7 +24,7 @@ public class OpportunitiesSearchTest extends Base {
     //Test Data
     public String index = "Opportunities";
     public String archived_searchTerm = "SPE4A516TT128";
-    public String active_searchTerm = "SPE4A716R1273";
+    public String active_searchTerm = "HDTRA1-14-R-0020";
     public String autocomplete_searchTerm = "16--insulation blanket, cabin, aircraft";
     public String presolicitation_searchTerm="N6554011T5343";
     public String combinedsynopsis_searchTerm="SPRTA114Q0054";
