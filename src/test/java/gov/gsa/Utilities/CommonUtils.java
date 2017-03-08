@@ -1,6 +1,5 @@
 package gov.gsa.Utilities;
 
-import gov.gsa.Navigation.FederalHierarchySearchNavigation;
 import gov.gsa.Navigation.SearchNavigation;
 import gov.gsa.Pages.FederalHierarchySearchPage;
 import gov.gsa.Pages.SearchPage;
@@ -139,7 +138,13 @@ public class CommonUtils {
         return false;
     }
 
+    public static DataField splitLabelAndData(String element) {
+        String fieldLabel = element.substring(0, element.indexOf(':')).trim(); // get all up to but not including colon
+        String fieldData = element.substring(element.indexOf(':') + 1).trim(); // get all after and not including colon
+        System.out.println("Field Label : "+fieldLabel+"\nField Data : "+fieldData);
 
+        return new DataField(null, fieldLabel, fieldData);
+    }
 
 
 }

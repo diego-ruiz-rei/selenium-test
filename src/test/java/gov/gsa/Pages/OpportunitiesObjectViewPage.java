@@ -1,8 +1,10 @@
 package gov.gsa.Pages;
 
 import gov.gsa.Utilities.Base;
+import gov.gsa.Utilities.CommonUtils;
 import gov.gsa.Utilities.CommonUtils.DataField;
 import gov.gsa.Utilities.ObjectView;
+import gov.gsa.Utilities.CommonUtils.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -17,95 +19,81 @@ import java.util.List;
 
 public class OpportunitiesObjectViewPage extends ObjectView {
 
-
-//    // I don't think this is required here..have to look into why this is being called
-//    public OpportunitiesObjectViewPage(){
-//        super();
-//    }
-
     public static Boolean oppTitle() {
         return Base.driver.findElements(By.tagName("h1")).size() > 0;
-    }
-
-    private static DataField splitLabelAndData(String element) {
-        String fieldLabel = element.substring(0, element.indexOf(':')).trim(); // get all up to but not including colon
-        String fieldData = element.substring(element.indexOf(':') + 1).trim(); // get all after and not including colon
-       // System.out.println("**Label "+fieldLabel+"**Data "+fieldData);
-
-        return new DataField(null, fieldLabel, fieldData);
     }
 
     //Opportunity Header
     public static DataField solicitation() {
         String solname = Base.driver.findElement(By.id("opportunity-header-solicitation-number")).getText();
-        return splitLabelAndData(solname).setName("Solicitation Number");
+        return CommonUtils.splitLabelAndData(solname).setName("Solicitation Number");
     }
 
     public static DataField office() {
         String office = Base.driver.findElement(By.id("opportunity-header-hierarchy-level")).getText();
-        return splitLabelAndData(office).setName("Office");
+        return CommonUtils.splitLabelAndData(office).setName("Office");
     }
 
     public static DataField location() {
         String location = Base.driver.findElement(By.id("opportunity-header-location")).getText();
-        return splitLabelAndData(location).setName("Location");
+        return CommonUtils.splitLabelAndData(location).setName("Location");
     }
 
     //General Information
     public static DataField oppType() {
         String opportunityType = Base.driver.findElement(By.id("opportunity-general-type")).getText();
-        return splitLabelAndData(opportunityType).setName("Opportunity Type");
+        return CommonUtils.splitLabelAndData(opportunityType).setName("Opportunity Type");
     }
 
     public static DataField postedDate() {
         String postedDate = Base.driver.findElement(By.id("opportunity-general-posted-date")).getText();
-        return splitLabelAndData(postedDate).setName("Posted Date");
+        return CommonUtils.splitLabelAndData(postedDate).setName("Posted Date");
     }
 
     public static DataField originalPosted() {
         String originalPosted = Base.driver.findElement(By.id("opportunity-general-original-posted-date")).getText();
-        return splitLabelAndData(originalPosted).setName("Original Posted Date");
+        return CommonUtils.splitLabelAndData(originalPosted).setName("Original Posted Date");
     }
 
     public static DataField updatedPostedDate(){
         String updatedPostedDate = Base.driver.findElement(By.id("opportunity-general-posted-date")).getText();
-        return splitLabelAndData(updatedPostedDate).setName("Update/Amendment Posted Date");
+        return CommonUtils.splitLabelAndData(updatedPostedDate).setName("Update/Amendment Posted Date");
     }
 
     public static DataField originalResponse() {
         String originalResponse = Base.driver.findElement(By.id("opportunity-general-original-response-date")).getText();
-        return splitLabelAndData(originalResponse).setName("Original Response Date");
+        return CommonUtils.splitLabelAndData(originalResponse).setName("Original Response Date");
     }
 
     public static DataField updatedResponseDate(){
         String updatedResponseDate = Base.driver.findElement(By.id("opportunity-general-response-date")).getText();
-        return splitLabelAndData(updatedResponseDate).setName("Update/Amendment Response Date");
+        return CommonUtils.splitLabelAndData(updatedResponseDate).setName("Update/Amendment Response Date");
     }
 
     public static DataField archivingPolicy() {
         String archivingPolicy = Base.driver.findElement(By.id("opportunity-general-archiving-policy")).getText();
-        return splitLabelAndData(archivingPolicy).setName("Archiving Policy");
+        return CommonUtils.splitLabelAndData(archivingPolicy).setName("Archiving Policy");
     }
 
     public static DataField updatedArchiveDate(){
         String updatedArchiveDate = Base.driver.findElement(By.id("opportunity-general-archive-date")).getText();
-        return splitLabelAndData(updatedArchiveDate).setName("Update/Amendment Archive Date");
+        return CommonUtils.splitLabelAndData(updatedArchiveDate).setName("Update/Amendment Archive Date");
     }
 
     //Classification Section
     public static DataField originalSetAside() {
         String originalSetAside = Base.driver.findElement(By.id("opportunity-classification-original-set-aside")).getText();
-        return splitLabelAndData(originalSetAside).setName("Original Set Aside");
+        return CommonUtils.splitLabelAndData(originalSetAside).setName("Original Set Aside");
     }
 
     public static DataField updatedSetAside() {
         String updatedSetAside = Base.driver.findElement(By.id("opportunity-classification-set-aside")).getText();
-        return splitLabelAndData(updatedSetAside).setName("Update/Amendment Set Aside");
+        return CommonUtils.splitLabelAndData(updatedSetAside).setName("Update/Amendment Set Aside");
     }
 
     public static DataField classificationCode() {
         String classificationCode = Base.driver.findElement(By.id("opportunity-classification-classification-code")).getText();
-        return splitLabelAndData(classificationCode).setName("Classification Code");
+        return CommonUtils.splitLabelAndData(classificationCode).setName("Classification Code");
     }
 
     // todo change to DataField
@@ -184,7 +172,7 @@ public class OpportunitiesObjectViewPage extends ObjectView {
             for (WebElement oppTypeElement : oppTypeElements) {
                 oppType = oppTypeElement.getText();
             }
-            return splitLabelAndData(oppType).setName("Opportunity Type");
+            return CommonUtils.splitLabelAndData(oppType).setName("Opportunity Type");
         }
         else
         {
@@ -369,69 +357,69 @@ int code = 0;
         WebElement element = (WebElement) Base.wait.until(
                 ExpectedConditions.visibilityOfElementLocated(By.id("opportunity-award")));
         String contractAwardDollarAmount = Base.driver.findElement(By.id("opportunity-award-amount")).getText();
-        return splitLabelAndData(contractAwardDollarAmount).setName("Contract Award Dollar Amount");
+        return CommonUtils.splitLabelAndData(contractAwardDollarAmount).setName("Contract Award Dollar Amount");
     }
 
     public static DataField contractAwardDate() {
         WebElement element = (WebElement) Base.wait.until(
                 ExpectedConditions.visibilityOfElementLocated(By.id("opportunity-award")));
         String contractAwardDate = Base.driver.findElement(By.id("opportunity-award-date")).getText();
-        return splitLabelAndData(contractAwardDate).setName("Contract Award Date");
+        return CommonUtils.splitLabelAndData(contractAwardDate).setName("Contract Award Date");
     }
 
     public static DataField contractAwardNumber() {
         WebElement element = (WebElement) Base.wait.until(
                 ExpectedConditions.visibilityOfElementLocated(By.id("opportunity-award")));
         String contractAwardNumber = Base.driver.findElement(By.id("opportunity-award-number")).getText();
-        return splitLabelAndData(contractAwardNumber).setName("Contract Award Number");
+        return CommonUtils.splitLabelAndData(contractAwardNumber).setName("Contract Award Number");
     }
 
     public static DataField contractLineItemNumber() {
         WebElement element = (WebElement) Base.wait.until(
                 ExpectedConditions.visibilityOfElementLocated(By.id("opportunity-award")));
         String contractLineItemNumber = Base.driver.findElement(By.id("opportunity-award-line-item-number")).getText();
-        return splitLabelAndData(contractLineItemNumber).setName("Contract Line Item Number");
+        return CommonUtils.splitLabelAndData(contractLineItemNumber).setName("Contract Line Item Number");
     }
 
     public static DataField contractorAwardedName() {
         WebElement element = (WebElement) Base.wait.until(
                 ExpectedConditions.visibilityOfElementLocated(By.id("opportunity-award")));
         String contractorAwardedName = Base.driver.findElement(By.id("opportunity-awarded-name")).getText();
-        return splitLabelAndData(contractorAwardedName).setName("Contractor Awarded Name");
+        return CommonUtils.splitLabelAndData(contractorAwardedName).setName("Contractor Awarded Name");
     }
 
     public static DataField contractorAwardedDUNS() {
         WebElement element = (WebElement) Base.wait.until(
                 ExpectedConditions.visibilityOfElementLocated(By.id("opportunity-award")));
         String contractorAwardedDUNS = Base.driver.findElement(By.id("opportunity-awarded-duns")).getText();
-        return splitLabelAndData(contractorAwardedDUNS).setName("Contractor Awarded DUNS");
+        return CommonUtils.splitLabelAndData(contractorAwardedDUNS).setName("Contractor Awarded DUNS");
     }
 
     public static DataField contractorAwardedAddress() {
         WebElement element = (WebElement) Base.wait.until(
                 ExpectedConditions.visibilityOfElementLocated(By.id("opportunity-award")));
         String contractorAwardedAddress = Base.driver.findElement(By.id("opportunity-awarded-address")).getText();
-        return splitLabelAndData(contractorAwardedAddress).setName("Contractor Awarded Address");
+        return CommonUtils.splitLabelAndData(contractorAwardedAddress).setName("Contractor Awarded Address");
     }
 
     public static DataField statutoryAuthority() {
         String statutoryAuthority = Base.driver.findElement(By.id("opportunity-general-statutory-authority")).getText();
-        return splitLabelAndData(statutoryAuthority).setName("J&A Statutory Authority");
+        return CommonUtils.splitLabelAndData(statutoryAuthority).setName("J&A Statutory Authority");
     }
 
     public static DataField justificationAuthority() {
         String justificationAuthority = Base.driver.findElement(By.id("opportunity-general-justification-authority")).getText();
-        return splitLabelAndData(justificationAuthority).setName("Fair Opportunity / Limited Sources Justification Authority");
+        return CommonUtils.splitLabelAndData(justificationAuthority).setName("Fair Opportunity / Limited Sources Justification Authority");
     }
 
     public static DataField orderNumber() {
         String orderNumber = Base.driver.findElement(By.id("opportunity-order-number")).getText();
-        return splitLabelAndData(orderNumber).setName("Task/Delivery Order Number");
+        return CommonUtils.splitLabelAndData(orderNumber).setName("Task/Delivery Order Number");
     }
 
     public static DataField specialLegislation() {
         String specialLegislation = Base.driver.findElement(By.id("opportunity-general-special-legislation")).getText();
-        return splitLabelAndData(specialLegislation).setName("Special Legislation");
+        return CommonUtils.splitLabelAndData(specialLegislation).setName("Special Legislation");
     }
 }
 
