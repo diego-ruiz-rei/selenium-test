@@ -25,7 +25,7 @@ public class WDSCAObjectViewTest extends WDObjectViewHelper{
 
     @BeforeClass
     public static void start() throws InterruptedException {
-        WDObjectViewHelper.sca_searchTerm = "1967-0442";
+        WDObjectViewHelper.sca_searchTerm = "1968-0005";
         setUp();
         WDObjectViewNavigation.gotoWDObjectView(sca_searchTerm);
 
@@ -43,11 +43,7 @@ public class WDSCAObjectViewTest extends WDObjectViewHelper{
         System.out.println("SCA Type is displayed");
     }
 
-    @Test
-    public void wdSCASideMenuTest() throws InterruptedException {
-        assertEquals("SCA Side Menu Element is not present", ObjectView.wdSideMenuItem(), "SCA WD # "+sca_searchTerm);
-        System.out.println("SCA Side Menu is displayed");
-    }
+
 
     @Test
     public void wdServicesTest() throws InterruptedException{

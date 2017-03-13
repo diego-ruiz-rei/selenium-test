@@ -69,8 +69,8 @@ public class ObjectView extends Base{
 
     //WD Side Menu
     public static String wdSideMenuItem() {
-        System.out.println("Side Menu : "+Base.driver.findElement(By.cssSelector(".usa-sidenav-sub_list > li > a")).getText());
-        return Base.driver.findElement(By.cssSelector(".usa-sidenav-sub_list > li > a")).getText();
+        System.out.println("Side Menu : "+Base.driver.findElement(By.cssSelector("samsidenav > aside > ul > li:nth-child(2) > a")).getText());
+        return Base.driver.findElement(By.cssSelector("samsidenav > aside > ul > li:nth-child(2) > a")).getText();
     }
 
 

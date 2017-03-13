@@ -1,6 +1,7 @@
 package gov.gsa.Pages;
 
 import gov.gsa.Utilities.Base;
+import gov.gsa.Utilities.CommonUtils;
 import gov.gsa.Utilities.CommonUtils.DataField;
 import gov.gsa.Utilities.ObjectView;
 import org.openqa.selenium.By;
@@ -34,45 +35,50 @@ public class WageDeterminationSearchPage extends ObjectView {
 
     // grab state field
     public static DataField wdState(){
-        String label = Base.driver.findElement(By.cssSelector("div.usa-width-two-thirds > ul.m_T-3x > li:nth-of-type(1) > strong")).getText();
-        String data = Base.driver.findElement(By.cssSelector("div.usa-width-two-thirds > ul.m_T-3x > li:nth-of-type(1) > span")).getText();
+        String label = Base.driver.findElement(By.cssSelector("#wd-state-0 > strong")).getText();
+        String data = Base.driver.findElement(By.cssSelector("#wd-state-0 > span")).getText();
         return new DataField("state field", label, data);
     }
 
     // grab county field
     public static DataField wdCounty(){
-        String label = Base.driver.findElement(By.cssSelector("div.usa-width-two-thirds >  ul > li.break-word > strong")).getText();
-        String data_element = Base.driver.findElement(By.cssSelector("div.usa-width-two-thirds >  ul > li.break-word")).getText();
+
+        String county = Base.driver.findElement(By.id("wd-counties-0")).getText();
+        return CommonUtils.splitLabelAndData(county).setName("county");
+        /*
+        String label = Base.driver.findElement(By.cssSelector("# > strong")).getText();
+        String data_element = Base.driver.findElement(By.cssSelector("#wd-counties-0 > span")).getText();
         String data = data_element.substring(data_element.indexOf(':')+1).trim();
         return new DataField("county field", label, data);
+        */
     }
 
     // grab revision number field
     public static DataField wdRevisionNum(){
-        String label = Base.driver.findElement(By.cssSelector("div.usa-width-one-third > ul.m_B-0 > li:nth-of-type(1) > strong")).getText();
-        String data = Base.driver.findElement(By.cssSelector("div.usa-width-one-third > ul.m_B-0 > li:nth-of-type(1) ")).getText();
+        String label = Base.driver.findElement(By.cssSelector("#wd-revision-number > strong")).getText();
+        String data = Base.driver.findElement(By.cssSelector("#wd-revision-number > span")).getText();
         return new DataField("revision number field", label, data);
     }
 
     // grab construction type field
     public static DataField wdConstructionType(){
-        String label = Base.driver.findElement(By.cssSelector("div.usa-width-one-third > ul > li:nth-of-type(2) > strong")).getText();
-        String data = Base.driver.findElement(By.xpath("//*[@id=\"search-results\"]/div/wage-determination-result/div[2]/ul/li[2]")).getText();
+        String label = Base.driver.findElement(By.cssSelector("#wd-construction-types > strong")).getText();
+        String data = Base.driver.findElement(By.cssSelector("#wd-construction-types > span")).getText();
         System.out.println("***label "+label+"***data "+data);
         return new DataField("Construction Type", label, data);
     }
 
     // grab SCA Service field
     public static DataField wdService(){
-        String label = Base.driver.findElement(By.cssSelector("div.usa-width-one-third > ul.m_B-0 > li:nth-of-type(2) > strong")).getText();
-        String data = Base.driver.findElement(By.cssSelector("div.usa-width-one-third > ul.m_B-0 > li:nth-of-type(2) > span")).getText();
+        String label = Base.driver.findElement(By.cssSelector("#wd-services > strong")).getText();
+        String data = Base.driver.findElement(By.cssSelector("#wd-services) > span")).getText();
         return new DataField("Service", label, data);
     }
 
     // grab date field
     public static DataField wdDate(){
-        String label = Base.driver.findElement(By.cssSelector("div.usa-width-one-third > ul.m_B-0 > li:nth-of-type(3) > strong")).getText();
-        String data = Base.driver.findElement(By.cssSelector("div.usa-width-one-third > ul.m_B-0 > li:nth-of-type(3)")).getText();
+        String label = Base.driver.findElement(By.cssSelector("#wd-date > strong")).getText();
+        String data = Base.driver.findElement(By.cssSelector("#wd-date > span")).getText();
         return new DataField("date field", label, data);
     }
 
