@@ -194,7 +194,7 @@ public class OpportunitiesSearchResultsPage {
     public static boolean presolicitation(){
         String typeFieldValue=getTypeFieldValue();
         System.out.print(typeFieldValue);
-        if(typeFieldValue.equalsIgnoreCase("Presolicitation")){
+        if(typeFieldValue.equalsIgnoreCase("Original Presolicitation")){
             return true;
         }
         else
@@ -205,7 +205,7 @@ public class OpportunitiesSearchResultsPage {
     public static boolean combinedSynopsis(){
         String typeFieldValue=getTypeFieldValue();
         System.out.print(typeFieldValue);
-        if(typeFieldValue.equalsIgnoreCase("Combined Synopsis/Solicitation")){
+        if(typeFieldValue.equalsIgnoreCase("Original Combined Synopsis/Solicitation")){
             return true;
         }
         else
@@ -216,7 +216,7 @@ public class OpportunitiesSearchResultsPage {
     public static boolean saleOfSurplus(){
         String typeFieldValue=getTypeFieldValue();
         System.out.print(typeFieldValue);
-        if(typeFieldValue.equalsIgnoreCase("Sale of Surplus Property")){
+        if(typeFieldValue.equalsIgnoreCase("Original Sale of Surplus Property")){
             return true;
         }
         else
@@ -227,7 +227,7 @@ public class OpportunitiesSearchResultsPage {
     public static boolean sourcesSought(){
         String typeFieldValue=getTypeFieldValue();
         System.out.print(typeFieldValue);
-        if(typeFieldValue.equalsIgnoreCase("Sources Sought")){
+        if(typeFieldValue.equalsIgnoreCase("Original Sources Sought")){
             return true;
         }
         else
@@ -238,7 +238,7 @@ public class OpportunitiesSearchResultsPage {
     public static boolean justifyApprove(){
         String typeFieldValue=getTypeFieldValue();
         System.out.print(typeFieldValue);
-        if(typeFieldValue.equalsIgnoreCase("Justification and Approval (J&A)")){
+        if(typeFieldValue.equalsIgnoreCase("Original Justification and Approval (J&A)")){
             return true;
         }
         else
@@ -249,7 +249,7 @@ public class OpportunitiesSearchResultsPage {
     public static boolean awardCheck(){
         String typeFieldValue=getTypeFieldValue();
         System.out.print(typeFieldValue);
-        if(typeFieldValue.equalsIgnoreCase("Award Notice")){
+        if(typeFieldValue.equalsIgnoreCase("Original Award Notice")){
             return true;
         }
         else
@@ -260,7 +260,7 @@ public class OpportunitiesSearchResultsPage {
     public static boolean fairOpportunity(){
         String typeFieldValue=getTypeFieldValue();
         System.out.print(typeFieldValue);
-        if(typeFieldValue.equalsIgnoreCase("Fair Opportunity / Limited Sources Justification")){
+        if(typeFieldValue.equalsIgnoreCase("Original Fair Opportunity / Limited Sources Justification")){
             return true;
         }
         else
@@ -271,7 +271,7 @@ public class OpportunitiesSearchResultsPage {
     public static boolean specialNotice(){
         String typeFieldValue=getTypeFieldValue();
         System.out.print(typeFieldValue);
-        if(typeFieldValue.equalsIgnoreCase("Special Notice")){
+        if(typeFieldValue.equalsIgnoreCase("Original Special Notice")){
             return true;
         }
         else
@@ -282,7 +282,7 @@ public class OpportunitiesSearchResultsPage {
     public static boolean modifyAmend(){
         String typeFieldValue=getTypeFieldValue();
         System.out.print(typeFieldValue);
-        if(typeFieldValue.equalsIgnoreCase("Modification/Amendment/Cancel")){
+        if(typeFieldValue.contains("Updated")){
             return true;
         }
         else

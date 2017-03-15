@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -41,6 +42,12 @@ public class WageDeterminationObjectViewPage extends ObjectView{
         return CommonUtils.splitLabelAndData(county).setName("Counties");
     }
 
+    public static Integer multipleStateCountiesCount() {
+        System.out.println("Count of State and Counties : "+ Base.driver.findElements(By.cssSelector(".m_B-3x")).size());
+        return Base.driver.findElements(By.cssSelector(".m_B-3x")).size();
+
+    }
+
     public static DataField revision() {
         String revision = Base.driver.findElement(By.id("wd-revision-number")).getText();
         return CommonUtils.splitLabelAndData(revision).setName("Revision");
@@ -57,7 +64,8 @@ public class WageDeterminationObjectViewPage extends ObjectView{
         return CommonUtils.splitLabelAndData(construction).setName("Construction");
     }
 
-    public static DataField services() {
+    public static DataField services() throws InterruptedException {
+        Thread.sleep(2000);
         String service = Base.driver.findElement(By.id("wd-services")).getText();
         return CommonUtils.splitLabelAndData(service).setName("Service");
     }
@@ -71,5 +79,33 @@ public class WageDeterminationObjectViewPage extends ObjectView{
     {
         System.out.println("Printer Link Text : "+Base.driver.findElement(By.cssSelector("#wd-print-link > a")).getText());
         return Base.driver.findElement(By.cssSelector("#wd-print-link > a")).getText();
+    }
+
+    public static int printerFriendlyStatusCode() throws InterruptedException, MalformedURLException,IOException {
+        int code = 0;
+        try {
+
+            Thread.sleep(1000);
+            String link = Base.driver.findElement(By.id("wd-print-link")).findElement(By.tagName("a")).getAttribute("href");
+            System.out.println("Link: " + link);
+            URL url = new URL(link);
+            HttpsURLConnection connection = (HttpsURLConnection)url.openConnection();
+            connection.setHostnameVerifier ((hostname, session) -> true);
+            connection.setRequestMethod("GET");
+            connection.setReadTimeout(10000);
+            connection.connect();
+            Thread.sleep(5000);
+            code = connection.getResponseCode();
+        } catch(InterruptedException e){
+            System.out.println("InterruptedException");
+            e.printStackTrace();
+        } catch(MalformedURLException e){
+            System.out.println("MalformedURLException");
+            e.printStackTrace();
+        } catch(IOException e){
+            System.out.println("IOException");
+            e.printStackTrace();
+        }
+        return code;
     }
 }

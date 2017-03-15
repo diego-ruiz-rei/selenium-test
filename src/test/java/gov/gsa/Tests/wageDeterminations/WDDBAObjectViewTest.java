@@ -4,10 +4,7 @@ import gov.gsa.Navigation.WDObjectViewNavigation;
 import gov.gsa.Pages.WageDeterminationObjectViewPage;
 import gov.gsa.Utilities.CommonUtils;
 import gov.gsa.Utilities.ObjectView;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runners.MethodSorters;
 import gov.gsa.Utilities.CommonUtils.DataField;
 
@@ -25,9 +22,10 @@ public class WDDBAObjectViewTest extends WDObjectViewHelper{
     // Any variables needed here
     @BeforeClass
     public static void start() throws InterruptedException {
-        WDObjectViewHelper.dba_searchTerm = "AZ20170007";
+        WDObjectViewHelper.dba_searchTerm = "AL20170102";
         setUp();
         WDObjectViewNavigation.gotoWDObjectView(dba_searchTerm);
+
     }
 
     @Test
@@ -42,11 +40,7 @@ public class WDDBAObjectViewTest extends WDObjectViewHelper{
         System.out.println("DBA Type is displayed");
     }
 
-    @Test
-    public void wdDBASideMenuTest() throws InterruptedException {
-        assertEquals("DBA Side Menu Element is not present", ObjectView.wdSideMenuItem(), "DBA WD # "+dba_searchTerm);
-        System.out.println("DBA Side Menu is displayed");
-    }
+
 
     @Test
     public void wdConstructionTest() throws InterruptedException{

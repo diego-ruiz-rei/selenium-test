@@ -24,7 +24,8 @@ public class WDDBASearchTest extends WDSearchHelper {
     // Any variables needed here
     @BeforeClass
     public static void start() throws InterruptedException {
-        WDSearchHelper.searchTerm = "NM20170031";
+        WDSearchHelper.searchTerm = "AK20170001";
+        //NM20170031
         WDSearchHelper.autocomplete_searchTerm = "tx20170011";
         WDSearchHelper.inactive_searchTerm = "ky20100141";
 
