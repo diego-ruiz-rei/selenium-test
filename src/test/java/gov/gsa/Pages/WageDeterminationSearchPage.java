@@ -4,6 +4,9 @@ import gov.gsa.Utilities.Base;
 import gov.gsa.Utilities.CommonUtils.DataField;
 import gov.gsa.Utilities.ObjectView;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 /**
  * Created by michael.kellogg on 1/30/17.
@@ -76,8 +79,104 @@ public class WageDeterminationSearchPage extends ObjectView {
         return new DataField("date field", label, data);
     }
 
+    //check for state name through filters
+    public static String checkStateFilter(){
+        Base.driver.findElement(By.cssSelector("#state > option:nth-of-type(2)")).click();
+        String data = Base.driver.findElement(By.cssSelector("div.usa-width-two-thirds > ul.m_T-3x > li:nth-of-type(1) > span")).getText();
+        System.out.println(data);
+        return data;
+    }
+
+    //check for county name through filters
+    public static String checkCountyFilter() throws InterruptedException {
+
+        String countyFieldValue = "";
+        Base.driver.findElement(By.cssSelector("#state > option:nth-of-type(2)")).click();
+
+        Thread.sleep(2000);
+        Base.driver.findElement(By.cssSelector("#county > option:nth-of-type(2)")).click();
+        Thread.sleep(2000);
+
+        List<WebElement> countyFieldValueElements = Base.driver.findElements(By.cssSelector("#search-results > div:nth-child(9) > wage-determination-result > div.usa-width-two-thirds > ul > li:nth-child(2)"));
+        if (countyFieldValueElements.size() > 0) {
+            for (WebElement countyTypeElement : countyFieldValueElements) {
+                countyFieldValue = countyTypeElement.getText();
+            }
+
+        }
+        String data = countyFieldValue.substring(countyFieldValue.indexOf(':')+1).trim();
+
+        return data;
+    }
+
+    //check for sca filter tag through filters
+    public static String checkSCAFilterTag() throws InterruptedException {
+        Base.driver.findElement(By.cssSelector("#radio-sca")).click();
+        String data= Base.driver.findElement(By.cssSelector(".search-page .usa-label")).getText();
+        return data;
+    }
+
+    //check for elevator services through filter
+    public static String checkElevatorServicesFilterTag() throws InterruptedException {
+        Base.driver.findElement(By.cssSelector("#radio-sca")).click();
+        Thread.sleep(2000);
+
+        Base.driver.findElement(By.cssSelector("#prevYesLocality")).click();
+        Thread.sleep(2000);
+
+        Base.driver.findElement(By.cssSelector("#cbaNo")).click();
+        Thread.sleep(2000);
+
+        Base.driver.findElement(By.id("6")).click();
+        Thread.sleep(2000);
+
+        Base.driver.findElement(By.cssSelector("#constructionType > option:nth-of-type(9)")).click();
+        Thread.sleep(2000);
+
+        String data= Base.driver.findElement(By.cssSelector("#wd-services > span")).getText();
+        return data;
+    }
+
+    //check for even number
+    public static Boolean checkForEvenWdNumber() throws InterruptedException {
+        Base.driver.findElement(By.cssSelector("#radio-sca")).click();
+        Thread.sleep(2000);
+
+        Base.driver.findElement(By.cssSelector("#prevYesDifferentLocality")).click();
+        Thread.sleep(2000);
+
+        Base.driver.findElement(By.id("noEven")).click();
+        Thread.sleep(2000);
 
 
+        String captureNumber= Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(9) > wage-determination-result > h3 > a")).getText();
+        return checkForEven(Integer.parseInt(String.valueOf(captureNumber.charAt(captureNumber.length()-1))));
+    }
 
+    //function that checks for even number
+    public static Boolean checkForEven(int numberToBeChecked){
+        if(numberToBeChecked % 2==0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    //checks for odd number
+    public static Boolean checkForOddWdNumber() throws InterruptedException {
+        Base.driver.findElement(By.cssSelector("#radio-sca")).click();
+        Thread.sleep(2000);
+
+        Base.driver.findElement(By.cssSelector("#prevNo")).click();
+        Thread.sleep(2000);
+
+        Base.driver.findElement(By.id("noOdd")).click();
+        Thread.sleep(2000);
+
+
+        String captureNumber= Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(9) > wage-determination-result > h3 > a")).getText();
+        return checkForEven(Integer.parseInt(String.valueOf(captureNumber.charAt(captureNumber.length()-1))));
+    }
 
 }

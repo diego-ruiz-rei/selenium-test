@@ -65,6 +65,38 @@ public class WDSCASearchTest extends WDSearchHelper{
         System.out.println("Inactive tag exists");
     }
 
+    //check for sca filter tag
+    @Test
+    public void scaFilterTagTest() throws InterruptedException {
+        SearchNavigation.gotoSearchResultsPage(index,"");
+        assertEquals(WageDeterminationSearchPage.checkSCAFilterTag(),"SCA WAGE DETERMINATION");
+
+    }
+
+    //check for elevator services through filters
+    @Test
+    public void selectServiceTest() throws InterruptedException {
+        SearchNavigation.gotoSearchResultsPage(index,"");
+        assertEquals(WageDeterminationSearchPage.checkElevatorServicesFilterTag(),"Elevator Services");
+
+    }
+
+    //check for even sca number through filters
+    @Test
+    public void evenNumberTest() throws InterruptedException {
+        SearchNavigation.gotoSearchResultsPage(index,"");
+        assertTrue("WD number is even", WageDeterminationSearchPage.checkForEvenWdNumber());
+    }
+
+    //check for odd sca numbers through filters
+    @Test
+    public void oddNumberTest() throws InterruptedException {
+        SearchNavigation.gotoSearchResultsPage(index,"");
+        assertTrue("WD number is even", !WageDeterminationSearchPage.checkForOddWdNumber());
+    }
+
+
+
 
     @AfterClass
     public static void end(){

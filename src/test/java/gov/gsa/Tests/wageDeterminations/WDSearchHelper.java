@@ -5,6 +5,7 @@ import gov.gsa.Pages.WageDeterminationSearchPage;
 import gov.gsa.Utilities.Base;
 import gov.gsa.Utilities.CommonUtils;
 import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -27,7 +28,13 @@ public class WDSearchHelper extends Base{
     public static String searchTerm = "";
     public static String autocomplete_searchTerm = "";
     public static String inactive_searchTerm = "";
+    public static String state_filter="Alabama";
+    public static String county_filter="Autauga";
 
+    @BeforeClass
+    public static void start() throws InterruptedException {
+        setUp();
+    }
 
     // checking pagination is greater than 0
     @Test
@@ -77,7 +84,6 @@ public class WDSearchHelper extends Base{
         testLabelContains(wdCounty, "County/ies");
     }
 
-
     @Test
     public void wdLastRevisedDateTest() throws InterruptedException {
         SearchNavigation.gotoSearchResultsPage(index, searchTerm);
@@ -86,9 +92,24 @@ public class WDSearchHelper extends Base{
         testLabelContains(wdDate, "Last Revised Date");
     }
 
+    //test to check state field contains same state name as in state filter
+    @Test
+    public void stateFilterTest() throws InterruptedException {
+        SearchNavigation.gotoSearchResultsPage(index,"");
+        assertEquals(WageDeterminationSearchPage.checkStateFilter(),state_filter);
+    }
+
+    //test to check county/ies field contains same county name as in county filter
+    @Test
+    public void countyFilterTest() throws InterruptedException {
+        SearchNavigation.gotoSearchResultsPage(index,"");
+        String countyList=WageDeterminationSearchPage.checkCountyFilter();
+        assertTrue("County/ies field contains county selected",countyList.contains(county_filter));
+    }
+
 
     @AfterClass
-    public static void end(){
+   public static void end(){
         closeOut();
     }
 
