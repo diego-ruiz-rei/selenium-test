@@ -1,5 +1,6 @@
 package gov.gsa.Tests.wageDeterminations;
 
+import gov.gsa.Navigation.HomePageNavigation;
 import gov.gsa.Navigation.SearchNavigation;
 import gov.gsa.Pages.WageDeterminationSearchPage;
 import gov.gsa.Utilities.Base;
@@ -48,6 +49,7 @@ public class WDSearchHelper extends Base{
     // keyword search - tests if search string exists in the wage determination number title
     @Test
     public void wdKeywordSearchTest() throws InterruptedException {
+        HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,searchTerm);
         DataField wdTitle = WageDeterminationSearchPage.wdNumber();
         CommonUtils.testDataContains(wdTitle, searchTerm);
@@ -56,12 +58,14 @@ public class WDSearchHelper extends Base{
     // auto complete - tests if autocomplete exists
     @Test
     public void wdAutoCompleteTest() throws InterruptedException {
+        HomePageNavigation.gotoHomePage();
         assertTrue(CommonUtils.autoCompleteExists(index,autocomplete_searchTerm));
     }
 
     // test DBA and SCA common fields exist in search results
     @Test
     public void wdStateTest() throws InterruptedException {
+        HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index, searchTerm);
         CommonUtils.DataField wdState = WageDeterminationSearchPage.wdState();
         testLabelAndDataExists(wdState);
@@ -70,6 +74,7 @@ public class WDSearchHelper extends Base{
 
     @Test
     public void wdRevisionTest() throws InterruptedException {
+        HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index, searchTerm);
         CommonUtils.DataField wdRevision = WageDeterminationSearchPage.wdRevisionNum();
         testLabelAndDataExists(wdRevision);
@@ -78,14 +83,17 @@ public class WDSearchHelper extends Base{
 
     @Test
     public void wdCountyTest() throws InterruptedException {
+        HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index, searchTerm);
         CommonUtils.DataField wdCounty = WageDeterminationSearchPage.wdCounty();
         testLabelAndDataExists(wdCounty);
         testLabelContains(wdCounty, "County/ies");
     }
 
+    //Todo: Add condition to separate published date and last revised date
     @Test
     public void wdLastRevisedDateTest() throws InterruptedException {
+        HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index, searchTerm);
         CommonUtils.DataField wdDate = WageDeterminationSearchPage.wdDate();
         testLabelAndDataExists(wdDate);
@@ -95,6 +103,7 @@ public class WDSearchHelper extends Base{
     //test to check state field contains same state name as in state filter
     @Test
     public void stateFilterTest() throws InterruptedException {
+        HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
         assertEquals(WageDeterminationSearchPage.checkStateFilter(),state_filter);
     }
@@ -102,6 +111,7 @@ public class WDSearchHelper extends Base{
     //test to check county/ies field contains same county name as in county filter
     @Test
     public void countyFilterTest() throws InterruptedException {
+        HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
         String countyList=WageDeterminationSearchPage.checkCountyFilter();
         assertTrue("County/ies field contains county selected",countyList.contains(county_filter));

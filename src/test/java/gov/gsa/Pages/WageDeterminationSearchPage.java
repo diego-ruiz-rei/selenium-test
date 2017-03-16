@@ -25,8 +25,12 @@ public class WageDeterminationSearchPage extends ObjectView {
     }
 
     // finds pagination items on fh page
-    public static Integer wdResultPageCount() {
-        return Base.driver.findElements(By.cssSelector(".page-button")).size();
+    public static Integer wdResultPageCount() throws InterruptedException {
+        Thread.sleep(2000);
+        int pageNumber= Base.driver.findElements(By.cssSelector(".page-button")).size();
+        Thread.sleep(2000);
+        return pageNumber;
+
     }
 
     // grab wage determination number field
@@ -74,7 +78,7 @@ public class WageDeterminationSearchPage extends ObjectView {
     // grab SCA Service field
     public static DataField wdService(){
         String label = Base.driver.findElement(By.cssSelector("#wd-services > strong")).getText();
-        String data = Base.driver.findElement(By.cssSelector("#wd-services) > span")).getText();
+        String data = Base.driver.findElement(By.cssSelector("#wd-services > span")).getText();
         return new DataField("Service", label, data);
     }
 
@@ -97,6 +101,7 @@ public class WageDeterminationSearchPage extends ObjectView {
     public static String checkCountyFilter() throws InterruptedException {
 
         String countyFieldValue = "";
+        Thread.sleep(2000);
         Base.driver.findElement(By.cssSelector("#state > option:nth-of-type(2)")).click();
 
         Thread.sleep(2000);
