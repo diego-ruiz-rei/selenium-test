@@ -42,8 +42,8 @@ public class WageDeterminationSearchPage extends ObjectView {
 
     // grab state field
     public static DataField wdState(){
-        String label = Base.driver.findElement(By.cssSelector("#wd-state-0 > strong")).getText();
-        String data = Base.driver.findElement(By.cssSelector("#wd-state-0 > span")).getText();
+        String label = Base.driver.findElement(By.cssSelector(".m_B-2x > li:nth-child(1)> strong")).getText();
+        String data = Base.driver.findElement(By.cssSelector(".m_B-2x > li:nth-child(1) > span")).getText();
         return new DataField("state field", label, data);
     }
 
@@ -90,10 +90,24 @@ public class WageDeterminationSearchPage extends ObjectView {
     }
 
     //check for state name through filters
-    public static String checkStateFilter(){
+    public static String checkStateFilter() throws InterruptedException {
+        String stateFieldValue="";
+        Thread.sleep(2000);
         Base.driver.findElement(By.cssSelector("#state > option:nth-of-type(2)")).click();
-        String data = Base.driver.findElement(By.cssSelector("div.usa-width-two-thirds > ul.m_T-3x > li:nth-of-type(1) > span")).getText();
+        Thread.sleep(2000);
+        List<WebElement> stateFieldElements = Base.driver.findElements(By.cssSelector(".m_B-2x > li:nth-child(1)"));
+        if (stateFieldElements.size() > 0) {
+            for (WebElement stateTypeElement : stateFieldElements) {
+                stateFieldValue = stateTypeElement.getText();
+
+            }
+
+        }
+
+
+        String data = stateFieldValue.substring(stateFieldValue.indexOf(':')+1).trim();
         System.out.println(data);
+
         return data;
     }
 
@@ -106,16 +120,20 @@ public class WageDeterminationSearchPage extends ObjectView {
 
         Thread.sleep(2000);
         Base.driver.findElement(By.cssSelector("#county > option:nth-of-type(2)")).click();
-        Thread.sleep(2000);
+        Thread.sleep(5000);
+        //System.out.println(1);
 
-        List<WebElement> countyFieldValueElements = Base.driver.findElements(By.cssSelector("#search-results > div:nth-child(9) > wage-determination-result > div.usa-width-two-thirds > ul > li:nth-child(2)"));
+        //List<WebElement> countyFieldValueElements = Base.driver.findElements(By.cssSelector("#search-results > div:nth-child(9) > wage-determination-result > div.usa-width-two-thirds > ul > li:nth-child(2)"));
+        List<WebElement> countyFieldValueElements = Base.driver.findElements(By.cssSelector("#search-results > div:nth-child(9) > wage-determination-result > div.usa-width-two-thirds"));
         if (countyFieldValueElements.size() > 0) {
             for (WebElement countyTypeElement : countyFieldValueElements) {
                 countyFieldValue = countyTypeElement.getText();
             }
 
         }
+        System.out.println("this is the county field data: " + countyFieldValueElements);
         String data = countyFieldValue.substring(countyFieldValue.indexOf(':')+1).trim();
+        System.out.println(data);
 
         return data;
     }
@@ -188,6 +206,23 @@ public class WageDeterminationSearchPage extends ObjectView {
 
         String captureNumber= Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(9) > wage-determination-result > h3 > a")).getText();
         return checkForEven(Integer.parseInt(String.valueOf(captureNumber.charAt(captureNumber.length()-1))));
+    }
+
+    //checks for displayed message
+    public static String checkAssertedMessage() throws InterruptedException {
+        Base.driver.findElement(By.cssSelector("#radio-sca")).click();
+        Thread.sleep(2000);
+
+        Base.driver.findElement(By.cssSelector("#prevYesLocality")).click();
+        Thread.sleep(2000);
+
+        Base.driver.findElement(By.cssSelector("#cbaYesBased")).click();
+        Thread.sleep(2000);
+
+
+        String data= Base.driver.findElement(By.cssSelector("div.usa-width-one > p")).getText();
+        System.out.println(data);
+        return data;
     }
 
 }

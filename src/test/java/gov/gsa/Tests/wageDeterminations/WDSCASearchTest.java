@@ -24,6 +24,7 @@ public class WDSCASearchTest extends WDSearchHelper{
     // Any variables needed here
 
     public static String services_performed="Elevator Services";
+    public static String asserted_message="Please navigate to the Service Contract Act section of the legacy WDOL site to retrieve a Collective Bargaining Agreement (CBA) WD or to create a new CBA WD";
     @BeforeClass
     public static void start() throws InterruptedException {
         WDSearchHelper.searchTerm = "1967-0442";
@@ -103,6 +104,14 @@ public class WDSCASearchTest extends WDSearchHelper{
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
         assertTrue("WD number is even", !WageDeterminationSearchPage.checkForOddWdNumber());
+    }
+
+    //check for asserted message for same locality and yes, contract based on cba
+    @Test
+    public void assertMessageTest() throws InterruptedException {
+        HomePageNavigation.gotoHomePage();
+        SearchNavigation.gotoSearchResultsPage(index,"");
+        assertEquals(WageDeterminationSearchPage.checkAssertedMessage(),asserted_message );
     }
 
 
