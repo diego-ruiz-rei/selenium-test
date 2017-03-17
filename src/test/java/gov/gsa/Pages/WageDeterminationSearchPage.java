@@ -42,15 +42,15 @@ public class WageDeterminationSearchPage extends ObjectView {
 
     // grab state field
     public static DataField wdState(){
-        String label = Base.driver.findElement(By.cssSelector("#wd-state-0 > strong")).getText();
-        String data = Base.driver.findElement(By.cssSelector("#wd-state-0 > span")).getText();
+        String label = Base.driver.findElement(By.cssSelector("#search-results > div > .usa-grid-full > .usa-width-two-thirds .usa-unstyled-list > li:nth-child(1) > strong")).getText();
+        String data = Base.driver.findElement(By.cssSelector("#search-results > div > .usa-grid-full > .usa-width-two-thirds .usa-unstyled-list > li:nth-child(1) > span")).getText();
         return new DataField("state field", label, data);
     }
 
     // grab county field
     public static DataField wdCounty(){
 
-        String county = Base.driver.findElement(By.id("wd-counties-0")).getText();
+        String county = Base.driver.findElement(By.cssSelector("#search-results > div > .usa-grid-full > .usa-width-two-thirds .usa-unstyled-list > li:nth-child(2)")).getText();
         return CommonUtils.splitLabelAndData(county).setName("county");
         /*
         String label = Base.driver.findElement(By.cssSelector("# > strong")).getText();
@@ -92,7 +92,7 @@ public class WageDeterminationSearchPage extends ObjectView {
     //check for state name through filters
     public static String checkStateFilter(){
         Base.driver.findElement(By.cssSelector("#state > option:nth-of-type(2)")).click();
-        String data = Base.driver.findElement(By.cssSelector("div.usa-width-two-thirds > ul.m_T-3x > li:nth-of-type(1) > span")).getText();
+        String data = Base.driver.findElement(By.cssSelector(".usa-width-two-thirds #search-results > div > .usa-grid-full > .usa-width-two-thirds .usa-unstyled-list > li > span")).getText();
         System.out.println(data);
         return data;
     }

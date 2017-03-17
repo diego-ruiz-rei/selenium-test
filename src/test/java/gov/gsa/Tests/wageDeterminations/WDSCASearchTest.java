@@ -4,10 +4,7 @@ import gov.gsa.Navigation.HomePageNavigation;
 import gov.gsa.Navigation.SearchNavigation;
 import gov.gsa.Pages.WageDeterminationSearchPage;
 import gov.gsa.Utilities.CommonUtils;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runners.MethodSorters;
 
 import static gov.gsa.Utilities.CommonUtils.testLabelAndDataExists;
@@ -24,6 +21,7 @@ public class WDSCASearchTest extends WDSearchHelper{
     // Any variables needed here
 
     public static String services_performed="Elevator Services";
+
     @BeforeClass
     public static void start() throws InterruptedException {
         WDSearchHelper.searchTerm = "1967-0442";
@@ -32,10 +30,14 @@ public class WDSCASearchTest extends WDSearchHelper{
         setUp();
     }
 
+    @Before
+    public void init() throws InterruptedException {
+        HomePageNavigation.gotoHomePage();
+    }
+
     // empty search - tests wd tag shows up above results and that pagination is greater than 1
     @Test
     public void wdEmptySearchTest() throws InterruptedException {
-        HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index, " ");
         System.out.println(WageDeterminationSearchPage.wdTag());
         assertEquals(WageDeterminationSearchPage.wdTag(), "DBA WAGE DETERMINATION");
@@ -44,7 +46,6 @@ public class WDSCASearchTest extends WDSearchHelper{
 
     @Test
     public void wdSCATitleTest() throws InterruptedException {
-        HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index, searchTerm);
         CommonUtils.DataField wdTitle = WageDeterminationSearchPage.wdNumber();
         testLabelAndDataExists(wdTitle);
@@ -53,7 +54,6 @@ public class WDSCASearchTest extends WDSearchHelper{
 
     @Test
     public void wdSCAServiceTest() throws InterruptedException {
-        HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index, searchTerm);
         CommonUtils.DataField wdService = WageDeterminationSearchPage.wdService();
         testLabelAndDataExists(wdService);
@@ -64,7 +64,6 @@ public class WDSCASearchTest extends WDSearchHelper{
     // check if inactive tag exists for SCA
     @Test
     public void inactiveTagTestSCA() throws InterruptedException {
-        HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoIsActiveFalseSearch(index,inactive_searchTerm);
         System.out.println(WageDeterminationSearchPage.wdInactiveTag());
         assertEquals(WageDeterminationSearchPage.wdInactiveTag(), "INACTIVE");
@@ -74,7 +73,6 @@ public class WDSCASearchTest extends WDSearchHelper{
     //check for sca filter tag
     @Test
     public void scaFilterTagTest() throws InterruptedException {
-        HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
         assertEquals(WageDeterminationSearchPage.checkSCAFilterTag(),"SCA WAGE DETERMINATION");
 
@@ -83,7 +81,6 @@ public class WDSCASearchTest extends WDSearchHelper{
     //check for elevator services through filters
     @Test
     public void selectServiceTest() throws InterruptedException {
-        HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
         assertEquals(WageDeterminationSearchPage.checkElevatorServicesFilterTag(),services_performed);
 
@@ -92,7 +89,6 @@ public class WDSCASearchTest extends WDSearchHelper{
     //check for even sca number through filters
     @Test
     public void evenNumberTest() throws InterruptedException {
-        HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
         assertTrue("WD number is even", WageDeterminationSearchPage.checkForEvenWdNumber());
     }
@@ -100,13 +96,9 @@ public class WDSCASearchTest extends WDSearchHelper{
     //check for odd sca numbers through filters
     @Test
     public void oddNumberTest() throws InterruptedException {
-        HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
         assertTrue("WD number is even", !WageDeterminationSearchPage.checkForOddWdNumber());
     }
-
-
-
 
     @AfterClass
     public static void end(){
