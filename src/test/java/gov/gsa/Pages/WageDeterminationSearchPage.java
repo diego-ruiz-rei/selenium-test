@@ -42,15 +42,20 @@ public class WageDeterminationSearchPage extends ObjectView {
 
     // grab state field
     public static DataField wdState(){
+<<<<<<< HEAD
         String label = Base.driver.findElement(By.cssSelector(".m_B-2x > li:nth-child(1)> strong")).getText();
         String data = Base.driver.findElement(By.cssSelector(".m_B-2x > li:nth-child(1) > span")).getText();
+=======
+        String label = Base.driver.findElement(By.cssSelector("#search-results > div > .usa-grid-full > .usa-width-two-thirds .usa-unstyled-list > li:nth-child(1) > strong")).getText();
+        String data = Base.driver.findElement(By.cssSelector("#search-results > div > .usa-grid-full > .usa-width-two-thirds .usa-unstyled-list > li:nth-child(1) > span")).getText();
+>>>>>>> 2b034e1918df312c0135b0cfa173d37993e2da62
         return new DataField("state field", label, data);
     }
 
     // grab county field
     public static DataField wdCounty(){
 
-        String county = Base.driver.findElement(By.id("wd-counties-0")).getText();
+        String county = Base.driver.findElement(By.cssSelector("#search-results > div > .usa-grid-full > .usa-width-two-thirds .usa-unstyled-list > li:nth-child(2)")).getText();
         return CommonUtils.splitLabelAndData(county).setName("county");
         /*
         String label = Base.driver.findElement(By.cssSelector("# > strong")).getText();
@@ -94,6 +99,7 @@ public class WageDeterminationSearchPage extends ObjectView {
         String stateFieldValue="";
         Thread.sleep(2000);
         Base.driver.findElement(By.cssSelector("#state > option:nth-of-type(2)")).click();
+<<<<<<< HEAD
         Thread.sleep(2000);
         List<WebElement> stateFieldElements = Base.driver.findElements(By.cssSelector(".m_B-2x > li:nth-child(1)"));
         if (stateFieldElements.size() > 0) {
@@ -106,6 +112,9 @@ public class WageDeterminationSearchPage extends ObjectView {
 
 
         String data = stateFieldValue.substring(stateFieldValue.indexOf(':')+1).trim();
+=======
+        String data = Base.driver.findElement(By.cssSelector(".usa-width-two-thirds #search-results > div > .usa-grid-full > .usa-width-two-thirds .usa-unstyled-list > li > span")).getText();
+>>>>>>> 2b034e1918df312c0135b0cfa173d37993e2da62
         System.out.println(data);
 
         return data;
