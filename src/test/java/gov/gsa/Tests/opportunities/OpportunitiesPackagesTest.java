@@ -23,7 +23,7 @@ import static org.junit.Assert.*;
 public class OpportunitiesPackagesTest extends Base{
 
     //Test Data - Notice Ids
-    public String external_Link_package = "33274e2fa53eb34a24c4da02b0edfb26";//Test for external link
+    public String external_Link_package = "21f67404bc869fa8ddc3d4a455b00dfc";//Test for external link
     public String single_package = "1954a3b14efff49e70c9ccf239e7e951";
     public String no_package = "165b3db50efea022a78c95872079cfd0";
     public String multiple_packages = "10460d4fd45a82cc5d85f0b7693138a0";
@@ -60,7 +60,7 @@ public class OpportunitiesPackagesTest extends Base{
     @Test
     public void externalLinkTest() throws InterruptedException {
         OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(external_Link_package);
-        assertEquals(OpportunitiesObjectViewPage.externalLink(), "See Solicitation");
+        assertEquals(OpportunitiesObjectViewPage.externalLink(), "Solicitation");
         System.out.println("Packages - External Link exists");
     }
 

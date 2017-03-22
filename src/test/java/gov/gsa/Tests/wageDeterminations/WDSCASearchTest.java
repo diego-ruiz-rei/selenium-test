@@ -21,34 +21,29 @@ public class WDSCASearchTest extends WDSearchHelper{
     // Any variables needed here
 
     public static String services_performed="Elevator Services";
-
     public static String asserted_message="Please navigate to the Service Contract Act section of the legacy WDOL site to retrieve a Collective Bargaining Agreement (CBA) WD or to create a new CBA WD";
 
     @BeforeClass
     public static void start() throws InterruptedException {
+        WDSearchHelper.wd_type = "SCA";
         WDSearchHelper.searchTerm = "1967-0442";
         WDSearchHelper.autocomplete_searchTerm = "1973-0479";
         WDSearchHelper.inactive_searchTerm = "1994-2002";
         setUp();
     }
 
-    @Before
-    public void init() throws InterruptedException {
-        HomePageNavigation.gotoHomePage();
-    }
-
     // empty search - tests wd tag shows up above results and that pagination is greater than 1
     @Test
     public void wdEmptySearchTest() throws InterruptedException {
-        SearchNavigation.gotoSearchResultsPage(index, " ");
+        SearchNavigation.gotoSCASearch(index, " ");
         System.out.println(WageDeterminationSearchPage.wdTag());
-        assertEquals(WageDeterminationSearchPage.wdTag(), "DBA WAGE DETERMINATION");
+        assertEquals("Empty Search does not render any results",WageDeterminationSearchPage.wdTag(), "SCA WAGE DETERMINATION");
         System.out.println("Wage Determination tag exists");
     }
 
     @Test
     public void wdSCATitleTest() throws InterruptedException {
-        SearchNavigation.gotoSearchResultsPage(index, searchTerm);
+        SearchNavigation.gotoSCASearch(index, searchTerm);
         CommonUtils.DataField wdTitle = WageDeterminationSearchPage.wdNumber();
         testLabelAndDataExists(wdTitle);
         testLabelContains(wdTitle, "SCA Wage Determination");
@@ -56,7 +51,7 @@ public class WDSCASearchTest extends WDSearchHelper{
 
     @Test
     public void wdSCAServiceTest() throws InterruptedException {
-        SearchNavigation.gotoSearchResultsPage(index, searchTerm);
+        SearchNavigation.gotoSCASearch(index, searchTerm);
         CommonUtils.DataField wdService = WageDeterminationSearchPage.wdService();
         testLabelAndDataExists(wdService);
         testLabelContains(wdService, "Service");
@@ -68,51 +63,68 @@ public class WDSCASearchTest extends WDSearchHelper{
     public void inactiveTagTestSCA() throws InterruptedException {
         SearchNavigation.gotoIsActiveFalseSearch(index,inactive_searchTerm);
         System.out.println(WageDeterminationSearchPage.wdInactiveTag());
-        assertEquals(WageDeterminationSearchPage.wdInactiveTag(), "INACTIVE");
+        assertEquals("Inactive Tag is not present",WageDeterminationSearchPage.wdInactiveTag(), "INACTIVE");
         System.out.println("Inactive tag exists");
     }
 
     //check for sca filter tag
     @Test
     public void scaFilterTagTest() throws InterruptedException {
-        SearchNavigation.gotoSearchResultsPage(index,"");
-        assertEquals(WageDeterminationSearchPage.checkSCAFilterTag(),"SCA WAGE DETERMINATION");
+        SearchNavigation.gotoSCASearch(index,"");
+        assertEquals("SCA Wage Determination Tag is not present",WageDeterminationSearchPage.checkSCAFilterTag(),"SCA WAGE DETERMINATION");
 
     }
 
     //check for elevator services through filters
     @Test
-    public void selectServiceTest() throws InterruptedException {
-        SearchNavigation.gotoSearchResultsPage(index,"");
-        assertEquals(WageDeterminationSearchPage.checkElevatorServicesFilterTag(),services_performed);
-
+    public void standardServiceFilterTest() throws InterruptedException {
+        SearchNavigation.gotoSCASearch(index,"");
+        assertEquals("Search results does not match with Service Filter",WageDeterminationSearchPage.checkElevatorServicesFilterTag(),services_performed);
     }
 
     //check for even sca number through filters
     @Test
-    public void evenNumberTest() throws InterruptedException {
-        SearchNavigation.gotoSearchResultsPage(index,"");
-        assertTrue("WD number is even", WageDeterminationSearchPage.checkForEvenWdNumber());
+    public void standardServiceEvenNumberFilterTest() throws InterruptedException {
+        SearchNavigation.gotoSCASearch(index,"");
+        assertTrue("Search results does not contain Even Number", WageDeterminationSearchPage.checkForEvenWdNumber());
     }
 
     //check for odd sca numbers through filters
     @Test
-    public void oddNumberTest() throws InterruptedException {
-        SearchNavigation.gotoSearchResultsPage(index,"");
-        assertTrue("WD number is even", !WageDeterminationSearchPage.checkForOddWdNumber());
+    public void standardServiceOddNumberFilterTest() throws InterruptedException {
+        SearchNavigation.gotoSCASearch(index,"");
+        assertTrue("Search results does not contain Odd Number", !WageDeterminationSearchPage.checkForOddWdNumber());
     }
 
     //check for asserted message for same locality and yes, contract based on cba
     @Test
-    public void assertMessageTest() throws InterruptedException {
+    public void subjectToCBAFilterTest() throws InterruptedException {
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
-        assertEquals(WageDeterminationSearchPage.checkAssertedMessage(),asserted_message );
+        assertEquals("Search Result does not contain message for Subject to CBA Filter",WageDeterminationSearchPage.checkAssertedMessage(),asserted_message );
     }
 
+    //Check for Published/Last Revised Date
+    @Test
+    public void wdSCADateTest() throws InterruptedException{
+        SearchNavigation.gotoSCASearch(index, searchTerm);
+        CommonUtils.DataField revision = WageDeterminationSearchPage.wdRevisionNum();
+        CommonUtils.DataField date = WageDeterminationSearchPage.wdDate();
+        testLabelAndDataExists(date);
+        if(new Integer(revision.data) == 1){
+            testLabelContains(date,"Published Date");
+            System.out.println("Published Date Field is Present in SCA Search");
+        }
+        else{
+            testLabelContains(date,"Last Revised Date");
+            System.out.println("Last Revised Date Field is Present in SCA Search");
+        }
+    }
 
-
-
+    @After
+    public void clearFilter(){
+        WageDeterminationSearchPage.clearAll();
+    }
 
     @AfterClass
     public static void end(){

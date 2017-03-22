@@ -265,9 +265,10 @@ public class OpportunitiesObjectViewPage extends ObjectView {
     //Packages - Secure packages Count
     public static ArrayList<Integer> secureNotSecurePackagesCount() throws InterruptedException {
         packagesExpand();
-        Thread.sleep(1000);
+        Thread.sleep(5000);
         int secureCount = Base.driver.findElements(By.cssSelector(".card-extra-content .fa.fa-lock")).size();
         int notSecuredCount = Base.driver.findElements(By.cssSelector("i.fa.fa-unlock")).size();
+        System.out.println("Secured Count "+secureCount+"\nNot Secured Count "+notSecuredCount);
         ArrayList<Integer> ar = new ArrayList<Integer>();
         ar.add(secureCount);
         ar.add(notSecuredCount);

@@ -1,11 +1,11 @@
 package gov.gsa.Pages;
 
 import gov.gsa.Utilities.Base;
-import gov.gsa.Utilities.CommonUtils;
 import gov.gsa.Utilities.CommonUtils.DataField;
 import gov.gsa.Utilities.ObjectView;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -42,24 +42,20 @@ public class WageDeterminationSearchPage extends ObjectView {
 
     // grab state field
     public static DataField wdState(){
-
-        String label = Base.driver.findElement(By.cssSelector(".m_B-2x > li:nth-child(1)> strong")).getText();
-        String data = Base.driver.findElement(By.cssSelector(".m_B-2x > li:nth-child(1) > span")).getText();
-
+        String label = Base.driver.findElement(By.cssSelector("#wd-state-0 > strong")).getText();
+        String data = Base.driver.findElement(By.cssSelector("#wd-state-0 > span")).getText();
+        System.out.println("Field Label : "+label+" Data : "+data);
         return new DataField("state field", label, data);
     }
 
     // grab county field
     public static DataField wdCounty(){
-
-        String county = Base.driver.findElement(By.cssSelector("#search-results > div > .usa-grid-full > .usa-width-two-thirds .usa-unstyled-list > li:nth-child(2)")).getText();
-        return CommonUtils.splitLabelAndData(county).setName("county");
-        /*
-        String label = Base.driver.findElement(By.cssSelector("# > strong")).getText();
-        String data_element = Base.driver.findElement(By.cssSelector("#wd-counties-0 > span")).getText();
+        String label = Base.driver.findElement(By.cssSelector("#wd-counties-0 > strong")).getText();
+        String data_element = Base.driver.findElement(By.cssSelector("#wd-counties-0")).getText();
         String data = data_element.substring(data_element.indexOf(':')+1).trim();
+        System.out.println("Field Label : "+label+" Data : "+data);
         return new DataField("county field", label, data);
-        */
+
     }
 
     // grab revision number field
@@ -96,51 +92,21 @@ public class WageDeterminationSearchPage extends ObjectView {
         String stateFieldValue="";
         Thread.sleep(2000);
         Base.driver.findElement(By.cssSelector("#state > option:nth-of-type(2)")).click();
-
         Thread.sleep(2000);
-        List<WebElement> stateFieldElements = Base.driver.findElements(By.cssSelector(".m_B-2x > li:nth-child(1)"));
-        if (stateFieldElements.size() > 0) {
-            for (WebElement stateTypeElement : stateFieldElements) {
-                stateFieldValue = stateTypeElement.getText();
-
-            }
-
-        }
-
-
-        String data = stateFieldValue.substring(stateFieldValue.indexOf(':')+1).trim();
-
-
-        System.out.println(data);
-
-        return data;
+        DataField state = wdState();
+        return String.valueOf(state.data);
     }
 
     //check for county name through filters
     public static String checkCountyFilter() throws InterruptedException {
-
         String countyFieldValue = "";
         Thread.sleep(2000);
         Base.driver.findElement(By.cssSelector("#state > option:nth-of-type(2)")).click();
-
         Thread.sleep(2000);
         Base.driver.findElement(By.cssSelector("#county > option:nth-of-type(2)")).click();
-        Thread.sleep(5000);
-        //System.out.println(1);
-
-        //List<WebElement> countyFieldValueElements = Base.driver.findElements(By.cssSelector("#search-results > div:nth-child(9) > wage-determination-result > div.usa-width-two-thirds > ul > li:nth-child(2)"));
-        List<WebElement> countyFieldValueElements = Base.driver.findElements(By.cssSelector("#search-results > div:nth-child(9) > wage-determination-result > div.usa-width-two-thirds"));
-        if (countyFieldValueElements.size() > 0) {
-            for (WebElement countyTypeElement : countyFieldValueElements) {
-                countyFieldValue = countyTypeElement.getText();
-            }
-
-        }
-        System.out.println("this is the county field data: " + countyFieldValueElements);
-        String data = countyFieldValue.substring(countyFieldValue.indexOf(':')+1).trim();
-        System.out.println(data);
-
-        return data;
+        Thread.sleep(2000);
+        DataField county = wdCounty();
+        return county.data;
     }
 
     //check for sca filter tag through filters
@@ -154,19 +120,14 @@ public class WageDeterminationSearchPage extends ObjectView {
     public static String checkElevatorServicesFilterTag() throws InterruptedException {
         Base.driver.findElement(By.cssSelector("#radio-sca")).click();
         Thread.sleep(2000);
-
         Base.driver.findElement(By.cssSelector("#prevYesLocality")).click();
         Thread.sleep(2000);
-
         Base.driver.findElement(By.cssSelector("#cbaNo")).click();
         Thread.sleep(2000);
-
         Base.driver.findElement(By.id("6")).click();
         Thread.sleep(2000);
-
         Base.driver.findElement(By.cssSelector("#constructionType > option:nth-of-type(9)")).click();
         Thread.sleep(2000);
-
         String data= Base.driver.findElement(By.cssSelector("#wd-services > span")).getText();
         return data;
     }
@@ -183,7 +144,7 @@ public class WageDeterminationSearchPage extends ObjectView {
         Thread.sleep(2000);
 
 
-        String captureNumber= Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(9) > wage-determination-result > h3 > a")).getText();
+        String captureNumber= Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > wage-determination-result > h3 > a")).getText();
         return checkForEven(Integer.parseInt(String.valueOf(captureNumber.charAt(captureNumber.length()-1))));
     }
 
@@ -209,7 +170,7 @@ public class WageDeterminationSearchPage extends ObjectView {
         Thread.sleep(2000);
 
 
-        String captureNumber= Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(9) > wage-determination-result > h3 > a")).getText();
+        String captureNumber= Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > wage-determination-result > h3 > a")).getText();
         return checkForEven(Integer.parseInt(String.valueOf(captureNumber.charAt(captureNumber.length()-1))));
     }
 
@@ -230,4 +191,7 @@ public class WageDeterminationSearchPage extends ObjectView {
         return data;
     }
 
+    public static void clearAll() {
+        Base.driver.findElement(By.xpath("//button[text()='Clear All']")).click();
+    }
 }

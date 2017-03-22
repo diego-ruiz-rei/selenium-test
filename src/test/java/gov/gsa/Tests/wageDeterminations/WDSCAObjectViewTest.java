@@ -69,6 +69,13 @@ public class WDSCAObjectViewTest extends WDObjectViewHelper{
         }
     }
 
+    @Test
+    public void wdMultipleStateCountyCountTest() throws InterruptedException{
+        assertTrue("Multiple State/Counties are not displayed",WageDeterminationObjectViewPage.multipleStateCountiesCount() > 1);
+        System.out.println("Multiple States and Counties Fields are Present in the WD Object View page");
+    }
+
+
     @AfterClass
     public static void end(){
         closeOut();

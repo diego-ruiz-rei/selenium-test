@@ -60,12 +60,6 @@ public class WDObjectViewHelper extends Base{
         System.out.println("State Field is Present in the WD Object View page");
     }
 
-    @Test
-    public void wdMultipleStateCountyCountTest() throws InterruptedException{
-        assertTrue("Multiple State/Counties are not displayed",WageDeterminationObjectViewPage.multipleStateCountiesCount() > 1);
-        System.out.println("Multiple States and Counties Fields are Present in the WD Object View page");
-    }
-
 
     /*TODO create tests for Search and Object View Data Match
     @Test
