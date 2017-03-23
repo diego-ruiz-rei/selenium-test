@@ -4,17 +4,19 @@ import gov.gsa.Utilities.Base;
 import gov.gsa.Utilities.CommonUtils;
 import gov.gsa.Utilities.CommonUtils.DataField;
 import gov.gsa.Utilities.ObjectView;
-import gov.gsa.Utilities.CommonUtils.*;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import javax.net.ssl.HttpsURLConnection;
-import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class OpportunitiesObjectViewPage extends ObjectView {
@@ -422,6 +424,146 @@ int code = 0;
         String specialLegislation = Base.driver.findElement(By.id("opportunity-general-special-legislation")).getText();
         return CommonUtils.splitLabelAndData(specialLegislation).setName("Special Legislation");
     }
+
+    //View/Hide Changes
+    public static String viewHideChangesButton(String sectionId) throws InterruptedException {
+        WebElement element = (WebElement) Base.wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[text()='Hide Changes']")));
+        return Base.driver.findElement(By.id(sectionId)).getText();
+    }
+
+    public static String synopsisViewHideChangesButton() throws InterruptedException {
+        Base.driver.findElement(By.id("defaultBtnSynopsis")).click();
+        return viewHideChangesButton("defaultBtnSynopsis");
+    }
+
+    public static String generalInformationViewHideChangesButton() throws InterruptedException {
+        Base.driver.findElement(By.id("defaultBtnGeneral")).click();
+        return viewHideChangesButton("defaultBtnGeneral");
+    }
+
+    public static String classificationViewHideChangesButton() throws InterruptedException {
+        Base.driver.findElement(By.id("defaultBtnClassification")).click();
+        return viewHideChangesButton("defaultBtnClassification");
+    }
+
+    //changes from date
+    public static String changesFrom(String sectionId) throws InterruptedException, ParseException {
+        //Base.driver.findElement(By.id("defaultBtnSynopsis")).click();
+        WebElement element = (WebElement) Base.wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[text()='Hide Changes']")));
+
+        String changesFromText = Base.driver.findElement(By.cssSelector("#"+sectionId+" > h2 > span")).getText();
+        String Date = changesFromText.substring(changesFromText.indexOf("from")+5).trim();
+        System.out.println("Date "+Date);
+        return Date;
+    }
+
+    public static String synopsisChangesFrom() throws InterruptedException, ParseException {
+        Base.driver.findElement(By.id("defaultBtnSynopsis")).click();
+        return changesFrom("opportunity-synopsis");
+    }
+
+    public static String generalInformationChangesFrom() throws InterruptedException, ParseException {
+        Base.driver.findElement(By.id("defaultBtnGeneral")).click();
+        return changesFrom("opportunity-general");
+    }
+
+    public static String classificationChangesFrom() throws InterruptedException, ParseException {
+        Thread.sleep(2000);
+        Base.driver.findElement(By.id("defaultBtnClassification")).click();
+        return changesFrom("opportunity-classification");
+    }
+
+
+    public static String tagExists(String sectionID,String cssSelectorText) throws InterruptedException, ParseException {
+        //Base.driver.findElement(By.id("defaultBtnSynopsis")).click();
+        WebElement element = (WebElement) Base.wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[text()='Hide Changes']")));
+
+        WebElement field_content= Base.driver.findElement(By.cssSelector(cssSelectorText));
+        String updated_data = null;
+        if (field_content.findElements(By.tagName("strike")).size()>0)
+            updated_data = field_content.findElement(By.tagName("strike")).getText();
+        else if (field_content.findElements(By.tagName("u")).size()>0)
+            updated_data = field_content.findElement(By.tagName("u")).getText();
+        else if (field_content.findElements(By.cssSelector("#"+sectionID+" > div > span > font > i")).size()>0)
+            updated_data = field_content.findElement(By.cssSelector("#"+sectionID+" > div > span > font > i")).getText();
+        else if (field_content.findElements(By.cssSelector("#"+sectionID+" > span > font > i")).size()>0)
+            updated_data = field_content.findElement(By.cssSelector("#"+sectionID+" > span > font > i")).getText();
+        else if (field_content.findElements(By.cssSelector("#"+sectionID+" > ul > span > font > i")).size()>0)
+            updated_data = field_content.findElement(By.cssSelector("#"+sectionID+" > ul > span > font > i")).getText();
+        else
+            updated_data = "";
+        System.out.println("Updated Data : "+updated_data);
+        return updated_data;
+    }
+
+    public static String generalInformationUpdateResponseDateTagExists() throws InterruptedException, ParseException {
+        Base.driver.findElement(By.id("defaultBtnGeneral")).click();
+        return tagExists("opportunity-general-response-date","#opportunity-general-response-date > span ");
+    }
+
+    public static String generalInformationArchivingPolicyTagExists() throws InterruptedException, ParseException {
+        Base.driver.findElement(By.id("defaultBtnGeneral")).click();
+        return tagExists("opportunity-general-response-date","#opportunity-general-archiving-policy > span");
+    }
+
+    public static String generalInformationUpdateArchiveDateTagExists() throws InterruptedException, ParseException {
+        Base.driver.findElement(By.id("defaultBtnGeneral")).click();
+        return tagExists("opportunity-general-archive-date","#opportunity-general-archive-date > span ");
+    }
+
+    public static String generalInformationSpecialLegislationTagExists() throws InterruptedException, ParseException {
+        Base.driver.findElement(By.id("defaultBtnGeneral")).click();
+        return tagExists("opportunity-general-special-legislation","#opportunity-general-special-legislation > span");
+    }
+
+    public static String synopsisTagExists() throws InterruptedException, ParseException {
+        Base.driver.findElement(By.id("defaultBtnSynopsis")).click();
+        return tagExists("opportunity-synopsis","#opportunity-synopsis > .usa-changes");
+    }
+
+    public static String classificationUpdateSetAsideTagExists() throws InterruptedException, ParseException {
+        Base.driver.findElement(By.id("defaultBtnClassification")).click();
+        return tagExists("opportunity-classification-set-aside","#opportunity-classification-set-aside > span");
+    }
+
+    public static String classificationCodeTagExists() throws InterruptedException, ParseException {
+        Base.driver.findElement(By.id("defaultBtnClassification")).click();
+        return tagExists("opportunity-classification-classification-code","#opportunity-classification-classification-code > span");
+    }
+
+    public static String classificationNAICSTagExists() throws InterruptedException, ParseException {
+        Base.driver.findElement(By.id("defaultBtnClassification")).click();
+        return tagExists("opportunity-classification-set-aside","#opportunity-classification-naics-code > pre");
+    }
+
+    public static String classificationPlaceOfPerformanceTagExists() throws InterruptedException, ParseException {
+        Base.driver.findElement(By.id("defaultBtnClassification")).click();
+        return tagExists("opportunity-classification","#opportunity-classification > ul > span ");
+    }
+
+    //Finds current element and then index of previous element in History Section
+    public static String historySectionDate() throws InterruptedException,ParseException {
+        WebElement element = (WebElement) Base.wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.id("opportunity-history")));
+        List<WebElement> history_section = Base.driver.findElements(By.cssSelector("#opportunity-history > sam-history > ul > li"));
+        Integer index = null;
+        if(history_section.size() > 0) {
+            for (WebElement history : history_section) {
+                String className = history.getAttribute("class");
+                if(history.getAttribute("class").equals("current")){
+                    index = history_section.indexOf(history);
+                }
+            }
+            System.out.println("Index : "+index);
+        }
+        String historyDate = Base.driver.findElement(By.cssSelector("#opportunity-history > sam-history > ul > li:nth-child("+index+") > span > strong")).getText();
+        String date = CommonUtils.formatDate(historyDate);
+        return date;
+    }
+
 }
 
 

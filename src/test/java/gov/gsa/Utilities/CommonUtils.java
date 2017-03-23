@@ -6,6 +6,9 @@ import gov.gsa.Pages.SearchPage;
 import gov.gsa.Pages.WageDeterminationSearchPage;
 import org.openqa.selenium.By;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.function.Predicate;
 
 import static jdk.nashorn.internal.objects.NativeRegExp.test;
@@ -138,6 +141,7 @@ public class CommonUtils {
         return false;
     }
 
+    //spilt label and data
     public static DataField splitLabelAndData(String element) {
         String fieldLabel = element.substring(0, element.indexOf(':')).trim(); // get all up to but not including colon
         String fieldData = element.substring(element.indexOf(':') + 1).trim(); // get all after and not including colon
@@ -146,5 +150,14 @@ public class CommonUtils {
         return new DataField(null, fieldLabel, fieldData);
     }
 
+    //parse string and format to Date format
+    public static String formatDate(String dateString) throws ParseException {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm");
+        Date date = simpleDateFormat.parse(dateString);
+
+        simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        System.out.println("Formatted Date : " + simpleDateFormat.format(date));
+        return simpleDateFormat.format(date);
+    }
 
 }
