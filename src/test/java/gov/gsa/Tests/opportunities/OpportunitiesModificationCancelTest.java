@@ -44,6 +44,10 @@ public class OpportunitiesModificationCancelTest extends Base {
     public static String general_information_view_changes_opportunity = "d79c65bcad52fb8d1cd5bb6a1e26f151";
     public static String special_legislation_view_changes_opportunity = "6261e9d373fffcb3f05bc067447e1a7a";
 
+    //Test Data for History Section
+    public static String history_section = "c752657782129a4eddc1e39675a40c52";
+    public static String message = "Note: There have been updates to this opportunity. To view the most recent update/amendment, click here";
+
 
     @BeforeClass
     public static void start() throws InterruptedException {
@@ -109,7 +113,7 @@ public class OpportunitiesModificationCancelTest extends Base {
     @Test
     public void synopsisChangesFromDateTest() throws InterruptedException, ParseException {
         OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(synopsis_view_changes_opportunity);
-        assertTrue("Date does not match",OpportunitiesObjectViewPage.synopsisChangesFrom().contains(OpportunitiesObjectViewPage.historySectionDate()));
+        assertTrue("Date does not match",OpportunitiesObjectViewPage.synopsisChangesFrom().contains(CommonUtils.formatDate(OpportunitiesObjectViewPage.historySectionDate())));
     }
 
     @Test
@@ -133,7 +137,7 @@ public class OpportunitiesModificationCancelTest extends Base {
     @Test
     public void generalInformationChangesFromDateTest() throws InterruptedException, ParseException {
         OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(general_information_view_changes_opportunity);
-        assertTrue("Date does not match",OpportunitiesObjectViewPage.generalInformationChangesFrom().contains(OpportunitiesObjectViewPage.historySectionDate()));
+        assertTrue("Date does not match",OpportunitiesObjectViewPage.generalInformationChangesFrom().contains(CommonUtils.formatDate(OpportunitiesObjectViewPage.historySectionDate())));
     }
 
     @Test
@@ -169,7 +173,7 @@ public class OpportunitiesModificationCancelTest extends Base {
     @Test
     public void classificationChangesFromDateTest() throws InterruptedException, ParseException {
         OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(classification_view_changes_opportunity);
-        assertTrue("Date does not match",OpportunitiesObjectViewPage.classificationChangesFrom().contains(OpportunitiesObjectViewPage.historySectionDate()));
+        assertTrue("Date does not match",OpportunitiesObjectViewPage.classificationChangesFrom().contains(CommonUtils.formatDate(OpportunitiesObjectViewPage.historySectionDate())));
     }
 
     @Test
@@ -188,6 +192,44 @@ public class OpportunitiesModificationCancelTest extends Base {
     public void classificationPlaceOfPerformanceTagExistsTest() throws InterruptedException, ParseException {
         OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(classification_view_changes_opportunity);
         assertTrue("There are no updates to Place of Performance Text",OpportunitiesObjectViewPage.classificationPlaceOfPerformanceTagExists().length()>=1);
+    }
+
+    //History Section tests
+    @Test
+    public void historySectionTitleTest() throws InterruptedException, ParseException {
+        OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(history_section);
+        assertTrue("History Section Title does not exist",OpportunitiesObjectViewPage.historySectionTitle().equals("History"));
+    }
+
+    @Test
+    public void historySectionCountTest() throws InterruptedException, ParseException {
+        OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(history_section);
+        assertTrue("History Section does not contains notices",OpportunitiesObjectViewPage.historySectionCount()>1);
+    }
+
+    @Test
+    public void originalNoticeTextTest() throws InterruptedException, ParseException {
+        OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(history_section);
+        assertTrue("History Section does not contains notices",OpportunitiesObjectViewPage.originalNoticeText().contains("Original"));
+    }
+
+    @Test
+    public void previousVersionTest() throws InterruptedException, ParseException {
+        OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(history_section);
+        String history_section_date = OpportunitiesObjectViewPage.historySectionDate();
+        assertTrue("History Section - Previous Version link does not lead to correct page",history_section_date.contains(OpportunitiesObjectViewPage.previousVersionNoticePage()));
+    }
+
+    @Test
+    public void updatedVersionMessageLink() throws InterruptedException, ParseException {
+        OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(history_section);
+        assertTrue("History Section - Previous Version Message is not displayed",OpportunitiesObjectViewPage.updatedNoticeMessage().equals(message));
+    }
+
+    @Test
+    public void updatedVersionLinkTest() throws InterruptedException, ParseException {
+        OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(history_section);
+        assertTrue("History Section - Previous Version Message does not lead to correct page",OpportunitiesObjectViewPage.updatedNoticeLink().equals("current"));
     }
 
     @AfterClass

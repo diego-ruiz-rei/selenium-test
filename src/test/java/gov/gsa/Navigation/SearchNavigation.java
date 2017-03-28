@@ -17,7 +17,7 @@ public class SearchNavigation{
         Base.driver.findElement(By.cssSelector(".search-inputbar")).sendKeys(searchTerm);
         new Select(Base.driver.findElement(By.id("filter"))).selectByVisibleText(index);
         Base.driver.findElement(By.cssSelector(".search-btn")).click();
-        Thread.sleep(2000);
+        Thread.sleep(3000);
 
     }
 

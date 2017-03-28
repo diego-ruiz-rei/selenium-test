@@ -5,7 +5,6 @@ import gov.gsa.Utilities.CommonUtils;
 import gov.gsa.Utilities.CommonUtils.DataField;
 import gov.gsa.Utilities.ObjectView;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -14,9 +13,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class OpportunitiesObjectViewPage extends ObjectView {
@@ -545,7 +542,7 @@ int code = 0;
     }
 
     //Finds current element and then index of previous element in History Section
-    public static String historySectionDate() throws InterruptedException,ParseException {
+    public static Integer getHistorySectionIndex() throws InterruptedException,ParseException {
         WebElement element = (WebElement) Base.wait.until(
                 ExpectedConditions.visibilityOfElementLocated(By.id("opportunity-history")));
         List<WebElement> history_section = Base.driver.findElements(By.cssSelector("#opportunity-history > sam-history > ul > li"));
@@ -559,9 +556,59 @@ int code = 0;
             }
             System.out.println("Index : "+index);
         }
-        String historyDate = Base.driver.findElement(By.cssSelector("#opportunity-history > sam-history > ul > li:nth-child("+index+") > span > strong")).getText();
-        String date = CommonUtils.formatDate(historyDate);
-        return date;
+        return index;
+    }
+
+    public static String historySectionDate() throws InterruptedException,ParseException {
+        Integer index = getHistorySectionIndex();
+        return Base.driver.findElement(By.cssSelector("#opportunity-history > sam-history > ul > li:nth-child("+index+") > span > strong")).getText();
+    }
+
+
+    //History Section
+    public static String historySectionTitle() throws InterruptedException, ParseException {
+        return Base.driver.findElement(By.cssSelector("#opportunity-history > h2")).getText();
+    }
+
+    //Check number of elements in History section
+    public static Integer historySectionCount() throws InterruptedException, ParseException {
+        System.out.println("Number of Elements in History Section : "+Base.driver.findElements(By.cssSelector("#opportunity-history > sam-history > ul > li")).size());
+        return Base.driver.findElements(By.cssSelector("#opportunity-history > sam-history > ul > li")).size();
+    }
+
+    //Check Original is displayed in first element in History section
+    public static String originalNoticeText() throws InterruptedException, ParseException {
+        System.out.println("First element Text History Section : "+Base.driver.findElement(By.cssSelector("#opportunity-history > sam-history > ul > li:nth-child(1) > span > a")).getText());
+        return Base.driver.findElement(By.cssSelector("#opportunity-history > sam-history > ul > li:nth-child(1) > span > a")).getText();
+    }
+
+    //Click on previous section on History section
+    public static String previousVersionNoticePage() throws InterruptedException, ParseException {
+        Integer index = getHistorySectionIndex();
+        Base.driver.findElement(By.cssSelector("#opportunity-history > sam-history > ul > li:nth-child("+index+") > span > a")).click();
+        Thread.sleep(5000);
+        System.out.println("Updated Posted Date : "+updatedPostedDate().data);
+        return updatedPostedDate().data;
+
+    }
+
+    //capture message from previous version
+    public static String updatedNoticeMessage() throws InterruptedException,ParseException {
+        Integer index = getHistorySectionIndex();
+        Base.driver.findElement(By.cssSelector("#opportunity-history > sam-history > ul > li:nth-child("+index+") > span > a")).click();
+        Thread.sleep(2000);
+        return Base.driver.findElement(By.cssSelector("#main-container > ng-component > div > div > samalert > div > div > p > div")).getText();
+    }
+
+    public static String updatedNoticeLink() throws InterruptedException, ParseException {
+        Integer index = getHistorySectionIndex();
+        Base.driver.findElement(By.cssSelector("#opportunity-history > sam-history > ul > li:nth-child("+index+") > span > a")).click();
+        Thread.sleep(5000);
+        Base.driver.findElement(By.cssSelector("#main-container > ng-component > div > div > samalert > div > div > p > div > a")).click();
+        Thread.sleep(5000);
+        Integer current_index = index+1;
+        System.out.println("Class Name : "+Base.driver.findElement(By.cssSelector("#opportunity-history > sam-history > ul > li:nth-child("+current_index+")")).getAttribute("class"));
+        return Base.driver.findElement(By.cssSelector("#opportunity-history > sam-history > ul > li:nth-child("+current_index+")")).getAttribute("class");
     }
 
 }

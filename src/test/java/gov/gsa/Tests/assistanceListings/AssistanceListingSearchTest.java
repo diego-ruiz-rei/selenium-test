@@ -1,13 +1,11 @@
 package gov.gsa.Tests.assistanceListings;
 
+import gov.gsa.Navigation.HomePageNavigation;
 import gov.gsa.Navigation.SearchNavigation;
 import gov.gsa.Pages.AssistanceListingSearchPage;
 import gov.gsa.Utilities.Base;
 import gov.gsa.Utilities.CommonUtils;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runners.MethodSorters;
 
 import static gov.gsa.Utilities.CommonUtils.testLabelAndDataExists;
@@ -27,6 +25,12 @@ public class AssistanceListingSearchTest extends Base{
     public String active_searchTerm = "16.025";
     public String autocomplete_searchTerm = "cooperating technical partners";
     public String exact_searchTerm ="Partners for Fish and Wildlife";
+
+    public String fh_filter ="INTERIOR, DEPARTMENT OF THE (D)";
+    public String fh_dept_filter ="EDUCATION, DEPARTMENT OF (D)";
+    public String fh_subtier_filter = "OFFICE OF ELEMENTARY AND SECONDARY EDUCATION (A)";
+
+
 
 
     @BeforeClass
@@ -141,7 +145,37 @@ public class AssistanceListingSearchTest extends Base{
     public void historySectionResultsTest() throws InterruptedException {
         SearchNavigation.gotoIsActiveFalseSearch(index,historical_searchTerm);
         assertTrue("No Data in History Section",AssistanceListingSearchPage.historySectionResults() > 1);
+    }
 
+    //Federal Organization Filter
+    @Test
+    public void fhFilterSelectionTest() throws InterruptedException {
+        HomePageNavigation.gotoHomePage();
+        SearchNavigation.gotoSearchResultsPage(index,"");
+        assertTrue("Selected FH Filter is not displayed",AssistanceListingSearchPage.fhFilterSelection(fh_filter).equals(fh_filter));
+    }
+
+    @Test
+    public void fhFilterAndDataMatchTest() throws InterruptedException {
+        HomePageNavigation.gotoHomePage();
+        SearchNavigation.gotoSearchResultsPage(index,"");
+        assertTrue("No results for FH Filter",AssistanceListingSearchPage.fhFilterSelection(fh_filter).contains(AssistanceListingSearchPage.department().data));
+    }
+
+    @Test
+    public void fhSubTierFilterAndDataMatchTest() throws InterruptedException {
+        HomePageNavigation.gotoHomePage();
+        SearchNavigation.gotoSearchResultsPage(index,"");
+        //System.out.println("Selected Filter :"+AssistanceListingSearchPage.fhSubTierFilterSelection(fh_dept_filter,fh_subtier_filter));
+        assertTrue("Selected Filter is incorrect for Subtier Agency",AssistanceListingSearchPage.fhSubTierFilterSelection(fh_dept_filter,fh_subtier_filter).equals(fh_subtier_filter));
+        assertTrue("No results for FH SubTier Filter",fh_dept_filter.contains(AssistanceListingSearchPage.department().data));
+
+    }
+
+    @After
+    public void clearFilter(){
+
+        AssistanceListingSearchPage.clearAll();
     }
 
     @AfterClass

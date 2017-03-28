@@ -192,6 +192,6 @@ public class WageDeterminationSearchPage extends ObjectView {
     }
 
     public static void clearAll() {
-        Base.driver.findElement(By.xpath("//button[text()='Clear All']")).click();
+               Base.driver.findElement(By.xpath("//button[text()='Clear All']")).click();
     }
 }

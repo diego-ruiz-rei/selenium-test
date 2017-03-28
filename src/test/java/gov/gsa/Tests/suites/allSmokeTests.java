@@ -31,7 +31,7 @@ import org.junit.runners.Suite;
 //
 @RunWith(Suite.class)
 @Suite.SuiteClasses({HomepageTest.class,
-        SearchTest.class,
+        //SearchTest.class,
         AssistanceListingSearchTest.class,
         OpportunitiesSearchTest.class,
         FederalHierarchySearchTest.class,
@@ -40,7 +40,7 @@ import org.junit.runners.Suite;
         WDDBASearchTest.class,
         WDSCASearchTest.class,
         AssistanceListingObjectViewTest.class,
-        OpportunitiesObjectViewTest.class,
+        //OpportunitiesObjectViewTest.class,
         OpportunitiesPackagesTest.class,
         OpportunitiesModificationCancelTest.class,
         FHDepartmentObjectViewTest.class,
