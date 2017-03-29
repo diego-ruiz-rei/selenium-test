@@ -229,7 +229,7 @@ public class OpportunitiesModificationCancelTest extends Base {
     @Test
     public void updatedVersionLinkTest() throws InterruptedException, ParseException {
         OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(history_section);
-        assertTrue("History Section - Previous Version Message does not lead to correct page",OpportunitiesObjectViewPage.updatedNoticeLink().equals("current"));
+        assertTrue("History Section - Previous Version Message does not lead to correct page",OpportunitiesObjectViewPage.updatedNoticeLink().contains("current"));
     }
 
     @AfterClass

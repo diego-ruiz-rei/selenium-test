@@ -550,7 +550,7 @@ int code = 0;
         if(history_section.size() > 0) {
             for (WebElement history : history_section) {
                 String className = history.getAttribute("class");
-                if(history.getAttribute("class").equals("current")){
+                if(history.getAttribute("class").contains("current")){
                     index = history_section.indexOf(history);
                 }
             }
