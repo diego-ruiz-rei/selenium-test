@@ -14,7 +14,9 @@ import static org.junit.Assert.assertTrue;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class FHDepartmentObjectViewTest extends FHObjectViewHelper {
 
-    public static String FH_SearchTerm = "health and human services, department of";
+    public static String FH_SearchTerm = "health and human services, department of The Secretary of HHS";
+    public static String org_id = "100004222";
+
 
     @BeforeClass
     public static void start() throws InterruptedException {
@@ -22,6 +24,7 @@ public class FHDepartmentObjectViewTest extends FHObjectViewHelper {
         Base.setUp();
 
         try {
+            //FederalHierarchyObjectViewNavigation.gotoFHObjectViewByID(org_id);
             FederalHierarchyObjectViewNavigation.gotoFHObjectView(FH_SearchTerm);
         } catch (InterruptedException e) {
             e.printStackTrace();

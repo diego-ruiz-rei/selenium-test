@@ -26,4 +26,10 @@ public class FederalHierarchyObjectViewNavigation extends ObjectView{
                 ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".intro-section > h1")));
     }
 
+    public static void gotoFHObjectViewByID(String fh_orgId) throws InterruptedException {
+        Base.driver.get(full_url + "/organization/" + fh_orgId);
+        Thread.sleep(2000);
+
+    }
+
 }

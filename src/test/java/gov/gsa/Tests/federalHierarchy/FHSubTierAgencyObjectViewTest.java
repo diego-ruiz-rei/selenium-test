@@ -18,7 +18,8 @@ import static org.junit.Assert.assertTrue;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class FHSubTierAgencyObjectViewTest extends FHObjectViewHelper {
 
-    public static String FH_Department = "health and human services, department of";
+    public static String FH_Department = "health and human services, department of The Secretary of HHS";
+    public static String org_id = "100004222";
     public static String FH_Agency = "Social Security Administration";
 
 
@@ -29,6 +30,7 @@ public class FHSubTierAgencyObjectViewTest extends FHObjectViewHelper {
         Base.setUp();
 
         try {
+        //    FederalHierarchyObjectViewNavigation.gotoFHObjectViewByID(org_id);
             FederalHierarchyObjectViewNavigation.gotoFHObjectView(FH_Department);
             FederalHierarchyObjectViewPage.agencyDrillDown(FH_Agency);
 
