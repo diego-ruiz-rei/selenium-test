@@ -91,8 +91,9 @@ public class OpportunitiesObjectViewTest extends Base {
         });
     	}
     	else{
-    		return  Arrays.asList(new Object[][]{   
-	    		{new String[][]{{"N0016417RJT22"},{"p"},
+    		return  Arrays.asList(new Object[][]{
+                    //N0016417RJT22
+	    		{new String[][]{{"SPRDL115Q0118"},{"p"},
 	    			{"Contract Award Dollar Amount","Contract Award Date","Contract Award Number", "Task Order Number", "Contract Line Item Number", 
                   	"Contractor Awarded Name", "Contractor Awarded DUNS", "Contractor Awarded Address", "J&A Statutory Authority", "Fair Opportunity",
                   	"Modification Number", "Description of Benefits" ,"Original Posted Date" , "Original Response Date" , "Special Legislation" ,

@@ -16,7 +16,7 @@ public class FACObjectViewPage extends ObjectView {
 //        super();
 //    }
 
-    private  String FACSearchTerm = "93.155";
+    private  String FACSearchTerm = "93.1";
 
     public void gotoFACObjectView() throws InterruptedException {
         //driver.get(base_url + "programs/610e64ea171eeff29c952688eaf3c7e4/view");
@@ -269,7 +269,7 @@ public class FACObjectViewPage extends ObjectView {
 
     public static String headquarters() {
 
-        return Base.driver.findElement(By.cssSelector(".sam-address")).getText();
+        return Base.driver.findElement(By.cssSelector(".sam-poc")).getText();
     }
 
     //History Section
@@ -278,7 +278,7 @@ public class FACObjectViewPage extends ObjectView {
     }
 
     public static String historyContent() {
-        return Base.driver.findElement(By.id("program-historical-details-0")).getText();
+        return Base.driver.findElement(By.cssSelector(".history-item-0 > span")).getText();
     }
 
 

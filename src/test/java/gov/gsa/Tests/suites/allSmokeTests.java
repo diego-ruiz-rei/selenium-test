@@ -40,7 +40,7 @@ import org.junit.runners.Suite;
         WDDBASearchTest.class,
         WDSCASearchTest.class,
         AssistanceListingObjectViewTest.class,
-        //OpportunitiesObjectViewTest.class,
+        OpportunitiesObjectViewTest.class,
         OpportunitiesPackagesTest.class,
         OpportunitiesModificationCancelTest.class,
         FHDepartmentObjectViewTest.class,
