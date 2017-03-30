@@ -1,5 +1,6 @@
 package gov.gsa.Tests.opportunities;
 
+import gov.gsa.Navigation.HomePageNavigation;
 import gov.gsa.Navigation.SearchNavigation;
 import gov.gsa.Pages.OpportunitiesSearchResultsPage;
 import gov.gsa.Utilities.Base;
@@ -23,13 +24,13 @@ public class OpportunitiesSearchTest extends Base {
 
     //Test Data
     public String index = "Opportunities";
-    public String archived_searchTerm = "SPE4A516TT128";
+    public String archived_searchTerm = "SPE8E517T1063";
     public String active_searchTerm = "HDTRA1-14-R-0020";
     public String autocomplete_searchTerm = "16--insulation blanket, cabin, aircraft";
     public String presolicitation_searchTerm="N6554011T5343";
     public String combinedsynopsis_searchTerm="SPRTA114Q0054";
     public String surplussale_searchTerm="W912P-16-T-0056";
-    public String sourcessought_searchTerm="RFIP0700NAS16-0756";
+    public String sourcessought_searchTerm="SPRWA1-15-R-00494";
     public String justifyapprove_searchTerm="W9128F-16-R-0006";
     public String awardnotice_searchTerm="5GA0066A";
     public String fairopportunity_searchTerm="W9133L16F2Y04";
@@ -44,6 +45,7 @@ public class OpportunitiesSearchTest extends Base {
     // Opportunities Tag
     @Test
     public void opportunitiesTagTest() throws InterruptedException {
+        HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
         assertEquals("Opportunities Tag does not Exist",OpportunitiesSearchResultsPage.opportunitiesTag(),"OPPORTUNITY");
         System.out.println("Opportunities Tag is Present");
@@ -67,6 +69,7 @@ public class OpportunitiesSearchTest extends Base {
     //Pagination test
     @Test
     public void paginationTest() throws InterruptedException {
+        HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
         assertTrue("Opportunities Pagination Does not exist", OpportunitiesSearchResultsPage.resultsPageCount() > 1);
         System.out.println("Opportunities Pagination on Empty Search exists");

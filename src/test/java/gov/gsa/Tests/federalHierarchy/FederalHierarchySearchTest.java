@@ -10,7 +10,6 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import static gov.gsa.Utilities.CommonUtils.testDataExists;
 import static gov.gsa.Utilities.CommonUtils.testLabelAndDataExists;
 import static gov.gsa.Utilities.CommonUtils.testLabelContains;
 import static org.junit.Assert.assertEquals;
@@ -23,7 +22,8 @@ public class FederalHierarchySearchTest extends Base {
     //Test Data
     public String index = "Federal Hierarchy";
     public String inactive_searchTerm = "";
-    public String fh_searchTerm = "agriculture, department of";
+    public String fh_searchTerm = "agriculture, department of Rural Utilities Service";
+    public String fh_searchTitle = "agriculture, department of";
     public String autocomplete_searchTerm = "federal emergency management agency";
     public String featured_result_searchTerm = "FEDERAL BUREAU OF INVESTIGATION";
     public String fh_searchTermFpdsCode="PENSION BENEFIT GUARANTY CORPORATION";
@@ -69,7 +69,7 @@ public class FederalHierarchySearchTest extends Base {
     public void testSearchTermTitle() throws InterruptedException {
         SearchNavigation.gotoSearchResultsPage(index,fh_searchTerm);
         System.out.println(FederalHierarchySearchPage.firstResultTitle());
-        assertTrue(FederalHierarchySearchPage.firstResultTitle().equalsIgnoreCase(fh_searchTerm));
+        assertTrue(FederalHierarchySearchPage.firstResultTitle().equalsIgnoreCase(fh_searchTitle));
         System.out.println("First Search Item Is Correct");
     }
 

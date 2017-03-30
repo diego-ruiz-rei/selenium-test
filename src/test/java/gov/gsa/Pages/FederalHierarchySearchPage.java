@@ -105,7 +105,7 @@ public class FederalHierarchySearchPage extends ObjectView {
 // Check fpds org id
     public static DataField testFpdsOrg() {
         String fpdsText="";
-        List<WebElement> fpdsTypeElements = Base.driver.findElements(By.cssSelector("federal-hierarchy-result > div.usa-width-one-third > ul > li:nth-child(3)"));
+        List<WebElement> fpdsTypeElements = Base.driver.findElements(By.cssSelector("#search-results > div:nth-child(1) > federal-hierarchy-result > div.usa-width-one-third > ul > li:nth-child(3)"));
 
         if(fpdsTypeElements.size() > 0) {
             for (WebElement oppTypeElement : fpdsTypeElements) {
@@ -170,7 +170,7 @@ public class FederalHierarchySearchPage extends ObjectView {
 
     // grab description
     public static boolean extractDescription(){
-        String descriptionText=Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(2) > federal-hierarchy-result > div.usa-width-two-thirds > p > span")).getText();
+        String descriptionText=Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > federal-hierarchy-result > div.usa-width-two-thirds > p > span")).getText();
 
         if(descriptionText.length()!=0 && descriptionText!=null){
             return true;
@@ -182,7 +182,7 @@ public class FederalHierarchySearchPage extends ObjectView {
     //check for department
     public static DataField departmentCheck() {
         String departmentText="";
-        List<WebElement> departmentTextTypeElements = Base.driver.findElements(By.cssSelector("#search-results > div:nth-child(2) > federal-hierarchy-result > div.usa-width-two-thirds > .m_B-2x > li"));
+        List<WebElement> departmentTextTypeElements = Base.driver.findElements(By.cssSelector("#search-results > div:nth-child(1) > federal-hierarchy-result > div.usa-width-two-thirds > .m_B-2x > li"));
 
         if(departmentTextTypeElements.size() > 0) {
             for (WebElement deptTypeElement : departmentTextTypeElements) {
@@ -201,7 +201,7 @@ public class FederalHierarchySearchPage extends ObjectView {
     //check for sub-tier label
     public static String subTierCheck(){
         String subTierText="";
-        List<WebElement> subTierTextTypeElements = Base.driver.findElements(By.cssSelector("#search-results > div:nth-child(2) > federal-hierarchy-result > div.usa-width-one-third > ul > li:nth-child(1)"));
+        List<WebElement> subTierTextTypeElements = Base.driver.findElements(By.cssSelector("#search-results > div:nth-child(1) > federal-hierarchy-result > div.usa-width-one-third > ul > li:nth-child(1)"));
         if(subTierTextTypeElements.size() > 0) {
             for (WebElement deptTypeElement : subTierTextTypeElements) {
                 subTierText = deptTypeElement.getText();
@@ -214,10 +214,10 @@ public class FederalHierarchySearchPage extends ObjectView {
     //Check for also known as label and data
     public static String aliasNameCheck() {
         String aliasNameText="";
-        List<WebElement> aliasNameTextTypeElements = Base.driver.findElements(By.cssSelector("#search-results > div:nth-child(2) > federal-hierarchy-result > div.usa-width-one-third > ul > li:nth-child(2)"));
+        List<WebElement> aliasNameTextTypeElements = Base.driver.findElements(By.cssSelector("#search-results > div:nth-child(1) > federal-hierarchy-result > div.usa-width-one-third > ul > li:nth-child(2)"));
 
         if(aliasNameTextTypeElements.size() > 0) {
-            aliasNameText=Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(2) > federal-hierarchy-result > div.usa-width-one-third > ul > li:nth-child(2) > strong")).getText();
+            aliasNameText=Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > federal-hierarchy-result > div.usa-width-one-third > ul > li:nth-child(2) > strong")).getText();
         }
 
         return aliasNameText;
