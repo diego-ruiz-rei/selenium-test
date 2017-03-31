@@ -35,6 +35,7 @@ public class WDSCASearchTest extends WDSearchHelper{
     // empty search - tests wd tag shows up above results and that pagination is greater than 1
     @Test
     public void wdEmptySearchTest() throws InterruptedException {
+        HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSCASearch(index, " ");
         System.out.println(WageDeterminationSearchPage.wdTag());
         assertEquals("Empty Search does not render any results",WageDeterminationSearchPage.wdTag(), "SCA WAGE DETERMINATION");
@@ -43,6 +44,7 @@ public class WDSCASearchTest extends WDSearchHelper{
 
     @Test
     public void wdSCATitleTest() throws InterruptedException {
+        HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSCASearch(index, searchTerm);
         CommonUtils.DataField wdTitle = WageDeterminationSearchPage.wdNumber();
         testLabelAndDataExists(wdTitle);
@@ -51,6 +53,7 @@ public class WDSCASearchTest extends WDSearchHelper{
 
     @Test
     public void wdSCAServiceTest() throws InterruptedException {
+        HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSCASearch(index, searchTerm);
         CommonUtils.DataField wdService = WageDeterminationSearchPage.wdService();
         testLabelAndDataExists(wdService);
@@ -70,6 +73,7 @@ public class WDSCASearchTest extends WDSearchHelper{
     //check for sca filter tag
     @Test
     public void scaFilterTagTest() throws InterruptedException {
+        HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSCASearch(index,"");
         assertEquals("SCA Wage Determination Tag is not present",WageDeterminationSearchPage.checkSCAFilterTag(),"SCA WAGE DETERMINATION");
 
@@ -78,6 +82,7 @@ public class WDSCASearchTest extends WDSearchHelper{
     //check for elevator services through filters
     @Test
     public void standardServiceFilterTest() throws InterruptedException {
+        HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSCASearch(index,"");
         assertEquals("Search results does not match with Service Filter",WageDeterminationSearchPage.checkElevatorServicesFilterTag(),services_performed);
     }
@@ -85,6 +90,7 @@ public class WDSCASearchTest extends WDSearchHelper{
     //check for even sca number through filters
     @Test
     public void standardServiceEvenNumberFilterTest() throws InterruptedException {
+        HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSCASearch(index,"");
         assertTrue("Search results does not contain Even Number", WageDeterminationSearchPage.checkForEvenWdNumber());
     }
@@ -92,6 +98,7 @@ public class WDSCASearchTest extends WDSearchHelper{
     //check for odd sca numbers through filters
     @Test
     public void standardServiceOddNumberFilterTest() throws InterruptedException {
+        HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSCASearch(index,"");
         assertTrue("Search results does not contain Odd Number", !WageDeterminationSearchPage.checkForOddWdNumber());
     }
@@ -107,6 +114,7 @@ public class WDSCASearchTest extends WDSearchHelper{
     //Check for Published/Last Revised Date
     @Test
     public void wdSCADateTest() throws InterruptedException{
+        HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSCASearch(index, searchTerm);
         CommonUtils.DataField revision = WageDeterminationSearchPage.wdRevisionNum();
         CommonUtils.DataField date = WageDeterminationSearchPage.wdDate();

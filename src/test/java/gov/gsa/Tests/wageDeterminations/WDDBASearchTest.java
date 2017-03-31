@@ -1,16 +1,16 @@
 package gov.gsa.Tests.wageDeterminations;
 
+import gov.gsa.Navigation.HomePageNavigation;
 import gov.gsa.Navigation.SearchNavigation;
 import gov.gsa.Pages.WageDeterminationSearchPage;
 import gov.gsa.Utilities.CommonUtils;
+import gov.gsa.Utilities.CommonUtils.DataField;
 import org.junit.*;
 import org.junit.runners.MethodSorters;
-import gov.gsa.Utilities.CommonUtils.DataField;
 
 import static gov.gsa.Utilities.CommonUtils.testLabelAndDataExists;
 import static gov.gsa.Utilities.CommonUtils.testLabelContains;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class WDDBASearchTest extends WDSearchHelper {
@@ -29,6 +29,7 @@ public class WDDBASearchTest extends WDSearchHelper {
     // empty search - tests wd tag shows up above results and that pagination is greater than 1
     @Test
     public void wdEmptySearchTest() throws InterruptedException {
+        HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoDBASearch(index, " ");
         System.out.println(WageDeterminationSearchPage.wdTag());
         assertEquals("DBA Wage Determination tag is not Found",WageDeterminationSearchPage.wdTag(), "DBA WAGE DETERMINATION");
@@ -37,6 +38,7 @@ public class WDDBASearchTest extends WDSearchHelper {
 
     @Test
     public void wdDBATitleTest() throws InterruptedException {
+        HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoDBASearch(index, searchTerm);
         CommonUtils.DataField wdTitle = WageDeterminationSearchPage.wdNumber();
         testLabelAndDataExists(wdTitle);
@@ -45,6 +47,7 @@ public class WDDBASearchTest extends WDSearchHelper {
 
     @Test
     public void wdDBAConstructionTypeTest() throws InterruptedException {
+        HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoDBASearch(index, searchTerm);
         DataField wdConstructionType = WageDeterminationSearchPage.wdConstructionType();
         testLabelAndDataExists(wdConstructionType);
@@ -64,6 +67,7 @@ public class WDDBASearchTest extends WDSearchHelper {
     //check DBA Published or Last Revised Date
     @Test
     public void wdDBADateTest() throws InterruptedException{
+        HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoDBASearch(index,searchTerm);
         DataField revision = WageDeterminationSearchPage.wdRevisionNum();
         DataField date = WageDeterminationSearchPage.wdDate();
