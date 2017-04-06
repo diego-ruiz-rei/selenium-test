@@ -21,6 +21,7 @@ import static org.junit.Assert.assertTrue;
 public class WDDBAObjectViewTest extends WDObjectViewHelper{
     // Any variables needed here
     public static String history_searchTerm = "AK20170001";
+    public static String showmore_history_searchTerm = "IL20170008";
     public static String revisionName = "Revision 3";
 
     @BeforeClass
@@ -77,6 +78,15 @@ public class WDDBAObjectViewTest extends WDObjectViewHelper{
         }
         assertTrue("WD Latest History Revision number donot match", WageDeterminationObjectViewPage.getHistoryRevisionNumberFromHistory().equals(WageDeterminationObjectViewPage.getHistoryRevisionNumber()));
         assertTrue("WD Latest History Revision Date donot match", WageDeterminationObjectViewPage.getHistoryRevisionDateFromHistory().equals(WageDeterminationObjectViewPage.getHistoryRevisionDate()));
+    }
+
+    @Test
+    public void wdDBAMoreRevisionsTest() throws InterruptedException{
+        WDObjectViewHelper.dba_searchTerm = showmore_history_searchTerm;
+        WDObjectViewNavigation.gotoWDObjectView(dba_searchTerm);
+        Thread.sleep(3000);
+        WageDeterminationObjectViewPage.showMoreHistory();
+        assertTrue("WD More revisions not loaded", WageDeterminationObjectViewPage.getTotalHistoryRevisions() > 5);
     }
 
     @AfterClass
