@@ -108,4 +108,53 @@ public class WageDeterminationObjectViewPage extends ObjectView{
         }
         return code;
     }
+
+    public static String getHistoryRevisionNumberFromHistory(){
+        String latestRevision = Base.driver.findElement(By.cssSelector("#wd-history > sam-history > ul > li.current > span > a")).getText();
+        return latestRevision.substring(latestRevision.lastIndexOf(" ")+1);
+    }
+
+    public static String getHistoryRevisionNumber(){
+        String latestRevision = Base.driver.findElement(By.id("wd-revision-number")).getText();
+        return latestRevision.substring(latestRevision.lastIndexOf(" ")+1);
+    }
+
+    public static String getHistoryRevisionDateFromHistory(){
+        String latestRevision = Base.driver.findElement(By.cssSelector("#wd-history > sam-history > ul > li.current > span")).getText();
+        String date = latestRevision.substring(0, latestRevision.indexOf("\n"));
+        return latestRevision.substring(0, 3) + date.substring(date.indexOf(' '));
+    }
+
+    public static String getHistoryRevisionDate(){
+        String latestRevision = Base.driver.findElement(By.id("wd-date")).getText();
+        String s = latestRevision.substring(latestRevision.indexOf(":")+2);
+        return latestRevision.substring(latestRevision.indexOf(":")+2);
+
+    }
+
+    public static void getHistoryRevision(String revisionTitle){
+        List<WebElement> revisions= Base.driver.findElements(By.cssSelector("#wd-history > sam-history > ul > li"));
+        for (WebElement reivsion : revisions) {
+            WebElement link = reivsion.findElement(By.cssSelector("span > a"));
+            String currentRevision = link.getText();
+            String requestedRevision = revisionTitle;
+            if((link.getText()).contains(revisionTitle)){
+                if(reivsion.getAttribute("class").contains("current"))
+                    break;
+                else {
+                    link.click();
+                    break;
+                }
+            }
+        }
+    }
+
+    public static void showMoreHistory(){
+        Base.driver.findElement(By.id("defaultBtnHistory")).click();
+    }
+
+    public static int getTotalHistoryRevisions(){
+        List<WebElement> revisions= Base.driver.findElements(By.cssSelector("#wd-history > sam-history > ul > li"));
+        return revisions.size();
+    }
 }

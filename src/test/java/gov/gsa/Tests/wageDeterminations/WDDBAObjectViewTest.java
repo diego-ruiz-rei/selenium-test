@@ -20,6 +20,9 @@ import static org.junit.Assert.assertTrue;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class WDDBAObjectViewTest extends WDObjectViewHelper{
     // Any variables needed here
+    public static String history_searchTerm = "AK20170001";
+    public static String revisionName = "Revision 3";
+
     @BeforeClass
     public static void start() throws InterruptedException {
         WDObjectViewHelper.dba_searchTerm = "AL20170102";
@@ -39,8 +42,6 @@ public class WDDBAObjectViewTest extends WDObjectViewHelper{
         assertEquals("DBA Type is not present",WageDeterminationObjectViewPage.wdType(), "Davis-Bacon Act");
         System.out.println("DBA Type is displayed");
     }
-
-
 
     @Test
     public void wdConstructionTest() throws InterruptedException{
@@ -63,6 +64,19 @@ public class WDDBAObjectViewTest extends WDObjectViewHelper{
             testLabelContains(date,"Last Revised Date");
             System.out.println("Last Revised Date Field is Present in the WD Object View page");
         }
+    }
+
+    @Test
+    public void wdDBAHistoryRevisionTest() throws InterruptedException{
+        WDObjectViewHelper.dba_searchTerm = history_searchTerm;
+        WDObjectViewNavigation.gotoWDObjectView(dba_searchTerm);
+        Thread.sleep(3000);
+        if(!revisionName.isEmpty()) {
+            WageDeterminationObjectViewPage.getHistoryRevision(revisionName);
+            Thread.sleep(3000);
+        }
+        assertTrue("WD Latest History Revision number donot match", WageDeterminationObjectViewPage.getHistoryRevisionNumberFromHistory().equals(WageDeterminationObjectViewPage.getHistoryRevisionNumber()));
+        assertTrue("WD Latest History Revision Date donot match", WageDeterminationObjectViewPage.getHistoryRevisionDateFromHistory().equals(WageDeterminationObjectViewPage.getHistoryRevisionDate()));
     }
 
     @AfterClass

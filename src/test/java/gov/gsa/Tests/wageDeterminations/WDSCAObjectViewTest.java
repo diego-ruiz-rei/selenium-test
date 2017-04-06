@@ -28,7 +28,6 @@ public class WDSCAObjectViewTest extends WDObjectViewHelper{
         WDObjectViewHelper.sca_searchTerm = "1968-0005";
         setUp();
         WDObjectViewNavigation.gotoWDObjectView(sca_searchTerm);
-
     }
 
     @Test
@@ -42,8 +41,6 @@ public class WDSCAObjectViewTest extends WDObjectViewHelper{
         assertEquals("SCA Type is not present",WageDeterminationObjectViewPage.wdType(), "Service Contract Act");
         System.out.println("SCA Type is displayed");
     }
-
-
 
     @Test
     public void wdServicesTest() throws InterruptedException{
@@ -75,11 +72,22 @@ public class WDSCAObjectViewTest extends WDObjectViewHelper{
         System.out.println("Multiple States and Counties Fields are Present in the WD Object View page");
     }
 
+    @Test
+    public void wdSCAHistoryLatestRevisionTest() throws InterruptedException{
+        Thread.sleep(3000);
+        assertTrue("WD Latest History Revision number donot match", WageDeterminationObjectViewPage.getHistoryRevisionNumberFromHistory().equals(WageDeterminationObjectViewPage.getHistoryRevisionNumber()));
+        assertTrue("WD Latest History Revision Date donot match", WageDeterminationObjectViewPage.getHistoryRevisionDateFromHistory().equals(WageDeterminationObjectViewPage.getHistoryRevisionDate()));
+    }
+
+    @Test
+    public void wdSCAMoreRevisionsTest() throws InterruptedException{
+        WageDeterminationObjectViewPage.showMoreHistory();
+        assertTrue("WD More revisions not loaded", WageDeterminationObjectViewPage.getTotalHistoryRevisions() > 5);
+    }
 
     @AfterClass
     public static void end(){
         closeOut();
     }
-
 
 }

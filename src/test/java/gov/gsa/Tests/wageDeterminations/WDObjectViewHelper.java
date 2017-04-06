@@ -1,5 +1,6 @@
 package gov.gsa.Tests.wageDeterminations;
 
+import edu.emory.mathcs.backport.java.util.Arrays;
 import gov.gsa.Navigation.SearchNavigation;
 import gov.gsa.Navigation.WDObjectViewNavigation;
 import gov.gsa.Pages.WageDeterminationObjectViewPage;
@@ -31,8 +32,16 @@ import static org.junit.Assert.*;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class WDObjectViewHelper extends Base{
     //Test Data
-    public static String dba_searchTerm = "";
-    public static String sca_searchTerm = "";
+    public static String dba_searchTerm = "AL20170102";
+    public static String sca_searchTerm = "1967-044";
+
+    @BeforeClass
+    public static void start() throws InterruptedException {
+        WDObjectViewHelper.dba_searchTerm = "AK20170001";
+        setUp();
+        WDObjectViewNavigation.gotoWDObjectView(dba_searchTerm);
+
+    }
 
     @Test
     public void wdTitleTest() throws InterruptedException{
@@ -48,7 +57,8 @@ public class WDObjectViewHelper extends Base{
 
     @Test
     public void wdSideMenuTest() throws InterruptedException {
-        assertEquals("SCA Side Menu Element is not present", ObjectView.wdSideMenuItem(), "Wage Determination");
+        ArrayList<String> menu = new ArrayList<String>(){{add("Overview"); add("Wage Determination"); add("History");}};
+        assertTrue("WD Side Menu Elements incorrect", menu.equals(ObjectView.wdSideMenuItems()));
         System.out.println("SCA Side Menu is displayed");
     }
 
@@ -116,5 +126,6 @@ public class WDObjectViewHelper extends Base{
             System.out.println("IOException " + e);
         }
     }
+
 
 }

@@ -1,6 +1,11 @@
 package gov.gsa.Utilities;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class ObjectView extends Base{
@@ -68,9 +73,14 @@ public class ObjectView extends Base{
     }
 
     //WD Side Menu
-    public static String wdSideMenuItem() {
-        System.out.println("Side Menu : "+Base.driver.findElement(By.cssSelector("samsidenav > aside > ul > li:nth-child(2) > a")).getText());
-        return Base.driver.findElement(By.cssSelector("samsidenav > aside > ul > li:nth-child(2) > a")).getText();
+    public static ArrayList<String> wdSideMenuItems() {
+        List<WebElement> tabs = Base.driver.findElements(By.cssSelector("samsidenav > aside > ul > li"));
+        ArrayList<String> title = new ArrayList<String>();
+        for (WebElement tab: tabs) {
+            title.add(tab.findElement(By.cssSelector("a")).getText());
+
+        }
+        return title;
     }
 
 
