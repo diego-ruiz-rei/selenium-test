@@ -74,6 +74,7 @@ public class AwardsSearchTest extends Base {
         assertTrue("Message does not exist", AwardsSearchResultsPage.extractTotalResults());
     }
 
+    //test for vendor name label and data
     @Test
     public void vendorNameTest() throws InterruptedException {
         HomePageNavigation.gotoHomePage();
@@ -81,6 +82,7 @@ public class AwardsSearchTest extends Base {
         assertTrue("Vendor name does not exist", AwardsSearchResultsPage.vendorName());
     }
 
+    //test for vendor address label and data
     @Test
     public void vendorAddressTest() throws InterruptedException {
         HomePageNavigation.gotoHomePage();
@@ -88,6 +90,7 @@ public class AwardsSearchTest extends Base {
         assertTrue("Vendor address does not exist", AwardsSearchResultsPage.vendorAddress());
     }
 
+    //test for duns number label and data
     @Test
     public void dunsNumberTest()throws InterruptedException {
         HomePageNavigation.gotoHomePage();
@@ -97,6 +100,7 @@ public class AwardsSearchTest extends Base {
         testLabelContains(fieldDataElement, "DUNS");
     }
 
+    //test for global vendor label and data
     @Test
     public void globalVendorTest()throws InterruptedException {
         HomePageNavigation.gotoHomePage();
@@ -106,6 +110,7 @@ public class AwardsSearchTest extends Base {
         testLabelContains(fieldDataElement, "Global Vendor");
     }
 
+    //test for global duns label and data
     @Test
     public void globalDunsTest()throws InterruptedException {
         HomePageNavigation.gotoHomePage();
@@ -115,7 +120,7 @@ public class AwardsSearchTest extends Base {
         testLabelContains(fieldDataElement, "Global DUNS");
     }
 
-
+    //test for department label and data
     @Test
     public void departmentTest()throws InterruptedException {
         HomePageNavigation.gotoHomePage();
@@ -125,6 +130,7 @@ public class AwardsSearchTest extends Base {
         testLabelContains(fieldDataElement, "Department/Ind. Agency");
     }
 
+    //test for office label and data
     @Test
     public void officeTest()throws InterruptedException {
         HomePageNavigation.gotoHomePage();
@@ -134,6 +140,7 @@ public class AwardsSearchTest extends Base {
         testLabelContains(fieldDataElement, "Office");
     }
 
+    //test for action-obligation label and data
     @Test
     public void actionObligationTest()throws InterruptedException {
         HomePageNavigation.gotoHomePage();
@@ -143,6 +150,7 @@ public class AwardsSearchTest extends Base {
         testLabelContains(fieldDataElement, "Action Obligation");
     }
 
+    //test for award or idv type label and data
     @Test
     public void awardTypeTest()throws InterruptedException {
         HomePageNavigation.gotoHomePage();
@@ -152,6 +160,7 @@ public class AwardsSearchTest extends Base {
         testLabelContains(fieldDataElement, "Award Type");
     }
 
+    //test for reference idv label and data
     @Test
     public void referenceIdvTest()throws InterruptedException {
         HomePageNavigation.gotoHomePage();
@@ -161,6 +170,7 @@ public class AwardsSearchTest extends Base {
         testLabelContains(fieldDataElement, "Referenced IDV");
     }
 
+    //test for date signed label and data
     @Test
     public void dateSignedTest()throws InterruptedException {
         HomePageNavigation.gotoHomePage();
@@ -170,6 +180,7 @@ public class AwardsSearchTest extends Base {
         testLabelContains(fieldDataElement, "Date Signed");
     }
 
+    //test for naicscode label and data
     @Test
     public void naicsCodeTest()throws InterruptedException {
         HomePageNavigation.gotoHomePage();
@@ -179,6 +190,7 @@ public class AwardsSearchTest extends Base {
         testLabelContains(fieldDataElement, "NAICS Code");
     }
 
+    //test for psc code label and data
     @Test
     public void pscCodeTest()throws InterruptedException {
         HomePageNavigation.gotoHomePage();
