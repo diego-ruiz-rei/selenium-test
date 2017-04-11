@@ -4,10 +4,15 @@ import gov.gsa.Utilities.Base;
 import gov.gsa.Utilities.CommonUtils;
 import org.openqa.selenium.By;
 
+import java.text.NumberFormat;
+import java.text.ParseException;
+
 /**
  * Created by prashant.pillai on 4/10/17.
  */
 public class AwardsSearchResultsPage {
+
+    private static int multipleItemsNumber = 4;
 
     //check for awards tag
     public static String awardsTag(){
@@ -32,17 +37,16 @@ public class AwardsSearchResultsPage {
     }
 
     //check for total results message
-    public static boolean extractTotalResults(){
+    public static long extractTotalResults() throws ParseException {
         String resultText=Base.driver.findElement(By.cssSelector(".usa-width-three-fourths > .usa-width-one > strong")).getText();
 
         String[] splitMessage = resultText.split("\\s+");
-        int totalCount = Integer.parseInt(splitMessage[5]);
-        if(totalCount >= 1 && resultText.contains("Showing 1 - 1 of")){
-            return true;
-        }
-        else{
-            return false;
-        }
+
+        long totalCount = (long) NumberFormat.getNumberInstance(java.util.Locale.US).parse(splitMessage[5]);
+        System.out.print(totalCount);
+
+        return totalCount;
+
     }
 
     //check for vendor name
@@ -156,5 +160,141 @@ public class AwardsSearchResultsPage {
         String label = Base.driver.findElement(By.cssSelector(".award-or-idv-type > strong")).getText();
         String data = Base.driver.findElement(By.cssSelector(".award-or-idv-type > ul > li > span")).getText();
         return new CommonUtils.DataField("Award Type",label,data);
+    }
+
+    public static boolean checkContractTypeFilter() throws InterruptedException {
+        Base.driver.findElement(By.id("Contract")).click();
+        Thread.sleep(2000);
+        String label = Base.driver.findElement(By.cssSelector(".award-or-idv-type > strong")).getText();
+
+        if(label.equalsIgnoreCase("Award Type")){
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
+
+    public static boolean checkICDTypeFilter() throws InterruptedException {
+        Base.driver.findElement(By.id("ICD")).click();
+        Thread.sleep(2000);
+        String label = Base.driver.findElement(By.cssSelector(".award-or-idv-type > strong")).getText();
+
+        if(label.equalsIgnoreCase("IDV Type")){
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
+
+    public static boolean checkAwardDropdownICD() throws InterruptedException {
+        Base.driver.findElement(By.id("ICD")).click();
+        Thread.sleep(2000);
+        Base.driver.findElement(By.cssSelector(".award-type-dropdown-list input")).click();
+        Thread.sleep(2000);
+        String autoCompleteText = Base.driver.findElement(By.cssSelector(".award-type-dropdown-list #sam-autocomplete-results > li:nth-child(1)")).getText();
+        System.out.print(autoCompleteText);
+        Base.driver.findElement(By.cssSelector(".award-type-dropdown-list #sam-autocomplete-results > li:nth-child(1)")).click();
+        Thread.sleep(2000);
+
+        String typesSelected = Base.driver.findElement(By.cssSelector(".award-type-dropdown-list button.usa-button-link")).getText();
+        System.out.print(typesSelected);
+        String label = Base.driver.findElement(By.cssSelector(".award-or-idv-type > strong")).getText();
+        String data =  Base.driver.findElement(By.cssSelector(".award-or-idv-type > ul > li > span")).getText();
+
+        if(typesSelected.equalsIgnoreCase(autoCompleteText) && label.equalsIgnoreCase("IDV Type") && data.equalsIgnoreCase("BOA")) {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public static boolean checkAwardDropdownContract() throws InterruptedException{
+        Base.driver.findElement(By.id("Contract")).click();
+        Thread.sleep(2000);
+        Base.driver.findElement(By.cssSelector(".award-type-dropdown-list input")).click();
+        Thread.sleep(2000);
+        String autoCompleteText = Base.driver.findElement(By.cssSelector(".award-type-dropdown-list #sam-autocomplete-results > li:nth-child(2)")).getText();
+        System.out.print(autoCompleteText);
+
+        Base.driver.findElement(By.cssSelector(".award-type-dropdown-list #sam-autocomplete-results > li:nth-child(2)")).click();
+        Thread.sleep(2000);
+
+        String typesSelected = Base.driver.findElement(By.cssSelector(".award-type-dropdown-list button.usa-button-link")).getText();
+        System.out.print(typesSelected);
+        String label = Base.driver.findElement(By.cssSelector(".award-or-idv-type > strong")).getText();
+        String data =  Base.driver.findElement(By.cssSelector(".award-or-idv-type > ul > li > span")).getText();
+
+        if(typesSelected.equalsIgnoreCase(autoCompleteText) && label.equalsIgnoreCase("Award Type") && data.equalsIgnoreCase("BPA CALL")) {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public static boolean checkMultipleContractTypeFilter() throws InterruptedException, ParseException {
+
+        for(int i=1 ; i< multipleItemsNumber ;i++) {
+            Base.driver.findElement(By.cssSelector(".contract-type-dropdown-list input")).click();
+            Thread.sleep(2000);
+
+            Base.driver.findElement(By.cssSelector(".contract-type-dropdown-list #sam-autocomplete-results > li:nth-child("+i+")")).click();
+            Thread.sleep(2000);
+        }
+        String[] typesSelected = Base.driver.findElement(By.cssSelector(".contract-type-dropdown-list ul.usa-unstyled-list")).getText().split("\\r?\\n");
+
+        if(typesSelected.length > 1 && extractTotalResults() > 1) {
+            return true;
+        }
+        else{
+            return false;
+        }
+
+
+    }
+
+    public static boolean checkMultipleAwardTypeFilter() throws InterruptedException, ParseException {
+        for(int i=1 ; i< multipleItemsNumber ;i++) {
+            Base.driver.findElement(By.cssSelector(".award-type-dropdown-list input")).click();
+            Thread.sleep(2000);
+
+            Base.driver.findElement(By.cssSelector(".award-type-dropdown-list #sam-autocomplete-results > li:nth-child("+i+")")).click();
+            Thread.sleep(2000);
+        }
+        String[] typesSelected = Base.driver.findElement(By.cssSelector(".award-type-dropdown-list ul.usa-unstyled-list")).getText().split("\\r?\\n");
+
+        if(typesSelected.length > 1 && extractTotalResults() > 1) {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public static boolean checkContractDropdownTypeFilter() throws InterruptedException, ParseException {
+        Base.driver.findElement(By.cssSelector(".contract-type-dropdown-list input")).click();
+        Thread.sleep(2000);
+        String autoCompleteText = Base.driver.findElement(By.cssSelector(".contract-type-dropdown-list #sam-autocomplete-results > li:nth-child(1)")).getText();
+        System.out.print(autoCompleteText);
+        Base.driver.findElement(By.cssSelector(".contract-type-dropdown-list #sam-autocomplete-results > li:nth-child(1)")).click();
+        Thread.sleep(2000);
+        String typesSelected = Base.driver.findElement(By.cssSelector(".contract-type-dropdown-list button.usa-button-link")).getText();
+        System.out.println(typesSelected);
+
+        if(typesSelected.equalsIgnoreCase(autoCompleteText) && extractTotalResults() > 1) {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public static void clearAll() {
+        Base.driver.findElement(By.id("clear-all-filters")).click();
     }
 }

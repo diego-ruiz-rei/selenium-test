@@ -5,11 +5,10 @@ import gov.gsa.Navigation.SearchNavigation;
 import gov.gsa.Pages.AwardsSearchResultsPage;
 import gov.gsa.Utilities.Base;
 import gov.gsa.Utilities.CommonUtils;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runners.MethodSorters;
+
+import java.text.ParseException;
 
 import static gov.gsa.Utilities.CommonUtils.testLabelAndDataExists;
 import static gov.gsa.Utilities.CommonUtils.testLabelContains;
@@ -27,6 +26,7 @@ public class AwardsSearchTest extends Base {
     public String index="Awards";
     public String active_searchTerm = "VA24615F0356";
     public String autocomplete_searchTerm = "VA24614A0067";
+    public String contract_award_type_filter = "069058";
 
     @BeforeClass
     public static void start() throws InterruptedException {
@@ -54,7 +54,7 @@ public class AwardsSearchTest extends Base {
     //test for auto-complete
     @Test
     public void autoCompleteTest() throws InterruptedException {
-        HomePageNavigation.gotoHomePage();
+        //HomePageNavigation.gotoHomePage();
         assertTrue(CommonUtils.autoCompleteExists(index,autocomplete_searchTerm));
     }
 
@@ -68,10 +68,10 @@ public class AwardsSearchTest extends Base {
 
     //test for number of results
     @Test
-    public void resultNumberTest() throws InterruptedException{
+    public void resultNumberTest() throws InterruptedException, ParseException {
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,active_searchTerm);
-        assertTrue("Message does not exist", AwardsSearchResultsPage.extractTotalResults());
+        assertTrue("Message does not exist", AwardsSearchResultsPage.extractTotalResults() >= 1);
     }
 
     //test for vendor name label and data
@@ -198,6 +198,62 @@ public class AwardsSearchTest extends Base {
         CommonUtils.DataField fieldDataElement = AwardsSearchResultsPage.checkPscCode();
         testLabelAndDataExists(fieldDataElement);
         testLabelContains(fieldDataElement, "PSC Code");
+    }
+
+    @Test
+    public void contractTypeFilterTest() throws InterruptedException{
+        HomePageNavigation.gotoHomePage();
+        SearchNavigation.gotoSearchResultsPage(index,"");
+        assertTrue("Contract Type Label does not exist", AwardsSearchResultsPage.checkContractTypeFilter());
+    }
+
+    @Test
+    public void icdTypeFilterTest() throws InterruptedException{
+        HomePageNavigation.gotoHomePage();
+        SearchNavigation.gotoSearchResultsPage(index,"");
+        assertTrue("IDV Type Label does not exist", AwardsSearchResultsPage.checkICDTypeFilter());
+    }
+
+    @Test
+    public void icdAwardDropdownFilterTest() throws InterruptedException{
+        HomePageNavigation.gotoHomePage();
+        SearchNavigation.gotoSearchResultsPage(index,autocomplete_searchTerm);
+        assertTrue("Field Label/Value or type selected is Incorrect", AwardsSearchResultsPage.checkAwardDropdownICD());
+    }
+
+    @Test
+    public void contractAwardDropdownFilterTest() throws InterruptedException{
+        HomePageNavigation.gotoHomePage();
+        SearchNavigation.gotoSearchResultsPage(index,contract_award_type_filter);
+        assertTrue("Field Label/Value or type selected is Incorrect", AwardsSearchResultsPage.checkAwardDropdownContract());
+    }
+
+    @Test
+    public void multipleAwardTypeFilterTest() throws InterruptedException, ParseException {
+        HomePageNavigation.gotoHomePage();
+        SearchNavigation.gotoSearchResultsPage(index,"");
+        assertTrue("Field Label/Value or type selected is Incorrect", AwardsSearchResultsPage.checkMultipleAwardTypeFilter());
+
+    }
+
+    @Test
+    public void multipleContractTypeFilterTest() throws InterruptedException, ParseException {
+        HomePageNavigation.gotoHomePage();
+        SearchNavigation.gotoSearchResultsPage(index,"");
+        assertTrue("Field Label/Value or type selected is Incorrect", AwardsSearchResultsPage.checkMultipleContractTypeFilter());
+
+    }
+
+    @Test
+    public void contractDropdownFilterTest() throws InterruptedException, ParseException{
+        HomePageNavigation.gotoHomePage();
+        SearchNavigation.gotoSearchResultsPage(index,"");
+        assertTrue("Field Label/Value or type selected is Incorrect", AwardsSearchResultsPage.checkContractDropdownTypeFilter());
+    }
+
+    @After
+    public void clearFilter(){
+        AwardsSearchResultsPage.clearAll();
     }
 
     @AfterClass
