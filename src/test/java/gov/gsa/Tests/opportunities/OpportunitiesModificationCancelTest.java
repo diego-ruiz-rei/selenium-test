@@ -43,6 +43,10 @@ public class OpportunitiesModificationCancelTest extends Base {
     public static String classification_view_changes_opportunity = "d79c65bcad52fb8d1cd5bb6a1e26f151";
     public static String general_information_view_changes_opportunity = "d79c65bcad52fb8d1cd5bb6a1e26f151";
     public static String special_legislation_view_changes_opportunity = "6261e9d373fffcb3f05bc067447e1a7a";
+    public static String contact_information_view_changes_opportunity = "e6afbdf1d80d63d7641a9af9d266fe16";
+    public static String contact_information_secondary_poc_view_changes_opportunity = "2665167791aa06e0c9e61239723a03db";
+    public static String awards_view_changes_opportunity = "601c5b23dd9bc57ea52b902a241960d2";
+
 
     //Test Data for History Section
     public static String history_section = "c752657782129a4eddc1e39675a40c52";
@@ -193,6 +197,119 @@ public class OpportunitiesModificationCancelTest extends Base {
         OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(classification_view_changes_opportunity);
         assertTrue("There are no updates to Place of Performance Text",OpportunitiesObjectViewPage.classificationPlaceOfPerformanceTagExists().length()>=1);
     }
+
+    //Contact Information View Changes
+
+    @Test
+    public void contactInformationViewChangesButtonTest() throws InterruptedException{
+        OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(contact_information_view_changes_opportunity);
+        assertTrue("View Changes button on Contact Information does not exist",OpportunitiesObjectViewPage.ViewChangesButtonExist("Contact Information"));
+    }
+
+    @Test
+    public void contactInformationViewChangesChangesFromTest() throws InterruptedException, ParseException{
+        OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(contact_information_view_changes_opportunity);
+        assertTrue("Contact Information Changes From Text does not exist",!OpportunitiesObjectViewPage.ViewChangesChangesFromExist("Contact Information").isEmpty());
+    }
+
+    @Test
+    public void contactInformationViewChangesContractingOfficeAddressTest() throws InterruptedException, ParseException{
+        OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(contact_information_view_changes_opportunity);
+        assertTrue("Contact Information - Contracting Office Address not updated", !OpportunitiesObjectViewPage.ViewChangesFieldUpdated("Contact Information", "Contracting Office Address").isEmpty());
+    }
+
+    @Test
+    public void contactInformationViewChangesPrimaryPointOfContactNameTest() throws InterruptedException, ParseException{
+        OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(contact_information_view_changes_opportunity);
+        assertTrue("Contact Information - Primary Point Of Contact Name not updated", !OpportunitiesObjectViewPage.ViewChangesFieldUpdated("Contact Information", "Primary Point Of Contact Name").isEmpty());
+    }
+
+    @Test
+    public void contactInformationViewChangesPrimaryPointOfContactEmailTest() throws InterruptedException, ParseException{
+        OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(contact_information_view_changes_opportunity);
+        assertTrue("Contact Information - Primary Point Of Contact Email not updated", !OpportunitiesObjectViewPage.ViewChangesFieldUpdated("Contact Information", "Primary Point Of Contact Email").isEmpty());
+    }
+
+    @Test
+    public void contactInformationViewChangesPrimaryPointOfContactPhoneTest() throws InterruptedException, ParseException{
+        OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(contact_information_view_changes_opportunity);
+        assertTrue("Contact Information - Primary Point Of Contact Phone not updated", !OpportunitiesObjectViewPage.ViewChangesFieldUpdated("Contact Information", "Primary Point Of Contact Phone").isEmpty());
+    }
+
+    @Test
+    public void contactInformationViewChangesSecondaryPointOfContactNameTest() throws InterruptedException, ParseException{
+        OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(contact_information_secondary_poc_view_changes_opportunity);
+        assertTrue("Contact Information - Secondary Point Of Contact Name not updated", !OpportunitiesObjectViewPage.ViewChangesFieldUpdated("Contact Information", "Secondary Point Of Contact Name").isEmpty());
+    }
+
+    @Test
+    public void contactInformationViewChangesSecondaryPointOfContactTitleTest() throws InterruptedException, ParseException{
+        OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(contact_information_secondary_poc_view_changes_opportunity);
+        assertTrue("Contact Information - Secondary Point Of Contact Title not updated", !OpportunitiesObjectViewPage.ViewChangesFieldUpdated("Contact Information", "Secondary Point Of Contact Title").isEmpty());
+    }
+
+    @Test
+    public void contactInformationViewChangesSecondaryPointOfContactEmailTest() throws InterruptedException, ParseException{
+        OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(contact_information_secondary_poc_view_changes_opportunity);
+        assertTrue("Contact Information - Secondary Point Of Contact Email not updated", !OpportunitiesObjectViewPage.ViewChangesFieldUpdated("Contact Information", "Secondary Point Of Contact Email").isEmpty());
+    }
+
+    //Awards View Changes
+
+    @Test
+    public void awardsViewChangesButtonTest() throws InterruptedException{
+        OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(awards_view_changes_opportunity);
+        assertTrue("View Changes button on Awards does not exist",OpportunitiesObjectViewPage.ViewChangesButtonExist("Award Details"));
+    }
+
+    @Test
+    public void awardsViewChangesChangesFromTest() throws InterruptedException, ParseException{
+        OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(awards_view_changes_opportunity);
+        assertTrue("Awards Changes From Text does not exist",!OpportunitiesObjectViewPage.ViewChangesChangesFromExist("Award Details").isEmpty());
+    }
+
+    @Test
+    public void awardsViewChangesContractAwardDateTest() throws InterruptedException, ParseException{
+        OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(awards_view_changes_opportunity);
+        assertTrue("Award Details - Contract Award Date not updated", !OpportunitiesObjectViewPage.ViewChangesFieldUpdated("Award Details", "Contract Award Date").isEmpty());
+    }
+
+    @Test
+    public void awardsViewChangesContractAwardNumberTest() throws InterruptedException, ParseException{
+        OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(awards_view_changes_opportunity);
+        assertTrue("Award Details - Contract Award Number not updated", !OpportunitiesObjectViewPage.ViewChangesFieldUpdated("Award Details", "Contract Award Number").isEmpty());
+    }
+
+    @Test
+    public void awardsViewChangesContractorAwardedDUNSTest() throws InterruptedException, ParseException{
+        OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(awards_view_changes_opportunity);
+        assertTrue("Award Details - Contractor Awarded DUNS not updated", !OpportunitiesObjectViewPage.ViewChangesFieldUpdated("Award Details", "Contractor Awarded DUNS").isEmpty());
+    }
+
+    @Test
+    public void awardsViewChangesContractorAwardedNameTest() throws InterruptedException, ParseException{
+        OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(awards_view_changes_opportunity);
+        assertTrue("Award Details - Contractor Awarded Name not updated", !OpportunitiesObjectViewPage.ViewChangesFieldUpdated("Award Details", "Contractor Awarded Name").isEmpty());
+    }
+
+    @Test
+    public void awardsViewChangesContractorAwardedAddressTest() throws InterruptedException, ParseException{
+        OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(awards_view_changes_opportunity);
+        assertTrue("Award Details - Contractor Awarded Address not updated", !OpportunitiesObjectViewPage.ViewChangesFieldUpdated("Award Details", "Contractor Awarded Address").isEmpty());
+    }
+
+    @Test
+    public void awardsViewChangesContractAwardDollarAmountTest() throws InterruptedException, ParseException{
+        OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(awards_view_changes_opportunity);
+        assertTrue("Award Details - Contract Award Dollar Amount not updated", !OpportunitiesObjectViewPage.ViewChangesFieldUpdated("Award Details", "Contract Award Dollar Amount").isEmpty());
+    }
+
+    @Test
+    public void awardsViewChangesContractLineItemNumberTest() throws InterruptedException, ParseException{
+        OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(awards_view_changes_opportunity);
+        assertTrue("Award Details - Contract Line Item Number not updated", !OpportunitiesObjectViewPage.ViewChangesFieldUpdated("Award Details", "Contract Line Item Number").isEmpty());
+    }
+
 
     //History Section tests
     @Test

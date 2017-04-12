@@ -472,6 +472,74 @@ int code = 0;
         return changesFrom("opportunity-classification");
     }
 
+    public static Boolean ViewChangesButtonExist(String section) {
+        switch (section){
+            case "Contact Information":  section = "Contact Information";
+                return (Base.driver.findElement(By.id("defaultBtnContactInformation")).getText().equals("View Changes"));
+            case "Award Details":
+                return (Base.driver.findElement(By.id("defaultBtnAwardDetails")).getText().equals("View Changes"));
+            default:
+                return false;
+        }
+    }
+
+    public static String ViewChangesChangesFromExist(String section) throws InterruptedException, ParseException{
+        switch (section){
+            case "Contact Information":  section = "Contact Information";
+                Base.driver.findElement(By.id("defaultBtnContactInformation")).click();
+                return changesFrom("opportunity-contact");
+            case "Award Details":
+                Base.driver.findElement(By.id("defaultBtnAwardDetails")).click();
+                return changesFrom("opportunity-award");
+            default:
+                return "";
+        }
+    }
+
+    public static String ViewChangesFieldUpdated(String section, String field) throws InterruptedException, ParseException{
+        switch (section){
+            case "Contact Information":  section = "Contact Information";
+                Base.driver.findElement(By.id("defaultBtnContactInformation")).click();
+                if(field.equals("Contracting Office Address"))
+                    return tagExists("opportunity-contact-contracting-office","#opportunity-contact-contracting-office");
+                else if(field.equals("Primary Point Of Contact Name"))
+                    return tagExists("opportunity-contact-primary-poc-full-name", "#opportunity-contact-primary-poc-full-name");
+                else if(field.equals("Primary Point Of Contact Email"))
+                    return tagExists("opportunity-contact-primary-poc-email", "#opportunity-contact-primary-poc-email");
+                else if(field.equals("Primary Point Of Contact Phone"))
+                    return tagExists("opportunity-contact-primary-poc-phone", "#opportunity-contact-primary-poc-phone");
+                else if(field.equals("Primary Point Of Contact Title"))
+                    return tagExists("opportunity-contact-primary-poc-title", "#opportunity-contact-primary-poc-title");
+                else if(field.equals("Secondary Point Of Contact Name"))
+                    return tagExists("opportunity-contact-secondary-poc-full-name", "#opportunity-contact-secondary-poc-full-name");
+                else if(field.equals("Secondary Point Of Contact Title"))
+                    return tagExists("opportunity-contact-secondary-poc-title", "#opportunity-contact-secondary-poc-title");
+                else if(field.equals("Secondary Point Of Contact Email"))
+                    return tagExists("opportunity-contact-secondary-poc-email", "#opportunity-contact-secondary-poc-email");
+                else return "";
+
+            case "Award Details":
+                Base.driver.findElement(By.id("defaultBtnAwardDetails")).click();
+                if(field.equals("Contract Award Date"))
+                    return tagExists("opportunity-award-date","#opportunity-award-date");
+                else if(field.equals("Contract Award Number"))
+                    return tagExists("opportunity-award-number", "#opportunity-award-number");
+                else if(field.equals("Contractor Awarded DUNS"))
+                    return tagExists("opportunity-awarded-duns", "#opportunity-awarded-duns");
+                else if(field.equals("Contractor Awarded Name"))
+                    return tagExists("opportunity-awarded-name", "#opportunity-awarded-name");
+                else if(field.equals("Contractor Awarded Address"))
+                    return tagExists("opportunity-awarded-address", "#opportunity-awarded-address");
+                else if(field.equals("Contract Award Dollar Amount"))
+                    return tagExists("opportunity-award-amount", "#opportunity-award-amount");
+                else if(field.equals("Contract Line Item Number"))
+                    return tagExists("opportunity-award-line-item-number", "#opportunity-award-line-item-number");
+                else return "";
+            default:
+                return "";
+        }
+    }
+
 
     public static String tagExists(String sectionID,String cssSelectorText) throws InterruptedException, ParseException {
         //Base.driver.findElement(By.id("defaultBtnSynopsis")).click();
