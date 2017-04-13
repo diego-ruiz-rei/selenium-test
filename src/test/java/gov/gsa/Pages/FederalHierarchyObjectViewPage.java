@@ -24,12 +24,12 @@ public class FederalHierarchyObjectViewPage extends ObjectView{
         return Base.driver.findElements(By.tagName("h1")).size() > 0;
     }
 
-    public static DataField fpdsOrgID() {
-        String fpdsorgid = Base.driver.findElement(By.cssSelector(".intro-section >  section:nth-child(2)")).getText();
-        String fpdsorgid_label = fpdsorgid.substring(0,fpdsorgid.indexOf(':')).trim();
-        String fpdsorgid_data = fpdsorgid.substring(fpdsorgid.indexOf(':') + 1 ,fpdsorgid.indexOf('|')).trim();
-        System.out.println("FPDS Org ID Label : "+fpdsorgid_label+"\nData : "+fpdsorgid_data);
-        return new DataField("FPDS Org ID",fpdsorgid_label,fpdsorgid_data);
+    public static DataField cgacCode() {
+        String cgaccode = Base.driver.findElement(By.cssSelector(".intro-section >  section:nth-child(2)")).getText();
+        String cgaccode_label = cgaccode.substring(cgaccode.indexOf('|')+1,cgaccode.lastIndexOf(':')).trim();
+        String cgaccode_data = cgaccode.substring(cgaccode.lastIndexOf(':') + 1 ,cgaccode.lastIndexOf('|')).trim();
+        System.out.println("CGAC Code: "+cgaccode_label+"\nData : "+cgaccode_data);
+        return new DataField("CGAC Code",cgaccode_label,cgaccode_data);
     }
 
     public static DataField status() {

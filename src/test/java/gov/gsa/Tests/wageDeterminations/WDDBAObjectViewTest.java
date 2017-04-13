@@ -29,7 +29,6 @@ public class WDDBAObjectViewTest extends WDObjectViewHelper{
         WDObjectViewHelper.dba_searchTerm = "AL20170102";
         setUp();
         WDObjectViewNavigation.gotoWDObjectView(dba_searchTerm);
-
     }
 
     @Test
@@ -68,9 +67,9 @@ public class WDDBAObjectViewTest extends WDObjectViewHelper{
     }
 
     @Test
-    public void wdDBAHistoryRevisionTest() throws InterruptedException{
-        WDObjectViewHelper.dba_searchTerm = history_searchTerm;
-        WDObjectViewNavigation.gotoWDObjectView(dba_searchTerm);
+    public void zzwdDBAHistoryRevisionTest() throws InterruptedException{
+        Thread.sleep(2000);
+        WDObjectViewNavigation.gotoWDObjectView(history_searchTerm);
         Thread.sleep(3000);
         if(!revisionName.isEmpty()) {
             WageDeterminationObjectViewPage.getHistoryRevision(revisionName);
@@ -78,12 +77,12 @@ public class WDDBAObjectViewTest extends WDObjectViewHelper{
         }
         assertTrue("WD Latest History Revision number donot match", WageDeterminationObjectViewPage.getHistoryRevisionNumberFromHistory().equals(WageDeterminationObjectViewPage.getHistoryRevisionNumber()));
         assertTrue("WD Latest History Revision Date donot match", WageDeterminationObjectViewPage.getHistoryRevisionDateFromHistory().equals(WageDeterminationObjectViewPage.getHistoryRevisionDate()));
+
     }
 
     @Test
-    public void wdDBAMoreRevisionsTest() throws InterruptedException{
-        WDObjectViewHelper.dba_searchTerm = showmore_history_searchTerm;
-        WDObjectViewNavigation.gotoWDObjectView(dba_searchTerm);
+    public void zzwdDBAMoreRevisionsTest() throws InterruptedException{
+        WDObjectViewNavigation.gotoWDObjectView(showmore_history_searchTerm);
         Thread.sleep(3000);
         WageDeterminationObjectViewPage.showMoreHistory();
         assertTrue("WD More revisions not loaded", WageDeterminationObjectViewPage.getTotalHistoryRevisions() > 5);

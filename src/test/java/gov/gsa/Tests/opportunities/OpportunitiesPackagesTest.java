@@ -60,7 +60,7 @@ public class OpportunitiesPackagesTest extends Base{
     @Test
     public void externalLinkTest() throws InterruptedException {
         OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(external_Link_package);
-        assertEquals(OpportunitiesObjectViewPage.externalLink(), "Solicitation");
+        assertEquals(OpportunitiesObjectViewPage.externalLink(), "Solicitation <1 kB");
         System.out.println("Packages - External Link exists");
     }
 

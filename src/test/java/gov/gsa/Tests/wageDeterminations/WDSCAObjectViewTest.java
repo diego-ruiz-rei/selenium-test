@@ -22,6 +22,7 @@ import static org.junit.Assert.assertTrue;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class WDSCAObjectViewTest extends WDObjectViewHelper{
+    //public static String sca_history_searchTerm = "1967-044";
 
     @BeforeClass
     public static void start() throws InterruptedException {

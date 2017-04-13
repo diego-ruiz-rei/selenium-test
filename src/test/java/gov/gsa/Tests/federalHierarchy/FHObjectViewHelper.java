@@ -43,10 +43,10 @@ public class FHObjectViewHelper extends Base{
     }
 
     @Test
-    public void fpdsOrgIdTest() throws InterruptedException {
-        CommonUtils.DataField fpds_org_id = FederalHierarchyObjectViewPage.fpdsOrgID();
-        testLabelAndDataExists(fpds_org_id);
-        testLabelContains(fpds_org_id, "FPDS Org ID");
+    public void cgacCodeTest() throws InterruptedException {
+        CommonUtils.DataField cgac_code = FederalHierarchyObjectViewPage.cgacCode();
+        testLabelAndDataExists(cgac_code);
+        testLabelContains(cgac_code, "CGAC Code");
     }
 
     @Test

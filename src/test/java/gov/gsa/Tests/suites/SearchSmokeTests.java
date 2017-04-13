@@ -38,15 +38,7 @@ import org.junit.runners.Suite;
         EntitiesSearchTest.class,
         ExclusionsSearchTest.class,
         WDDBASearchTest.class,
-        WDSCASearchTest.class,
-        AssistanceListingObjectViewTest.class,
-        OpportunitiesObjectViewTest.class,
-        OpportunitiesPackagesTest.class,
-        OpportunitiesModificationCancelTest.class,
-        FHDepartmentObjectViewTest.class,
-        FHSubTierAgencyObjectViewTest.class,
-        WDDBAObjectViewTest.class,
-        WDSCAObjectViewTest.class,
+        WDSCASearchTest.class
         })
-public class allSmokeTests extends Base{
+public class SearchSmokeTests extends Base{
 }

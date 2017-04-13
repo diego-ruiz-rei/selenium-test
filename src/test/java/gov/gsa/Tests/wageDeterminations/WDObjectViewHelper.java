@@ -32,16 +32,8 @@ import static org.junit.Assert.*;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class WDObjectViewHelper extends Base{
     //Test Data
-    public static String dba_searchTerm = "AL20170102";
-    public static String sca_searchTerm = "1967-044";
-
-    @BeforeClass
-    public static void start() throws InterruptedException {
-        WDObjectViewHelper.dba_searchTerm = "AK20170001";
-        setUp();
-        WDObjectViewNavigation.gotoWDObjectView(dba_searchTerm);
-
-    }
+    public static String dba_searchTerm = "";
+    public static String sca_searchTerm = "";
 
     @Test
     public void wdTitleTest() throws InterruptedException{

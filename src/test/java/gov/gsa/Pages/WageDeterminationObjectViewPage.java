@@ -4,17 +4,14 @@ import gov.gsa.Utilities.Base;
 import gov.gsa.Utilities.CommonUtils;
 import gov.gsa.Utilities.CommonUtils.DataField;
 import gov.gsa.Utilities.ObjectView;
-import gov.gsa.Utilities.CommonUtils.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -89,8 +86,8 @@ public class WageDeterminationObjectViewPage extends ObjectView{
             String link = Base.driver.findElement(By.id("wd-print-link")).findElement(By.tagName("a")).getAttribute("href");
             System.out.println("Link: " + link);
             URL url = new URL(link);
-            HttpsURLConnection connection = (HttpsURLConnection)url.openConnection();
-            connection.setHostnameVerifier ((hostname, session) -> true);
+            HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+            //connection.setHostnameVerifier ((hostname, session) -> true);
             connection.setRequestMethod("GET");
             connection.setReadTimeout(10000);
             connection.connect();
@@ -149,8 +146,9 @@ public class WageDeterminationObjectViewPage extends ObjectView{
         }
     }
 
-    public static void showMoreHistory(){
+    public static void showMoreHistory() throws InterruptedException{
         Base.driver.findElement(By.id("defaultBtnHistory")).click();
+        Thread.sleep(2000);
     }
 
     public static int getTotalHistoryRevisions(){

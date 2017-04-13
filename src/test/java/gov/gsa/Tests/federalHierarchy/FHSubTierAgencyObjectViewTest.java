@@ -19,8 +19,8 @@ import static org.junit.Assert.assertTrue;
 public class FHSubTierAgencyObjectViewTest extends FHObjectViewHelper {
 
     public static String FH_Department = "health and human services, department of The Secretary of HHS";
-    public static String org_id = "100004222";
-    public static String FH_Agency = "Social Security Administration";
+    public static String org_id = "100004223";
+    public static String FH_Agency = "U.s. Office of Consumer Affairs";
 
 
 
