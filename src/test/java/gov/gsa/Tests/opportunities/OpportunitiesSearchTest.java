@@ -92,7 +92,7 @@ public class OpportunitiesSearchTest extends Base {
         SearchNavigation.gotoSearchResultsPage(index,active_searchTerm);
         DataField officeData = OpportunitiesSearchResultsPage.officeName();
         testLabelAndDataExists(officeData);
-        testLabelContains(officeData, "Office");
+        testLabelContains(officeData, "Sub-tier");
     }
 
     //Test for Location
@@ -101,7 +101,7 @@ public class OpportunitiesSearchTest extends Base {
         SearchNavigation.gotoSearchResultsPage(index,active_searchTerm);
         DataField locationData = OpportunitiesSearchResultsPage.locationName();
         testLabelAndDataExists(locationData);
-        testLabelContains(locationData, "Location");
+        testLabelContains(locationData, "Office");
     }
 
     //Test for SolicitationNumber

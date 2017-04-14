@@ -1,5 +1,6 @@
 package gov.gsa.Tests.exclusions;
 
+import gov.gsa.Navigation.HomePageNavigation;
 import gov.gsa.Navigation.SearchNavigation;
 import gov.gsa.Pages.ExclusionsSearchPage;
 import gov.gsa.Utilities.Base;
@@ -30,7 +31,7 @@ public class ExclusionsSearchTest extends Base {
     public String index = "Exclusions";
     public String active_searchTerm = "BOB METGUD";
     public String autocomplete_searchTerm = "melissa dawn ferrell";
-    public String exact_searchTerm = "\"CENTURY METALS INC.\"";
+    public String exact_searchTerm = "926177528";
     public String valid_Termination_Date = "\"GIANT LABOR SOLUTIONS LLC\"";
     public String indefinite_Termination_Date = "\"JANE ANN BAILEY\"";
 
@@ -70,6 +71,7 @@ public class ExclusionsSearchTest extends Base {
     // auto complete - tests if autocomplete exists
     @Test
     public void autoCompleteTest() throws InterruptedException {
+        HomePageNavigation.gotoHomePage();
         assertTrue(CommonUtils.autoCompleteExists(index,autocomplete_searchTerm));
     }
 

@@ -1,5 +1,6 @@
 package gov.gsa.Tests.federalHierarchy;
 
+import gov.gsa.Navigation.HomePageNavigation;
 import gov.gsa.Navigation.SearchNavigation;
 import gov.gsa.Pages.FederalHierarchySearchPage;
 import gov.gsa.Utilities.Base;
@@ -25,7 +26,7 @@ public class FederalHierarchySearchTest extends Base {
     public String fh_searchTerm = "agriculture, department of Rural Utilities Service";
     public String fh_searchTitle = "agriculture, department of";
     public String autocomplete_searchTerm = "federal emergency management agency";
-    public String featured_result_searchTerm = "FEDERAL BUREAU OF INVESTIGATION";
+    public String featured_result_searchTerm = "RURAL HOUSING SERVICE";
     public String fh_searchTermFpdsCode="PENSION BENEFIT GUARANTY CORPORATION";
     public String fh_searchTermFpdsCodeOld="UNITED STATES INSTITUTE OF PEACE";
     public String duns_searchTerm = "";
@@ -76,6 +77,7 @@ public class FederalHierarchySearchTest extends Base {
     // checking if autocomplete window exists
     @Test
     public void autoCompleteTest() throws InterruptedException {
+        HomePageNavigation.gotoHomePage();
         assertTrue(CommonUtils.autoCompleteExists(index,autocomplete_searchTerm));
     }
 
@@ -123,32 +125,32 @@ public class FederalHierarchySearchTest extends Base {
 */
 
     //check fpds org id label and value
-    @Test
+    /*@Test
     public void fpdsOrgIdTest() throws InterruptedException {
         SearchNavigation.gotoSearchResultsPage(index,fh_searchTerm);
         CommonUtils.DataField fpdsFieldText = FederalHierarchySearchPage.testFpdsOrg();
-        testLabelAndDataExists(fpdsFieldText);
+        testLabelAndDataExists(fpdsFieldText);s
         testLabelContains(fpdsFieldText, "FPDS Org ID");
-    }
+    }*/
 
     //test for fpds code label and value
-    @Test
+    /*@Test
     public void fpdsOrgCodeTest() throws InterruptedException {
         SearchNavigation.gotoSearchResultsPage(index,fh_searchTermFpdsCode);
         CommonUtils.DataField fpdsCodeFieldText = FederalHierarchySearchPage.testFpdsCode();
         testLabelAndDataExists(fpdsCodeFieldText);
         testLabelContains(fpdsCodeFieldText, "FPDS Code");
-    }
+    }*/
 
     //todo : Find test data
     //test for fpds code(old) label. Does not check for value
-    @Test
+    /*@Test
     public void fpdsOrgCodeOldTest() throws InterruptedException {
         SearchNavigation.gotoSearchResultsPage(index,fh_searchTermFpdsCodeOld);
         CommonUtils.DataField fpdsCodeOldFieldText = FederalHierarchySearchPage.testFpdsCodeOld();
         //testLabelAndDataExists(fpdsCodeOldFieldText);
         testLabelContains(fpdsCodeOldFieldText, "FPDS Code (Old)");
-    }
+    }*/
 
 
 
@@ -204,7 +206,7 @@ public class FederalHierarchySearchTest extends Base {
     @Test
     public void aliasNameTest() throws InterruptedException {
         SearchNavigation.gotoSearchResultsPage(index,fh_searchTerm);
-        assertEquals("Also Known as Tag does not Exist", FederalHierarchySearchPage.aliasNameCheck(),"Also Known As");
+        assertEquals("Also Known as Tag does not Exist", FederalHierarchySearchPage.aliasNameCheck(),"Also Known As:");
 
     }
 
