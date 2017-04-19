@@ -49,9 +49,9 @@ public class WDObjectViewHelper extends Base{
 
     @Test
     public void wdSideMenuTest() throws InterruptedException {
-        ArrayList<String> menu = new ArrayList<String>(){{add("Overview"); add("Wage Determination"); add("History");}};
+        ArrayList<String> menu = new ArrayList<String>(){{add("Overview"); add("Document"); add("History");}};
         assertTrue("WD Side Menu Elements incorrect", menu.equals(ObjectView.wdSideMenuItems()));
-        System.out.println("SCA Side Menu is displayed");
+        System.out.println("WD Side Menu is displayed");
     }
 
     @Test
