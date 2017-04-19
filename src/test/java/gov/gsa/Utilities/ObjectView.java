@@ -74,7 +74,7 @@ public class ObjectView extends Base{
 
     //WD Side Menu
     public static ArrayList<String> wdSideMenuItems() {
-        List<WebElement> tabs = Base.driver.findElements(By.cssSelector("samsidenav > aside > ul > li"));
+        List<WebElement> tabs = Base.driver.findElements(By.cssSelector("samsidenav > aside sammenuitem > ul > li"));
         ArrayList<String> title = new ArrayList<String>();
         for (WebElement tab: tabs) {
             title.add(tab.findElement(By.cssSelector("a")).getText());
