@@ -1,5 +1,6 @@
 package gov.gsa.Tests.federalHierarchy;
 
+import gov.gsa.Navigation.HomePageNavigation;
 import gov.gsa.Navigation.SearchNavigation;
 import gov.gsa.Pages.FederalHierarchySearchPage;
 import gov.gsa.Utilities.Base;
@@ -9,6 +10,8 @@ import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+
+import java.text.ParseException;
 
 import static gov.gsa.Utilities.CommonUtils.testLabelAndDataExists;
 import static gov.gsa.Utilities.CommonUtils.testLabelContains;
@@ -25,8 +28,8 @@ public class FederalHierarchySearchTest extends Base {
     public String fh_searchTerm = "agriculture, department of Rural Utilities Service";
     public String fh_searchTitle = "agriculture, department of";
     public String autocomplete_searchTerm = "federal emergency management agency";
-    public String featured_result_searchTerm = "FEDERAL BUREAU OF INVESTIGATION";
-    public String fh_searchTermFpdsCode="PENSION BENEFIT GUARANTY CORPORATION";
+    public String featured_result_searchTerm = "RURAL HOUSING SERVICE";
+    public String fh_cgacCode="PENSION BENEFIT GUARANTY CORPORATION";
     public String fh_searchTermFpdsCodeOld="UNITED STATES INSTITUTE OF PEACE";
     public String duns_searchTerm = "";
 
@@ -134,7 +137,7 @@ public class FederalHierarchySearchTest extends Base {
     //test for fpds code label and value
     @Test
     public void fpdsOrgCodeTest() throws InterruptedException {
-        SearchNavigation.gotoSearchResultsPage(index,fh_searchTermFpdsCode);
+        SearchNavigation.gotoSearchResultsPage(index,fh_cgacCode);
         CommonUtils.DataField fpdsCodeFieldText = FederalHierarchySearchPage.testFpdsCode();
         testLabelAndDataExists(fpdsCodeFieldText);
         testLabelContains(fpdsCodeFieldText, "FPDS Code");
@@ -205,6 +208,31 @@ public class FederalHierarchySearchTest extends Base {
     public void aliasNameTest() throws InterruptedException {
         SearchNavigation.gotoSearchResultsPage(index,fh_searchTerm);
         assertEquals("Also Known as Tag does not Exist", FederalHierarchySearchPage.aliasNameCheck(),"Also Known As");
+
+    }
+
+    //total results
+    @Test
+    public void resultNumberTest() throws InterruptedException, ParseException {
+        HomePageNavigation.gotoHomePage();
+        SearchNavigation.gotoSearchResultsPage(index,"");
+        assertTrue("Message does not exist", CommonUtils.extractTotalResults() >= 1);
+    }
+
+    @Test
+    public void cgacCodeFeaturedResultTest() throws InterruptedException{
+        SearchNavigation.gotoSearchResultsPage(index,fh_cgacCode);
+        System.out.println(FederalHierarchySearchPage.checkCgacCodeFeaturedResult());
+
+    }
+
+    @Test
+    public void cgacCodeDepartmentTest() throws InterruptedException{
+
+    }
+
+    @Test
+    public void cgacCodeSubTierTest() throws InterruptedException{
 
     }
 

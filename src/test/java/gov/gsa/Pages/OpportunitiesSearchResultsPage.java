@@ -1,13 +1,8 @@
 package gov.gsa.Pages;
 import gov.gsa.Utilities.Base;
 import gov.gsa.Utilities.CommonUtils.DataField;
-import gov.gsa.Utilities.Base;
-import gov.gsa.Utilities.CommonUtils;
-import gov.gsa.Utilities.ObjectView;
-import org.junit.AfterClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
 
 import java.util.List;
 
@@ -93,11 +88,11 @@ public class OpportunitiesSearchResultsPage {
             for (WebElement oppTypeElement : officeTypeElements) {
                 officeName = oppTypeElement.getText();
             }
-            return splitLabelAndData(officeName).setName("Office");
+            return splitLabelAndData(officeName).setName("Sub-tier");
         }
         else
         {
-            return new DataField("Office",null,null);
+            return new DataField("Sub-tier",null,null);
         }
     }
 
@@ -111,11 +106,11 @@ public class OpportunitiesSearchResultsPage {
                 locationName = oppTypeElement.getText();
             }
 
-            return splitLabelAndData(locationName).setName("Location");
+            return splitLabelAndData(locationName).setName("Office");
         }
         else
         {
-            return new DataField("Location",null,null);
+            return new DataField("Office",null,null);
         }
     }
 

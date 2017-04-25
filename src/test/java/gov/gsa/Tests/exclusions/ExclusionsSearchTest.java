@@ -1,12 +1,11 @@
 package gov.gsa.Tests.exclusions;
 
+import gov.gsa.Navigation.HomePageNavigation;
 import gov.gsa.Navigation.SearchNavigation;
 import gov.gsa.Pages.ExclusionsSearchPage;
 import gov.gsa.Utilities.Base;
 import gov.gsa.Utilities.CommonUtils;
 import gov.gsa.Utilities.CommonUtils.DataField;
-import static gov.gsa.Utilities.CommonUtils.*;
-
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -19,6 +18,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import static gov.gsa.Utilities.CommonUtils.testLabelAndDataExists;
+import static gov.gsa.Utilities.CommonUtils.testLabelContains;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -148,6 +149,14 @@ public class ExclusionsSearchTest extends Base {
         SearchNavigation.gotoSearchResultsPage(index,indefinite_Termination_Date);
         System.out.println(ExclusionsSearchPage.exTerminationDate());
         CommonUtils.testDataContains(ExclusionsSearchPage.exTerminationDate(), "Indefinite");
+    }
+
+    //total results
+    @Test
+    public void resultNumberTest() throws InterruptedException, ParseException {
+        HomePageNavigation.gotoHomePage();
+        SearchNavigation.gotoSearchResultsPage(index,"");
+        assertTrue("Message does not exist", CommonUtils.extractTotalResults() >= 1);
     }
 
     @AfterClass

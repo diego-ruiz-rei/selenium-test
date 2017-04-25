@@ -11,6 +11,8 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import java.text.ParseException;
+
 import static gov.gsa.Utilities.CommonUtils.testLabelAndDataExists;
 import static gov.gsa.Utilities.CommonUtils.testLabelContains;
 import static gov.gsa.Utilities.CommonUtils.*;
@@ -92,7 +94,7 @@ public class OpportunitiesSearchTest extends Base {
         SearchNavigation.gotoSearchResultsPage(index,active_searchTerm);
         DataField officeData = OpportunitiesSearchResultsPage.officeName();
         testLabelAndDataExists(officeData);
-        testLabelContains(officeData, "Office");
+        testLabelContains(officeData, "Sub-tier");
     }
 
     //Test for Location
@@ -101,7 +103,7 @@ public class OpportunitiesSearchTest extends Base {
         SearchNavigation.gotoSearchResultsPage(index,active_searchTerm);
         DataField locationData = OpportunitiesSearchResultsPage.locationName();
         testLabelAndDataExists(locationData);
-        testLabelContains(locationData, "Location");
+        testLabelContains(locationData, "Office");
     }
 
     //Test for SolicitationNumber
@@ -206,6 +208,14 @@ public class OpportunitiesSearchTest extends Base {
     public void modifyAmendTest() throws InterruptedException {
         SearchNavigation.gotoSearchResultsPage(index,modifyamendSearchTerm);
         assertTrue("Modification/Amendment Does not exist", OpportunitiesSearchResultsPage.modifyAmend());
+    }
+
+    //total results
+    @Test
+    public void resultNumberTest() throws InterruptedException, ParseException {
+        HomePageNavigation.gotoHomePage();
+        SearchNavigation.gotoSearchResultsPage(index,"");
+        assertTrue("Message does not exist", CommonUtils.extractTotalResults() >= 1);
     }
 
     @AfterClass

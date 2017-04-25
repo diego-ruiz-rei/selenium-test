@@ -12,6 +12,8 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import gov.gsa.Utilities.CommonUtils.DataField;
 
+import java.text.ParseException;
+
 import static gov.gsa.Utilities.CommonUtils.testLabelAndDataExists;
 import static gov.gsa.Utilities.CommonUtils.testLabelContains;
 import static org.junit.Assert.assertEquals;
@@ -115,6 +117,14 @@ public class WDSearchHelper extends Base{
             SearchNavigation.gotoDBASearch(index, "");
         String countyList=WageDeterminationSearchPage.checkCountyFilter();
         assertTrue("County/ies field contains county selected",countyList.contains(county_filter) || countyList.contains("Statewide") );
+    }
+
+    //total results
+    @Test
+    public void resultNumberTest() throws InterruptedException, ParseException {
+        HomePageNavigation.gotoHomePage();
+        SearchNavigation.gotoSearchResultsPage(index,"");
+        assertTrue("Message does not exist", CommonUtils.extractTotalResults() >= 1);
     }
 
 

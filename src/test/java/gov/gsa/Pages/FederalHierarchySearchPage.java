@@ -224,4 +224,7 @@ public class FederalHierarchySearchPage extends ObjectView {
     }
 
 
+    public static String checkCgacCodeFeaturedResult() {
+         return Base.driver.findElement(By.cssSelector("card-secure-content usa-unstyled-list > li:nth-child(2)")).getText();
+    }
 }

@@ -71,7 +71,7 @@ public class AwardsSearchTest extends Base {
     public void resultNumberTest() throws InterruptedException, ParseException {
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,active_searchTerm);
-        assertTrue("Message does not exist", AwardsSearchResultsPage.extractTotalResults() >= 1);
+        assertTrue("Message does not exist", CommonUtils.extractTotalResults() >= 1);
     }
 
     //test for vendor name label and data

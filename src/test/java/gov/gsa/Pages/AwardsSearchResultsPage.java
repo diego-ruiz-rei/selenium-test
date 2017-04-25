@@ -4,7 +4,6 @@ import gov.gsa.Utilities.Base;
 import gov.gsa.Utilities.CommonUtils;
 import org.openqa.selenium.By;
 
-import java.text.NumberFormat;
 import java.text.ParseException;
 
 /**
@@ -36,18 +35,7 @@ public class AwardsSearchResultsPage {
             return false;
     }
 
-    //check for total results message
-    public static long extractTotalResults() throws ParseException {
-        String resultText=Base.driver.findElement(By.cssSelector(".usa-width-three-fourths > .usa-width-one > strong")).getText();
 
-        String[] splitMessage = resultText.split("\\s+");
-
-        long totalCount = (long) NumberFormat.getNumberInstance(java.util.Locale.US).parse(splitMessage[5]);
-        System.out.print(totalCount);
-
-        return totalCount;
-
-    }
 
     //check for vendor name
     public static boolean vendorName() {
@@ -248,7 +236,7 @@ public class AwardsSearchResultsPage {
         }
         String[] typesSelected = Base.driver.findElement(By.cssSelector(".contract-type-dropdown-list ul.usa-unstyled-list")).getText().split("\\r?\\n");
 
-        if(typesSelected.length > 1 && extractTotalResults() > 1) {
+        if(typesSelected.length > 1 && CommonUtils.extractTotalResults() > 1) {
             return true;
         }
         else{
@@ -268,7 +256,7 @@ public class AwardsSearchResultsPage {
         }
         String[] typesSelected = Base.driver.findElement(By.cssSelector(".award-type-dropdown-list ul.usa-unstyled-list")).getText().split("\\r?\\n");
 
-        if(typesSelected.length > 1 && extractTotalResults() > 1) {
+        if(typesSelected.length > 1 && CommonUtils.extractTotalResults() > 1) {
             return true;
         }
         else{
@@ -286,7 +274,7 @@ public class AwardsSearchResultsPage {
         String typesSelected = Base.driver.findElement(By.cssSelector(".contract-type-dropdown-list button.usa-button-link")).getText();
         System.out.println(typesSelected);
 
-        if(typesSelected.equalsIgnoreCase(autoCompleteText) && extractTotalResults() > 1) {
+        if(typesSelected.equalsIgnoreCase(autoCompleteText) && CommonUtils.extractTotalResults() > 1) {
             return true;
         }
         else{

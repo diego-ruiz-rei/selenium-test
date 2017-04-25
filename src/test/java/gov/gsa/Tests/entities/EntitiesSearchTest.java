@@ -1,5 +1,6 @@
 package gov.gsa.Tests.entities;
 
+import gov.gsa.Navigation.HomePageNavigation;
 import gov.gsa.Navigation.SearchNavigation;
 import gov.gsa.Pages.EntitiesSearchResultsPage;
 import gov.gsa.Utilities.Base;
@@ -9,6 +10,8 @@ import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+
+import java.text.ParseException;
 
 import static gov.gsa.Utilities.CommonUtils.testLabelAndDataExists;
 import static gov.gsa.Utilities.CommonUtils.testLabelContains;
@@ -130,6 +133,14 @@ public class EntitiesSearchTest extends Base{
         SearchNavigation.gotoSearchResultsPage(index,duns_searchTerm);
         assertEquals("Entities Exact match NOT found on DUNS Number",EntitiesSearchResultsPage.dunsExactMatch(), duns_searchTerm);
         System.out.println("Entities Exact match found on DUNS Number");
+    }
+
+    //total results
+    @Test
+    public void resultNumberTest() throws InterruptedException, ParseException {
+        HomePageNavigation.gotoHomePage();
+        SearchNavigation.gotoSearchResultsPage(index,"");
+        assertTrue("Message does not exist", CommonUtils.extractTotalResults() >= 1);
     }
 
 

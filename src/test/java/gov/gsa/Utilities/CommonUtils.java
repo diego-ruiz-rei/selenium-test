@@ -1,18 +1,15 @@
 package gov.gsa.Utilities;
 
 import gov.gsa.Navigation.SearchNavigation;
-import gov.gsa.Pages.FederalHierarchySearchPage;
 import gov.gsa.Pages.SearchPage;
-import gov.gsa.Pages.WageDeterminationSearchPage;
 import org.openqa.selenium.By;
 
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.function.Predicate;
 
-import static jdk.nashorn.internal.objects.NativeRegExp.test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by michael.kellogg on 12/6/16.
@@ -158,6 +155,19 @@ public class CommonUtils {
         simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
         System.out.println("Formatted Date : " + simpleDateFormat.format(date));
         return simpleDateFormat.format(date);
+    }
+
+    //check for total results message
+    public static long extractTotalResults() throws ParseException {
+        String resultText=Base.driver.findElement(By.cssSelector(".usa-width-three-fourths > .usa-width-one > strong")).getText();
+
+        String[] splitMessage = resultText.split("\\s+");
+
+        long totalCount = (long) NumberFormat.getNumberInstance(java.util.Locale.US).parse(splitMessage[5]);
+        System.out.print(totalCount);
+
+        return totalCount;
+
     }
 
 }

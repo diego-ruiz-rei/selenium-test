@@ -8,6 +8,8 @@ import gov.gsa.Utilities.CommonUtils;
 import org.junit.*;
 import org.junit.runners.MethodSorters;
 
+import java.text.ParseException;
+
 import static gov.gsa.Utilities.CommonUtils.testLabelAndDataExists;
 import static gov.gsa.Utilities.CommonUtils.testLabelContains;
 import static gov.gsa.Utilities.CommonUtils.*;
@@ -170,6 +172,14 @@ public class AssistanceListingSearchTest extends Base{
         assertTrue("Selected Filter is incorrect for Subtier Agency",AssistanceListingSearchPage.fhSubTierFilterSelection(fh_dept_filter,fh_subtier_filter).equals(fh_subtier_filter));
         assertTrue("No results for FH SubTier Filter",fh_dept_filter.contains(AssistanceListingSearchPage.department().data));
 
+    }
+
+    //test for total results
+    @Test
+    public void resultNumberTest() throws InterruptedException, ParseException {
+        HomePageNavigation.gotoHomePage();
+        SearchNavigation.gotoSearchResultsPage(index,"");
+        assertTrue("Message does not exist", CommonUtils.extractTotalResults() >= 1);
     }
 
     @After
