@@ -219,7 +219,7 @@ public class FederalHierarchySearchPage extends ObjectView {
         if(aliasNameTextTypeElements.size() > 0) {
             aliasNameText=Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > federal-hierarchy-result > div.usa-width-one-third > ul > li:nth-child(2) > strong")).getText();
         }
-
+        System.out.println(aliasNameText);
         return aliasNameText;
     }
 

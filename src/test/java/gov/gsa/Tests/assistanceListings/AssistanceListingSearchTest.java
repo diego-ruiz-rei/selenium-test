@@ -161,7 +161,7 @@ public class AssistanceListingSearchTest extends Base{
     public void fhFilterAndDataMatchTest() throws InterruptedException {
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
-        assertTrue("No results for FH Filter",AssistanceListingSearchPage.fhFilterSelection(fh_filter).contains(AssistanceListingSearchPage.department().data));
+        assertTrue("No results for FH Filter",AssistanceListingSearchPage.fhFilterSelection(fh_dept_filter).contains(AssistanceListingSearchPage.department().data));
     }
 
     @Test

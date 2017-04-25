@@ -283,6 +283,6 @@ public class AwardsSearchResultsPage {
     }
 
     public static void clearAll() {
-        Base.driver.findElement(By.id("clear-all-filters")).click();
+        Base.driver.findElement(By.xpath("//button[text()='Clear All']")).click();
     }
 }

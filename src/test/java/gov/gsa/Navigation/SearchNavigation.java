@@ -23,9 +23,11 @@ public class SearchNavigation{
 
     public static void gotoSearchResultsPage(String index, String searchTerm) throws InterruptedException {
         searchResults(index,searchTerm);
-        if(!Base.driver.findElement(By.id("checkbox-active")).isSelected())
-            Base.driver.findElement(By.id("checkbox-active")).click();
-        Thread.sleep(2000);
+        if(index!="Federal Hierarchy") {
+            if (!Base.driver.findElement(By.id("checkbox-active")).isSelected())
+                Base.driver.findElement(By.id("checkbox-active")).click();
+            Thread.sleep(2000);
+        }
     }
 
     public static void gotoAutoComplete(String index,String searchTerm) throws InterruptedException {
