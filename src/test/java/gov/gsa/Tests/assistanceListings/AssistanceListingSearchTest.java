@@ -154,14 +154,15 @@ public class AssistanceListingSearchTest extends Base{
     public void fhFilterSelectionTest() throws InterruptedException {
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
-        assertTrue("Selected FH Filter is not displayed",AssistanceListingSearchPage.fhFilterSelection(fh_filter).equals(fh_filter));
+        String fhFilter= CommonUtils.fhFilterSelection(fh_filter);
+        assertTrue("Selected FH Filter is not displayed",fhFilter.equalsIgnoreCase(fh_filter));
     }
 
     @Test
     public void fhFilterAndDataMatchTest() throws InterruptedException {
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
-        assertTrue("No results for FH Filter",AssistanceListingSearchPage.fhFilterSelection(fh_dept_filter).contains(AssistanceListingSearchPage.department().data));
+        assertTrue("No results for FH Filter",CommonUtils.fhFilterSelection(fh_dept_filter).contains(AssistanceListingSearchPage.department().data));
     }
 
     @Test
@@ -169,7 +170,7 @@ public class AssistanceListingSearchTest extends Base{
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
         //System.out.println("Selected Filter :"+AssistanceListingSearchPage.fhSubTierFilterSelection(fh_dept_filter,fh_subtier_filter));
-        assertTrue("Selected Filter is incorrect for Subtier Agency",AssistanceListingSearchPage.fhSubTierFilterSelection(fh_dept_filter,fh_subtier_filter).equals(fh_subtier_filter));
+        assertTrue("Selected Filter is incorrect for Subtier Agency",CommonUtils.fhSubTierFilterSelection(fh_dept_filter,fh_subtier_filter).equals(fh_subtier_filter));
         assertTrue("No results for FH SubTier Filter",fh_dept_filter.contains(AssistanceListingSearchPage.department().data));
 
     }

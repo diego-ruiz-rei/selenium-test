@@ -3,6 +3,7 @@ package gov.gsa.Utilities;
 import gov.gsa.Navigation.SearchNavigation;
 import gov.gsa.Pages.SearchPage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.Select;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -168,6 +169,30 @@ public class CommonUtils {
 
         return totalCount;
 
+    }
+
+    //Filters for agency picker
+
+    public static String fhFilterSelection(String filter) throws InterruptedException {
+        Base.driver.findElement(By.cssSelector(".usa-agency-picker-search-input")).sendKeys(filter);
+        Base.driver.findElement(By.cssSelector(".usa-agency-picker-icon")).click();
+        Thread.sleep(5000);
+        System.out.println("Selected Filter :"+Base.driver.findElement(By.cssSelector("agencypicker > div > div.usa-agency-picker-readonly-area > ul > li")).getText());
+        return Base.driver.findElement(By.cssSelector("agencypicker > div > div.usa-agency-picker-readonly-area > ul > li")).getText();
+    }
+
+    //Filters for agency picker
+
+    public static String fhSubTierFilterSelection(String dept_filter, String subtier_filter) throws InterruptedException {
+        Base.driver.findElement(By.linkText("Advanced")).click();
+        Thread.sleep(2000);
+        new Select(Base.driver.findElement(By.id("Department"))).selectByVisibleText(dept_filter);
+        Thread.sleep(2000);
+        new Select(Base.driver.findElement(By.id("Agency"))).selectByVisibleText(subtier_filter);
+        Thread.sleep(1000);
+        Base.driver.findElement(By.cssSelector(".usa-agency-picker-button-area > button:nth-child(1)")).click();
+        Thread.sleep(2000);
+        return Base.driver.findElement(By.cssSelector("agencypicker > div > div.usa-agency-picker-readonly-area > ul > li")).getText();
     }
 
 }

@@ -285,4 +285,40 @@ public class AwardsSearchResultsPage {
     public static void clearAll() {
         Base.driver.findElement(By.xpath("//button[text()='Clear All']")).click();
     }
+
+    public static boolean checkNaicsFilter(String filterData, String naicsFieldData) throws InterruptedException {
+        Base.driver.findElement(By.cssSelector(".naics-psc-dropdown-list sam-type-ahead:nth-child(1) input")).sendKeys(filterData);
+        Thread.sleep(2000);
+        Base.driver.findElement(By.cssSelector(".naics-psc-dropdown-list #sam-autocomplete-results > li")).click();
+        Thread.sleep(2000);
+        String displayData = Base.driver.findElement(By.cssSelector("#naics-psc-display button.usa-button-link")).getText();
+        String data = Base.driver.findElement(By.cssSelector(".naics-code > ul > li > span")).getText();
+
+        if(displayData.contains(filterData) && data.equals(naicsFieldData)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+    public static boolean checkNaicsMultipleFilter(String filterData1, String filterData2) throws InterruptedException, ParseException {
+        Base.driver.findElement(By.cssSelector(".naics-psc-dropdown-list sam-type-ahead:nth-child(1) input")).sendKeys(filterData1);
+        Thread.sleep(2000);
+        Base.driver.findElement(By.cssSelector(".naics-psc-dropdown-list #sam-autocomplete-results > li")).click();
+        Thread.sleep(2000);
+        Base.driver.findElement(By.cssSelector(".naics-psc-dropdown-list sam-type-ahead:nth-child(1) input")).sendKeys(filterData2);
+        Thread.sleep(2000);
+        Base.driver.findElement(By.cssSelector(".naics-psc-dropdown-list #sam-autocomplete-results > li")).click();
+        Thread.sleep(2000);
+
+        String[] typesSelected = Base.driver.findElement(By.cssSelector("#naics-psc-display ul.usa-unstyled-list")).getText().split("\\r?\\n");
+        System.out.println(typesSelected[0]+" "+typesSelected[1]);
+        if(typesSelected.length > 1 && CommonUtils.extractTotalResults() > 1) {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }

@@ -1,11 +1,12 @@
 package gov.gsa.Pages;
 
 import gov.gsa.Utilities.Base;
-import gov.gsa.Utilities.CommonUtils.*;
+import gov.gsa.Utilities.CommonUtils.DataField;
 import gov.gsa.Utilities.ObjectView;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -224,7 +225,46 @@ public class FederalHierarchySearchPage extends ObjectView {
     }
 
 
-    public static String checkCgacCodeFeaturedResult() {
-         return Base.driver.findElement(By.cssSelector("card-secure-content usa-unstyled-list > li:nth-child(2)")).getText();
+    public static DataField checkCgacCodeFeaturedResult() {
+        String extractField= Base.driver.findElement(By.cssSelector(".card-secure-content .usa-unstyled-list > li:nth-child(2)")).getText();
+        return splitLabelAndData(extractField).setName("CGAC");
+    }
+
+    public static DataField checkCgacCodeDepartment() {
+        String departmentField = Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(4) > federal-hierarchy-result > div.usa-width-one-third > ul > li:nth-child(1)")).getText();
+        if(departmentField.equalsIgnoreCase("Department")){
+            String extractField = Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(4) > federal-hierarchy-result > div.usa-width-one-third > ul > li:nth-child(3)")).getText();
+            return splitLabelAndData(extractField).setName("CGAC");
+        }
+        return new DataField("CGAC",null,null);
+    }
+
+    public static DataField checkCgacCodeSubTier() {
+        String subTierField = Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(3) > federal-hierarchy-result > div.usa-width-one-third > ul > li:nth-child(1)")).getText();
+        if(subTierField.equalsIgnoreCase("Sub-Tier")){
+            String extractField = Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(3) > federal-hierarchy-result > div.usa-width-one-third > ul > li:nth-child(2)")).getText();
+            return splitLabelAndData(extractField).setName("CGAC");
+        }
+        return new DataField("CGAC",null,null);
+    }
+
+    public static String checkFhAwardsLink() throws InterruptedException {
+        String extractField = "";
+        Thread.sleep(1000);
+        Base.driver.findElement(By.cssSelector(".card-secure-content .usa-unstyled-list > li:nth-child(3)")).click();
+        Thread.sleep(2000);
+        String oldTab = driver.getWindowHandle();
+        ArrayList<String> newTab = new ArrayList<String> (driver.getWindowHandles());
+        newTab.remove(oldTab);
+        driver.switchTo().window(newTab.get(0));
+        Thread.sleep(2000);
+       // String awardTitle = Base.driver.findElement(By.cssSelector("awards-result > p > span")).getText();
+        //if("Award".equals(awardTitle)) {
+             extractField = Base.driver.findElement(By.cssSelector("agencypicker > div > div.usa-agency-picker-readonly-area > ul > li")).getText();
+
+        //}
+        return extractField;
     }
 }
+
+

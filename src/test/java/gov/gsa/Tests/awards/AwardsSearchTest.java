@@ -27,6 +27,9 @@ public class AwardsSearchTest extends Base {
     public String active_searchTerm = "VA24615F0356";
     public String autocomplete_searchTerm = "VA24614A0067";
     public String contract_award_type_filter = "069058";
+    public String naics_filter_1 = "561720 -- Janitorial Services";
+    public String naics_filter_field = "JANITORIAL SERVICES (561720)";
+    public String naics_filter_2 = "238220 -- Plumbing, Heating, and Air-Conditioning Contractors";
 
     @BeforeClass
     public static void start() throws InterruptedException {
@@ -249,6 +252,20 @@ public class AwardsSearchTest extends Base {
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
         assertTrue("Field Label/Value or type selected is Incorrect", AwardsSearchResultsPage.checkContractDropdownTypeFilter());
+    }
+
+    @Test
+    public void naicsFilterTest() throws InterruptedException{
+        HomePageNavigation.gotoHomePage();
+        SearchNavigation.gotoSearchResultsPage(index,"");
+        assertTrue("Naics test fails",AwardsSearchResultsPage.checkNaicsFilter(naics_filter_1, naics_filter_field));
+    }
+
+    @Test
+    public void naicsFilterMultipleTest() throws InterruptedException, ParseException {
+        HomePageNavigation.gotoHomePage();
+        SearchNavigation.gotoSearchResultsPage(index,"");
+        assertTrue("Naics test fails",AwardsSearchResultsPage.checkNaicsMultipleFilter(naics_filter_1, naics_filter_2));
     }
 
     @After

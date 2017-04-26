@@ -32,7 +32,9 @@ public class FederalHierarchySearchTest extends Base {
     public String fh_cgacCode="PENSION BENEFIT GUARANTY CORPORATION";
     public String fh_searchTermFpdsCodeOld="UNITED STATES INSTITUTE OF PEACE";
     public String duns_searchTerm = "";
-
+    public String fh_dept_filter ="EDUCATION, DEPARTMENT OF (D)";
+    public String fh_subtier_filter = "OFFICE OF ELEMENTARY AND SECONDARY EDUCATION (A)";
+    public String fh_awards_link = "VETERANS AFFAIRS, DEPARTMENT OF";
     // Any variables needed here
 
     @BeforeClass
@@ -220,21 +222,68 @@ public class FederalHierarchySearchTest extends Base {
         assertTrue("Message does not exist", CommonUtils.extractTotalResults() >= 1);
     }
 
+    //Cgac code field check for featured result
     @Test
     public void cgacCodeFeaturedResultTest() throws InterruptedException{
         SearchNavigation.gotoSearchResultsPage(index,fh_cgacCode);
-        System.out.println(FederalHierarchySearchPage.checkCgacCodeFeaturedResult());
+        CommonUtils.DataField cgacField = FederalHierarchySearchPage.checkCgacCodeFeaturedResult();
+        testLabelAndDataExists(cgacField);
+        testLabelContains(cgacField, "CGAC");
 
     }
 
+    //Cgac code field check for dept
     @Test
     public void cgacCodeDepartmentTest() throws InterruptedException{
+        SearchNavigation.gotoSearchResultsPage(index,fh_cgacCode);
+        CommonUtils.DataField cgacField = FederalHierarchySearchPage.checkCgacCodeDepartment();
+        testLabelAndDataExists(cgacField);
+        testLabelContains(cgacField, "CGAC");
 
     }
 
+    //Cgac code field check for sub-tier
     @Test
     public void cgacCodeSubTierTest() throws InterruptedException{
+        SearchNavigation.gotoSearchResultsPage(index,fh_cgacCode);
+        CommonUtils.DataField cgacField = FederalHierarchySearchPage.checkCgacCodeSubTier();
+        testLabelAndDataExists(cgacField);
+        testLabelContains(cgacField, "CGAC");
+    }
 
+    //tests for agency picker filter
+    @Test
+    public void fhFilterSelectionTest() throws InterruptedException {
+        HomePageNavigation.gotoHomePage();
+        SearchNavigation.gotoSearchResultsPage(index,"");
+        String fhFilter= CommonUtils.fhFilterSelection(fh_dept_filter);
+        assertTrue("Selected FH Filter is not displayed",fhFilter.equalsIgnoreCase(fh_dept_filter));
+    }
+
+    @Test
+    public void fhFilterAndDataMatchTest() throws InterruptedException {
+        HomePageNavigation.gotoHomePage();
+        SearchNavigation.gotoSearchResultsPage(index,"");
+        assertTrue("No results for FH Filter",CommonUtils.fhFilterSelection(fh_dept_filter).contains(FederalHierarchySearchPage.departmentCheck().data));
+    }
+
+    @Test
+    public void fhSubTierFilterAndDataMatchTest() throws InterruptedException {
+        HomePageNavigation.gotoHomePage();
+        SearchNavigation.gotoSearchResultsPage(index,"");
+        //System.out.println("Selected Filter :"+AssistanceListingSearchPage.fhSubTierFilterSelection(fh_dept_filter,fh_subtier_filter));
+        assertTrue("Selected Filter is incorrect for Subtier Agency",CommonUtils.fhSubTierFilterSelection(fh_dept_filter,fh_subtier_filter).equals(fh_subtier_filter));
+        assertTrue("No results for FH SubTier Filter",fh_dept_filter.contains(FederalHierarchySearchPage.departmentCheck().data));
+
+    }
+
+    //check link from featured result. This test will not work on dev
+    @Test
+    public void fhAwardsLinkTest() throws InterruptedException{
+        HomePageNavigation.gotoHomePage();
+        SearchNavigation.gotoSearchResultsPage(index,fh_awards_link);
+        String fhFilter = FederalHierarchySearchPage.checkFhAwardsLink();
+        assertTrue("Link is not working",fhFilter.equals(fh_awards_link));
     }
 
 

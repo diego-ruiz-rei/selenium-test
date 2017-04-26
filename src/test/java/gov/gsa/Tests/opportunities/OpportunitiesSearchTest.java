@@ -38,6 +38,9 @@ public class OpportunitiesSearchTest extends Base {
     public String fairopportunity_searchTerm="W9133L16F2Y04";
     public String specialnotice_searchTerm="C27JFPMU";
     public String modifyamendSearchTerm="FM44186201AW01";
+    public String fh_filter ="INTERIOR, DEPARTMENT OF THE (D)";
+    public String fh_dept_filter ="EDUCATION, DEPARTMENT OF (D)";
+    public String fh_subtier_filter = "OFFICE OF ELEMENTARY AND SECONDARY EDUCATION (A)";
 
     @BeforeClass
     public static void start() throws InterruptedException {
@@ -218,6 +221,31 @@ public class OpportunitiesSearchTest extends Base {
         assertTrue("Message does not exist", CommonUtils.extractTotalResults() >= 1);
     }
 
+    //tests for agency picker filter
+    @Test
+    public void fhFilterSelectionTest() throws InterruptedException {
+        HomePageNavigation.gotoHomePage();
+        SearchNavigation.gotoSearchResultsPage(index,"");
+        String fhFilter= CommonUtils.fhFilterSelection(fh_filter);
+        assertTrue("Selected FH Filter is not displayed",fhFilter.equalsIgnoreCase(fh_filter));
+    }
+
+    @Test
+    public void fhFilterAndDataMatchTest() throws InterruptedException {
+        HomePageNavigation.gotoHomePage();
+        SearchNavigation.gotoSearchResultsPage(index,"");
+        assertTrue("No results for FH Filter",CommonUtils.fhFilterSelection(fh_dept_filter).contains(OpportunitiesSearchResultsPage.department().data));
+    }
+
+    @Test
+    public void fhSubTierFilterAndDataMatchTest() throws InterruptedException {
+        HomePageNavigation.gotoHomePage();
+        SearchNavigation.gotoSearchResultsPage(index,"");
+        //System.out.println("Selected Filter :"+AssistanceListingSearchPage.fhSubTierFilterSelection(fh_dept_filter,fh_subtier_filter));
+        assertTrue("Selected Filter is incorrect for Subtier Agency",CommonUtils.fhSubTierFilterSelection(fh_dept_filter,fh_subtier_filter).equals(fh_subtier_filter));
+        assertTrue("No results for FH SubTier Filter",fh_dept_filter.contains(OpportunitiesSearchResultsPage.department().data));
+
+    }
     @AfterClass
     public static void end(){
         closeOut();

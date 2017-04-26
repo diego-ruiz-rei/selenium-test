@@ -34,6 +34,9 @@ public class ExclusionsSearchTest extends Base {
     public String exact_searchTerm = "926177528";
     public String valid_Termination_Date = "\"GIANT LABOR SOLUTIONS LLC\"";
     public String indefinite_Termination_Date = "\"JANE ANN BAILEY\"";
+    public String fh_filter ="EDUCATION, DEPARTMENT OF (D)";
+    public String fh_dept_filter ="HOMELAND SECURITY, DEPARTMENT OF (D)";
+    public String fh_subtier_filter = "U.S. IMMIGRATION AND CUSTOMS ENFORCEMENT (A)";
 
     // Any variables needed here
     @BeforeClass
@@ -158,6 +161,36 @@ public class ExclusionsSearchTest extends Base {
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
         assertTrue("Message does not exist", CommonUtils.extractTotalResults() >= 1);
+    }
+
+    //tests for agency picker filter
+    @Test
+    public void fhFilterSelectionTest() throws InterruptedException {
+        HomePageNavigation.gotoHomePage();
+        SearchNavigation.gotoSearchResultsPage(index,"");
+        String fhFilter= CommonUtils.fhFilterSelection(fh_filter);
+        assertTrue("Selected FH Filter is not displayed",fhFilter.equalsIgnoreCase(fh_filter));
+    }
+
+    @Test
+    public void fhFilterAndDataMatchTest() throws InterruptedException, ParseException {
+        HomePageNavigation.gotoHomePage();
+        SearchNavigation.gotoSearchResultsPage(index,"");
+        long totalResultsNoFilter = CommonUtils.extractTotalResults();
+        String filterName = CommonUtils.fhFilterSelection(fh_filter);
+        long totalResultsFilter = (CommonUtils.extractTotalResults());
+        assertTrue("No results for FH Filter",totalResultsFilter < totalResultsNoFilter);
+    }
+
+    @Test
+    public void fhSubTierFilterAndDataMatchTest() throws InterruptedException, ParseException {
+        HomePageNavigation.gotoHomePage();
+        SearchNavigation.gotoSearchResultsPage(index,"");
+        long totalResultsNoFilter = CommonUtils.extractTotalResults();
+        //System.out.println("Selected Filter :"+AssistanceListingSearchPage.fhSubTierFilterSelection(fh_dept_filter,fh_subtier_filter));
+        assertTrue("Selected Filter is incorrect for Subtier Agency",CommonUtils.fhSubTierFilterSelection(fh_dept_filter,fh_subtier_filter).equals(fh_subtier_filter));
+        long totalResultsFilter = CommonUtils.extractTotalResults();
+        assertTrue("Selected Filter is incorrect for Subtier Agency", totalResultsFilter < totalResultsNoFilter);
     }
 
     @AfterClass
