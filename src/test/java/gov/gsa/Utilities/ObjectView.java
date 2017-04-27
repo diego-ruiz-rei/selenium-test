@@ -72,6 +72,18 @@ public class ObjectView extends Base{
         return Base.driver.findElement(By.linkText("Packages")).getText();
     }
 
+    public static String awardNotices() {
+        return Base.driver.findElement(By.linkText("Award Notices")).getText();
+    }
+
+    public static String awardSummary() throws InterruptedException {
+        Base.driver.findElement(By.linkText("Award Notices")).click();
+        Thread.sleep(2000);
+        return Base.driver.findElement(By.linkText("Award Summary")).getText();
+    }
+
+
+
     //WD Side Menu
     public static ArrayList<String> wdSideMenuItems() {
         List<WebElement> tabs = Base.driver.findElements(By.cssSelector("samsidenav > aside sammenuitem > ul > li"));
