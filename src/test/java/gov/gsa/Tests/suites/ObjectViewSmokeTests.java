@@ -12,10 +12,7 @@ import gov.gsa.Tests.federalHierarchy.FHDepartmentObjectViewTest;
 import gov.gsa.Tests.federalHierarchy.FHSubTierAgencyObjectViewTest;
 import gov.gsa.Tests.federalHierarchy.FederalHierarchySearchTest;
 import gov.gsa.Tests.home.HomepageTest;
-import gov.gsa.Tests.opportunities.OpportunitiesModificationCancelTest;
-import gov.gsa.Tests.opportunities.OpportunitiesObjectViewTest;
-import gov.gsa.Tests.opportunities.OpportunitiesPackagesTest;
-import gov.gsa.Tests.opportunities.OpportunitiesSearchTest;
+import gov.gsa.Tests.opportunities.*;
 import gov.gsa.Tests.wageDeterminations.WDDBAObjectViewTest;
 import gov.gsa.Tests.wageDeterminations.WDDBASearchTest;
 import gov.gsa.Tests.wageDeterminations.WDSCAObjectViewTest;
@@ -34,6 +31,7 @@ import org.junit.runners.Suite;
         OpportunitiesObjectViewTest.class,
         OpportunitiesPackagesTest.class,
         OpportunitiesModificationCancelTest.class,
+        OpportunitiesAwardsTabTest.class,
         FHDepartmentObjectViewTest.class,
         FHSubTierAgencyObjectViewTest.class,
         WDDBAObjectViewTest.class,
