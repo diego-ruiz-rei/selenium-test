@@ -150,6 +150,7 @@ public class AwardsSearchResultsPage {
         return new CommonUtils.DataField("Award Type",label,data);
     }
 
+    //icd type
     public static boolean checkContractTypeFilter() throws InterruptedException {
         Base.driver.findElement(By.id("Contract")).click();
         Thread.sleep(2000);
@@ -164,6 +165,7 @@ public class AwardsSearchResultsPage {
 
     }
 
+    //contract type
     public static boolean checkICDTypeFilter() throws InterruptedException {
         Base.driver.findElement(By.id("ICD")).click();
         Thread.sleep(2000);
@@ -178,6 +180,7 @@ public class AwardsSearchResultsPage {
 
     }
 
+    //AWARD ICD TYPE
     public static boolean checkAwardDropdownICD() throws InterruptedException {
         Base.driver.findElement(By.id("ICD")).click();
         Thread.sleep(2000);
@@ -201,6 +204,7 @@ public class AwardsSearchResultsPage {
         }
     }
 
+    //award contract type
     public static boolean checkAwardDropdownContract() throws InterruptedException{
         Base.driver.findElement(By.id("Contract")).click();
         Thread.sleep(2000);
@@ -225,6 +229,7 @@ public class AwardsSearchResultsPage {
         }
     }
 
+    //multiple contract
     public static boolean checkMultipleContractTypeFilter() throws InterruptedException, ParseException {
 
         for(int i=1 ; i< multipleItemsNumber ;i++) {
@@ -246,6 +251,7 @@ public class AwardsSearchResultsPage {
 
     }
 
+    //multiple award
     public static boolean checkMultipleAwardTypeFilter() throws InterruptedException, ParseException {
         for(int i=1 ; i< multipleItemsNumber ;i++) {
             Base.driver.findElement(By.cssSelector(".award-type-dropdown-list input")).click();
@@ -264,6 +270,7 @@ public class AwardsSearchResultsPage {
         }
     }
 
+    //contract
     public static boolean checkContractDropdownTypeFilter() throws InterruptedException, ParseException {
         Base.driver.findElement(By.cssSelector(".contract-type-dropdown-list input")).click();
         Thread.sleep(2000);
@@ -282,10 +289,7 @@ public class AwardsSearchResultsPage {
         }
     }
 
-    public static void clearAll() {
-        Base.driver.findElement(By.xpath("//button[text()='Clear All']")).click();
-    }
-
+    //naics single
     public static boolean checkNaicsFilter(String filterData, String naicsFieldData) throws InterruptedException {
         Base.driver.findElement(By.cssSelector(".naics-psc-dropdown-list sam-type-ahead:nth-child(1) input")).sendKeys(filterData);
         Thread.sleep(2000);
@@ -301,7 +305,7 @@ public class AwardsSearchResultsPage {
         }
     }
 
-
+    //naics multiple
     public static boolean checkNaicsMultipleFilter(String filterData1, String filterData2) throws InterruptedException, ParseException {
         Base.driver.findElement(By.cssSelector(".naics-psc-dropdown-list sam-type-ahead:nth-child(1) input")).sendKeys(filterData1);
         Thread.sleep(2000);
@@ -321,4 +325,9 @@ public class AwardsSearchResultsPage {
             return false;
         }
     }
+
+    public static void clearAll() {
+        Base.driver.findElement(By.xpath("//button[text()='Clear All']")).click();
+    }
+
 }

@@ -203,6 +203,7 @@ public class AwardsSearchTest extends Base {
         testLabelContains(fieldDataElement, "PSC Code");
     }
 
+    //test for contract type filter
     @Test
     public void contractTypeFilterTest() throws InterruptedException{
         HomePageNavigation.gotoHomePage();
@@ -210,6 +211,7 @@ public class AwardsSearchTest extends Base {
         assertTrue("Contract Type Label does not exist", AwardsSearchResultsPage.checkContractTypeFilter());
     }
 
+    //test for icd type filter
     @Test
     public void icdTypeFilterTest() throws InterruptedException{
         HomePageNavigation.gotoHomePage();
@@ -217,6 +219,7 @@ public class AwardsSearchTest extends Base {
         assertTrue("IDV Type Label does not exist", AwardsSearchResultsPage.checkICDTypeFilter());
     }
 
+    //Validate Award-IDV Types filter renders results - for ICD
     @Test
     public void icdAwardDropdownFilterTest() throws InterruptedException{
         HomePageNavigation.gotoHomePage();
@@ -224,6 +227,7 @@ public class AwardsSearchTest extends Base {
         assertTrue("Field Label/Value or type selected is Incorrect", AwardsSearchResultsPage.checkAwardDropdownICD());
     }
 
+    //Validate Award-IDV Types filter renders results - for Contract
     @Test
     public void contractAwardDropdownFilterTest() throws InterruptedException{
         HomePageNavigation.gotoHomePage();
@@ -231,6 +235,7 @@ public class AwardsSearchTest extends Base {
         assertTrue("Field Label/Value or type selected is Incorrect", AwardsSearchResultsPage.checkAwardDropdownContract());
     }
 
+    //Validate multiple values can be selected for Award-IDV Types
     @Test
     public void multipleAwardTypeFilterTest() throws InterruptedException, ParseException {
         HomePageNavigation.gotoHomePage();
@@ -239,6 +244,7 @@ public class AwardsSearchTest extends Base {
 
     }
 
+    //Validate multiple values can be selected for Contract Types
     @Test
     public void multipleContractTypeFilterTest() throws InterruptedException, ParseException {
         HomePageNavigation.gotoHomePage();
@@ -247,6 +253,7 @@ public class AwardsSearchTest extends Base {
 
     }
 
+    //Validate Contract Types filter renders results
     @Test
     public void contractDropdownFilterTest() throws InterruptedException, ParseException{
         HomePageNavigation.gotoHomePage();
@@ -254,6 +261,7 @@ public class AwardsSearchTest extends Base {
         assertTrue("Field Label/Value or type selected is Incorrect", AwardsSearchResultsPage.checkContractDropdownTypeFilter());
     }
 
+    //Validate NAICS filter renders result
     @Test
     public void naicsFilterTest() throws InterruptedException{
         HomePageNavigation.gotoHomePage();
@@ -261,6 +269,7 @@ public class AwardsSearchTest extends Base {
         assertTrue("Naics test fails",AwardsSearchResultsPage.checkNaicsFilter(naics_filter_1, naics_filter_field));
     }
 
+    //Validate multiple values can be selected for NAICS Type
     @Test
     public void naicsFilterMultipleTest() throws InterruptedException, ParseException {
         HomePageNavigation.gotoHomePage();

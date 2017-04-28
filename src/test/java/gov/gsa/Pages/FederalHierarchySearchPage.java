@@ -224,12 +224,13 @@ public class FederalHierarchySearchPage extends ObjectView {
         return aliasNameText;
     }
 
-
+    //cgac field check
     public static DataField checkCgacCodeFeaturedResult() {
         String extractField= Base.driver.findElement(By.cssSelector(".card-secure-content .usa-unstyled-list > li:nth-child(2)")).getText();
         return splitLabelAndData(extractField).setName("CGAC");
     }
 
+    //cgac code for dept
     public static DataField checkCgacCodeDepartment() {
         String departmentField = Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(4) > federal-hierarchy-result > div.usa-width-one-third > ul > li:nth-child(1)")).getText();
         if(departmentField.equalsIgnoreCase("Department")){
@@ -239,6 +240,7 @@ public class FederalHierarchySearchPage extends ObjectView {
         return new DataField("CGAC",null,null);
     }
 
+    //cgac code for sub tier
     public static DataField checkCgacCodeSubTier() {
         String subTierField = Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(3) > federal-hierarchy-result > div.usa-width-one-third > ul > li:nth-child(1)")).getText();
         if(subTierField.equalsIgnoreCase("Sub-Tier")){
@@ -248,6 +250,7 @@ public class FederalHierarchySearchPage extends ObjectView {
         return new DataField("CGAC",null,null);
     }
 
+    //awards link check from FH featured result
     public static String checkFhAwardsLink() throws InterruptedException {
         String extractField = "";
         Thread.sleep(1000);
