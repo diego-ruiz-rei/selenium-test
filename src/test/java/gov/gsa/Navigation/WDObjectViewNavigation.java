@@ -15,11 +15,11 @@ import java.util.List;
  */
 public class WDObjectViewNavigation extends ObjectView{
     public static void gotoWDObjectView(String wd_SearchTerm) throws InterruptedException {
-        List <WebElement> homePageSearch = Base.driver.findElements(By.cssSelector(".search-inputbar"));
+        List <WebElement> homePageSearch = Base.driver.findElements(By.cssSelector("#search-div > form > div.relative.div-fill > div > sam-autocomplete > div > div > input"));
         if(!homePageSearch.isEmpty()) {
-            Base.driver.findElement(By.cssSelector(".search-inputbar")).clear();
+            Base.driver.findElement(By.cssSelector("#search-div > form > div.relative.div-fill > div > sam-autocomplete > div > div > input")).clear();
             Thread.sleep(3000);
-            Base.driver.findElement(By.cssSelector(".search-inputbar")).sendKeys(wd_SearchTerm);
+            Base.driver.findElement(By.cssSelector("#search-div > form > div.relative.div-fill > div > sam-autocomplete > div > div > input")).sendKeys(wd_SearchTerm);
         }else{
             Base.driver.findElement(By.cssSelector(".input-container > input")).clear();
             Thread.sleep(3000);

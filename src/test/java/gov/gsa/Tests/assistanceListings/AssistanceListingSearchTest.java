@@ -174,11 +174,11 @@ public class AssistanceListingSearchTest extends Base{
         assertTrue("No results for FH SubTier Filter",fh_dept_filter.contains(AssistanceListingSearchPage.department().data));
 
     }
-
     //test for total results
     @Test
     public void resultNumberTest() throws InterruptedException, ParseException {
         HomePageNavigation.gotoHomePage();
+        Thread.sleep(2000);
         SearchNavigation.gotoSearchResultsPage(index,"");
         assertTrue("Message does not exist", CommonUtils.extractTotalResults() >= 1);
     }

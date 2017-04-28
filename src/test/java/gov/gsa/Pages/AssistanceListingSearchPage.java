@@ -164,7 +164,7 @@ public class AssistanceListingSearchPage extends Base{
 
 
     public static void clearAll() {
-        Base.driver.findElement(By.cssSelector(".search-inputbar")).clear();
+        Base.driver.findElement(By.cssSelector("#search-div > form > div.relative.div-fill > div > sam-autocomplete > div > div > input")).clear();
         Base.driver.findElement(By.cssSelector(".usa-button-primary.usa-search-submit.search-btn")).click();
         Base.driver.findElement(By.xpath("//button[text()='Clear All']")).click();
     }

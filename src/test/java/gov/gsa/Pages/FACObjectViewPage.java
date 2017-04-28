@@ -22,7 +22,7 @@ public class FACObjectViewPage extends ObjectView {
         //driver.get(base_url + "programs/610e64ea171eeff29c952688eaf3c7e4/view");
         System.out.println("Search results page");
         Thread.sleep(1000);
-        Base.driver.findElement(By.cssSelector(".search-inputbar")).sendKeys(FACSearchTerm);
+        Base.driver.findElement(By.cssSelector("#search-div > form > div.relative.div-fill > div > sam-autocomplete > div > div > input")).sendKeys(FACSearchTerm);
         System.out.println("After Search results page");
         //By.name("search"))
         Base.driver.findElement(By.cssSelector(".search-btn")).click();

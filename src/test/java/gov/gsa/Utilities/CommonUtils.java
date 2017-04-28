@@ -159,13 +159,14 @@ public class CommonUtils {
     }
 
     //check for total results message
-    public static long extractTotalResults() throws ParseException {
+    public static long extractTotalResults() throws ParseException, InterruptedException {
         String resultText=Base.driver.findElement(By.cssSelector(".usa-width-three-fourths > .usa-width-one > strong")).getText();
 
         String[] splitMessage = resultText.split("\\s+");
 
         long totalCount = (long) NumberFormat.getNumberInstance(java.util.Locale.US).parse(splitMessage[5]);
         System.out.print(totalCount);
+        Thread.sleep(2000);
 
         return totalCount;
 

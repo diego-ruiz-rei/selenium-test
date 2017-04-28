@@ -22,7 +22,7 @@ public class HomePage{
     }
 
     public static boolean searchInputBarExists() {
-        return Base.driver.findElements(By.cssSelector(".search-inputbar")).size() > 0;
+        return Base.driver.findElements(By.cssSelector("#search-div > form > div.relative.div-fill > div > sam-autocomplete > div > div > input")).size() > 0;
     }
 
     public static boolean searchButtonExists() {

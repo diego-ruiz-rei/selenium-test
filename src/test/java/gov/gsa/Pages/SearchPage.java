@@ -44,7 +44,7 @@ public class SearchPage{
             Thread.sleep(1000);
             //select index , enter search term and click on search button
             new Select(Base.driver.findElement(By.id("filter"))).selectByVisibleText(keywords[i][0]);
-            Base.driver.findElement(By.cssSelector(".search-inputbar")).sendKeys(keywords[i][1]);
+            Base.driver.findElement(By.cssSelector("#search-div > form > div.relative.div-fill > div > sam-autocomplete > div > div > input")).sendKeys(keywords[i][1]);
             Base.driver.findElement(By.cssSelector(".search-btn")).click();
             //this.appWait();
             Thread.sleep(1000);
@@ -94,7 +94,7 @@ public class SearchPage{
                 System.out.println("Element in Search Results Page : " + element.getText());
                 System.out.println("Search Result Found for Search term !");
 
-                Base.driver.findElement(By.cssSelector(".search-inputbar")).clear();
+                Base.driver.findElement(By.cssSelector("#search-div > form > div.relative.div-fill > div > sam-autocomplete > div > div > input")).clear();
             } else {
                 //Check No results found message
                 element = (WebElement) Base.wait.until(
@@ -103,7 +103,7 @@ public class SearchPage{
                 assertTrue(("No results found for '"+keywords[i][1]+"'").contains(element.getText()));
                 System.out.println("No results Found for Search term");
 
-                Base.driver.findElement(By.cssSelector(".search-inputbar")).clear();
+                Base.driver.findElement(By.cssSelector("#search-div > form > div.relative.div-fill > div > sam-autocomplete > div > div > input")).clear();
             }
 
         }
