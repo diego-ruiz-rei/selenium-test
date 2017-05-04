@@ -40,52 +40,52 @@ public class OpportunitiesObjectViewTest extends Base {
     	if(System.getProperty("siteTarget").contains("reisys.com")){
         return  Arrays.asList(new Object[][]{
                 //Pass the fields that should not be included in the
-                /*{new String[][]{{"AAA-AAA-11-1111"},{"p"},
+                {new String[][]{{"AAA-AAA-11-1111"},{"p"},
         			{"Contract Award Dollar Amount","Contract Award Date","Contract Award Number", "Task Order Number", "Contract Line Item Number", 
                   	"Contractor Awarded Name", "Contractor Awarded DUNS", "Contractor Awarded Address", "J&A Statutory Authority", "Fair Opportunity",
-                  	"Modification Number", "Description of Benefits"}
-                  }},//Presolicitation*/
+                  	"Modification Number", "Description of Benefits","Contracting Office"}
+                  }},//Presolicitation
                 {new String[][]{{"AAA-AAA-11-1112"},{"k"},
                 	{"Contract Award Dollar Amount","Contract Award Date","Contract Award Number", "Task Order Number", "Contract Line Item Number", 
                 	"Contractor Awarded Name", "Contractor Awarded DUNS", "Contractor Awarded Address", "J&A Statutory Authority", "Fair Opportunity",
-                	"Modification Number", "Description of Benefits"}
+                	"Modification Number", "Description of Benefits","Contracting Office"}
                 }},//Combined Synopsis
                 {new String[][]{{"AAA-AAA-11-1113"},{"f"},
                 	{"Special Legislation","Contract Award Dollar Amount","Contract Award Date","Contract Award Number", "Task Order Number", "Contract Line Item Number", 
                 	"Contractor Awarded Name", "Contractor Awarded DUNS", "Contractor Awarded Address", "J&A Statutory Authority", "Fair Opportunity",
-                	"Modification Number", "Description of Benefits"}
+                	"Modification Number", "Description of Benefits","Contracting Office"}
                 }},//Foreign Government Standard
                 {new String[][]{{"AAA-AAA-11-1114"},{"g"},
                 	{"Special Legislation","Contract Award Dollar Amount","Contract Award Date","Contract Award Number", "Task Order Number", "Contract Line Item Number", 
                 	"Contractor Awarded Name", "Contractor Awarded DUNS", "Contractor Awarded Address", "J&A Statutory Authority", "Fair Opportunity",
-                	"Modification Number", "Description of Benefits"}
+                	"Modification Number", "Description of Benefits","Contracting Office"}
                 }},//Sale of Surplus
                 {new String[][]{{"AAA-AAA-11-1115"},{"r"},
                 	{"Contract Award Dollar Amount","Contract Award Date","Contract Award Number", "Task Order Number", "Contract Line Item Number", 
                 	"Contractor Awarded Name", "Contractor Awarded DUNS", "Contractor Awarded Address", "J&A Statutory Authority", "Fair Opportunity",
-                	"Modification Number", "Description of Benefits"}
+                	"Modification Number", "Description of Benefits","Contracting Office"}
                 }},//Sources Sought
                 {new String[][]{{"AAA-AAA-11-1116"},{"i"},
                 	{"Special Legislation","Contract Award Dollar Amount","Contract Award Date", "Contract Line Item Number", 
                 	"Contractor Awarded Name", "Contractor Awarded DUNS", "Contractor Awarded Address", "J&A Statutory Authority", "Fair Opportunity",
-                	"Modification Number"}
+                	"Modification Number","Contracting Office"}
                 }},//Intent of Bundle
                 {new String[][]{{"AAA-AAA-11-1117"},{"j"},
                 	{"Contract Award Dollar Amount", "Task Order Number", "Contract Line Item Number", 
-                	"Contractor Awarded Name", "Contractor Awarded DUNS", "Contractor Awarded Address", "Fair Opportunity"}
+                	"Contractor Awarded Name", "Contractor Awarded DUNS", "Contractor Awarded Address", "Fair Opportunity","Contracting Office"}
                 }},//Justification and Approval
                 {new String[][]{{"AAA-AAA-11-1118"},{"a"},
                 	{"Task Order Number", "J&A Statutory Authority", "Fair Opportunity", "Modification Number",
-                	"Place of Performance","Description of Benefits"}
+                	"Place of Performance","Description of Benefits","Contracting Office","Classification Code","NAICS Code","Point of Contact","classification Code"}
                 }},//Award
                 {new String[][]{{"AAA-AAA-11-1119"},{"l"},
                 	{"Contract Award Dollar Amount", "Contract Line Item Number", "Contractor Awarded Name", "Contractor Awarded DUNS",
-                	"Contractor Awarded Address", "J&A Statutory Authority", "Description of Benefits"}
+                	"Contractor Awarded Address", "J&A Statutory Authority", "Description of Benefits","Contracting Office"}
                 }},//Fair Opportunity   
                 {new String[][]{{"AAA-AAA-11-1120"},{"s"},
                 	{"Contract Award Dollar Amount","Contract Award Date", "Contract Award Number", "Task Order Number", "Contract Line Item Number", 
                 	"Contractor Awarded Name", "Contractor Awarded DUNS", "Contractor Awarded Address", "J&A Statutory Authority", "Fair Opportunity",
-                	"Modification Number", "Description of Benefits"}
+                	"Modification Number", "Description of Benefits","Contracting Office"}
                 }},//Special Notice
 
         });

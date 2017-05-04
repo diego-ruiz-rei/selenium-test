@@ -665,14 +665,15 @@ int code = 0;
         Integer index = getHistorySectionIndex();
         Base.driver.findElement(By.cssSelector("#opportunity-history > sam-history > ul > li:nth-child("+index+") > span > a")).click();
         Thread.sleep(2000);
-        return Base.driver.findElement(By.cssSelector("#main-container > ng-component > div > div > samalert > div > div > p > div")).getText();
+
+        return Base.driver.findElement(By.cssSelector("#main-container > ng-component > div > div > samalert > div > div > p")).getText();
     }
 
     public static String updatedNoticeLink() throws InterruptedException, ParseException {
         Integer index = getHistorySectionIndex();
         Base.driver.findElement(By.cssSelector("#opportunity-history > sam-history > ul > li:nth-child("+index+") > span > a")).click();
         Thread.sleep(5000);
-        Base.driver.findElement(By.cssSelector("#main-container > ng-component > div > div > samalert > div > div > p > div > a")).click();
+        Base.driver.findElement(By.cssSelector("#main-container > ng-component > div > div > samalert > div > div > p > a")).click();
         Thread.sleep(5000);
         Integer current_index = index+1;
         System.out.println("Class Name : "+Base.driver.findElement(By.cssSelector("#opportunity-history > sam-history > ul > li:nth-child("+current_index+")")).getAttribute("class"));

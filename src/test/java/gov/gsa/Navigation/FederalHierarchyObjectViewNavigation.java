@@ -14,9 +14,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
  */
 public class FederalHierarchyObjectViewNavigation extends ObjectView{
     public static void gotoFHObjectView(String opp_SearchTerm) throws InterruptedException {
-        Base.driver.findElement(By.cssSelector("#search-div > form > div.relative.div-fill > div > sam-autocomplete > div > div > input")).clear();
         Thread.sleep(2000);
+        Base.driver.findElement(By.cssSelector("#search-div > form > div.relative.div-fill > div > sam-autocomplete > div > div > input")).clear();
         Base.driver.findElement(By.cssSelector("#search-div > form > div.relative.div-fill > div > sam-autocomplete > div > div > input")).sendKeys(opp_SearchTerm);
+        Thread.sleep(2000);
         new Select(Base.driver.findElement(By.id("filter"))).selectByVisibleText("Federal Hierarchy");
         Base.driver.findElement(By.cssSelector(".search-btn")).click();
         WebElement element = (WebElement) Base.wait.until(

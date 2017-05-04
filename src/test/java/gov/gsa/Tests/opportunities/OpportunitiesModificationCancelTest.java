@@ -50,6 +50,8 @@ public class OpportunitiesModificationCancelTest extends Base {
 
     //Test Data for History Section
     public static String history_section = "c752657782129a4eddc1e39675a40c52";
+    public static String history_section_version_link = "21b2e7924b75a96a2db8f9262f6ffa8d";
+
     public static String message = "Note: There have been updates to this opportunity. To view the most recent update/amendment, click here";
 
 
@@ -340,7 +342,7 @@ public class OpportunitiesModificationCancelTest extends Base {
     @Test
     public void updatedVersionMessageLink() throws InterruptedException, ParseException {
         OpportunitiesObjectViewNavigation.gotoOppObjectViewByID(history_section);
-        assertTrue("History Section - Previous Version Message is not displayed",OpportunitiesObjectViewPage.updatedNoticeMessage().equals(message));
+        assertTrue("History Section - Previous Version Message is not displayed",OpportunitiesObjectViewPage.updatedNoticeMessage().contains(message));
     }
 
     @Test

@@ -131,12 +131,12 @@ public class WageDeterminationObjectViewPage extends ObjectView{
 
     public static void getHistoryRevision(String revisionTitle){
         List<WebElement> revisions= Base.driver.findElements(By.cssSelector("#wd-history > sam-history > ul > li"));
-        for (WebElement reivsion : revisions) {
-            WebElement link = reivsion.findElement(By.cssSelector("span > a"));
+        for (WebElement revision : revisions) {
+            WebElement link = revision.findElement(By.cssSelector("span > a"));
             String currentRevision = link.getText();
             String requestedRevision = revisionTitle;
             if((link.getText()).contains(revisionTitle)){
-                if(reivsion.getAttribute("class").contains("current"))
+                if(revision.getAttribute("class").contains("current"))
                     break;
                 else {
                     link.click();

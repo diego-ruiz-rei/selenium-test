@@ -15,6 +15,7 @@ import java.util.List;
  */
 public class WDObjectViewNavigation extends ObjectView{
     public static void gotoWDObjectView(String wd_SearchTerm) throws InterruptedException {
+        Thread.sleep(2000);
         List <WebElement> homePageSearch = Base.driver.findElements(By.cssSelector("#search-div > form > div.relative.div-fill > div > sam-autocomplete > div > div > input"));
         if(!homePageSearch.isEmpty()) {
             Base.driver.findElement(By.cssSelector("#search-div > form > div.relative.div-fill > div > sam-autocomplete > div > div > input")).clear();

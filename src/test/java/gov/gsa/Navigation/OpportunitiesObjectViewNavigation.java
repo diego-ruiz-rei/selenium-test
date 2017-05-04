@@ -16,6 +16,7 @@ public class OpportunitiesObjectViewNavigation extends ObjectView {
 
     public static void gotoOppObjectView(String opp_SearchTerm) throws InterruptedException {
         //System.out.println("Search results page");
+        Thread.sleep(2000);
         Base.driver.findElement(By.cssSelector("#search-div > form > div.relative.div-fill > div > sam-autocomplete > div > div > input")).clear();
         Thread.sleep(2000);
         Base.driver.findElement(By.cssSelector("#search-div > form > div.relative.div-fill > div > sam-autocomplete > div > div > input")).sendKeys(opp_SearchTerm);
