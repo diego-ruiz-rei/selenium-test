@@ -233,15 +233,15 @@ public class FederalHierarchySearchPage extends ObjectView {
 
     //cgac field check
     public static DataField checkCgacCodeFeaturedResult() {
-        String extractField= Base.driver.findElement(By.cssSelector(".card-secure-content .usa-unstyled-list > li:nth-child(2)")).getText();
-        return splitLabelAndData(extractField).setName("CGAC");
+        String extractField= Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(3) > federal-hierarchy-result > div > div > div.four.wide.column > ul > li:nth-child(4)")).getText();
+        return splitLabelAndDataNewLine(extractField).setName("CGAC");
     }
 
     //cgac code for dept
     public static DataField checkCgacCodeDepartment() {
-        String departmentField = Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(4) > federal-hierarchy-result > div.usa-width-one-third > ul > li:nth-child(1)")).getText();
+        String departmentField = Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(4) > federal-hierarchy-result > div > div > div.four.wide.column > ul > li:nth-child(3) > strong")).getText();
         if(departmentField.equalsIgnoreCase("Department")){
-            String extractField = Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(4) > federal-hierarchy-result > div.usa-width-one-third > ul > li:nth-child(3)")).getText();
+            String extractField = Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(4) > federal-hierarchy-result > div > div > div.four.wide.column > ul > li:nth-child(5)")).getText();
             return splitLabelAndData(extractField).setName("CGAC");
         }
         return new DataField("CGAC",null,null);
@@ -249,9 +249,9 @@ public class FederalHierarchySearchPage extends ObjectView {
 
     //cgac code for sub tier
     public static DataField checkCgacCodeSubTier() {
-        String subTierField = Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(3) > federal-hierarchy-result > div.usa-width-one-third > ul > li:nth-child(1)")).getText();
+        String subTierField = Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(3) > federal-hierarchy-result > div > div > div.four.wide.column > ul > li:nth-child(3)")).getText();
         if(subTierField.equalsIgnoreCase("Sub-Tier")){
-            String extractField = Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(3) > federal-hierarchy-result > div.usa-width-one-third > ul > li:nth-child(2)")).getText();
+            String extractField = Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(3) > federal-hierarchy-result > div > div > div.four.wide.column > ul > li:nth-child(4)")).getText();
             return splitLabelAndData(extractField).setName("CGAC");
         }
         return new DataField("CGAC",null,null);
@@ -261,20 +261,26 @@ public class FederalHierarchySearchPage extends ObjectView {
     public static String checkFhAwardsLink() throws InterruptedException {
         String extractField = "";
         Thread.sleep(1000);
-        Base.driver.findElement(By.cssSelector(".card-secure-content .usa-unstyled-list > li:nth-child(3)")).click();
+        Base.driver.findElement(By.cssSelector("#main-container > search > div > div > div:nth-child(2) > fh-featured-result > div > div > div > div.sam-ui.attached.grid > div > div.ten.wide.column > p > a")).click();
         Thread.sleep(2000);
         String oldTab = driver.getWindowHandle();
         ArrayList<String> newTab = new ArrayList<String> (driver.getWindowHandles());
         newTab.remove(oldTab);
         driver.switchTo().window(newTab.get(0));
         Thread.sleep(2000);
-       // String awardTitle = Base.driver.findElement(By.cssSelector("awards-result > p > span")).getText();
-        //if("Award".equals(awardTitle)) {
+       String awardTitle = Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span")).getText();
+        if("Award".equals(awardTitle)) {
              extractField = Base.driver.findElement(By.cssSelector("agencypicker > div > div.usa-agency-picker-readonly-area > ul > li")).getText();
 
-        //}
+        }
         return extractField;
     }
+
+    public static void clearAll() {
+        Base.driver.findElement(By.xpath("//button[text()='Clear All']")).click();
+        Base.driver.findElement(By.cssSelector("#search-div > form > div.relative.div-fill > div > sam-autocomplete > div > div > span > i")).click();
+    }
+
 }
 
 

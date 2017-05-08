@@ -2,14 +2,13 @@ package gov.gsa.Tests.federalHierarchy;
 
 import gov.gsa.Navigation.HomePageNavigation;
 import gov.gsa.Navigation.SearchNavigation;
+import gov.gsa.Pages.ExclusionsSearchPage;
 import gov.gsa.Pages.FederalHierarchySearchPage;
 import gov.gsa.Utilities.Base;
 import gov.gsa.Utilities.CommonUtils;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runners.MethodSorters;
+import org.openqa.selenium.By;
 
 import java.text.ParseException;
 
@@ -285,6 +284,12 @@ public class FederalHierarchySearchTest extends Base {
         SearchNavigation.gotoSearchResultsPage(index,fh_awards_link);
         String fhFilter = FederalHierarchySearchPage.checkFhAwardsLink();
         assertTrue("Link is not working",fhFilter.equals(fh_awards_link));
+    }
+
+
+    @After
+    public void clearFilter(){
+        FederalHierarchySearchPage.clearAll();
     }
 
 
