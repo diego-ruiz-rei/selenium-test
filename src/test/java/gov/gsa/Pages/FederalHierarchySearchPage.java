@@ -16,7 +16,7 @@ public class FederalHierarchySearchPage extends ObjectView {
 
     // finds the federal hierarchy tag above result items
     public static String fhTag(){
-        return Base.driver.findElement(By.cssSelector(".search-page .usa-label")).getText();
+        return Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > federal-hierarchy-result > div > div > div.four.wide.column > ul > li:nth-child(2) > span")).getText();
     }
 
     //Split label and data based on ":"
@@ -43,7 +43,7 @@ public class FederalHierarchySearchPage extends ObjectView {
 
     // finds the title of featured result
     public static String featuredResultTitle(){
-        return Base.driver.findElement(By.className("card-header-secure")).findElement(By.tagName("a")).getText();
+        return Base.driver.findElement(By.cssSelector("#main-container > search > div > div > div:nth-child(2) > fh-featured-result > div > div > div > div.sam-ui.attached.grid > div > div.ten.wide.column > h3 > a")).getText();
     }
 
     // finds autocomplete window
@@ -53,7 +53,7 @@ public class FederalHierarchySearchPage extends ObjectView {
 
     // finds the first result title
     public static String firstResultTitle(){
-        return Base.driver.findElement(By.className("federal-hierarchy-title")).findElement(By.tagName("a")).getText();
+        return Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > federal-hierarchy-result > div > div > div.eight.wide.column > h3 > a")).getText();
     }
 
     ///
@@ -75,7 +75,7 @@ public class FederalHierarchySearchPage extends ObjectView {
 
     // result description
     public static String resultDescription(){
-        return Base.driver.findElement(By.className("m_T-2x")).findElement(By.tagName("span")).getText();
+        return Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(2) > federal-hierarchy-result > div > div > div.eight.wide.column > p > span")).getText();
     }
 
     // result department
@@ -160,7 +160,7 @@ public class FederalHierarchySearchPage extends ObjectView {
 
     // grab title
     public static boolean extractTitle(){
-        String titleText=Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(2) > federal-hierarchy-result > h3.federal-hierarchy-title > a")).getText();
+        String titleText=Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > federal-hierarchy-result > div > div > div.eight.wide.column > h3 > a")).getText();
 
         if(titleText.length()!=0 && titleText!=null){
             return true;
@@ -171,7 +171,7 @@ public class FederalHierarchySearchPage extends ObjectView {
 
     // grab description
     public static boolean extractDescription(){
-        String descriptionText=Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > federal-hierarchy-result > div.usa-width-two-thirds > p > span")).getText();
+        String descriptionText=Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > federal-hierarchy-result > div > div > div.eight.wide.column > p > span")).getText();
 
         if(descriptionText.length()!=0 && descriptionText!=null){
             return true;
@@ -183,7 +183,7 @@ public class FederalHierarchySearchPage extends ObjectView {
     //check for department
     public static DataField departmentCheck() {
         String departmentText="";
-        List<WebElement> departmentTextTypeElements = Base.driver.findElements(By.cssSelector("#search-results > div:nth-child(1) > federal-hierarchy-result > div.usa-width-two-thirds > .m_B-2x > li"));
+        List<WebElement> departmentTextTypeElements = Base.driver.findElements(By.cssSelector("#search-results > div:nth-child(1) > federal-hierarchy-result > div > div > div.eight.wide.column > ul > li"));
 
         if(departmentTextTypeElements.size() > 0) {
             for (WebElement deptTypeElement : departmentTextTypeElements) {
@@ -191,7 +191,7 @@ public class FederalHierarchySearchPage extends ObjectView {
             }
 
             System.out.println(departmentText);
-            return splitLabelAndData(departmentText).setName("Department");
+            return splitLabelAndDataNewLine(departmentText).setName("Department");
         }
         else
         {
@@ -202,7 +202,7 @@ public class FederalHierarchySearchPage extends ObjectView {
     //check for sub-tier label
     public static String subTierCheck(){
         String subTierText="";
-        List<WebElement> subTierTextTypeElements = Base.driver.findElements(By.cssSelector("#search-results > div:nth-child(1) > federal-hierarchy-result > div.usa-width-one-third > ul > li:nth-child(1)"));
+        List<WebElement> subTierTextTypeElements = Base.driver.findElements(By.cssSelector("#search-results > div:nth-child(1) > federal-hierarchy-result > div > div > div.four.wide.column > ul > li:nth-child(3)"));
         if(subTierTextTypeElements.size() > 0) {
             for (WebElement deptTypeElement : subTierTextTypeElements) {
                 subTierText = deptTypeElement.getText();
@@ -213,15 +213,22 @@ public class FederalHierarchySearchPage extends ObjectView {
     }
 
     //Check for also known as label and data
-    public static String aliasNameCheck() {
+    public static DataField aliasNameCheck() {
         String aliasNameText="";
-        List<WebElement> aliasNameTextTypeElements = Base.driver.findElements(By.cssSelector("#search-results > div:nth-child(1) > federal-hierarchy-result > div.usa-width-one-third > ul > li:nth-child(2)"));
+        List<WebElement> aliasNameTextTypeElements = Base.driver.findElements(By.cssSelector("#search-results > div:nth-child(1) > federal-hierarchy-result > div > div > div.four.wide.column > ul > li:nth-child(4)"));
 
         if(aliasNameTextTypeElements.size() > 0) {
-            aliasNameText=Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > federal-hierarchy-result > div.usa-width-one-third > ul > li:nth-child(2) > strong")).getText();
+            for (WebElement deptTypeElement : aliasNameTextTypeElements) {
+                aliasNameText = deptTypeElement.getText();
+            }
+
+            System.out.println(aliasNameText);
+            return splitLabelAndDataNewLine(aliasNameText).setName("Also Known As");
         }
-        System.out.println(aliasNameText);
-        return aliasNameText;
+        else
+        {
+            return new DataField("Also Known As",null,null);
+        }
     }
 
     //cgac field check

@@ -47,7 +47,7 @@ public class FederalHierarchySearchTest extends Base {
     public void emptySearchTestTag() throws InterruptedException {
         SearchNavigation.gotoSearchResultsPage(index,"");
         System.out.println(FederalHierarchySearchPage.fhTag());
-        assertEquals(FederalHierarchySearchPage.fhTag(), "FEDERAL HIERARCHY");
+        assertEquals(FederalHierarchySearchPage.fhTag(), "Federal Hierarchy");
         System.out.println("Federal Hierarchy tag exists");
     }
 
@@ -81,7 +81,7 @@ public class FederalHierarchySearchTest extends Base {
     // checking if autocomplete window exists
     @Test
     public void autoCompleteTest() throws InterruptedException {
-        HomePageNavigation.gotoHomePage();
+        SearchNavigation.gotoSearchResultsPage(index,"");
         assertTrue(CommonUtils.autoCompleteExists(index,autocomplete_searchTerm));
     }
 
@@ -210,8 +210,9 @@ public class FederalHierarchySearchTest extends Base {
     @Test
     public void aliasNameTest() throws InterruptedException {
         SearchNavigation.gotoSearchResultsPage(index,fh_searchTerm);
-        assertEquals("Also Known as Tag does not Exist", FederalHierarchySearchPage.aliasNameCheck(),"Also Known As:");
-
+        CommonUtils.DataField aliasField = FederalHierarchySearchPage.departmentCheck();
+        testLabelAndDataExists(aliasField);
+        testLabelContains(aliasField, "Also Known As");
     }
 
     //total results
