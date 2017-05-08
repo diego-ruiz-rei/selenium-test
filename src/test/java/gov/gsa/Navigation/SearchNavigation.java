@@ -36,7 +36,7 @@ public class SearchNavigation{
         Thread.sleep(2000);
         new Select(Base.driver.findElement(By.id("filter"))).selectByVisibleText(index);
         Base.driver.findElement(By.cssSelector("#search-div > form > div.relative.div-fill > div > sam-autocomplete > div > div > input")).sendKeys(searchTerm);
-        Thread.sleep(2000);
+        Thread.sleep(5000);
     }
 
     public static void gotoIsActiveFalseSearch(String index,String searchTerm) throws InterruptedException {

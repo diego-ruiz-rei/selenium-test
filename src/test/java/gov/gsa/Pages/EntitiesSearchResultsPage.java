@@ -12,63 +12,77 @@ import org.openqa.selenium.By;
  */
 public class EntitiesSearchResultsPage extends Base{
 
+
+
     // Entities tag in Search results page
     public static String entitiesTag(){
-        return Base.driver.findElement(By.cssSelector(".search-page .usa-label")).getText();
+        return Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > entities-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span")).getText();
     }
 
     // Entities Inactive tag in Search results page
     public static String entitiesInactiveTag(){
-        System.out.println("tag : "+Base.driver.findElement(By.cssSelector("entities-result > p > span:nth-child(2)")).getText());
-        return Base.driver.findElement(By.cssSelector("entities-result > p > span:nth-child(2)")).getText();
+        System.out.println("tag : "+Base.driver.findElement(By.cssSelector("#search-results > div > entities-result > div > div > div.four.wide.column > ul > li:nth-child(1)")).getText());
+        return Base.driver.findElement(By.cssSelector("#search-results > div > entities-result > div > div > div.four.wide.column > ul > li:nth-child(1)")).getText();
     }
 
     //DUNS
     public static DataField duns() {
-        String duns = Base.driver.findElement(By.cssSelector(".m_B-2x > li:nth-child(1) > strong")).getText();
-        String dunsdata = Base.driver.findElement(By.cssSelector(".m_B-2x > li:nth-child(1) > span")).getText();
+        String data = Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > entities-result > div > div > div.eight.wide.column > ul > li:nth-child(1)")).getText();
+        String[] splitLabelAndData = CommonUtils.splitLabelAndDataNewLine(data);
+        String duns = splitLabelAndData[0];
+        String dunsdata = splitLabelAndData[1];
         System.out.println("Duns Label : "+duns+"\nData : "+dunsdata);
         return new DataField("DUNS",duns,dunsdata);
     }
 
     //NCAGE Code
     public static DataField ncageCode() {
-        String ncage = Base.driver.findElement(By.cssSelector(".usa-unstyled-list.usa-text-small.m_T-3x.m_B-2x > li:nth-child(2) > strong")).getText();
-        String ncagedata = Base.driver.findElement(By.cssSelector(".usa-unstyled-list.usa-text-small.m_T-3x.m_B-2x > li:nth-child(2) > span")).getText();
+        String data = Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > entities-result > div > div > div.eight.wide.column > ul > li:nth-child(2)")).getText();
+        String[] splitLabelAndData = CommonUtils.splitLabelAndDataNewLine(data);
+        String ncage = splitLabelAndData[0];
+        String ncagedata = splitLabelAndData[1];
         System.out.println("NCAGE Code Label : "+ncage+"\nData : "+ncagedata);
         return new DataField("NCAGE Code",ncage,ncagedata);
     }
 
     //Entity Address
     public static DataField entityAddress() {
-        String address = Base.driver.findElement(By.cssSelector(".usa-unstyled-list.usa-text-small.m_T-3x.m_B-2x > li:nth-child(3) > strong")).getText();
-        String addressdata = Base.driver.findElement(By.cssSelector(".usa-unstyled-list.usa-text-small.m_T-3x.m_B-2x > li:nth-child(3) > span")).getText();
+        String data = Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > entities-result > div > div > div.eight.wide.column > ul > li:nth-child(3)")).getText();
+        String[] splitLabelAndData = CommonUtils.splitLabelAndDataNewLine(data);
+        String address = splitLabelAndData[0];
+        String addressdata = splitLabelAndData[1];
         System.out.println("Address : "+address+"\nData : "+addressdata);
         return new DataField("Address",address,addressdata);
     }
 
     //Expiration Date
     public static DataField expirationDate() {
-        String exp_date = Base.driver.findElement(By.className("m_B-0")).findElement(By.tagName("strong")).getText();
-        String exp_date_data = Base.driver.findElement(By.cssSelector("entities-result > div.usa-width-one-third > ul > li:nth-child(1) > ul > li > span")).getText();
+        String data = Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > entities-result > div > div > div.four.wide.column > ul > li:nth-child(2)")).getText();
+        String[] splitLabelAndData = CommonUtils.splitLabelAndDataNewLine(data);
+        String exp_date = splitLabelAndData[0];
+        String exp_date_data = splitLabelAndData[1];
         System.out.println("Exp Date : "+exp_date+"\nData : "+exp_date_data);
         return new DataField("Expiration Date",exp_date,exp_date_data);
     }
 
     //Purpose of Registration
     public static DataField purposeOfRegistration() {
-        String purpose = Base.driver.findElement(By.cssSelector("entities-result > div.usa-width-one-third > ul > li:nth-child(2) > strong")).getText();
-        String purpose_data = Base.driver.findElement(By.cssSelector("entities-result > div.usa-width-one-third > ul > li:nth-child(2) > ul > li > span")).getText();
+        String data = Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > entities-result > div > div > div.four.wide.column > ul > li:nth-child(3)")).getText();
+        String[] splitLabelAndData = CommonUtils.splitLabelAndDataNewLine(data);
+        String purpose = splitLabelAndData[0];
+        String purpose_data = splitLabelAndData[1];
         System.out.println("Purpose of Registration : "+purpose+"\nData : "+purpose_data);
         return new DataField("Purpose of Registration",purpose,purpose_data);
     }
 
     //Delinquent Federal Debt
     public static DataField delinquentFederalDebt() {
-        String federal_debt = Base.driver.findElement(By.cssSelector("entities-result > div.usa-width-one-third > ul > li:nth-child(3) > strong")).getText();
-        String federal_debt_data = Base.driver.findElement(By.cssSelector("entities-result > div.usa-width-one-third > ul > li:nth-child(3) > ul > li > span")).getText();
+        String data = Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > entities-result > div > div > div.four.wide.column > ul > li:nth-child(4)")).getText();
+        String[] splitLabelAndData = CommonUtils.splitLabelAndDataNewLine(data);
+        String federal_debt = splitLabelAndData[0];
+        String federal_debt_data = splitLabelAndData[1];
         System.out.println("Delinquent Federal Debt : "+federal_debt+"\nData : "+federal_debt_data);
-        return new DataField("Delinquent Federal Debt",federal_debt,federal_debt_data);
+        return new DataField("Delinquent Federal Debt:",federal_debt,federal_debt_data);
     }
 
     // Entities Title
@@ -78,7 +92,10 @@ public class EntitiesSearchResultsPage extends Base{
 
     // duns
     public static String dunsExactMatch(){
-        return Base.driver.findElement(By.className("m_B-2x")).findElement(By.tagName("span")).getText();
+        String data = Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > entities-result > div > div > div.eight.wide.column > ul > li:nth-child(1)")).getText();
+        String[] splitLabelAndData = CommonUtils.splitLabelAndDataNewLine(data);
+        String duns = splitLabelAndData[1];
+        return duns;
     }
 
 
@@ -94,4 +111,9 @@ public class EntitiesSearchResultsPage extends Base{
         return Base.driver.findElements(By.cssSelector(".page-button")).size();
     }
 
+    public static void clearAll() {
+        Base.driver.findElement(By.xpath("//button[text()='Clear All']")).click();
+        Base.driver.findElement(By.cssSelector("#search-div > form > div.relative.div-fill > div > sam-autocomplete > div > div > span > i")).click();
+
+    }
 }

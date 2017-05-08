@@ -5,10 +5,7 @@ import gov.gsa.Navigation.SearchNavigation;
 import gov.gsa.Pages.EntitiesSearchResultsPage;
 import gov.gsa.Utilities.Base;
 import gov.gsa.Utilities.CommonUtils;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runners.MethodSorters;
 
 import java.text.ParseException;
@@ -24,9 +21,9 @@ public class EntitiesSearchTest extends Base{
 
     //Test Data
     public String index = "Entities";
-    public String inactive_searchTerm = "ANAIAH INSTITUTE FOR RESEARCH MEASUREMENT AND STATISTICAL SOLUTIONS";
+    public String inactive_searchTerm = "016139227";
     public String active_searchTerm = "SMITH COUNTY EMERGENCY SHELTER FOR WOMEN AND CHILDREN, INC.";
-    public String autocomplete_searchTerm = "RESEARCH FOUNDATION, THE";
+    public String autocomplete_searchTerm = "FRANKLIN, COUNTY OF";
     public String exact_searchTerm = "\"WATERSWORX, LLC\"";
     public String duns_searchTerm = "\"079756806\"";
 
@@ -38,8 +35,9 @@ public class EntitiesSearchTest extends Base{
     // Entities Tag
     @Test
     public void entitiesTagTest() throws InterruptedException {
+       // HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
-        assertEquals("Entities Tag does not Exist",EntitiesSearchResultsPage.entitiesTag(),"ENTITY");
+        assertEquals("Entities Tag does not Exist",EntitiesSearchResultsPage.entitiesTag(),"Entity");
         System.out.println("Entities Tag is Present");
 
     }
@@ -48,7 +46,7 @@ public class EntitiesSearchTest extends Base{
     @Test
     public void entitiesInactiveTagTest() throws InterruptedException {
         SearchNavigation.gotoIsActiveFalseSearch(index,inactive_searchTerm);
-        assertEquals("Entities Inactive Tag does not Exist",EntitiesSearchResultsPage.entitiesInactiveTag(),"INACTIVE");
+        assertEquals("Entities Inactive Tag does not Exist",EntitiesSearchResultsPage.entitiesInactiveTag(),"Inactive");
         System.out.println("Entities Inactive Tag is Present");
     }
 
@@ -97,12 +95,13 @@ public class EntitiesSearchTest extends Base{
         SearchNavigation.gotoSearchResultsPage(index,active_searchTerm);
         DataField federal = EntitiesSearchResultsPage.delinquentFederalDebt();
         testLabelAndDataExists(federal);
-        testLabelContains(federal, "Delinquent Federal Debt");
+        testLabelContains(federal, "Delinquent Federal Debt:");
     }
 
     // Test Autocomplete
     @Test
     public void autoCompleteTest() throws InterruptedException {
+        SearchNavigation.gotoSearchResultsPage(index,"");
         assertTrue(CommonUtils.autoCompleteExists(index,autocomplete_searchTerm));
     }
 
@@ -141,6 +140,12 @@ public class EntitiesSearchTest extends Base{
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
         assertTrue("Message does not exist", CommonUtils.extractTotalResults() >= 1);
+    }
+
+    @After
+    public void clearFilter(){
+
+        EntitiesSearchResultsPage.clearAll();
     }
 
 

@@ -6,10 +6,7 @@ import gov.gsa.Pages.ExclusionsSearchPage;
 import gov.gsa.Utilities.Base;
 import gov.gsa.Utilities.CommonUtils;
 import gov.gsa.Utilities.CommonUtils.DataField;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runners.MethodSorters;
 
 import java.text.DateFormat;
@@ -30,7 +27,7 @@ public class ExclusionsSearchTest extends Base {
     //Test Data
     public String index = "Exclusions";
     public String active_searchTerm = "BOB METGUD";
-    public String autocomplete_searchTerm = "melissa dawn ferrell";
+    public String autocomplete_searchTerm = "melissa cheryl jones";
     public String exact_searchTerm = "926177528";
     public String valid_Termination_Date = "\"GIANT LABOR SOLUTIONS LLC\"";
     public String indefinite_Termination_Date = "\"JANE ANN BAILEY\"";
@@ -49,7 +46,7 @@ public class ExclusionsSearchTest extends Base {
     public void emptySearchTest() throws InterruptedException {
         SearchNavigation.gotoSearchResultsPage(index, " ");
         System.out.println(ExclusionsSearchPage.exTag());
-        assertEquals(ExclusionsSearchPage.exTag(), "EXCLUSION");
+        assertEquals(ExclusionsSearchPage.exTag(), "Exclusion");
         System.out.println("Exclusion tag exists");
     }
 
@@ -74,7 +71,7 @@ public class ExclusionsSearchTest extends Base {
     // auto complete - tests if autocomplete exists
     @Test
     public void autoCompleteTest() throws InterruptedException {
-        HomePageNavigation.gotoHomePage();
+        SearchNavigation.gotoSearchResultsPage(index,"");
         assertTrue(CommonUtils.autoCompleteExists(index,autocomplete_searchTerm));
     }
 
@@ -101,7 +98,7 @@ public class ExclusionsSearchTest extends Base {
         SearchNavigation.gotoSearchResultsPage(index, exact_searchTerm);
         DataField exAddress = ExclusionsSearchPage.exAddress();
         testLabelAndDataExists(exAddress);
-        testLabelContains(exAddress, "Address");
+        testLabelContains(exAddress, "Address:");
     }
 
     @Test
@@ -191,6 +188,11 @@ public class ExclusionsSearchTest extends Base {
         assertTrue("Selected Filter is incorrect for Subtier Agency",CommonUtils.fhSubTierFilterSelection(fh_dept_filter,fh_subtier_filter).equals(fh_subtier_filter));
         long totalResultsFilter = CommonUtils.extractTotalResults();
         assertTrue("Selected Filter is incorrect for Subtier Agency", totalResultsFilter < totalResultsNoFilter);
+    }
+
+    @After
+    public void clearFilter(){
+        ExclusionsSearchPage.clearAll();
     }
 
     @AfterClass

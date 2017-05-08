@@ -196,4 +196,9 @@ public class CommonUtils {
         return Base.driver.findElement(By.cssSelector("agencypicker > div > div.usa-agency-picker-readonly-area > ul > li")).getText();
     }
 
+    //split label and data on new line since span element is not present for all entity fields
+    public static String[] splitLabelAndDataNewLine(String data){
+        String[] splitLabelAndData = data.split("\\r?\\n");
+        return splitLabelAndData;
+    }
 }
