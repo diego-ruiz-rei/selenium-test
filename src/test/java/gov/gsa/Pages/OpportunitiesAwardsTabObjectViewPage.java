@@ -32,8 +32,12 @@ public class OpportunitiesAwardsTabObjectViewPage extends ObjectView{
     }
 
     public static DataField totalNumberOfAwards() throws InterruptedException {
-        String label = Base.driver.findElement(By.cssSelector("#opportunity-award-summary > div.usa-grid-full.usa-text-center > div:nth-child(1) > strong")).getText();
-        String data = Base.driver.findElement(By.cssSelector("#opportunity-award-summary > div.usa-grid-full.usa-text-center > div:nth-child(1) > p")).getText();
+        String css_selector = "#opportunity-award-summary > div.usa-grid-full > div.usa-width-three-fourths > div > div > div:nth-child(1) > div > div:nth-child(1)";
+        String data_css_selector = "#opportunity-award-summary > div.usa-grid-full > div.usa-width-three-fourths > div > div > div:nth-child(1) > div > div:nth-child(2)";
+        //*[@id="opportunity-award-summary"]/div[1]/div[1]/div/div/div[1]/div/div[1]
+
+        String label = Base.driver.findElement(By.cssSelector(css_selector)).getText();
+        String data = Base.driver.findElement(By.cssSelector(data_css_selector)).getText();
         return new DataField("Total Number of Awards",label,data);
     }
 
@@ -54,8 +58,8 @@ public class OpportunitiesAwardsTabObjectViewPage extends ObjectView{
     }
 
     public static Integer listOfRecords() throws InterruptedException {
-        System.out.println("Number of results : "+Base.driver.findElements(By.cssSelector("#awards-list > .card-simple")).size());
-        return Base.driver.findElements(By.cssSelector("#awards-list > .card-simple")).size();
+        System.out.println("Number of results : "+Base.driver.findElements(By.cssSelector("#awards-list > .sam-ui")).size());
+        return Base.driver.findElements(By.cssSelector("#awards-list > .sam-ui")).size();
     }
 
     public static Boolean sortByCompany() throws InterruptedException {
@@ -99,9 +103,11 @@ public class OpportunitiesAwardsTabObjectViewPage extends ObjectView{
 
         new Select(Base.driver.findElement(By.id("awardeeName"))).selectByVisibleText("Dollar Amount");
         Thread.sleep(2000);
+        String first_amount = Base.driver.findElement(By.cssSelector("#awards-list > div:nth-child(1) > div > div:nth-child(2) > ul > li:nth-child(1)")).getText().replaceAll("\n"," ");
+        String second_amount = Base.driver.findElement(By.cssSelector("#awards-list > div:nth-child(2) > div > div:nth-child(2) > ul > li:nth-child(1)")).getText().replaceAll("\n"," ");
 
-        double first_dollar_amount = Double.parseDouble(Base.driver.findElement(By.cssSelector("#awards-list > .card-simple > .card-simple-content > .usa-grid-full > div:nth-child(2) > ul > li:nth-child(1) > span:nth-child(2)")).getText());
-        double second_dollar_amount = Double.parseDouble(Base.driver.findElement(By.cssSelector(" #awards-list > div:nth-child(2) > div > div > div:nth-child(2) > ul > li:nth-child(1) > span:nth-child(2)")).getText());
+        double first_dollar_amount = Double.parseDouble(first_amount.substring(first_amount.lastIndexOf(" ")+1));
+        double second_dollar_amount = Double.parseDouble(second_amount.substring(second_amount.lastIndexOf(" ")+1));
 
         System.out.println("First Amount "+first_dollar_amount+"\nSecond Amount "+second_dollar_amount);
 

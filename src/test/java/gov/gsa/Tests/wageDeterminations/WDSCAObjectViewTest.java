@@ -33,7 +33,7 @@ public class WDSCAObjectViewTest extends WDObjectViewHelper{
 
     @Test
     public void wdSCATitleTest() throws InterruptedException {
-        assertEquals("WD SCA Title is not present",WageDeterminationObjectViewPage.wdTitle(), "SCA WD # "+sca_searchTerm);
+        assertEquals("WD SCA Title is not present",WageDeterminationObjectViewPage.wdTitle(), "SCA WD # "+sca_searchTerm+"\nService Contract Act");
         System.out.println("SCA Title exists and matches with Search term");
     }
 

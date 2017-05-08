@@ -24,18 +24,30 @@ public class OpportunitiesObjectViewPage extends ObjectView {
 
     //Opportunity Header
     public static DataField solicitation() {
-        String solname = Base.driver.findElement(By.id("opportunity-header-solicitation-number")).getText();
-        return CommonUtils.splitLabelAndData(solname).setName("Solicitation Number");
+
+        String label = Base.driver.findElement(By.cssSelector("#opportunity-header-solicitation-number > div > div.header")).getText();
+        String data = Base.driver.findElement(By.cssSelector("#opportunity-header-solicitation-number > div > div.description")).getText();
+        System.out.println("Solicitation Number : "+label+"\nData : "+data);
+        return new DataField("Solicitation Number",label,data);
+
     }
 
     public static DataField office() {
-        String office = Base.driver.findElement(By.id("opportunity-header-hierarchy-level")).getText();
-        return CommonUtils.splitLabelAndData(office).setName("Office");
+        String label = Base.driver.findElement(By.cssSelector("#opportunity-header-hierarchy-level > div > div.header")).getText();
+        String data = Base.driver.findElement(By.cssSelector("#opportunity-header-hierarchy-level > div > div.description")).getText();
+        System.out.println("Office : "+label+"\nData : "+data);
+        return new DataField("Office",label,data);
     }
 
     public static DataField location() {
-        String location = Base.driver.findElement(By.id("opportunity-header-location")).getText();
-        return CommonUtils.splitLabelAndData(location).setName("Location");
+       /* String location = Base.driver.findElement(By.id("opportunity-header-location")).getText();
+        return CommonUtils.splitLabelAndData(location).setName("Location");*/
+
+        String label = Base.driver.findElement(By.cssSelector("#opportunity-header-location > div > div.header")).getText();
+        String data = Base.driver.findElement(By.cssSelector("#opportunity-header-location > div > div.description")).getText();
+        System.out.println("Location : "+label+"\nData : "+data);
+        return new DataField("Location",label,data);
+
     }
 
     //General Information
