@@ -23,7 +23,7 @@ import static org.junit.Assert.*;
 public class AssistanceListingSearchTest extends Base{
     //Test Data
     public String index = "Assistance Listings";
-    public String historical_searchTerm = "97.060";
+    public String historical_searchTerm = "84.185";
     public String active_searchTerm = "16.025";
     public String autocomplete_searchTerm = "cooperating technical partners";
     public String exact_searchTerm ="Partners for Fish and Wildlife";
@@ -44,7 +44,7 @@ public class AssistanceListingSearchTest extends Base{
     @Test
     public void assistanceTagTest() throws InterruptedException {
         SearchNavigation.gotoSearchResultsPage(index,"");
-        assertEquals("Federal Assistance Listing Tag does not Exist", AssistanceListingSearchPage.assistanceTag(),"FEDERAL ASSISTANCE LISTING");
+        assertEquals("Federal Assistance Listing Tag does not Exist", AssistanceListingSearchPage.assistanceTag(),"Federal Assistance Listing");
         System.out.println("Federal Assistance Listing Tag is Present");
 
     }
@@ -53,7 +53,7 @@ public class AssistanceListingSearchTest extends Base{
     @Test
     public void historicalTagTest() throws InterruptedException {
         SearchNavigation.gotoIsActiveFalseSearch(index,historical_searchTerm);
-        assertEquals("Assistance Historical Tag does not Exist",AssistanceListingSearchPage.historicalTag(),"HISTORICAL");
+        assertEquals("Assistance Historical Tag does not Exist",AssistanceListingSearchPage.historicalTag(),"Historical");
         System.out.println("Assistance Historical Tag is Present");
     }
 

@@ -14,13 +14,13 @@ public class AssistanceListingSearchPage extends Base{
 
     // Assistance tag in Search results page
     public static String assistanceTag(){
-        return Base.driver.findElement(By.cssSelector(".search-page .usa-label")).getText();
+        return Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > assistance-listing-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span")).getText();
     }
 
     // Assistance Historical tag in Search results page
     public static String historicalTag(){
-        System.out.println("tag : "+Base.driver.findElement(By.cssSelector("assistance-listing-result > p > span:nth-child(2)")).getText());
-        return Base.driver.findElement(By.cssSelector("assistance-listing-result > p > span:nth-child(2)")).getText();
+        System.out.println("tag : "+Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > assistance-listing-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span")).getText());
+        return Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > assistance-listing-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span")).getText();
     }
 
     //Pagination count
@@ -32,19 +32,19 @@ public class AssistanceListingSearchPage extends Base{
     // Title
     public static String title() throws InterruptedException {
         Thread.sleep(2000);
-        return Base.driver.findElement(By.cssSelector("h3.assistance-listing-title > a")).getText();
+        return Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > assistance-listing-result > div > div > div.eight.wide.column > h3 > a")).getText();
     }
 
     // Description
     public static String description() throws InterruptedException {
-        return Base.driver.findElement(By.cssSelector(".m_T-2x")).getText();
+        return Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > assistance-listing-result > div > div > div.eight.wide.column > p")).getText();
     }
 
     // CFDA Number
     public static DataField cfdaNumber() {
         String cfdaLabel = "";
         String cfdaNumber = "";
-        List<WebElement> cfdaElements = Base.driver.findElements(By.cssSelector("assistance-listing-result > ul > li > strong"));
+        List<WebElement> cfdaElements = Base.driver.findElements(By.cssSelector("#search-results > div:nth-child(2) > assistance-listing-result > div > div > div.four.wide.column > ul > li:nth-child(2) > strong"));
         if(cfdaElements.size() > 0) {
             for (WebElement cfdaElement : cfdaElements) {
                 cfdaLabel = cfdaElement.getText();
@@ -62,18 +62,18 @@ public class AssistanceListingSearchPage extends Base{
     public static DataField department() {
         String deptLabel = "";
         String deptNumber = "";
-        List<WebElement> deptElements = Base.driver.findElements(By.cssSelector("assistance-listing-result > div.usa-width-two-thirds > ul > li:nth-child(1)"));
+        List<WebElement> deptElements = Base.driver.findElements(By.cssSelector("#search-results > div:nth-child(1) > assistance-listing-result > div > div > div.eight.wide.column > ul > li:nth-child(1)"));
         if(deptElements.size() > 0) {
             for (WebElement deptElement : deptElements) {
                 deptLabel = deptElement.findElement(By.tagName("strong")).getText();
                 deptNumber = deptElement.findElement(By.tagName("a")).getText();
             }
             System.out.println("Label : "+deptLabel+"\nData :"+deptNumber);
-            return new DataField("Department",deptLabel,deptNumber);
+            return new DataField("Department/Ind. Agency",deptLabel,deptNumber);
         }
         else
         {
-            return new DataField("Department",null,null);
+            return new DataField("Department/Ind. Agency",null,null);
         }
     }
 
@@ -81,7 +81,7 @@ public class AssistanceListingSearchPage extends Base{
     public static DataField office() {
         String label = "";
         String data = "";
-        List<WebElement> elements = Base.driver.findElements(By.cssSelector("assistance-listing-result > div.usa-width-two-thirds > ul > li:nth-child(2)"));
+        List<WebElement> elements = Base.driver.findElements(By.cssSelector("#search-results > div:nth-child(1) > assistance-listing-result > div > div > div.eight.wide.column > ul > li:nth-child(2)"));
         if(elements.size() > 0) {
             for (WebElement element : elements) {
                 label = element.findElement(By.tagName("strong")).getText();
@@ -99,7 +99,7 @@ public class AssistanceListingSearchPage extends Base{
     public static DataField funded() {
         String label = "";
         String data = "";
-        List<WebElement> elements = Base.driver.findElements(By.cssSelector("assistance-listing-result > div.usa-width-one-third > ul > li:nth-child(1)"));
+        List<WebElement> elements = Base.driver.findElements(By.cssSelector("#search-results > div:nth-child(1) > assistance-listing-result > div > div > div.four.wide.column > ul > li:nth-child(3)"));
         if(elements.size() > 0) {
             for (WebElement element : elements) {
                 label = element.findElement(By.tagName("strong")).getText();
@@ -119,7 +119,7 @@ public class AssistanceListingSearchPage extends Base{
     public static DataField lastDateModified() {
         String label = "";
         String data = "";
-        List<WebElement> elements = Base.driver.findElements(By.cssSelector("assistance-listing-result > div.usa-width-one-third > ul > li:nth-child(2)"));
+        List<WebElement> elements = Base.driver.findElements(By.cssSelector("#search-results > div:nth-child(1) > assistance-listing-result > div > div > div.four.wide.column > ul > li:nth-child(4)"));
         if(elements.size() > 0) {
             for (WebElement element : elements) {
                 label = element.findElement(By.tagName("strong")).getText();
@@ -137,7 +137,7 @@ public class AssistanceListingSearchPage extends Base{
     public static DataField typeOfAssistance() {
         String label = "";
         String data = "";
-        List<WebElement> elements = Base.driver.findElements(By.cssSelector("assistance-listing-result > div.usa-width-one-third > ul > li:nth-child(3)"));
+        List<WebElement> elements = Base.driver.findElements(By.cssSelector("#search-results > div:nth-child(1) > assistance-listing-result > div > div > div.four.wide.column > ul > li:nth-child(5)"));
         if(elements.size() > 0) {
             for (WebElement element : elements) {
                 label = element.findElement(By.tagName("strong")).getText();
