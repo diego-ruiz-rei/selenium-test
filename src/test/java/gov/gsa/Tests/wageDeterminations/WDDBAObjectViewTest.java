@@ -33,7 +33,7 @@ public class WDDBAObjectViewTest extends WDObjectViewHelper{
 
     @Test
     public void wdDBATitleTest() throws InterruptedException {
-        assertEquals("WD DBA title is not Present",WageDeterminationObjectViewPage.wdTitle(), "DBA WD # "+dba_searchTerm);
+        assertEquals("WD DBA title is not Present",WageDeterminationObjectViewPage.wdTitle(), "DBA WD # "+dba_searchTerm+"\nDavis-Bacon Act");
         System.out.println("DBA Title exists and matches with Search term");
     }
 
@@ -75,8 +75,8 @@ public class WDDBAObjectViewTest extends WDObjectViewHelper{
             WageDeterminationObjectViewPage.getHistoryRevision(revisionName);
             Thread.sleep(3000);
         }
-        assertTrue("WD Latest History Revision number donot match", WageDeterminationObjectViewPage.getHistoryRevisionNumberFromHistory().equals(WageDeterminationObjectViewPage.getHistoryRevisionNumber()));
-        assertTrue("WD Latest History Revision Date donot match", WageDeterminationObjectViewPage.getHistoryRevisionDateFromHistory().equals(WageDeterminationObjectViewPage.getHistoryRevisionDate()));
+        assertTrue("WD Latest History Revision number do not match", WageDeterminationObjectViewPage.getHistoryRevisionNumberFromHistory().equals(WageDeterminationObjectViewPage.getHistoryRevisionNumber()));
+        assertTrue("WD Latest History Revision Date do not match", WageDeterminationObjectViewPage.getHistoryRevisionDateFromHistory().equals(WageDeterminationObjectViewPage.getHistoryRevisionDate()));
 
     }
 

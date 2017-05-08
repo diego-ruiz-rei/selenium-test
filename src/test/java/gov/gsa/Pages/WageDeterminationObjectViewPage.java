@@ -26,17 +26,22 @@ public class WageDeterminationObjectViewPage extends ObjectView{
 
     public static String wdType()
     {
-        return Base.driver.findElement(By.cssSelector("#wage-determination > p")).getText();
+        return Base.driver.findElement(By.cssSelector("#wd-type")).getText();
     }
 
-    public static DataField state() {
-        String state = Base.driver.findElement(By.id("wd-state-0")).getText();
-        return CommonUtils.splitLabelAndData(state).setName("State");
+    public static DataField state() throws InterruptedException {
+        Thread.sleep(2000);
+        String label = Base.driver.findElement(By.cssSelector("#wd-state-0 > .sam-ui.medium.header")).getText();
+        String data = Base.driver.findElement(By.cssSelector("#wd-state-0 > div > div")).getText();
+        System.out.println("State : "+label+"\nData : "+data);
+        return new DataField("State",label,data);
     }
 
     public static DataField counties() {
-        String county = Base.driver.findElement(By.id("wd-counties-0")).getText();
-        return CommonUtils.splitLabelAndData(county).setName("Counties");
+        String label = Base.driver.findElement(By.cssSelector("#wd-counties-0 > div")).getText();
+        String data = Base.driver.findElement(By.cssSelector("#wd-counties-0 > div > div")).getText();
+        System.out.println("Counties : "+label+"\nData : "+data);
+        return new DataField("Counties",label,data);
     }
 
     public static Integer multipleStateCountiesCount() {
@@ -46,25 +51,33 @@ public class WageDeterminationObjectViewPage extends ObjectView{
     }
 
     public static DataField revision() {
-        String revision = Base.driver.findElement(By.id("wd-revision-number")).getText();
-        return CommonUtils.splitLabelAndData(revision).setName("Revision");
+        String label = Base.driver.findElement(By.cssSelector("#wd-revision-number > div > div.header")).getText();
+        String data = Base.driver.findElement(By.cssSelector("#wd-revision-number > div > div.description")).getText();
+        System.out.println("Revision : "+label+"\nData : "+data);
+        return new DataField("Revision",label,data);
     }
 
 
     public static DataField date() {
-        String date = Base.driver.findElement(By.id("wd-date")).getText();
-        return CommonUtils.splitLabelAndData(date).setName("Date");
+        String label = Base.driver.findElement(By.cssSelector("#wd-date > div > div.header")).getText();
+        String data = Base.driver.findElement(By.cssSelector("#wd-date > div > div.description")).getText();
+        System.out.println("Date : "+label+"\nData : "+data);
+        return new DataField("Date",label,data);
     }
 
     public static DataField constructionType() {
-        String construction = Base.driver.findElement(By.id("wd-construction-types")).getText();
-        return CommonUtils.splitLabelAndData(construction).setName("Construction");
+        String label = Base.driver.findElement(By.cssSelector("#wd-construction-types > div > div.header")).getText();
+        String data = Base.driver.findElement(By.cssSelector("#wd-construction-types > div > div.description")).getText();
+        System.out.println("Construction : "+label+"\nData : "+data);
+        return new DataField("Construction",label,data);
     }
 
     public static DataField services() throws InterruptedException {
         Thread.sleep(2000);
-        String service = Base.driver.findElement(By.id("wd-services")).getText();
-        return CommonUtils.splitLabelAndData(service).setName("Service");
+        String label = Base.driver.findElement(By.cssSelector("#wd-services > div > div.header")).getText();
+        String data = Base.driver.findElement(By.cssSelector("#wd-services > div > div.description")).getText();
+        System.out.println("Services : "+label+"\nData : "+data);
+        return new DataField("Services",label,data);
     }
 
     public static String wdDocument()
@@ -74,8 +87,8 @@ public class WageDeterminationObjectViewPage extends ObjectView{
 
     public static String printerFriendlyLink()
     {
-        System.out.println("Printer Link Text : "+Base.driver.findElement(By.cssSelector("#wd-print-link > a")).getText());
-        return Base.driver.findElement(By.cssSelector("#wd-print-link > a")).getText();
+        System.out.println("Printer Link Text : "+Base.driver.findElement(By.cssSelector("#wd-print-link > div > a")).getText());
+        return Base.driver.findElement(By.cssSelector("#wd-print-link > div > a")).getText();
     }
 
     public static int printerFriendlyStatusCode() throws InterruptedException, MalformedURLException,IOException {
@@ -112,8 +125,8 @@ public class WageDeterminationObjectViewPage extends ObjectView{
     }
 
     public static String getHistoryRevisionNumber(){
-        String latestRevision = Base.driver.findElement(By.id("wd-revision-number")).getText();
-        return latestRevision.substring(latestRevision.lastIndexOf(" ")+1);
+        return Base.driver.findElement(By.cssSelector("#wd-revision-number > div > div.description")).getText();
+        //return latestRevision.substring(latestRevision.lastIndexOf(" ")+1);
     }
 
     public static String getHistoryRevisionDateFromHistory(){
@@ -123,9 +136,9 @@ public class WageDeterminationObjectViewPage extends ObjectView{
     }
 
     public static String getHistoryRevisionDate(){
-        String latestRevision = Base.driver.findElement(By.id("wd-date")).getText();
-        String s = latestRevision.substring(latestRevision.indexOf(":")+2);
-        return latestRevision.substring(latestRevision.indexOf(":")+2);
+        return Base.driver.findElement(By.cssSelector("#wd-date > div > div.description")).getText();
+        //String s = latestRevision.substring(latestRevision.indexOf(":")+2);
+        //return latestRevision.substring(latestRevision.indexOf(":")+2);
 
     }
 

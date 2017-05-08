@@ -4,6 +4,8 @@ import gov.gsa.Navigation.FACObjectViewNavigation;
 import gov.gsa.Pages.FACObjectViewPage;
 
 import gov.gsa.Utilities.Base;
+import gov.gsa.Utilities.CommonUtils;
+import gov.gsa.Utilities.CommonUtils.DataField;
 import gov.gsa.Utilities.GraphObject;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -15,6 +17,8 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
+import static gov.gsa.Utilities.CommonUtils.testLabelAndDataExists;
+import static gov.gsa.Utilities.CommonUtils.testLabelContains;
 import static org.junit.Assert.*;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -70,17 +74,19 @@ public class AssistanceListingObjectViewTest extends Base{
 
     @Test
     public void agencyNameTest() {
-        ArrayList<String> agency = FACObjectViewPage.agencyname();
-        assertTrue("Agency Name is empty", agency.get(0).contains("AGENCY:"));
-        assertTrue("Agency Data is empty", agency.get(1).length() > 1);
+        DataField agency = FACObjectViewPage.agencyname();
+        testLabelAndDataExists(agency);
+        testLabelContains(agency,"AGENCY");
+
         System.out.println("Agency Name Label and Data exists");
     }
 
     @Test
     public void cfdaNumberTest() {
-        ArrayList<String> falnum = FACObjectViewPage.cfdaNumber();
-        assertTrue("CFDA Number is empty", falnum.get(0).contains("CFDA Number:"));
-        assertTrue("CFDA Number is empty", falnum.get(1).length() > 1);
+
+        DataField cfda_number = FACObjectViewPage.cfdaNumber();
+        testLabelAndDataExists(cfda_number);
+        testLabelContains(cfda_number,"CFDA Number");
         System.out.println("CFDA Number Label and Data exists");
     }
 

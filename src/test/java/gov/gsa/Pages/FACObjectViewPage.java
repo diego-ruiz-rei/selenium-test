@@ -1,6 +1,7 @@
 package gov.gsa.Pages;
 
 import gov.gsa.Utilities.Base;
+import gov.gsa.Utilities.CommonUtils;
 import gov.gsa.Utilities.GraphObject;
 import gov.gsa.Utilities.ObjectView;
 import org.openqa.selenium.By;
@@ -8,6 +9,8 @@ import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static gov.gsa.Utilities.CommonUtils.*;
 
 public class FACObjectViewPage extends ObjectView {
 
@@ -53,22 +56,25 @@ public class FACObjectViewPage extends ObjectView {
 
     }
 
-    public static ArrayList<String> agencyname(){
-        String agencyname = Base.driver.findElement(By.id("program-fh-information")).getText();
+    public static DataField agencyname(){
+        /*String agencyname = Base.driver.findElement(By.id("program-fh-information")).getText();
         String agencydata = agencyname.substring(agencyname.lastIndexOf(':')+1).trim();
         ArrayList<String> ar = new ArrayList<String>();
         ar.add(agencyname);
         ar.add(agencydata);
-        return ar;
+        return ar;*/
+
+        String label = Base.driver.findElement(By.cssSelector("#program-fh-information > div > div.header")).getText();
+        String data = Base.driver.findElement(By.cssSelector("#program-fh-information > div > div.description")).getText();
+        System.out.println("Agency : "+label+"\nData : "+data);
+        return new DataField("Agency",label,data);
     }
 
-    public static ArrayList<String> cfdaNumber(){
-        String fal = Base.driver.findElement(By.id("program-number")).getText();
-        String faldata = fal.substring(fal.lastIndexOf(':')+1).trim();
-        ArrayList<String> ar = new ArrayList<String>();
-        ar.add(fal);
-        ar.add(faldata);
-        return ar;
+    public static DataField cfdaNumber(){
+        String label = Base.driver.findElement(By.cssSelector("#program-number > div > div.header")).getText();
+        String data = Base.driver.findElement(By.cssSelector("#program-number > div > div.description")).getText();
+        System.out.println("CFDA Number : "+label+"\nData : "+data);
+        return new DataField("CFDA Number",label,data);
     }
 
     //TODO : Need to add id for Related Assistance   - Not applicable
