@@ -114,6 +114,6 @@ public class SearchPage{
 
     // grab first item from autocomplete window
     public static String autoCompleteFirstItem(){
-        return Base.driver.findElement(By.cssSelector("ul.usa-search-autocomplete > li")).getText();
+        return Base.driver.findElement(By.cssSelector("#sam-autocomplete-results > li")).getText();
     }
 }
