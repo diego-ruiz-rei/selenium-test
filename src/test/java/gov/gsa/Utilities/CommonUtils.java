@@ -160,7 +160,7 @@ public class CommonUtils {
 
     //check for total results message
     public static long extractTotalResults() throws ParseException, InterruptedException {
-        String resultText=Base.driver.findElement(By.cssSelector(".usa-width-three-fourths > .usa-width-one > strong")).getText();
+        String resultText=Base.driver.findElement(By.cssSelector("#main-container > search > div > div > div:nth-child(2) > strong > list-results-message")).getText();
 
         String[] splitMessage = resultText.split("\\s+");
 

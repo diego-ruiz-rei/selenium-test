@@ -22,13 +22,13 @@ public class WageDeterminationSearchPage extends ObjectView {
 
     // finds the wd tag above result items
     public static String wdTag() {
-        return Base.driver.findElement(By.cssSelector(".search-page .usa-label")).getText();
+        return Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > wage-determination-result > div > div > div.four.wide.column > ul > li:nth-child(2) > span")).getText();
     }
 
     // grab the inactive tag
     public static String wdInactiveTag(){
-        return Base.driver.findElement(By.cssSelector("wage-determination-result.usa-grid-full > p > span:nth-of-type(2)")).getText();
-    }
+        return Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > wage-determination-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span")).getText();
+        }
 
     // finds pagination items on fh page
     public static Integer wdResultPageCount() throws InterruptedException {
@@ -135,7 +135,7 @@ public class WageDeterminationSearchPage extends ObjectView {
     //check for sca filter tag through filters
     public static String checkSCAFilterTag() throws InterruptedException {
         Base.driver.findElement(By.cssSelector("#radio-sca")).click();
-        String data= Base.driver.findElement(By.cssSelector(".search-page .usa-label")).getText();
+        String data= Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > wage-determination-result > div > div > div.four.wide.column > ul > li:nth-child(2) > span")).getText();
         return data;
     }
 
@@ -167,7 +167,7 @@ public class WageDeterminationSearchPage extends ObjectView {
         Thread.sleep(2000);
 
 
-        String captureNumber= Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > wage-determination-result > h3 > a")).getText();
+        String captureNumber= Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > wage-determination-result > div > div > div.eight.wide.column > h3 > a")).getText();
         return checkForEven(Integer.parseInt(String.valueOf(captureNumber.charAt(captureNumber.length()-1))));
     }
 
@@ -193,7 +193,7 @@ public class WageDeterminationSearchPage extends ObjectView {
         Thread.sleep(2000);
 
 
-        String captureNumber= Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > wage-determination-result > h3 > a")).getText();
+        String captureNumber= Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > wage-determination-result > div > div > div.eight.wide.column > h3 > a")).getText();
         return checkForEven(Integer.parseInt(String.valueOf(captureNumber.charAt(captureNumber.length()-1))));
     }
 
@@ -209,12 +209,13 @@ public class WageDeterminationSearchPage extends ObjectView {
         Thread.sleep(2000);
 
 
-        String data= Base.driver.findElement(By.cssSelector("div.usa-width-one > p")).getText();
+        String data= Base.driver.findElement(By.cssSelector("#main-container > search > div > div > div.usa-width-one > p")).getText();
         System.out.println(data);
         return data;
     }
 
     public static void clearAll() {
-               Base.driver.findElement(By.xpath("//button[text()='Clear All']")).click();
+        Base.driver.findElement(By.xpath("//button[text()='Clear All']")).click();
+        Base.driver.findElement(By.cssSelector("#search-div > form > div.relative.div-fill > div > sam-autocomplete > div > div > span > i")).click();
     }
 }

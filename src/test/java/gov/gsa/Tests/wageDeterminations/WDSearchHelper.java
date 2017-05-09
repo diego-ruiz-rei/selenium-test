@@ -65,11 +65,12 @@ public class WDSearchHelper extends Base{
     // auto complete - tests if autocomplete exists
     @Test
     public void wdAutoCompleteTest() throws InterruptedException {
+        SearchNavigation.gotoSearchResultsPage(index,"");
         assertTrue(CommonUtils.autoCompleteExists(index,autocomplete_searchTerm));
     }
 
     // test DBA and SCA common fields exist in search results
-    @Test
+   @Test
     public void wdStateTest() throws InterruptedException {
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index, searchTerm);
@@ -122,7 +123,7 @@ public class WDSearchHelper extends Base{
     //total results
     @Test
     public void resultNumberTest() throws InterruptedException, ParseException {
-        HomePageNavigation.gotoHomePage();
+        //HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
         assertTrue("Message does not exist", CommonUtils.extractTotalResults() >= 1);
     }

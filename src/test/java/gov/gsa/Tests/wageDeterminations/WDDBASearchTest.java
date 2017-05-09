@@ -20,7 +20,7 @@ public class WDDBASearchTest extends WDSearchHelper {
     public static void start() throws InterruptedException {
         WDSearchHelper.wd_type = "DBA";
         WDSearchHelper.searchTerm = "AK20170001";
-        WDSearchHelper.autocomplete_searchTerm = "tx20170011";
+        WDSearchHelper.autocomplete_searchTerm = "tx20000010";
         WDSearchHelper.inactive_searchTerm = "ky20100141";
 
         setUp();
@@ -29,16 +29,16 @@ public class WDDBASearchTest extends WDSearchHelper {
     // empty search - tests wd tag shows up above results and that pagination is greater than 1
     @Test
     public void wdEmptySearchTest() throws InterruptedException {
-        HomePageNavigation.gotoHomePage();
+        //HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoDBASearch(index, " ");
         System.out.println(WageDeterminationSearchPage.wdTag());
-        assertEquals("DBA Wage Determination tag is not Found",WageDeterminationSearchPage.wdTag(), "DBA WAGE DETERMINATION");
+        assertEquals("DBA Wage Determination tag is not Found",WageDeterminationSearchPage.wdTag(), "DBA Wage Determination");
         System.out.println("Wage Determination tag exists");
     }
 
     @Test
     public void wdDBATitleTest() throws InterruptedException {
-        HomePageNavigation.gotoHomePage();
+        //HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoDBASearch(index, searchTerm);
         CommonUtils.DataField wdTitle = WageDeterminationSearchPage.wdNumber();
         testLabelAndDataExists(wdTitle);
@@ -47,7 +47,7 @@ public class WDDBASearchTest extends WDSearchHelper {
 
     @Test
     public void wdDBAConstructionTypeTest() throws InterruptedException {
-        HomePageNavigation.gotoHomePage();
+       // HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoDBASearch(index, searchTerm);
         DataField wdConstructionType = WageDeterminationSearchPage.wdConstructionType();
         testLabelAndDataExists(wdConstructionType);
@@ -60,14 +60,14 @@ public class WDDBASearchTest extends WDSearchHelper {
     public void inactiveTagTestDBA() throws InterruptedException {
         SearchNavigation.gotoIsActiveFalseSearch(index,inactive_searchTerm);
         System.out.println(WageDeterminationSearchPage.wdInactiveTag());
-        assertEquals(WageDeterminationSearchPage.wdInactiveTag(), "INACTIVE");
+        assertEquals(WageDeterminationSearchPage.wdInactiveTag(), "Inactive");
         System.out.println("Inactive tag exists");
     }
 
     //check DBA Published or Last Revised Date
     @Test
     public void wdDBADateTest() throws InterruptedException{
-        HomePageNavigation.gotoHomePage();
+        //HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoDBASearch(index,searchTerm);
         DataField revision = WageDeterminationSearchPage.wdRevisionNum();
         DataField date = WageDeterminationSearchPage.wdDate();
