@@ -184,18 +184,22 @@ public class CommonUtils {
 
     //Filters for agency picker
 
-    public static String fhSubTierFilterSelection(String dept_filter, String subtier_filter) throws InterruptedException {
-        Base.driver.findElement(By.linkText("Advanced")).click();
-        Thread.sleep(2000);
-        new Select(Base.driver.findElement(By.id("Department"))).selectByVisibleText(dept_filter);
-        Thread.sleep(2000);
-        new Select(Base.driver.findElement(By.id("Agency"))).selectByVisibleText(subtier_filter);
-        Thread.sleep(1000);
-        Base.driver.findElement(By.cssSelector(".usa-agency-picker-button-area > button:nth-child(1)")).click();
-        Thread.sleep(2000);
-        return Base.driver.findElement(By.cssSelector("agencypicker > div > div.usa-agency-picker-readonly-area > ul > li")).getText();
+    public static String fhSubTierFilterSelection(String dept_filter, String subtier_filter, String index) throws InterruptedException {
+        if (!index.equals("Opportunities")) {
+            Base.driver.findElement(By.linkText("Advanced")).click();
+            Thread.sleep(2000);
+            new Select(Base.driver.findElement(By.id("Department"))).selectByVisibleText(dept_filter);
+            Thread.sleep(2000);
+            new Select(Base.driver.findElement(By.id("Agency"))).selectByVisibleText(subtier_filter);
+            Thread.sleep(1000);
+            Base.driver.findElement(By.cssSelector(".usa-agency-picker-button-area > button:nth-child(1)")).click();
+            Thread.sleep(2000);
+            return Base.driver.findElement(By.cssSelector("agencypicker > div > div.usa-agency-picker-readonly-area > ul > li")).getText();
+        }
+        else{
+           return fhFilterSelection(subtier_filter);
+        }
     }
-
     //split label and data on new line since span element is not present for all entity fields
     public static String[] splitLabelAndDataNewLine(String data){
         String[] splitLabelAndData = data.split("\\r?\\n");

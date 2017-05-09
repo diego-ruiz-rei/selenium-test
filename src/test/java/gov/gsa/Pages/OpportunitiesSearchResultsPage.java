@@ -12,18 +12,17 @@ import java.util.List;
 public class OpportunitiesSearchResultsPage {
     // Opportunities tag in Search results page
     public static String opportunitiesTag(){
-        return Base.driver.findElement(By.cssSelector(".search-page .usa-label")).getText();
+        return Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > opportunities-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span")).getText();
     }
 
     // Opportunities Archived tag in Search results page
     public static String opportunitiesArchivedTag(){
-        System.out.println("tag : "+Base.driver.findElement(By.cssSelector("opportunities-result > p > span:nth-child(2)")).getText());
-        return Base.driver.findElement(By.cssSelector("opportunities-result > p > span:nth-child(2)")).getText();
+
+        return Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > opportunities-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span")).getText();
     }
 
     //Pagination count
     public static Integer resultsPageCount() throws InterruptedException {
-        Thread.sleep(10000);
         System.out.println("Results page count : "+ Base.driver.findElements(By.cssSelector(".page-button")).size());
         return Base.driver.findElements(By.cssSelector(".page-button")).size();
     }
@@ -41,7 +40,7 @@ public class OpportunitiesSearchResultsPage {
     private static String getTypeFieldValue(){
         String typeFieldValue="";
         String typeValue="";
-        List<WebElement> typeFieldValueElements = Base.driver.findElements(By.cssSelector("opportunities-result > div.usa-width-one-third > ul > li:nth-child(3)"));
+        List<WebElement> typeFieldValueElements = Base.driver.findElements(By.cssSelector("#search-results > div:nth-child(1) > opportunities-result > div > div > div.four.wide.column > ul > li:nth-child(4)"));
         if(typeFieldValueElements.size() > 0) {
             for (WebElement oppTypeElement : typeFieldValueElements) {
                 typeFieldValue = oppTypeElement.getText();
@@ -67,12 +66,13 @@ public class OpportunitiesSearchResultsPage {
     //Check for department
     public static DataField department() {
         String deptName="";
-        List<WebElement> deptTypeElements = Base.driver.findElements(By.cssSelector(".m_B-2x > li:nth-child(1)"));
+        List<WebElement> deptTypeElements = Base.driver.findElements(By.cssSelector("#search-results > div > opportunities-result > div > div > div.eight.wide.column > ul > li:nth-child(1)"));
         if(deptTypeElements.size() > 0) {
             for (WebElement oppTypeElement : deptTypeElements) {
                 deptName = oppTypeElement.getText();
+                System.out.print(deptName);
             }
-            return splitLabelAndData(deptName).setName("Department/Ind. Agency");
+            return splitLabelAndDataNewLine(deptName).setName("Department/Ind. Agency");
         }
         else
         {
@@ -83,12 +83,12 @@ public class OpportunitiesSearchResultsPage {
     //Check for office name
     public static DataField officeName() {
         String officeName="";
-        List<WebElement> officeTypeElements = Base.driver.findElements(By.cssSelector(".m_B-2x > li:nth-child(2)"));
+        List<WebElement> officeTypeElements = Base.driver.findElements(By.cssSelector("#search-results > div > opportunities-result > div > div > div.eight.wide.column > ul > li:nth-child(2)"));
         if(officeTypeElements.size() > 0) {
             for (WebElement oppTypeElement : officeTypeElements) {
                 officeName = oppTypeElement.getText();
             }
-            return splitLabelAndData(officeName).setName("Sub-tier");
+            return splitLabelAndDataNewLine(officeName).setName("Sub-tier");
         }
         else
         {
@@ -99,14 +99,14 @@ public class OpportunitiesSearchResultsPage {
     //Check for location name
     public static DataField locationName() {
         String locationName="";
-        List<WebElement> locationTypeElements = Base.driver.findElements(By.cssSelector(".m_B-2x > li:nth-child(3)"));
+        List<WebElement> locationTypeElements = Base.driver.findElements(By.cssSelector("#search-results > div > opportunities-result > div > div > div.eight.wide.column > ul > li:nth-child(3)"));
 
         if(locationTypeElements.size() > 0) {
             for (WebElement oppTypeElement : locationTypeElements) {
                 locationName = oppTypeElement.getText();
             }
 
-            return splitLabelAndData(locationName).setName("Office");
+            return splitLabelAndDataNewLine(locationName).setName("Office");
         }
         else
         {
@@ -117,7 +117,7 @@ public class OpportunitiesSearchResultsPage {
     //Check for solicitation number
     public static DataField solicitation() {
         String solicitationNumber="";
-        List<WebElement> solicitationTypeElements = Base.driver.findElements(By.cssSelector("opportunities-result > div.usa-width-one-third > ul > li:nth-child(1)"));
+        List<WebElement> solicitationTypeElements = Base.driver.findElements(By.cssSelector("#search-results > div > opportunities-result > div > div > div.four.wide.column > ul > li:nth-child(2)"));
 
         if(solicitationTypeElements.size() > 0) {
             for (WebElement oppTypeElement : solicitationTypeElements) {
@@ -134,7 +134,7 @@ public class OpportunitiesSearchResultsPage {
     //Check for posted date
     public static DataField postedDate() {
         String postedDateField="";
-        List<WebElement> postedDateTypeElements = Base.driver.findElements(By.cssSelector("opportunities-result > div.usa-width-one-third > ul > li:nth-child(2)"));
+        List<WebElement> postedDateTypeElements = Base.driver.findElements(By.cssSelector("#search-results > div > opportunities-result > div > div > div.four.wide.column > ul > li:nth-child(3)"));
 
         if(postedDateTypeElements.size() > 0) {
             for (WebElement oppTypeElement : postedDateTypeElements) {
@@ -151,7 +151,7 @@ public class OpportunitiesSearchResultsPage {
     //check for type
     public static DataField type() {
         String typeField="";
-        List<WebElement> typeElements = Base.driver.findElements(By.cssSelector("opportunities-result > div.usa-width-one-third > ul > li:nth-child(3)"));
+        List<WebElement> typeElements = Base.driver.findElements(By.cssSelector("#search-results > div > opportunities-result > div > div > div.four.wide.column > ul > li:nth-child(4)"));
 
         if(typeElements.size() > 0) {
             for (WebElement oppTypeElement : typeElements) {
@@ -177,7 +177,7 @@ public class OpportunitiesSearchResultsPage {
 
     // grab description
     public static boolean exDescription(){
-        String descriptionText=Base.driver.findElement(By.cssSelector("opportunities-result > div.usa-width-two-thirds > p > span")).getText();
+        String descriptionText=Base.driver.findElement(By.cssSelector("#search-results > div > opportunities-result > div > div > div.eight.wide.column > p > span")).getText();
         if(descriptionText.length()!=0 && descriptionText!=null){
             return true;
         }
@@ -277,7 +277,7 @@ public class OpportunitiesSearchResultsPage {
     public static boolean modifyAmend(){
         String typeFieldValue=getTypeFieldValue();
         System.out.print(typeFieldValue);
-        if(typeFieldValue.contains("Updated")){
+        if(typeFieldValue.contains("Combined Synopsis/Solicitation")){
             return true;
         }
         else
@@ -285,6 +285,7 @@ public class OpportunitiesSearchResultsPage {
     }
 
 
-
-
+    public static void clearAll() {
+        Base.driver.findElement(By.xpath("//button[text()='Clear All']")).click();
+    }
 }

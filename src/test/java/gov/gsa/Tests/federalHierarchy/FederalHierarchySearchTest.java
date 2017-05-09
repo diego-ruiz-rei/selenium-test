@@ -64,7 +64,7 @@ public class FederalHierarchySearchTest extends Base {
     public void testSearchTerm() throws InterruptedException {
         SearchNavigation.gotoSearchResultsPage(index,fh_searchTerm);
         System.out.println(FederalHierarchySearchPage.fhTag());
-        assertEquals(FederalHierarchySearchPage.fhTag(), "FEDERAL HIERARCHY");
+        assertEquals(FederalHierarchySearchPage.fhTag(), "Federal Hierarchy");
         System.out.println("Federal Hierarchy tag exists");
     }
 
@@ -209,7 +209,7 @@ public class FederalHierarchySearchTest extends Base {
     @Test
     public void aliasNameTest() throws InterruptedException {
         SearchNavigation.gotoSearchResultsPage(index,fh_searchTerm);
-        CommonUtils.DataField aliasField = FederalHierarchySearchPage.departmentCheck();
+        CommonUtils.DataField aliasField = FederalHierarchySearchPage.aliasNameCheck();
         testLabelAndDataExists(aliasField);
         testLabelContains(aliasField, "Also Known As");
     }
@@ -235,6 +235,7 @@ public class FederalHierarchySearchTest extends Base {
     //Cgac code field check for dept
     @Test
     public void cgacCodeDepartmentTest() throws InterruptedException{
+        HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,fh_cgacCode);
         CommonUtils.DataField cgacField = FederalHierarchySearchPage.checkCgacCodeDepartment();
         testLabelAndDataExists(cgacField);
@@ -245,6 +246,7 @@ public class FederalHierarchySearchTest extends Base {
     //Cgac code field check for sub-tier
     @Test
     public void cgacCodeSubTierTest() throws InterruptedException{
+        HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,fh_cgacCode);
         CommonUtils.DataField cgacField = FederalHierarchySearchPage.checkCgacCodeSubTier();
         testLabelAndDataExists(cgacField);
@@ -272,7 +274,7 @@ public class FederalHierarchySearchTest extends Base {
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
         //System.out.println("Selected Filter :"+AssistanceListingSearchPage.fhSubTierFilterSelection(fh_dept_filter,fh_subtier_filter));
-        assertTrue("Selected Filter is incorrect for Subtier Agency",CommonUtils.fhSubTierFilterSelection(fh_dept_filter,fh_subtier_filter).equals(fh_subtier_filter));
+        assertTrue("Selected Filter is incorrect for Subtier Agency",CommonUtils.fhSubTierFilterSelection(fh_dept_filter,fh_subtier_filter,index).equals(fh_subtier_filter));
         assertTrue("No results for FH SubTier Filter",fh_dept_filter.contains(FederalHierarchySearchPage.departmentCheck().data));
 
     }
@@ -280,7 +282,7 @@ public class FederalHierarchySearchTest extends Base {
     //check link from featured result. This test will not work on dev
     @Test
     public void fhAwardsLinkTest() throws InterruptedException{
-        HomePageNavigation.gotoHomePage();
+       // HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,fh_awards_link);
         String fhFilter = FederalHierarchySearchPage.checkFhAwardsLink();
         assertTrue("Link is not working",fhFilter.equals(fh_awards_link));

@@ -5,15 +5,19 @@ import gov.gsa.Utilities.CommonUtils.DataField;
 import gov.gsa.Utilities.ObjectView;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.sql.Driver;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by michael.kellogg on 1/30/17.
  */
 public class FederalHierarchySearchPage extends ObjectView {
-
+    static WebDriverWait wait = new WebDriverWait(driver, 10);
     // finds the federal hierarchy tag above result items
     public static String fhTag(){
         return Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > federal-hierarchy-result > div > div > div.four.wide.column > ul > li:nth-child(2) > span")).getText();
@@ -242,7 +246,7 @@ public class FederalHierarchySearchPage extends ObjectView {
         String departmentField = Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(4) > federal-hierarchy-result > div > div > div.four.wide.column > ul > li:nth-child(3) > strong")).getText();
         if(departmentField.equalsIgnoreCase("Department")){
             String extractField = Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(4) > federal-hierarchy-result > div > div > div.four.wide.column > ul > li:nth-child(5)")).getText();
-            return splitLabelAndData(extractField).setName("CGAC");
+            return splitLabelAndDataNewLine(extractField).setName("CGAC");
         }
         return new DataField("CGAC",null,null);
     }
@@ -252,7 +256,8 @@ public class FederalHierarchySearchPage extends ObjectView {
         String subTierField = Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(3) > federal-hierarchy-result > div > div > div.four.wide.column > ul > li:nth-child(3)")).getText();
         if(subTierField.equalsIgnoreCase("Sub-Tier")){
             String extractField = Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(3) > federal-hierarchy-result > div > div > div.four.wide.column > ul > li:nth-child(4)")).getText();
-            return splitLabelAndData(extractField).setName("CGAC");
+            System.out.println(extractField);
+            return splitLabelAndDataNewLine(extractField).setName("CGAC");
         }
         return new DataField("CGAC",null,null);
     }
@@ -262,23 +267,22 @@ public class FederalHierarchySearchPage extends ObjectView {
         String extractField = "";
         Thread.sleep(1000);
         Base.driver.findElement(By.cssSelector("#main-container > search > div > div > div:nth-child(2) > fh-featured-result > div > div > div > div.sam-ui.attached.grid > div > div.ten.wide.column > p > a")).click();
-        Thread.sleep(2000);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         String oldTab = driver.getWindowHandle();
         ArrayList<String> newTab = new ArrayList<String> (driver.getWindowHandles());
         newTab.remove(oldTab);
         driver.switchTo().window(newTab.get(0));
-        Thread.sleep(2000);
-       String awardTitle = Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span")).getText();
-        if("Award".equals(awardTitle)) {
+        //String awardTitle = Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span")).getText();
+       // Thread.sleep(2000);
+        //if("Award".equals(awardTitle)) {
              extractField = Base.driver.findElement(By.cssSelector("agencypicker > div > div.usa-agency-picker-readonly-area > ul > li")).getText();
-
-        }
+        //}
         return extractField;
     }
 
     public static void clearAll() {
         Base.driver.findElement(By.xpath("//button[text()='Clear All']")).click();
-        Base.driver.findElement(By.cssSelector("#search-div > form > div.relative.div-fill > div > sam-autocomplete > div > div > span > i")).click();
+        //Base.driver.findElement(By.cssSelector("#search-div > form > div.relative.div-fill > div > sam-autocomplete > div > div > span > i")).click();
     }
 
 }

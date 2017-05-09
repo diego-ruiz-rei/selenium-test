@@ -5,10 +5,7 @@ import gov.gsa.Navigation.SearchNavigation;
 import gov.gsa.Pages.OpportunitiesSearchResultsPage;
 import gov.gsa.Utilities.Base;
 import gov.gsa.Utilities.CommonUtils;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runners.MethodSorters;
 
 import java.text.ParseException;
@@ -27,7 +24,7 @@ public class OpportunitiesSearchTest extends Base {
     //Test Data
     public String index = "Opportunities";
     public String archived_searchTerm = "SPE8E517T1063";
-    public String active_searchTerm = "HDTRA1-14-R-0020";
+    public String active_searchTerm = "L15PS00039";
     public String autocomplete_searchTerm = "16--insulation blanket, cabin, aircraft";
     public String presolicitation_searchTerm="N6554011T5343";
     public String combinedsynopsis_searchTerm="SPRTA114Q0054";
@@ -39,8 +36,9 @@ public class OpportunitiesSearchTest extends Base {
     public String specialnotice_searchTerm="C27JFPMU";
     public String modifyamendSearchTerm="FM44186201AW01";
     public String fh_filter ="INTERIOR, DEPARTMENT OF THE (D)";
-    public String fh_dept_filter ="EDUCATION, DEPARTMENT OF (D)";
-    public String fh_subtier_filter = "OFFICE OF ELEMENTARY AND SECONDARY EDUCATION (A)";
+    public String fh_dept_filter ="100010393";
+    public String fh_subtier_filter = "FEDERAL AVIATION ADMINISTRATION (A)";
+    public String fh_subtier_dept_filter = "TRANSPORTATION, DEPARTMENT OF";
 
     @BeforeClass
     public static void start() throws InterruptedException {
@@ -52,7 +50,7 @@ public class OpportunitiesSearchTest extends Base {
     public void opportunitiesTagTest() throws InterruptedException {
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
-        assertEquals("Opportunities Tag does not Exist",OpportunitiesSearchResultsPage.opportunitiesTag(),"OPPORTUNITY");
+        assertEquals("Opportunities Tag does not Exist",OpportunitiesSearchResultsPage.opportunitiesTag(),"Opportunity");
         System.out.println("Opportunities Tag is Present");
 
     }
@@ -61,13 +59,14 @@ public class OpportunitiesSearchTest extends Base {
     @Test
     public void opportunitiesArchivedTagTest() throws InterruptedException {
         SearchNavigation.gotoIsActiveFalseSearch(index,archived_searchTerm);
-        assertEquals("Opportunities Archived Tag does not Exist",OpportunitiesSearchResultsPage.opportunitiesArchivedTag(),"ARCHIVED");
+        assertEquals("Opportunities Archived Tag does not Exist",OpportunitiesSearchResultsPage.opportunitiesArchivedTag(),"Archived");
         System.out.println("Opportunities Archived Tag is Present");
     }
 
     // Test Autocomplete
     @Test
     public void autoCompleteTest() throws InterruptedException {
+        SearchNavigation.gotoSearchResultsPage(index,"");
         assertTrue(CommonUtils.autoCompleteExists(index,autocomplete_searchTerm));
     }
 
@@ -237,15 +236,24 @@ public class OpportunitiesSearchTest extends Base {
         assertTrue("No results for FH Filter",CommonUtils.fhFilterSelection(fh_dept_filter).contains(OpportunitiesSearchResultsPage.department().data));
     }
 
+
     @Test
     public void fhSubTierFilterAndDataMatchTest() throws InterruptedException {
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
         //System.out.println("Selected Filter :"+AssistanceListingSearchPage.fhSubTierFilterSelection(fh_dept_filter,fh_subtier_filter));
-        assertTrue("Selected Filter is incorrect for Subtier Agency",CommonUtils.fhSubTierFilterSelection(fh_dept_filter,fh_subtier_filter).equals(fh_subtier_filter));
-        assertTrue("No results for FH SubTier Filter",fh_dept_filter.contains(OpportunitiesSearchResultsPage.department().data));
+
+
+        assertTrue("Selected Filter is incorrect for Subtier Agency",CommonUtils.fhSubTierFilterSelection("",fh_subtier_filter, index).equals(fh_subtier_filter));
+        assertTrue("No results for FH SubTier Filter",fh_subtier_dept_filter.contains(OpportunitiesSearchResultsPage.department().data));
 
     }
+
+    @After
+    public void clearAll(){
+        OpportunitiesSearchResultsPage.clearAll();
+    }
+
     @AfterClass
     public static void end(){
         closeOut();

@@ -170,7 +170,7 @@ public class AssistanceListingSearchTest extends Base{
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
         //System.out.println("Selected Filter :"+AssistanceListingSearchPage.fhSubTierFilterSelection(fh_dept_filter,fh_subtier_filter));
-        assertTrue("Selected Filter is incorrect for Subtier Agency",CommonUtils.fhSubTierFilterSelection(fh_dept_filter,fh_subtier_filter).equals(fh_subtier_filter));
+        assertTrue("Selected Filter is incorrect for Subtier Agency",CommonUtils.fhSubTierFilterSelection(fh_dept_filter,fh_subtier_filter,index).equals(fh_subtier_filter));
         assertTrue("No results for FH SubTier Filter",fh_dept_filter.contains(AssistanceListingSearchPage.department().data));
 
     }

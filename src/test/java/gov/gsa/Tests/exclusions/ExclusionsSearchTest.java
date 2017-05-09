@@ -185,7 +185,7 @@ public class ExclusionsSearchTest extends Base {
         SearchNavigation.gotoSearchResultsPage(index,"");
         long totalResultsNoFilter = CommonUtils.extractTotalResults();
         //System.out.println("Selected Filter :"+AssistanceListingSearchPage.fhSubTierFilterSelection(fh_dept_filter,fh_subtier_filter));
-        assertTrue("Selected Filter is incorrect for Subtier Agency",CommonUtils.fhSubTierFilterSelection(fh_dept_filter,fh_subtier_filter).equals(fh_subtier_filter));
+        assertTrue("Selected Filter is incorrect for Subtier Agency",CommonUtils.fhSubTierFilterSelection(fh_dept_filter,fh_subtier_filter,index).equals(fh_subtier_filter));
         long totalResultsFilter = CommonUtils.extractTotalResults();
         assertTrue("Selected Filter is incorrect for Subtier Agency", totalResultsFilter < totalResultsNoFilter);
     }

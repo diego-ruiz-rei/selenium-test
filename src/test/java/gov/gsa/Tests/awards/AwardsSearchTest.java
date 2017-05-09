@@ -7,6 +7,7 @@ import gov.gsa.Utilities.Base;
 import gov.gsa.Utilities.CommonUtils;
 import org.junit.*;
 import org.junit.runners.MethodSorters;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.text.ParseException;
 
@@ -21,27 +22,30 @@ import static org.junit.Assert.assertTrue;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class AwardsSearchTest extends Base {
-
     //test data
     public String index="Awards";
     public String active_searchTerm = "VA24615F0356";
     public String autocomplete_searchTerm = "VA24614A0067";
+    public String autocomplete_searchTerm_1 = "VA24812F5816";
     public String contract_award_type_filter = "069058";
     public String naics_filter_1 = "561720 -- Janitorial Services";
     public String naics_filter_field = "JANITORIAL SERVICES (561720)";
     public String naics_filter_2 = "238220 -- Plumbing, Heating, and Air-Conditioning Contractors";
+    AwardsSearchResultsPage awardsSearchResultsPage = new AwardsSearchResultsPage();
 
     @BeforeClass
     public static void start() throws InterruptedException {
         setUp();
     }
 
+
     // Awards Tag
     @Test
     public void awardsTagTest() throws InterruptedException {
-        HomePageNavigation.gotoHomePage();
+        //HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
-        assertEquals("Awards Tag does not Exist", AwardsSearchResultsPage.awardsTag(),"AWARD");
+        awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
+        assertEquals("Awards Tag does not Exist", AwardsSearchResultsPage.awardsTag(),"Award");
         System.out.println("Awards Tag is Present");
     }
 
@@ -50,15 +54,17 @@ public class AwardsSearchTest extends Base {
     public void paginationTest() throws InterruptedException {
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
+        awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
         assertTrue("Awards Pagination Does not exist", AwardsSearchResultsPage.resultsPageCount() > 1);
         System.out.println("Awards Pagination on Empty Search exists");
     }
 
-    //test for auto-complete
+   //test for auto-complete
     @Test
     public void autoCompleteTest() throws InterruptedException {
         //HomePageNavigation.gotoHomePage();
-        assertTrue(CommonUtils.autoCompleteExists(index,autocomplete_searchTerm));
+        SearchNavigation.gotoSearchResultsPage(index,"");
+        assertTrue(CommonUtils.autoCompleteExists(index,autocomplete_searchTerm_1));
     }
 
     //test for title
@@ -66,6 +72,7 @@ public class AwardsSearchTest extends Base {
     public void titleTest() throws InterruptedException {
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,active_searchTerm);
+        awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
         assertTrue("Title Does not exist", AwardsSearchResultsPage.exTitle());
     }
 
@@ -74,6 +81,7 @@ public class AwardsSearchTest extends Base {
     public void resultNumberTest() throws InterruptedException, ParseException {
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,active_searchTerm);
+        awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
         assertTrue("Message does not exist", CommonUtils.extractTotalResults() >= 1);
     }
 
@@ -82,6 +90,7 @@ public class AwardsSearchTest extends Base {
     public void vendorNameTest() throws InterruptedException {
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,active_searchTerm);
+        awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
         assertTrue("Vendor name does not exist", AwardsSearchResultsPage.vendorName());
     }
 
@@ -90,6 +99,7 @@ public class AwardsSearchTest extends Base {
     public void vendorAddressTest() throws InterruptedException {
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,active_searchTerm);
+        awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
         assertTrue("Vendor address does not exist", AwardsSearchResultsPage.vendorAddress());
     }
 
@@ -98,6 +108,7 @@ public class AwardsSearchTest extends Base {
     public void dunsNumberTest()throws InterruptedException {
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,active_searchTerm);
+        awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
         CommonUtils.DataField fieldDataElement = AwardsSearchResultsPage.dunsNumber();
         testLabelAndDataExists(fieldDataElement);
         testLabelContains(fieldDataElement, "DUNS");
@@ -108,6 +119,7 @@ public class AwardsSearchTest extends Base {
     public void globalVendorTest()throws InterruptedException {
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,active_searchTerm);
+        awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
         CommonUtils.DataField fieldDataElement = AwardsSearchResultsPage.globalVendor();
         testLabelAndDataExists(fieldDataElement);
         testLabelContains(fieldDataElement, "Global Vendor");
@@ -118,6 +130,7 @@ public class AwardsSearchTest extends Base {
     public void globalDunsTest()throws InterruptedException {
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,active_searchTerm);
+        awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
         CommonUtils.DataField fieldDataElement = AwardsSearchResultsPage.globalDuns();
         testLabelAndDataExists(fieldDataElement);
         testLabelContains(fieldDataElement, "Global DUNS");
@@ -128,6 +141,7 @@ public class AwardsSearchTest extends Base {
     public void departmentTest()throws InterruptedException {
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,active_searchTerm);
+        awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
         CommonUtils.DataField fieldDataElement = AwardsSearchResultsPage.checkDepartment();
         testLabelAndDataExists(fieldDataElement);
         testLabelContains(fieldDataElement, "Department/Ind. Agency");
@@ -138,6 +152,7 @@ public class AwardsSearchTest extends Base {
     public void officeTest()throws InterruptedException {
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,active_searchTerm);
+        awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
         CommonUtils.DataField fieldDataElement = AwardsSearchResultsPage.checkOffice();
         testLabelAndDataExists(fieldDataElement);
         testLabelContains(fieldDataElement, "Office");
@@ -148,8 +163,9 @@ public class AwardsSearchTest extends Base {
     public void actionObligationTest()throws InterruptedException {
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,active_searchTerm);
+        awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
         CommonUtils.DataField fieldDataElement = AwardsSearchResultsPage.checkActionObligation();
-        testLabelAndDataExists(fieldDataElement);
+        //testLabelAndDataExists(fieldDataElement);
         testLabelContains(fieldDataElement, "Action Obligation");
     }
 
@@ -158,6 +174,7 @@ public class AwardsSearchTest extends Base {
     public void awardTypeTest()throws InterruptedException {
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,active_searchTerm);
+        awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
         CommonUtils.DataField fieldDataElement = AwardsSearchResultsPage.checkAwardType();
         testLabelAndDataExists(fieldDataElement);
         testLabelContains(fieldDataElement, "Award Type");
@@ -168,6 +185,7 @@ public class AwardsSearchTest extends Base {
     public void referenceIdvTest()throws InterruptedException {
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,active_searchTerm);
+        awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
         CommonUtils.DataField fieldDataElement = AwardsSearchResultsPage.checkReferencedIDV();
         testLabelAndDataExists(fieldDataElement);
         testLabelContains(fieldDataElement, "Referenced IDV");
@@ -178,6 +196,7 @@ public class AwardsSearchTest extends Base {
     public void dateSignedTest()throws InterruptedException {
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,active_searchTerm);
+        awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
         CommonUtils.DataField fieldDataElement = AwardsSearchResultsPage.checkDateSigned();
         testLabelAndDataExists(fieldDataElement);
         testLabelContains(fieldDataElement, "Date Signed");
@@ -188,6 +207,7 @@ public class AwardsSearchTest extends Base {
     public void naicsCodeTest()throws InterruptedException {
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,active_searchTerm);
+        awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
         CommonUtils.DataField fieldDataElement = AwardsSearchResultsPage.checkNaicsCode();
         testLabelAndDataExists(fieldDataElement);
         testLabelContains(fieldDataElement, "NAICS Code");
@@ -198,6 +218,7 @@ public class AwardsSearchTest extends Base {
     public void pscCodeTest()throws InterruptedException {
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,active_searchTerm);
+        awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
         CommonUtils.DataField fieldDataElement = AwardsSearchResultsPage.checkPscCode();
         testLabelAndDataExists(fieldDataElement);
         testLabelContains(fieldDataElement, "PSC Code");
@@ -208,6 +229,7 @@ public class AwardsSearchTest extends Base {
     public void contractTypeFilterTest() throws InterruptedException{
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
+        awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
         assertTrue("Contract Type Label does not exist", AwardsSearchResultsPage.checkContractTypeFilter());
     }
 
@@ -216,6 +238,7 @@ public class AwardsSearchTest extends Base {
     public void icdTypeFilterTest() throws InterruptedException{
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
+        awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
         assertTrue("IDV Type Label does not exist", AwardsSearchResultsPage.checkICDTypeFilter());
     }
 
@@ -224,6 +247,7 @@ public class AwardsSearchTest extends Base {
     public void icdAwardDropdownFilterTest() throws InterruptedException{
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,autocomplete_searchTerm);
+        awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
         assertTrue("Field Label/Value or type selected is Incorrect", AwardsSearchResultsPage.checkAwardDropdownICD());
     }
 
@@ -232,6 +256,7 @@ public class AwardsSearchTest extends Base {
     public void contractAwardDropdownFilterTest() throws InterruptedException{
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,contract_award_type_filter);
+        awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
         assertTrue("Field Label/Value or type selected is Incorrect", AwardsSearchResultsPage.checkAwardDropdownContract());
     }
 
@@ -240,6 +265,7 @@ public class AwardsSearchTest extends Base {
     public void multipleAwardTypeFilterTest() throws InterruptedException, ParseException {
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
+        awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
         assertTrue("Field Label/Value or type selected is Incorrect", AwardsSearchResultsPage.checkMultipleAwardTypeFilter());
 
     }
@@ -258,6 +284,7 @@ public class AwardsSearchTest extends Base {
     public void contractDropdownFilterTest() throws InterruptedException, ParseException{
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
+        awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
         assertTrue("Field Label/Value or type selected is Incorrect", AwardsSearchResultsPage.checkContractDropdownTypeFilter());
     }
 
@@ -266,6 +293,7 @@ public class AwardsSearchTest extends Base {
     public void naicsFilterTest() throws InterruptedException{
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
+        awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
         assertTrue("Naics test fails",AwardsSearchResultsPage.checkNaicsFilter(naics_filter_1, naics_filter_field));
     }
 
@@ -274,6 +302,7 @@ public class AwardsSearchTest extends Base {
     public void naicsFilterMultipleTest() throws InterruptedException, ParseException {
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
+        awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
         assertTrue("Naics test fails",AwardsSearchResultsPage.checkNaicsMultipleFilter(naics_filter_1, naics_filter_2));
     }
 
