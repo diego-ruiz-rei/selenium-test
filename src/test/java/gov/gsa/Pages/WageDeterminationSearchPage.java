@@ -1,12 +1,10 @@
 package gov.gsa.Pages;
 
 import gov.gsa.Utilities.Base;
+import gov.gsa.Utilities.CommonUtils;
 import gov.gsa.Utilities.CommonUtils.DataField;
 import gov.gsa.Utilities.ObjectView;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-
-import java.util.List;
 
 /**
  * Created by michael.kellogg on 1/30/17.
@@ -48,36 +46,22 @@ public class WageDeterminationSearchPage extends ObjectView {
 
     // grab state field
     public static DataField wdState(){
-        String stateField="";
-        List<WebElement> stateElements = Base.driver.findElements(By.cssSelector(".m_B-2x:nth-of-type(1) > li:nth-child(1)"));
+        String label = Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > wage-determination-result > div > div > div.eight.wide.column > ul > li:nth-child(1) > strong")).getText();
+        String data = Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > wage-determination-result > div > div > div.eight.wide.column > ul > li:nth-child(1) > span")).getText();
 
-        if(stateElements.size() > 0) {
-            for (WebElement stTypeElement : stateElements) {
-                stateField = stTypeElement.getText();
-            }
-            return splitLabelAndData(stateField).setName("State");
-        }
-        else
-        {
-            return new DataField("State",null,null);
-        }
+        return new DataField("State",label,data);
+
     }
 
     // grab county field
     public static DataField wdCounty(){
         String countyField="";
-        List<WebElement> countyElements = Base.driver.findElements(By.cssSelector(".m_B-2x:nth-of-type(1) > li:nth-child(2)"));
+        String dataField = Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > wage-determination-result > div > div > div.eight.wide.column > ul > li:nth-child(2)")).getText();
+        String[] splitLabelAndData = CommonUtils.splitLabelAndDataNewLine(dataField);
+        String label = splitLabelAndData[0];
+        String data = splitLabelAndData[1];
 
-        if(countyElements.size() > 0) {
-            for (WebElement cntTypeElement : countyElements) {
-                countyField = cntTypeElement.getText();
-            }
-            return splitLabelAndData(countyField).setName("County/ies");
-        }
-        else
-        {
-            return new DataField("County/ies",null,null);
-        }
+        return new DataField("County/ies",label,data);
 
     }
 
@@ -85,7 +69,7 @@ public class WageDeterminationSearchPage extends ObjectView {
     public static DataField wdRevisionNum(){
         String label = Base.driver.findElement(By.cssSelector(".wd-revision-number > strong")).getText();
         String data = Base.driver.findElement(By.cssSelector(".wd-revision-number > span")).getText();
-        return new DataField("revision number field", label, data);
+        return new DataField("Revision #", label, data);
     }
 
     // grab construction type field
@@ -216,6 +200,7 @@ public class WageDeterminationSearchPage extends ObjectView {
 
     public static void clearAll() {
         Base.driver.findElement(By.xpath("//button[text()='Clear All']")).click();
+        Base.driver.findElement(By.cssSelector(".usa-button-primary.usa-search-submit.search-btn")).click();
         Base.driver.findElement(By.cssSelector("#search-div > form > div.relative.div-fill > div > sam-autocomplete > div > div > span > i")).click();
     }
 }

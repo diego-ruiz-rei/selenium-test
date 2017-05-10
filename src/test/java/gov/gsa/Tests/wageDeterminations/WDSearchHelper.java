@@ -44,7 +44,7 @@ public class WDSearchHelper extends Base{
     @Test
     public void wdPaginationTest() throws InterruptedException {
         HomePageNavigation.gotoHomePage();
-        if (wd_type == "SCA")
+        if (wd_type.equals("SCA"))
             SearchNavigation.gotoSCASearch(index, "");
         else
             SearchNavigation.gotoDBASearch(index, "");
@@ -57,7 +57,11 @@ public class WDSearchHelper extends Base{
     @Test
     public void wdKeywordSearchTest() throws InterruptedException {
         HomePageNavigation.gotoHomePage();
-        SearchNavigation.gotoSearchResultsPage(index,searchTerm);
+        if (wd_type.equals("SCA"))
+            SearchNavigation.gotoSCASearch(index, searchTerm);
+        else
+            SearchNavigation.gotoDBASearch(index, searchTerm);
+        //SearchNavigation.gotoSearchResultsPage(index,searchTerm);
         DataField wdTitle = WageDeterminationSearchPage.wdNumber();
         CommonUtils.testDataContains(wdTitle, searchTerm);
     }
@@ -72,7 +76,7 @@ public class WDSearchHelper extends Base{
     // test DBA and SCA common fields exist in search results
    @Test
     public void wdStateTest() throws InterruptedException {
-        HomePageNavigation.gotoHomePage();
+        //HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index, searchTerm);
         CommonUtils.DataField wdState = WageDeterminationSearchPage.wdState();
         testLabelAndDataExists(wdState);
@@ -81,11 +85,11 @@ public class WDSearchHelper extends Base{
 
     @Test
     public void wdRevisionTest() throws InterruptedException {
-        HomePageNavigation.gotoHomePage();
+        //HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index, searchTerm);
         CommonUtils.DataField wdRevision = WageDeterminationSearchPage.wdRevisionNum();
         testLabelAndDataExists(wdRevision);
-        testLabelContains(wdRevision, "Revision");
+        testLabelContains(wdRevision, "Revision #");
     }
 
     @Test
@@ -100,7 +104,7 @@ public class WDSearchHelper extends Base{
     //test to check state field contains same state name as in state filter
     @Test
     public void stateFilterTest() throws InterruptedException {
-        HomePageNavigation.gotoHomePage();
+        //HomePageNavigation.gotoHomePage();
         if (wd_type == "SCA")
             SearchNavigation.gotoSCASearch(index, "");
         else
@@ -111,7 +115,7 @@ public class WDSearchHelper extends Base{
     //test to check county/ies field contains same county name as in county filter
     @Test
     public void countyFilterTest() throws InterruptedException {
-        HomePageNavigation.gotoHomePage();
+        //HomePageNavigation.gotoHomePage();
         if (wd_type == "SCA")
             SearchNavigation.gotoSCASearch(index, "");
         else
