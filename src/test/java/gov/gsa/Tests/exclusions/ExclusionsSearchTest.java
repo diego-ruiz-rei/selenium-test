@@ -25,7 +25,7 @@ import static org.junit.Assert.assertTrue;
 public class ExclusionsSearchTest extends Base {
 
     //Test Data
-    public String index = "Exclusions";
+    public String index = "Entity Exclusions";
     public String active_searchTerm = "BOB METGUD";
     public String autocomplete_searchTerm = "melissa cheryl jones";
     public String exact_searchTerm = "926177528";

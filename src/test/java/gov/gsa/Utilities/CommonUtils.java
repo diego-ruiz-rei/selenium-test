@@ -177,7 +177,7 @@ public class CommonUtils {
     public static String fhFilterSelection(String filter) throws InterruptedException {
         Base.driver.findElement(By.cssSelector(".usa-agency-picker-search-input")).sendKeys(filter);
         Base.driver.findElement(By.cssSelector(".usa-agency-picker-icon")).click();
-        Thread.sleep(5000);
+        Thread.sleep(2000);
         System.out.println("Selected Filter :"+Base.driver.findElement(By.cssSelector("agencypicker > div > div.usa-agency-picker-readonly-area > ul > li")).getText());
         return Base.driver.findElement(By.cssSelector("agencypicker > div > div.usa-agency-picker-readonly-area > ul > li")).getText();
     }
@@ -185,7 +185,7 @@ public class CommonUtils {
     //Filters for agency picker
 
     public static String fhSubTierFilterSelection(String dept_filter, String subtier_filter, String index) throws InterruptedException {
-        if (!index.equals("Opportunities")) {
+        if (!index.equals("Contract Opportunities")) {
             Base.driver.findElement(By.linkText("Advanced")).click();
             Thread.sleep(2000);
             new Select(Base.driver.findElement(By.id("Department"))).selectByVisibleText(dept_filter);

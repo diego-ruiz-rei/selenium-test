@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 public class EntitiesSearchTest extends Base{
 
     //Test Data
-    public String index = "Entities";
+    public String index = "Entity Registrations";
     public String inactive_searchTerm = "016139227";
     public String active_searchTerm = "SMITH COUNTY EMERGENCY SHELTER FOR WOMEN AND CHILDREN, INC.";
     public String autocomplete_searchTerm = "FRANKLIN, COUNTY OF";

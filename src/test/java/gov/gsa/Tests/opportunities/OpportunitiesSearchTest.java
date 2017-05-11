@@ -22,7 +22,7 @@ import static org.junit.Assert.*;
 public class OpportunitiesSearchTest extends Base {
 
     //Test Data
-    public String index = "Opportunities";
+    public String index = "Contract Opportunities";
     public String archived_searchTerm = "SPE8E517T1063";
     public String active_searchTerm = "L15PS00039";
     public String autocomplete_searchTerm = "16--insulation blanket, cabin, aircraft";

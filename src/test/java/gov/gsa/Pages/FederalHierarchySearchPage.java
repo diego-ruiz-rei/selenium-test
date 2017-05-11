@@ -272,11 +272,12 @@ public class FederalHierarchySearchPage extends ObjectView {
         ArrayList<String> newTab = new ArrayList<String> (driver.getWindowHandles());
         newTab.remove(oldTab);
         driver.switchTo().window(newTab.get(0));
-        //String awardTitle = Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span")).getText();
+        AwardsSearchResultsPage.beforeTest();
+        String awardTitle = Base.driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span")).getText();
        // Thread.sleep(2000);
-        //if("Award".equals(awardTitle)) {
+        if("Award".equals(awardTitle)) {
              extractField = Base.driver.findElement(By.cssSelector("agencypicker > div > div.usa-agency-picker-readonly-area > ul > li")).getText();
-        //}
+        }
         return extractField;
     }
 

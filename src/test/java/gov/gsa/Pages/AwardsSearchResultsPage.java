@@ -1,5 +1,6 @@
 package gov.gsa.Pages;
 
+import gov.gsa.Utilities.Base;
 import gov.gsa.Utilities.CommonUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -128,6 +129,7 @@ public class AwardsSearchResultsPage {
 
     //check for naics code
     public static CommonUtils.DataField checkNaicsCode() {
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".naics-code >  span")));
         String label = driver.findElement(By.cssSelector(".naics-code > strong")).getText();
         String data = driver.findElement(By.cssSelector(".naics-code >  span")).getText();
 
@@ -175,9 +177,9 @@ public class AwardsSearchResultsPage {
     public static boolean checkICDTypeFilter() throws InterruptedException {
         driver.findElement(By.id("ICD")).click();
         Thread.sleep(2000);
-        String label = driver.findElement(By.cssSelector(".award-or-idv-type > strong")).getText();
-
-        if(label.equalsIgnoreCase("IDV Type")){
+        String label = driver.findElement(By.cssSelector("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li.award-or-idv-type > strong")).getText();
+        System.out.print(label);
+        if(label.equals("IDV Type")){
             return true;
         }
         else {
@@ -337,6 +339,8 @@ public class AwardsSearchResultsPage {
     }
 
     public static void clearAll() {
+        Base.driver.findElement(By.cssSelector("#search-div > form > div.relative.div-fill > div > sam-autocomplete > div > div > span > i")).click();
+        Base.driver.findElement(By.cssSelector(".usa-button-primary.usa-search-submit.search-btn")).click();
         driver.findElement(By.xpath("//button[text()='Clear All']")).click();
     }
 

@@ -22,7 +22,7 @@ import static org.junit.Assert.assertTrue;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class AwardsSearchTest extends Base {
     //test data
-    public String index="Awards";
+    public String index="Contract Awards";
     public String active_searchTerm = "VA24615F0356";
     public String autocomplete_searchTerm = "VA24614A0067";
     public String autocomplete_searchTerm_1 = "VA24812F5816";
@@ -52,7 +52,7 @@ public class AwardsSearchTest extends Base {
     //test for pagination
     @Test
     public void paginationTest() throws InterruptedException {
-        HomePageNavigation.gotoHomePage();
+        //HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
         awardsSearchResultsPage.beforeTest();
         //awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
@@ -71,7 +71,7 @@ public class AwardsSearchTest extends Base {
     //test for title
     @Test
     public void titleTest() throws InterruptedException {
-        HomePageNavigation.gotoHomePage();
+        //HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,active_searchTerm);
         awardsSearchResultsPage.beforeTest();
         //awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
@@ -81,7 +81,7 @@ public class AwardsSearchTest extends Base {
     //test for number of results
     @Test
     public void resultNumberTest() throws InterruptedException, ParseException {
-        HomePageNavigation.gotoHomePage();
+        //HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,active_searchTerm);
         awardsSearchResultsPage.beforeTest();
         //awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
@@ -91,7 +91,7 @@ public class AwardsSearchTest extends Base {
     //test for vendor name label and data
     @Test
     public void vendorNameTest() throws InterruptedException {
-        HomePageNavigation.gotoHomePage();
+        //HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,active_searchTerm);
         awardsSearchResultsPage.beforeTest();
         //awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
@@ -101,7 +101,7 @@ public class AwardsSearchTest extends Base {
     //test for vendor address label and data
     @Test
     public void vendorAddressTest() throws InterruptedException {
-        HomePageNavigation.gotoHomePage();
+        //HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,active_searchTerm);
         awardsSearchResultsPage.beforeTest();
         //awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
@@ -111,7 +111,7 @@ public class AwardsSearchTest extends Base {
     //test for duns number label and data
     @Test
     public void dunsNumberTest()throws InterruptedException {
-        HomePageNavigation.gotoHomePage();
+        //HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,active_searchTerm);
         awardsSearchResultsPage.beforeTest();
         //awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
@@ -123,7 +123,7 @@ public class AwardsSearchTest extends Base {
     //test for global vendor label and data
     @Test
     public void globalVendorTest()throws InterruptedException {
-        HomePageNavigation.gotoHomePage();
+        //HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,active_searchTerm);
         awardsSearchResultsPage.beforeTest();
         //awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
@@ -135,7 +135,7 @@ public class AwardsSearchTest extends Base {
     //test for global duns label and data
     @Test
     public void globalDunsTest()throws InterruptedException {
-        HomePageNavigation.gotoHomePage();
+        //HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,active_searchTerm);
         awardsSearchResultsPage.beforeTest();
         //awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
@@ -147,7 +147,7 @@ public class AwardsSearchTest extends Base {
     //test for department label and data
     @Test
     public void departmentTest()throws InterruptedException {
-        HomePageNavigation.gotoHomePage();
+        //HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,active_searchTerm);
         awardsSearchResultsPage.beforeTest();
         //awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
@@ -159,7 +159,7 @@ public class AwardsSearchTest extends Base {
     //test for office label and data
     @Test
     public void officeTest()throws InterruptedException {
-        HomePageNavigation.gotoHomePage();
+        //HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,active_searchTerm);
         awardsSearchResultsPage.beforeTest();
         //awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
@@ -171,7 +171,7 @@ public class AwardsSearchTest extends Base {
     //test for action-obligation label and data
     @Test
     public void actionObligationTest()throws InterruptedException {
-        HomePageNavigation.gotoHomePage();
+        //HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,active_searchTerm);
         awardsSearchResultsPage.beforeTest();
         //awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
@@ -183,7 +183,7 @@ public class AwardsSearchTest extends Base {
     //test for award or idv type label and data
     @Test
     public void awardTypeTest()throws InterruptedException {
-        HomePageNavigation.gotoHomePage();
+        //HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,active_searchTerm);
         awardsSearchResultsPage.beforeTest();
         //awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
@@ -207,7 +207,7 @@ public class AwardsSearchTest extends Base {
     //test for date signed label and data
     @Test
     public void dateSignedTest()throws InterruptedException {
-        HomePageNavigation.gotoHomePage();
+        //HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,active_searchTerm);
         awardsSearchResultsPage.beforeTest();
         //awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
@@ -231,7 +231,7 @@ public class AwardsSearchTest extends Base {
     //test for psc code label and data
     @Test
     public void pscCodeTest()throws InterruptedException {
-        HomePageNavigation.gotoHomePage();
+        //HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,active_searchTerm);
         awardsSearchResultsPage.beforeTest();
         //awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
@@ -243,7 +243,7 @@ public class AwardsSearchTest extends Base {
     //test for contract type filter
     @Test
     public void contractTypeFilterTest() throws InterruptedException{
-        HomePageNavigation.gotoHomePage();
+       // HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
         awardsSearchResultsPage.beforeTest();
         //awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
@@ -253,7 +253,7 @@ public class AwardsSearchTest extends Base {
     //test for icd type filter
     @Test
     public void icdTypeFilterTest() throws InterruptedException{
-        HomePageNavigation.gotoHomePage();
+       // HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
         awardsSearchResultsPage.beforeTest();
         //awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
@@ -263,7 +263,7 @@ public class AwardsSearchTest extends Base {
     //Validate Award-IDV Types filter renders results - for ICD
     @Test
     public void icdAwardDropdownFilterTest() throws InterruptedException{
-        HomePageNavigation.gotoHomePage();
+        //HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,autocomplete_searchTerm);
         awardsSearchResultsPage.beforeTest();
         //awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
@@ -273,7 +273,7 @@ public class AwardsSearchTest extends Base {
     //Validate Award-IDV Types filter renders results - for Contract
     @Test
     public void contractAwardDropdownFilterTest() throws InterruptedException{
-        HomePageNavigation.gotoHomePage();
+        //HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,contract_award_type_filter);
         awardsSearchResultsPage.beforeTest();
         //awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
@@ -283,7 +283,7 @@ public class AwardsSearchTest extends Base {
     //Validate multiple values can be selected for Award-IDV Types
     @Test
     public void multipleAwardTypeFilterTest() throws InterruptedException, ParseException {
-        HomePageNavigation.gotoHomePage();
+        //HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
         awardsSearchResultsPage.beforeTest();
         //awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
@@ -294,7 +294,7 @@ public class AwardsSearchTest extends Base {
     //Validate multiple values can be selected for Contract Types
     @Test
     public void multipleContractTypeFilterTest() throws InterruptedException, ParseException {
-        HomePageNavigation.gotoHomePage();
+        //HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
         assertTrue("Field Label/Value or type selected is Incorrect", AwardsSearchResultsPage.checkMultipleContractTypeFilter());
 
@@ -303,7 +303,7 @@ public class AwardsSearchTest extends Base {
     //Validate Contract Types filter renders results
     @Test
     public void contractDropdownFilterTest() throws InterruptedException, ParseException{
-        HomePageNavigation.gotoHomePage();
+        //HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
         awardsSearchResultsPage.beforeTest();
         //awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
@@ -313,7 +313,7 @@ public class AwardsSearchTest extends Base {
     //Validate NAICS filter renders result
     @Test
     public void naicsFilterTest() throws InterruptedException{
-        HomePageNavigation.gotoHomePage();
+        //HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
         awardsSearchResultsPage.beforeTest();
         //awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
@@ -323,7 +323,7 @@ public class AwardsSearchTest extends Base {
     //Validate multiple values can be selected for NAICS Type
     @Test
     public void naicsFilterMultipleTest() throws InterruptedException, ParseException {
-        HomePageNavigation.gotoHomePage();
+        //HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
         awardsSearchResultsPage.beforeTest();
         //awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");

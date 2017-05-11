@@ -152,7 +152,7 @@ public class AssistanceListingSearchTest extends Base{
     //Federal Organization Filter
     @Test
     public void fhFilterSelectionTest() throws InterruptedException {
-        HomePageNavigation.gotoHomePage();
+        //HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
         String fhFilter= CommonUtils.fhFilterSelection(fh_filter);
         assertTrue("Selected FH Filter is not displayed",fhFilter.equalsIgnoreCase(fh_filter));
@@ -160,14 +160,14 @@ public class AssistanceListingSearchTest extends Base{
 
     @Test
     public void fhFilterAndDataMatchTest() throws InterruptedException {
-        HomePageNavigation.gotoHomePage();
+        //HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
         assertTrue("No results for FH Filter",CommonUtils.fhFilterSelection(fh_dept_filter).contains(AssistanceListingSearchPage.department().data));
     }
 
     @Test
     public void fhSubTierFilterAndDataMatchTest() throws InterruptedException {
-        HomePageNavigation.gotoHomePage();
+        //HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
         //System.out.println("Selected Filter :"+AssistanceListingSearchPage.fhSubTierFilterSelection(fh_dept_filter,fh_subtier_filter));
         assertTrue("Selected Filter is incorrect for Subtier Agency",CommonUtils.fhSubTierFilterSelection(fh_dept_filter,fh_subtier_filter,index).equals(fh_subtier_filter));
