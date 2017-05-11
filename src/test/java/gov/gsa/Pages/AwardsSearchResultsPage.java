@@ -1,18 +1,11 @@
 package gov.gsa.Pages;
 
-import com.thoughtworks.selenium.Wait;
-import gov.gsa.Utilities.Base;
 import gov.gsa.Utilities.CommonUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import java.text.ParseException;
-import java.util.function.Function;
 
+import java.text.ParseException;
 
 import static gov.gsa.Utilities.Base.driver;
 
@@ -39,7 +32,6 @@ public class AwardsSearchResultsPage {
 
     // grab title
     public static boolean exTitle(){
-        beforeTest("h3.award-title > a");
         String titleText = driver.findElement(By.cssSelector("h3.award-title > a")).getText();
         if(titleText.length()!=0 && titleText!=null){
             return true;
@@ -109,7 +101,6 @@ public class AwardsSearchResultsPage {
 
     //check for office
     public static CommonUtils.DataField checkOffice(){
-        beforeTest(".office-name");
         String label = driver.findElement(By.cssSelector(".office-name > strong")).getText();
         String data = driver.findElement(By.cssSelector(".office-name > span")).getText();
 
@@ -129,7 +120,6 @@ public class AwardsSearchResultsPage {
 
     //check for psc code
     public static CommonUtils.DataField checkPscCode() {
-        beforeTest(".psc-code");
         String label = driver.findElement(By.cssSelector(".psc-code > strong")).getText();
         String data = driver.findElement(By.cssSelector(".psc-code > span")).getText();
 
@@ -342,8 +332,8 @@ public class AwardsSearchResultsPage {
         }
     }
 
-    public static void beforeTest(String selector){
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(selector)));
+    public static void beforeTest(){
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span")));
     }
 
     public static void clearAll() {
