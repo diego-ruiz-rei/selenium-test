@@ -20,7 +20,7 @@ public class OpportunitiesObjectViewNavigation extends ObjectView {
         Base.driver.findElement(By.cssSelector("#search-div > form > div.relative.div-fill > div > sam-autocomplete > div > div > input")).clear();
         Thread.sleep(2000);
         Base.driver.findElement(By.cssSelector("#search-div > form > div.relative.div-fill > div > sam-autocomplete > div > div > input")).sendKeys(opp_SearchTerm);
-        new Select(Base.driver.findElement(By.id("filter"))).selectByVisibleText("Opportunities");
+        new Select(Base.driver.findElement(By.id("filter"))).selectByVisibleText("Contract Opportunities");
         Base.driver.findElement(By.cssSelector(".search-btn")).click();
         Thread.sleep(3000);
         Base.driver.findElement(By.cssSelector(".opportunity-title > a")).click();
