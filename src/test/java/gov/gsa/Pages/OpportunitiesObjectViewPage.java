@@ -442,16 +442,19 @@ int code = 0;
     }
 
     public static String synopsisViewHideChangesButton() throws InterruptedException {
+        Thread.sleep(2000);
         Base.driver.findElement(By.id("defaultBtnSynopsis")).click();
         return viewHideChangesButton("defaultBtnSynopsis");
     }
 
     public static String generalInformationViewHideChangesButton() throws InterruptedException {
+        Thread.sleep(2000);
         Base.driver.findElement(By.id("defaultBtnGeneral")).click();
         return viewHideChangesButton("defaultBtnGeneral");
     }
 
     public static String classificationViewHideChangesButton() throws InterruptedException {
+        Thread.sleep(2000);
         Base.driver.findElement(By.id("defaultBtnClassification")).click();
         return viewHideChangesButton("defaultBtnClassification");
     }
@@ -474,6 +477,7 @@ int code = 0;
     }
 
     public static String generalInformationChangesFrom() throws InterruptedException, ParseException {
+        Thread.sleep(2000);
         Base.driver.findElement(By.id("defaultBtnGeneral")).click();
         return changesFrom("opportunity-general");
     }
@@ -582,6 +586,7 @@ int code = 0;
     }
 
     public static String generalInformationArchivingPolicyTagExists() throws InterruptedException, ParseException {
+        Thread.sleep(2000);
         Base.driver.findElement(By.id("defaultBtnGeneral")).click();
         return tagExists("opportunity-general-response-date","#opportunity-general-archiving-policy > span");
     }
@@ -597,11 +602,13 @@ int code = 0;
     }
 
     public static String synopsisTagExists() throws InterruptedException, ParseException {
+        Thread.sleep(2000);
         Base.driver.findElement(By.id("defaultBtnSynopsis")).click();
         return tagExists("opportunity-synopsis","#opportunity-synopsis > .usa-changes");
     }
 
     public static String classificationUpdateSetAsideTagExists() throws InterruptedException, ParseException {
+        Thread.sleep(2000);
         Base.driver.findElement(By.id("defaultBtnClassification")).click();
         return tagExists("opportunity-classification-set-aside","#opportunity-classification-set-aside > span");
     }
@@ -617,6 +624,7 @@ int code = 0;
     }
 
     public static String classificationPlaceOfPerformanceTagExists() throws InterruptedException, ParseException {
+        Thread.sleep(2000);
         Base.driver.findElement(By.id("defaultBtnClassification")).click();
         return tagExists("opportunity-classification","#opportunity-classification > ul > span ");
     }
@@ -678,14 +686,14 @@ int code = 0;
         Base.driver.findElement(By.cssSelector("#opportunity-history > sam-history > ul > li:nth-child("+index+") > span > a")).click();
         Thread.sleep(2000);
 
-        return Base.driver.findElement(By.cssSelector("#main-container > ng-component > div > div > samalert > div > div > p")).getText();
+        return Base.driver.findElement(By.cssSelector("#main-container > ng-component > div > div > sam-alert > div > div > p")).getText();
     }
 
     public static String updatedNoticeLink() throws InterruptedException, ParseException {
         Integer index = getHistorySectionIndex();
         Base.driver.findElement(By.cssSelector("#opportunity-history > sam-history > ul > li:nth-child("+index+") > span > a")).click();
         Thread.sleep(5000);
-        Base.driver.findElement(By.cssSelector("#main-container > ng-component > div > div > samalert > div > div > p > a")).click();
+        Base.driver.findElement(By.cssSelector("#main-container > ng-component > div > div > sam-alert > div > div > p > a")).click();
         Thread.sleep(5000);
         Integer current_index = index+1;
         System.out.println("Class Name : "+Base.driver.findElement(By.cssSelector("#opportunity-history > sam-history > ul > li:nth-child("+current_index+")")).getAttribute("class"));

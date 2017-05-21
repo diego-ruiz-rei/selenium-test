@@ -65,8 +65,8 @@ public class FederalHierarchyObjectViewPage extends ObjectView{
     }
 
     public static void agencyDrillDown(String agency) throws InterruptedException {
-        System.out.println(Base.driver.findElement(By.cssSelector("sampagination > nav > ul > li:nth-child(6) > a")).getText());
-        Base.driver.findElement(By.cssSelector("sampagination > nav > ul > li:nth-child(6) > a")).click();
+        System.out.println(Base.driver.findElement(By.cssSelector("sam-pagination > nav > ul > li:nth-child(6) > a")).getText());
+        Base.driver.findElement(By.cssSelector("sam-pagination > nav > ul > li:nth-child(6) > a")).click();
         WebElement element = (WebElement) Base.wait.until(
                 ExpectedConditions.elementToBeClickable(By.linkText(agency)));
         Base.driver.findElement(By.linkText(agency)).click();

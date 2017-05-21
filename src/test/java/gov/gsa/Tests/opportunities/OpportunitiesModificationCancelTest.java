@@ -52,7 +52,7 @@ public class OpportunitiesModificationCancelTest extends Base {
     public static String history_section = "c752657782129a4eddc1e39675a40c52";
     public static String history_section_version_link = "21b2e7924b75a96a2db8f9262f6ffa8d";
 
-    public static String message = "Note: There have been updates to this opportunity. To view the most recent update/amendment, click here";
+    public static String message = "Note: There have been new actions to this contract opportunity. To view the most recent action, please click here.";
 
 
     @BeforeClass

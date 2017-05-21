@@ -44,6 +44,7 @@ public class WageDeterminationObjectViewPage extends ObjectView{
         return new DataField("Counties",label,data);
     }
 
+    //TODO : Need to add unique classname/id for Multiple states
     public static Integer multipleStateCountiesCount() {
         System.out.println("Count of State and Counties : "+ Base.driver.findElements(By.cssSelector(".m_B-3x")).size());
         return Base.driver.findElements(By.cssSelector(".m_B-3x")).size();

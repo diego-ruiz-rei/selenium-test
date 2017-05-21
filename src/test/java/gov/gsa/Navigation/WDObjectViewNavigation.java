@@ -22,6 +22,8 @@ public class WDObjectViewNavigation extends ObjectView{
             Thread.sleep(3000);
             Base.driver.findElement(By.cssSelector("#search-div > form > div.relative.div-fill > div > sam-autocomplete > div > div > input")).sendKeys(wd_SearchTerm);
         }else{
+            Base.driver.findElement(By.cssSelector("body > app > sam-header > header > nav > div > sam-header-links > nav > div > div > a:nth-child(2) > i")).click();
+            Thread.sleep(2000);
             Base.driver.findElement(By.cssSelector(".input-container > input")).clear();
             Thread.sleep(3000);
             Base.driver.findElement(By.cssSelector(".input-container > input")).sendKeys(wd_SearchTerm);

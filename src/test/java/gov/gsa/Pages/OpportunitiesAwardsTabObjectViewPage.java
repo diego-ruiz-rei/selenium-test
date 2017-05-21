@@ -42,14 +42,14 @@ public class OpportunitiesAwardsTabObjectViewPage extends ObjectView{
     }
 
     public static DataField totalAmountAwarded() throws InterruptedException {
-        String label = Base.driver.findElement(By.cssSelector("#opportunity-award-summary > div.usa-grid-full.usa-text-center > div:nth-child(2) > strong")).getText();
-        String data = Base.driver.findElement(By.cssSelector("#opportunity-award-summary > div.usa-grid-full.usa-text-center > div:nth-child(2) > p")).getText();
+        String label = Base.driver.findElement(By.cssSelector("#opportunity-award-summary > div.usa-grid-full > div.usa-width-three-fourths > div > div > div:nth-child(2) > div > div:nth-child(1)")).getText();
+        String data = Base.driver.findElement(By.cssSelector("#opportunity-award-summary > div.usa-grid-full > div.usa-width-three-fourths > div > div > div:nth-child(2) > div > div:nth-child(2)")).getText();
         return new DataField("Total Amount Awarded",label,data);
     }
 
     public static DataField totalNumberOfRecipients() throws InterruptedException {
-        String label = Base.driver.findElement(By.cssSelector("#opportunity-award-summary > div.usa-grid-full.usa-text-center > div:nth-child(3) > strong")).getText();
-        String data = Base.driver.findElement(By.cssSelector("#opportunity-award-summary > div.usa-grid-full.usa-text-center > div:nth-child(3) > p")).getText();
+        String label = Base.driver.findElement(By.cssSelector("#opportunity-award-summary > div.usa-grid-full > div.usa-width-three-fourths > div > div > div:nth-child(3) > div > div:nth-child(1)")).getText();
+        String data = Base.driver.findElement(By.cssSelector("#opportunity-award-summary > div.usa-grid-full > div.usa-width-three-fourths > div > div > div:nth-child(3) > div > div:nth-child(2)")).getText();
         return new DataField("Total Number of Recipients",label,data);
     }
 
