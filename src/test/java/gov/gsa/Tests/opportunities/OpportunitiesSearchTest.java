@@ -50,7 +50,7 @@ public class OpportunitiesSearchTest extends Base {
     public void opportunitiesTagTest() throws InterruptedException {
         HomePageNavigation.gotoHomePage();
         SearchNavigation.gotoSearchResultsPage(index,"");
-        assertEquals("Opportunities Tag does not Exist",OpportunitiesSearchResultsPage.opportunitiesTag(),"Opportunity");
+        assertEquals("Opportunities Tag does not Exist",OpportunitiesSearchResultsPage.opportunitiesTag(),"Contract Opportunities");
         System.out.println("Opportunities Tag is Present");
 
     }

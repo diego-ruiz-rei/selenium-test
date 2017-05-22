@@ -23,7 +23,7 @@ public class SearchNavigation{
 
     public static void gotoSearchResultsPage(String index, String searchTerm) throws InterruptedException {
         searchResults(index,searchTerm);
-        if(index!="Federal Hierarchy") {
+        if(!index.equals("Federal Hierarchy") && !index.equals("Entity Exclusions")) {
             if (!Base.driver.findElement(By.id("checkbox-active")).isSelected())
                 Base.driver.findElement(By.id("checkbox-active")).click();
             Thread.sleep(2000);

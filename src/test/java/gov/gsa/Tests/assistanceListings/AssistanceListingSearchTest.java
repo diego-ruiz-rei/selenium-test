@@ -22,7 +22,7 @@ import static org.junit.Assert.*;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class AssistanceListingSearchTest extends Base{
     //Test Data
-    public String index = "Assistance Listings";
+    public String index = "Assistance Listing";
     public String historical_searchTerm = "84.185";
     public String active_searchTerm = "16.025";
     public String autocomplete_searchTerm = "cooperating technical partners";
@@ -44,7 +44,7 @@ public class AssistanceListingSearchTest extends Base{
     @Test
     public void assistanceTagTest() throws InterruptedException {
         SearchNavigation.gotoSearchResultsPage(index,"");
-        assertEquals("Federal Assistance Listing Tag does not Exist", AssistanceListingSearchPage.assistanceTag(),"Federal Assistance Listing");
+        assertEquals("Federal Assistance Listing Tag does not Exist", AssistanceListingSearchPage.assistanceTag(),"Assistance Listing");
         System.out.println("Federal Assistance Listing Tag is Present");
 
     }

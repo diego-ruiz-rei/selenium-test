@@ -22,7 +22,7 @@ import static org.junit.Assert.assertTrue;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class AwardsSearchTest extends Base {
     //test data
-    public String index="Contract Awards";
+    public String index="Contract Data";
     public String active_searchTerm = "VA24615F0356";
     public String autocomplete_searchTerm = "VA24614A0067";
     public String autocomplete_searchTerm_1 = "VA24812F5816";
@@ -45,7 +45,7 @@ public class AwardsSearchTest extends Base {
         SearchNavigation.gotoSearchResultsPage(index,"");
         awardsSearchResultsPage.beforeTest();
         //awardsSearchResultsPage.beforeTest("#search-results > div:nth-child(1) > awards-result > div > div > div.four.wide.column > ul > li:nth-child(1) > span");
-        assertEquals("Awards Tag does not Exist", AwardsSearchResultsPage.awardsTag(),"Award");
+        assertEquals("Awards Tag does not Exist", AwardsSearchResultsPage.awardsTag(),"Contract Data");
         System.out.println("Awards Tag is Present");
     }
 
